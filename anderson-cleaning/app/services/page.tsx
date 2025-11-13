@@ -1,11 +1,86 @@
 'use client'
 
-import { Sparkles, Users, CheckCircle2, Shield } from 'lucide-react'
+import { Sparkles, Users, CheckCircle2, Shield, ClipboardList, FileCheck, UserCheck, TrendingUp } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default function ServicesPage() {
+  // JSON-LD Structured Data for SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    'serviceType': 'Commercial Cleaning Services',
+    'provider': {
+      '@type': 'LocalBusiness',
+      'name': 'Anderson Cleaning',
+      'image': 'https://andersoncleaning.com/logo.png',
+      '@id': 'https://andersoncleaning.com',
+      'url': 'https://andersoncleaning.com',
+      'telephone': '+1-555-123-4567',
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': '103 Wayside Avenue',
+        'addressLocality': 'West Springfield',
+        'addressRegion': 'MA',
+        'postalCode': '01089',
+        'addressCountry': 'US',
+      },
+      'geo': {
+        '@type': 'GeoCoordinates',
+        'latitude': 42.1070,
+        'longitude': -72.6209,
+      },
+      'areaServed': [
+        {
+          '@type': 'City',
+          'name': 'Springfield',
+          'containedIn': { '@type': 'State', 'name': 'Massachusetts' },
+        },
+        {
+          '@type': 'City',
+          'name': 'Worcester',
+          'containedIn': { '@type': 'State', 'name': 'Massachusetts' },
+        },
+        {
+          '@type': 'City',
+          'name': 'Hartford',
+          'containedIn': { '@type': 'State', 'name': 'Connecticut' },
+        },
+      ],
+    },
+    'hasOfferCatalog': {
+      '@type': 'OfferCatalog',
+      'name': 'Commercial Cleaning Services',
+      'itemListElement': [
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            'name': 'Office & Commercial Cleaning',
+            'description': 'Daily and weekly cleaning programs for office buildings and commercial facilities',
+          },
+        },
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            'name': 'Janitorial Services',
+            'description': 'Comprehensive facility care with dedicated teams and quality control',
+          },
+        },
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            'name': 'Floor & Carpet Care',
+            'description': 'Professional floor maintenance including strip, wax, and carpet cleaning',
+          },
+        },
+      ],
+    },
+  }
+
   const services = [
     {
       title: 'Office & Commercial Cleaning',
@@ -59,6 +134,11 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+      {/* JSON-LD for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
 
       {/* Hero */}
@@ -81,32 +161,97 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Onboarding Process */}
+      <section className="py-20 bg-white dark:bg-slate-900">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              How We Get Started
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              From first contact to consistent quality—here's our onboarding process
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: ClipboardList,
+                step: '1',
+                title: 'Facility Walk-Through',
+                description: 'We tour your space to understand layout, traffic patterns, and special requirements. Free consultation, no obligation.',
+              },
+              {
+                icon: FileCheck,
+                step: '2',
+                title: 'Custom SOPs',
+                description: 'We create detailed Standard Operating Procedures specific to your facility—no cookie-cutter checklists.',
+              },
+              {
+                icon: UserCheck,
+                step: '3',
+                title: 'Team Training',
+                description: 'Our staff receives 40+ hours of training plus facility-specific instruction before they ever clean your space.',
+              },
+              {
+                icon: TrendingUp,
+                step: '4',
+                title: 'Supervised Start',
+                description: 'First week includes extra oversight and quality checks to ensure we meet your standards from day one.',
+              },
+            ].map((item, i) => {
+              const Icon = item.icon
+              return (
+                <div key={i} className="relative bg-gradient-to-br from-primary-50 to-accent-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-8 shadow-md text-center">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                    {item.step}
+                  </div>
+                  <Icon className="h-12 w-12 text-primary-600 dark:text-primary-400 mx-auto mb-4 mt-4" />
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    {item.description}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <strong>Timeline:</strong> Most clients are fully onboarded within 7-10 business days
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Services Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-slate-800/50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+              <div key={i} className="bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                 <div className="p-8">
                   <div className="text-6xl mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">{service.title}</h3>
                   {service.available === 'contracted' && (
-                    <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full mb-3">
+                    <span className="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full mb-3">
                       Contracted Clients Only
                     </span>
                   )}
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{service.description}</p>
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, j) => (
-                      <li key={j} className="flex items-center text-sm text-gray-700">
-                        <CheckCircle2 className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                      <li key={j} className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 text-accent-500 mr-2 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
                   </ul>
                   <a
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center text-primary-700 font-semibold hover:text-primary-800 group-hover:underline"
+                    className="inline-flex items-center text-primary-700 dark:text-primary-400 font-semibold hover:text-primary-800 dark:hover:text-primary-300 group-hover:underline"
                   >
                     Learn More →
                   </a>

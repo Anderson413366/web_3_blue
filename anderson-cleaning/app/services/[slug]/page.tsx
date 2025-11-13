@@ -497,6 +497,38 @@ export default function ServiceDetailPage() {
 
   const service = servicesData[slug]
 
+  // JSON-LD Structured Data for SEO
+  const jsonLd = service
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': service.title,
+        'description': service.heroDescription,
+        'provider': {
+          '@type': 'LocalBusiness',
+          'name': 'Anderson Cleaning',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': '103 Wayside Avenue',
+            'addressLocality': 'West Springfield',
+            'addressRegion': 'MA',
+            'postalCode': '01089',
+            'addressCountry': 'US',
+          },
+          'telephone': '+1-555-123-4567',
+        },
+        'areaServed': {
+          '@type': 'State',
+          'name': 'Massachusetts',
+        },
+        'offers': {
+          '@type': 'Offer',
+          'availability': 'https://schema.org/InStock',
+          'priceCurrency': 'USD',
+        },
+      }
+    : null
+
   // If service not found, show 404-like message
   if (!service) {
     return (
@@ -520,6 +552,13 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+      {/* JSON-LD for SEO */}
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <Header />
 
       {/* Hero Section */}
@@ -670,14 +709,108 @@ export default function ServiceDetailPage() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => router.push('/quote')}
-            >
-              Get Your Custom Quote
-            </Button>
+          <div className="mt-12 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-slate-800 dark:to-slate-700 rounded-xl p-8 md:p-12 shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">
+                Example Pricing
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 text-center mb-6">
+                While every facility is unique, here are typical price ranges to help you budget:
+              </p>
+
+              {slug === 'office-cleaning' && (
+                <div className="space-y-4">
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">Small Office (2,000-5,000 sq ft)</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">3x per week, after hours</p>
+                      </div>
+                      <p className="text-xl font-bold text-primary-600 dark:text-primary-400">$800-1,500/mo</p>
+                    </div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">Medium Office (5,000-15,000 sq ft)</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">5x per week, nightly service</p>
+                      </div>
+                      <p className="text-xl font-bold text-primary-600 dark:text-primary-400">$2,000-4,500/mo</p>
+                    </div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">Large Office (15,000+ sq ft)</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Daily service, dedicated team</p>
+                      </div>
+                      <p className="text-xl font-bold text-primary-600 dark:text-primary-400">$5,000+/mo</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {slug === 'janitorial' && (
+                <div className="space-y-4">
+                  <p className="text-gray-700 dark:text-gray-300 text-center mb-4">
+                    Janitorial service pricing is similar to office cleaning but includes enhanced quality control and dedicated account management.
+                  </p>
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <p className="font-bold text-gray-900 dark:text-gray-100 text-center">
+                      Typically 10-15% premium over standard office cleaning for added services and oversight
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {(slug === 'floor-carpet-care' || slug === 'window-cleaning' || slug === 'post-construction') && (
+                <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                  <p className="text-gray-700 dark:text-gray-300 text-center">
+                    <strong>Project-based pricing</strong> varies widely based on size and condition.
+                    Contact us for a free on-site estimate.
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-3">
+                    Most {service.title.toLowerCase()} projects range from $500-$5,000 depending on facility size and scope.
+                  </p>
+                </div>
+              )}
+
+              {slug === 'supply-management' && (
+                <div className="space-y-4">
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">Small Facility (1-10 employees)</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Basic consumables + management</p>
+                      </div>
+                      <p className="text-xl font-bold text-primary-600 dark:text-primary-400">$150-300/mo</p>
+                    </div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">Medium Facility (10-50 employees)</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Full consumables management</p>
+                      </div>
+                      <p className="text-xl font-bold text-primary-600 dark:text-primary-400">$400-800/mo</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-600 text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <strong>Free On-Site Consultation:</strong> Get an exact quote tailored to your facility
+                </p>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={() => router.push('/quote')}
+                >
+                  Request Your Free Quote
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
