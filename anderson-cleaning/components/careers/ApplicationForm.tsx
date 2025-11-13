@@ -2,7 +2,7 @@
 
 
 import React, { useContext } from 'react';
-import { useAppContext } from '../../App';
+import { useAppContext } from '@/lib/careers/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // This component might be vestigial if CareersPage.tsx handles direct rendering of sections.

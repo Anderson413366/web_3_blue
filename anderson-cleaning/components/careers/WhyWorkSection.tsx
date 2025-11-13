@@ -2,7 +2,7 @@
 
 
 import React, { useContext } from 'react';
-import { useAppContext } from '../../App';
+import { useAppContext } from '@/lib/careers/AppContext';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { motion } from 'framer-motion';
 import { GrowthIcon, UsersIcon, HandshakeIcon, ShieldCheckIcon } from './icons'; 

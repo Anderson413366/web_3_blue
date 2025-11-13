@@ -2,7 +2,7 @@
 
 
 import React, { useContext } from 'react';
-import { useAppContext } from '../../App';
+import { useAppContext } from '@/lib/careers/AppContext';
 import { Button } from '@/components/ui/Button';
 import { SparklesIconCareers } from './icons';
 import { motion } from 'framer-motion';
