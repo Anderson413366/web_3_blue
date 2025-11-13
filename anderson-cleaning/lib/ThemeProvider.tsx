@@ -50,11 +50,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
   }
 
-  // Prevent flash of incorrect theme
-  if (!mounted) {
-    return <>{children}</>
-  }
-
+  // Always provide context, even during SSR
+  // Theme starts as 'light' and updates after mount
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
