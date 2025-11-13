@@ -183,11 +183,11 @@ export default function ServicesPage() {
             {[
               {
                 q: 'Are you insured and bonded?',
-                a: 'Yes, we carry comprehensive general liability and workers' compensation insurance. All staff undergo background checks.',
+                a: 'Yes, we carry comprehensive general liability and workers\' compensation insurance. All staff undergo background checks.',
               },
               {
                 q: 'Do you provide cleaning supplies and equipment?',
-                a: 'Yes, all cleaning supplies and equipment are included. We can also manage your facility's consumables (paper products, soap, etc.) through our Supply Management service.',
+                a: 'Yes, all cleaning supplies and equipment are included. We can also manage your facility\'s consumables (paper products, soap, etc.) through our Supply Management service.',
               },
               {
                 q: 'How do you ensure quality?',
