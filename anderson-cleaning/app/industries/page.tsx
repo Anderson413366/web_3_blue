@@ -107,6 +107,35 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      {/* Important Notice */}
+      <section className="py-12 bg-yellow-50 dark:bg-yellow-900/20 border-y border-yellow-200 dark:border-yellow-800">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-start gap-4 bg-white dark:bg-slate-800 rounded-xl p-6 border-2 border-yellow-500 dark:border-yellow-600">
+              <div className="flex-shrink-0 mt-1">
+                <div className="h-10 w-10 rounded-full bg-yellow-500 dark:bg-yellow-600 flex items-center justify-center text-white font-bold text-xl">
+                  ⚠️
+                </div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  Important: We Do NOT Service Restaurants
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                  Anderson Cleaning specializes in B2B commercial and janitorial services for offices, medical facilities, schools, manufacturing, property management, and retail showrooms.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                  We do <strong>not</strong> provide cleaning services for restaurants, food service establishments, or facilities requiring 7-day-per-week coverage.
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+                  This allows us to specialize in the industries we serve best and maintain our high quality standards.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Industries Grid */}
       <section className="py-20">
         <div className="container mx-auto px-6">

@@ -253,6 +253,131 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Green & Safety Commitments */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">
+              Environmentally Responsible & Safety-First
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+              We believe in protecting both your facility and our planet. Our cleaning practices prioritize health, safety, and environmental sustainability.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-green-900 dark:text-green-300 mb-6">
+                  🌿 Green Cleaning Practices
+                </h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>EPA Safer Choice Products:</strong> Where possible, we use cleaning products certified by the EPA as safer for people and the environment
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>HEPA Filtration:</strong> Our vacuums use HEPA filters to trap 99.97% of particles, improving indoor air quality
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>Microfiber Technology:</strong> Microfiber cloths reduce chemical use while cleaning more effectively than traditional materials
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>Waste Reduction:</strong> Proper recycling protocols and concentrated product use to minimize environmental impact
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-blue-900 dark:text-blue-300 mb-6">
+                  🛡️ Safety & Security Protocols
+                </h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>Background Checks:</strong> Every team member undergoes comprehensive criminal background screening before employment
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>Drug Testing:</strong> Pre-employment and random drug screening ensures a safe, reliable workforce
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>OSHA Compliance:</strong> All staff trained on safety data sheets, bloodborne pathogens, and hazard communication
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <strong>Industry Certifications:</strong> Specialized training for medical facilities (HIPAA awareness), schools (child safety), and more
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Involvement */}
+      <section className="py-20 bg-gray-50 dark:bg-slate-800/50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+              Proud to Serve Our Community
+            </h2>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
+              Anderson Cleaning is more than just a business—we're active members of the Western Massachusetts and Northern Connecticut communities we serve.
+            </p>
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <div className="text-4xl mb-3">🤝</div>
+                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Local Hiring
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    We employ local residents, keeping jobs and economic benefits in our community
+                  </p>
+                </div>
+                <div>
+                  <div className="text-4xl mb-3">💚</div>
+                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Community Support
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Regular donations and support for local charities, schools, and community events
+                  </p>
+                </div>
+                <div>
+                  <div className="text-4xl mb-3">🌟</div>
+                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    Local Partnerships
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    We source supplies from local vendors whenever possible to support area businesses
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Commitment */}
       <section className="py-20">
         <div className="container mx-auto px-6">

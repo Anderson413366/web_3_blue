@@ -68,6 +68,22 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
+                    href="/about"
+                    className="hover:text-accent-400 transition-colors inline-block"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/testimonials"
+                    className="hover:text-accent-400 transition-colors inline-block"
+                  >
+                    Testimonials
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/quote"
                     className="hover:text-accent-400 transition-colors inline-block"
                   >
