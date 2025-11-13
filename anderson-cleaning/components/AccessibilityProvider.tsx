@@ -27,6 +27,8 @@ export default function AccessibilityProvider({
         // Run on every render in development
         // Results will appear in console
       })
+    }).catch((error) => {
+      console.warn('Failed to load axe-core:', error)
     })
   }, [])
 
