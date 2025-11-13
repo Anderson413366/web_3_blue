@@ -6,7 +6,11 @@ import { Button } from '@/components/ui/Button'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/lib/ThemeProvider'
 
-export default function Header() {
+interface HeaderProps {
+  extraControls?: React.ReactNode
+}
+
+export default function Header({ extraControls }: HeaderProps = {}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const { theme, toggleTheme } = useTheme()
@@ -69,6 +73,9 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+
+            {/* Extra Controls (e.g., Language Switcher) */}
+            {extraControls}
 
             {/* Theme Toggle */}
             <button
@@ -133,6 +140,12 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
+              {/* Extra Controls in Mobile (e.g., Language Switcher) */}
+              {extraControls && (
+                <div className="px-4 py-2">
+                  {extraControls}
+                </div>
+              )}
               <Link href="/quote" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="primary" className="w-full" asChild>
                   <span>Get a Quote</span>
