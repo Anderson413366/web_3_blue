@@ -22,7 +22,9 @@ export default function Header({ extraControls }: HeaderProps = {}) {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
-    { name: 'Quote', href: '/quote' },
+    { name: 'Industries', href: '/industries' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
     { name: 'Careers', href: '/apply' },
   ]
 
