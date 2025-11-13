@@ -57,7 +57,11 @@ body {
   background: #64748b;
 }
 
-/* Accessibility: Respect prefers-reduced-motion */
+/* =================================
+   ACCESSIBILITY STYLES (WCAG 2.2 AA)
+   ================================= */
+
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -69,28 +73,253 @@ body {
   }
 }
 
-/* Focus visible styles for keyboard navigation (WCAG 2.1 AA) */
+/* Screen reader only class - visually hidden but accessible to assistive tech */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Screen reader only, focusable - visible when focused */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible styles for keyboard navigation (WCAG 2.2) */
 *:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
 
-/* Skip to main content link for screen readers */
-.skip-to-main {
+/* Enhanced focus for buttons and interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Focus styles for dark mode */
+.dark *:focus-visible {
+  outline-color: #60a5fa;
+}
+
+.dark button:focus-visible,
+.dark a:focus-visible,
+.dark [role="button"]:focus-visible {
+  outline-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+/* Skip to main content link */
+.skip-link {
   position: absolute;
   left: -9999px;
-  z-index: 999;
-  padding: 1rem;
+  top: 0;
+  z-index: 9999;
+  padding: 1rem 1.5rem;
   background-color: #1d4ed8;
   color: white;
   text-decoration: none;
-  border-radius: 0.5rem;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  border: 3px solid #1e40af;
+  transition: none;
 }
 
-.skip-to-main:focus {
+.skip-link:focus {
   left: 1rem;
-  top: 1rem;
+  top: 0;
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+.dark .skip-link {
+  background-color: #2563eb;
+  border-color: #1d4ed8;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    border-width: 2px;
+  }
+}
+
+/* Ensure sufficient line height for readability */
+body {
+  line-height: 1.5;
+}
+
+p,
+li,
+td,
+dd {
+  line-height: 1.6;
+}
+
+/* Sufficient spacing between paragraphs */
+p + p {
+  margin-top: 1em;
+}
+
+/* Touch target size (minimum 44x44px for WCAG 2.2) */
+button,
+a,
+input[type="checkbox"],
+input[type="radio"],
+[role="button"],
+[role="link"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Exception for text links within paragraphs */
+p a,
+li a {
+  min-height: auto;
+  min-width: auto;
+  display: inline;
+}
+
+/* Error styling for form validation */
+[aria-invalid="true"],
+.error-field {
+  border-color: #dc2626 !important;
+  border-width: 2px;
+}
+
+.dark [aria-invalid="true"],
+.dark .error-field {
+  border-color: #ef4444 !important;
+}
+
+/* Error message styling */
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.dark .error-message {
+  color: #fca5a5;
+}
+
+/* Required field indicator */
+.required-indicator {
+  color: #dc2626;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.dark .required-indicator {
+  color: #fca5a5;
+}
+
+/* Loading/status announcements */
+[role="status"],
+[role="alert"],
+[aria-live] {
+  position: relative;
+}
+
+/* Disabled state */
+[disabled],
+[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Make main content focusable for skip link */
+#main-content {
+  outline: none;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+/* Ensure list semantics are preserved when removing default styling */
+.list-none {
+  list-style: none;
+}
+
+/* Support for lang attribute styling */
+[lang]:not([lang=""]) {
+  font-style: normal;
+}
+
+/* Focus trap for modals */
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+
+/* Ensure color alone is not used to convey information */
+.success-message,
+.error-message,
+.warning-message,
+.info-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.success-message::before {
+  content: "✓";
+  flex-shrink: 0;
+}
+
+.error-message::before {
+  content: "⚠";
+  flex-shrink: 0;
+}
+
+.warning-message::before {
+  content: "⚠";
+  flex-shrink: 0;
+}
+
+.info-message::before {
+  content: "ℹ";
+  flex-shrink: 0;
 }
 
 @layer utilities {

@@ -4,6 +4,8 @@ import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
 import CookieBanner from '@/components/CookieBanner'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
+import SkipLink from '@/components/SkipLink'
+import AccessibilityProvider from '@/components/AccessibilityProvider'
 import {
   generateOrganizationSchema,
   generateLocalBusinessSchema,
@@ -147,10 +149,13 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <ThemeProvider>
-          {children}
-          <CookieBanner />
-        </ThemeProvider>
+        <SkipLink />
+        <AccessibilityProvider>
+          <ThemeProvider>
+            {children}
+            <CookieBanner />
+          </ThemeProvider>
+        </AccessibilityProvider>
         <WebVitalsReporter />
       </body>
     </html>
