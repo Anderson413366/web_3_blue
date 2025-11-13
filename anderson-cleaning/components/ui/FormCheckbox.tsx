@@ -1,3 +1,5 @@
+'use client'
+
 
 import React, { forwardRef } from 'react';
 import { FormCheckboxProps } from '@/lib/careers/types';

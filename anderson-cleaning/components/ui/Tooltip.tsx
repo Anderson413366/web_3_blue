@@ -1,3 +1,5 @@
+'use client'
+
 
 import React, { useState, createContext, useContext, useRef, useEffect } from 'react';
 import { TooltipContextType } from '@/lib/careers/types';

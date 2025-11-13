@@ -2,17 +2,17 @@
 import { FormDataShape, LanguageCode, Theme, SectionConfig, Translations } from './types';
 
 // Components are imported and used directly in SECTIONS_CONFIG
-import PersonalInfoSection from './components/careers/sections/PersonalInfoSection';
-import JobDetailsSection from './components/careers/sections/JobDetailsSection';
-import AvailabilitySection from './components/careers/sections/AvailabilitySection';
-import EducationSection from './components/careers/sections/EducationSection';
-import WorkHistorySection from './components/careers/sections/WorkHistorySection';
-import ReferencesSection from './components/careers/sections/ReferencesSection';
-import MilitaryServiceSection from './components/careers/sections/MilitaryServiceSection';
-import GettingToKnowYouSection from './components/careers/sections/GettingToKnowYouSection';
-import StatementsSection from './components/careers/sections/StatementsSection';
-import UploadsSection from './components/careers/sections/UploadsSection';
-import ReviewSection from './components/careers/sections/ReviewSection';
+import PersonalInfoSection from '@/components/careers/sections/PersonalInfoSection';
+import JobDetailsSection from '@/components/careers/sections/JobDetailsSection';
+import AvailabilitySection from '@/components/careers/sections/AvailabilitySection';
+import EducationSection from '@/components/careers/sections/EducationSection';
+import WorkHistorySection from '@/components/careers/sections/WorkHistorySection';
+import ReferencesSection from '@/components/careers/sections/ReferencesSection';
+import MilitaryServiceSection from '@/components/careers/sections/MilitaryServiceSection';
+import GettingToKnowYouSection from '@/components/careers/sections/GettingToKnowYouSection';
+import StatementsSection from '@/components/careers/sections/StatementsSection';
+import UploadsSection from '@/components/careers/sections/UploadsSection';
+import ReviewSection from '@/components/careers/sections/ReviewSection';
 
 
 export const DEFAULT_LANGUAGE: LanguageCode = 'en';

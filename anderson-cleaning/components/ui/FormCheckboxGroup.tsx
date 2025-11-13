@@ -1,3 +1,5 @@
+'use client'
+
 
 import React from 'react';
 import { FormCheckboxGroupProps } from '@/lib/careers/types';
