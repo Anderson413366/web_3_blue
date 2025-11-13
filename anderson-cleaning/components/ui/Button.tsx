@@ -1,60 +1,96 @@
-import * as React from 'react'
-import { cn } from '@/lib/utils/cn'
+import React, { forwardRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { ButtonProps } from '@/lib/careers/types';
+import { Loader2IconCareers } from '../careers/icons'; 
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'primary' | 'accent' | 'outline' | 'ghost' | 'link'
-  size?: 'sm' | 'default' | 'lg' | 'icon'
-  isLoading?: boolean
-}
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', isLoading, children, disabled, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
-
-    const variants = {
-      default: 'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-200',
-      primary: 'bg-primary-700 text-white hover:bg-primary-800 shadow-md hover:shadow-lg transform hover:scale-105',
-      accent: 'bg-accent-500 text-white hover:bg-accent-600 shadow-md hover:shadow-lg transform hover:scale-105',
-      outline: 'border-2 border-primary-700 text-primary-700 hover:bg-primary-50 dark:border-primary-500 dark:text-primary-400 dark:hover:bg-slate-800',
-      ghost: 'hover:bg-slate-100 dark:hover:bg-slate-800',
-      link: 'text-primary-700 underline-offset-4 hover:underline',
+const Button = forwardRef<HTMLButtonElement | HTMLDivElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, isLoading = false, children, ...props }, ref) => {
+    
+    const baseStyles = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background dark:ring-offset-slate-900";
+    
+    let variantStyles = "";
+    switch (variant) {
+      case "outline":
+        variantStyles = "border border-input hover:bg-accent hover:text-accent-foreground dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-100";
+        break;
+      case "ghost":
+        variantStyles = "hover:bg-accent hover:text-accent-foreground dark:hover:bg-slate-800 dark:hover:text-slate-100";
+        break;
+      case "link":
+        variantStyles = "underline-offset-4 hover:underline text-primary dark:text-blue-400 dark:hover:text-blue-300";
+        break;
+      case "destructive":
+        variantStyles = "bg-red-600 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800";
+        break;
+      default: // 'default' variant
+        variantStyles = "bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700";
     }
 
-    const sizes = {
-      sm: 'h-9 px-4 text-sm',
-      default: 'h-11 px-6 py-2',
-      lg: 'h-14 px-8 py-3 text-lg',
-      icon: 'h-10 w-10',
+    let sizeStyles = "";
+    switch (size) {
+      case "sm":
+        sizeStyles = "h-9 px-3 rounded-md";
+        break;
+      case "lg":
+        sizeStyles = "h-11 px-8 rounded-md";
+        break;
+      case "icon":
+        sizeStyles = "h-10 w-10";
+        break;
+      default: // 'default' size
+        sizeStyles = "h-10 py-2 px-4";
     }
 
-    return (
-      <button
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
-        ref={ref}
-        disabled={disabled || isLoading}
-        {...props}
-      >
-        {isLoading && (
-          <svg
-            className="mr-2 h-4 w-4 animate-spin"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-        )}
-        {children}
-      </button>
-    )
+    const themedBaseStyles = baseStyles; 
+    const finalClassName = `${themedBaseStyles} ${variantStyles} ${sizeStyles} ${className || ""}`;
+
+    if (asChild) {
+      // When asChild is true, Comp is motion.div.
+      // Props should be div-compatible. `props` here are ButtonHTMLAttributes.
+      // Destructure known button-specific props to avoid passing them to a div.
+      const { 
+        disabled, 
+        form, 
+        formAction, 
+        formEncType, 
+        formMethod, 
+        formNoValidate, 
+        formTarget, 
+        name, 
+        type, 
+        value, 
+        ...divCompatibleProps 
+      } = props;
+
+      return (
+        <motion.div 
+          className={finalClassName} 
+          ref={ref as React.Ref<HTMLDivElement>} 
+          {...(divCompatibleProps as HTMLMotionProps<'div'>)} // Cast to div motion props
+        >
+          {/* For asChild, isLoading state might need to be handled by the child or visually on the div */}
+          {isLoading && <Loader2IconCareers className="mr-2 h-4 w-4 animate-spin" />}
+          {children}
+        </motion.div>
+      );
+    } else {
+      // When asChild is false, Comp is motion.button.
+      // Props are ButtonHTMLAttributes, which is what `props` is.
+      // Explicitly set `disabled` based on `props.disabled` and `isLoading`.
+      return (
+        <motion.button 
+          className={finalClassName} 
+          ref={ref as React.Ref<HTMLButtonElement>} 
+          {...props} 
+          disabled={props.disabled || isLoading}
+        >
+          {isLoading && <Loader2IconCareers className="mr-2 h-4 w-4 animate-spin" />}
+          {children}
+        </motion.button>
+      );
+    }
   }
-)
+);
+Button.displayName = "Button";
 
-Button.displayName = 'Button'
-
-export { Button }
+export { Button };
