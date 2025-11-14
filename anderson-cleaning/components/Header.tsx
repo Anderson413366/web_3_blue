@@ -38,21 +38,15 @@ export default function Header({ extraControls }: HeaderProps = {}) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <Image
+              <img
                 src="/images/logo.svg"
                 alt="Anderson Cleaning Logo"
-                width={160}
-                height={40}
                 className="h-10 w-auto dark:hidden transition-transform group-hover:scale-105"
-                priority
               />
-              <Image
+              <img
                 src="/images/logo-dark.svg"
                 alt="Anderson Cleaning Logo"
-                width={160}
-                height={40}
                 className="h-10 w-auto hidden dark:block transition-transform group-hover:scale-105"
-                priority
               />
             </Link>
           </div>
