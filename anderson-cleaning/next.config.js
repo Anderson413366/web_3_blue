@@ -49,10 +49,47 @@ const nextConfig = {
     NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || 'development',
   },
 
-  // Incremental Static Regeneration
+  // Headers for security and caching
   async headers() {
     return [
       {
+        // Security headers for all pages
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+      {
+        // Cache static assets
+        source: '/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache images
         source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
         headers: [
           {
@@ -62,6 +99,7 @@ const nextConfig = {
         ],
       },
       {
+        // Cache Next.js static files
         source: '/_next/static/:path*',
         headers: [
           {
@@ -71,6 +109,7 @@ const nextConfig = {
         ],
       },
       {
+        // Cache fonts
         source: '/fonts/:path*',
         headers: [
           {
@@ -79,14 +118,21 @@ const nextConfig = {
           },
         ],
       },
+    ]
+  },
+
+  // URL redirects
+  async redirects() {
+    return [
       {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-        ],
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/apply',
+        destination: '/en/apply',
+        permanent: false,
       },
     ]
   },
@@ -95,8 +141,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/apply',
-        destination: '/en/apply',
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
       },
     ]
   },
