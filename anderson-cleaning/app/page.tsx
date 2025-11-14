@@ -586,6 +586,131 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Resources & Learning Center */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50 dark:from-slate-800 dark:to-slate-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Resources & Learning Center
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Expert tips, answers to your questions, and special offers
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Blog/Resources Card */}
+            <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                <div className="text-4xl mb-3">📚</div>
+                <h3 className="text-2xl font-bold mb-2">Blog & Resources</h3>
+                <p className="text-blue-100">Expert cleaning tips and industry insights</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Office Cleaning Best Practices
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Green Cleaning Benefits
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Healthcare Facility Standards
+                    </span>
+                  </li>
+                </ul>
+                <Link href="/blog">
+                  <Button variant="primary" className="w-full group">
+                    Explore Articles
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* FAQ Card */}
+            <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-gradient-to-r from-green-600 to-green-700 p-6 text-white">
+                <div className="text-4xl mb-3">❓</div>
+                <h3 className="text-2xl font-bold mb-2">Frequently Asked Questions</h3>
+                <p className="text-green-100">Get answers to common questions</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">Contract & Pricing Info</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Staff Vetting & Training
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Service Area & Scheduling
+                    </span>
+                  </li>
+                </ul>
+                <Link href="/faq">
+                  <Button variant="primary" className="w-full group">
+                    View All FAQs
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Promotions Card */}
+            <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-gradient-to-r from-accent-500 to-accent-600 p-6 text-white">
+                <div className="text-4xl mb-3">🎁</div>
+                <h3 className="text-2xl font-bold mb-2">Special Offers</h3>
+                <p className="text-accent-100">Exclusive promotions and referral rewards</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      10% Off First Month for New Clients
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      $100 Referral Bonus Program
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-accent-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Seasonal Promotions
+                    </span>
+                  </li>
+                </ul>
+                <Link href="/promotions">
+                  <Button variant="accent" className="w-full group">
+                    See All Offers
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Value Props */}
       <section className="py-20 bg-white dark:bg-slate-900 transition-colors">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
