@@ -93,23 +93,45 @@ export default function QuoteForm({ onSuccess }: QuoteFormProps) {
       setIsSubmitting(true)
       setSubmitError(null)
 
-      // Check honeypot field
+      // Check honeypot field (client-side check)
       if (data.website) {
         throw new Error('Invalid submission detected')
       }
 
-      // TODO: Send to backend API
-      console.log('Quote form submitted:', data)
+      // Send to backend API
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to submit quote request')
+      }
+
+      // Track with Google Analytics dataLayer
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        ;(window as any).dataLayer.push({
+          event: 'form_submission',
+          form_name: 'quote_request',
+          form_type: 'multi_step',
+          facility_type: data.facilityType,
+          cleaning_frequency: data.cleaningFrequency,
+        })
+      }
 
       // Success!
       onSuccess?.()
     } catch (error) {
       console.error('Quote submission error:', error)
       setSubmitError(
-        'There was an error submitting your quote request. Please try again or call us at (413) 306-5053.'
+        error instanceof Error
+          ? error.message
+          : 'There was an error submitting your quote request. Please try again or call us at (413) 306-5053.'
       )
     } finally {
       setIsSubmitting(false)
