@@ -26,11 +26,11 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-accent-400 flex-shrink-0" aria-hidden="true" />
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+14133065053"
                   className="hover:text-accent-400 transition-colors"
                   aria-label="Call Anderson Cleaning"
                 >
-                  (555) 123-4567
+                  (413) 306-5053
                 </a>
               </div>
               <div className="flex items-center space-x-3">

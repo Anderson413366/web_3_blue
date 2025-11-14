@@ -21,7 +21,7 @@ export function generateOrganizationSchema() {
       'Professional commercial cleaning and janitorial services for businesses in Western Massachusetts and Northern Connecticut.',
     foundingDate: '2000',
     email: 'info@andersoncleaning.com',
-    telephone: '+1-413-733-3334',
+    telephone: '+1-413-306-5053',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '103 Wayside Ave',
@@ -33,7 +33,7 @@ export function generateOrganizationSchema() {
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: '+1-413-733-3334',
+        telephone: '+1-413-306-5053',
         contactType: 'Customer Service',
         areaServed: ['US-MA', 'US-CT'],
         availableLanguage: ['en', 'es', 'pt', 'ro'],
@@ -41,7 +41,7 @@ export function generateOrganizationSchema() {
       },
       {
         '@type': 'ContactPoint',
-        telephone: '+1-413-733-3334',
+        telephone: '+1-413-306-5053',
         contactType: 'Sales',
         areaServed: ['US-MA', 'US-CT'],
         availableLanguage: ['en', 'es', 'pt', 'ro'],
@@ -74,7 +74,7 @@ export function generateLocalBusinessSchema() {
     name: 'Anderson Cleaning, Inc.',
     image: `${baseUrl}/images/og-image.jpg`,
     url: baseUrl,
-    telephone: '+1-413-733-3334',
+    telephone: '+1-413-306-5053',
     email: 'info@andersoncleaning.com',
     priceRange: '$$',
     address: {
@@ -144,7 +144,7 @@ export function generateServiceSchema({ name, description, serviceType, url }: S
       '@type': 'Organization',
       name: 'Anderson Cleaning, Inc.',
       url: baseUrl,
-      telephone: '+1-413-733-3334',
+      telephone: '+1-413-306-5053',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '103 Wayside Ave',
@@ -247,7 +247,7 @@ export function generateReviewSchema({
       '@type': 'LocalBusiness',
       name: 'Anderson Cleaning, Inc.',
       image: `${baseUrl}/images/og-image.jpg`,
-      telephone: '+1-413-733-3334',
+      telephone: '+1-413-306-5053',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '103 Wayside Ave',

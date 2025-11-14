@@ -46,7 +46,11 @@ export default function Home() {
       </div>
 
       {/* Hero Section with Quote Form */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-24">
+      <section
+        id="main-content"
+        className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-24"
+        tabIndex={-1}
+      >
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -111,7 +115,7 @@ export default function Home() {
                     Get a Free Quote
                   </Button>
                 </Link>
-                <a href="tel:+15551234567" className="flex-1">
+                <a href="tel:+14133065053" className="flex-1">
                   <Button
                     variant="outline"
                     size="lg"
@@ -178,8 +182,9 @@ export default function Home() {
                       type="tel"
                       id="hero-phone"
                       required
+                      autoComplete="tel"
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
-                      placeholder="(555) 123-4567"
+                      placeholder="(413) 306-5053"
                     />
                   </div>
 

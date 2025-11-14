@@ -34,8 +34,8 @@ const PhoneIcon = ({ className = '' }: { className?: string }) => (
 // CONSTANTS
 // ============================================================================
 
-const PHONE_NUMBER = '(555) 123-4567' // Update with actual Anderson Cleaning phone number
-const PHONE_NUMBER_TEL = '+15551234567' // Update with actual number (E.164 format)
+const PHONE_NUMBER = '(413) 306-5053'
+const PHONE_NUMBER_TEL = '+14133065053'
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -232,7 +232,9 @@ export default function Header({ extraControls }: HeaderProps = {}) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors min-h-[44px] min-w-[44px]"
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
@@ -247,7 +249,11 @@ export default function Header({ extraControls }: HeaderProps = {}) {
             MOBILE NAVIGATION MENU
             ================================================================ */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-slate-700">
+          <nav
+            id="mobile-menu"
+            className="md:hidden py-4 border-t border-gray-200 dark:border-slate-700"
+            aria-label="Mobile Navigation"
+          >
             <div className="flex flex-col space-y-3">
               {/* Phone Number Link - Full display in mobile menu */}
               <a
@@ -296,7 +302,7 @@ export default function Header({ extraControls }: HeaderProps = {}) {
                 </Button>
               </Link>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>

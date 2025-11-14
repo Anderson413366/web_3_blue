@@ -293,7 +293,7 @@ export const mockTranslations: Record<LanguageCode, Translations> = {
     emailLabel: 'Email Address',
     emailPlaceholder: 'you@example.com',
     phoneLabel: 'Phone Number',
-    phonePlaceholder: '(555) 123-4567',
+    phonePlaceholder: '(413) 306-5053',
     applyingForLabel: 'Position Applying For',
     applyingForPlaceholder: 'Select a position',
     positionOptions: [
@@ -1318,7 +1318,7 @@ export const mockTranslations: Record<LanguageCode, Translations> = {
     emailLabel: 'Adresa de email',
     emailPlaceholder: 'dvs@exemplu.com',
     phoneLabel: 'Număr de telefon',
-    phonePlaceholder: '(555) 123-4567',
+    phonePlaceholder: '(413) 306-5053',
     applyingForLabel: 'Poziția pentru care aplicați',
     applyingForPlaceholder: 'Selectați o poziție',
     positionOptions: [

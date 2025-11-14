@@ -181,7 +181,11 @@ export default function FAQPage() {
       </section>
 
       {/* Search Bar */}
-      <section className="bg-white dark:bg-slate-900 py-8 border-b border-gray-200 dark:border-slate-700">
+      <section
+        id="main-content"
+        className="bg-white dark:bg-slate-900 py-8 border-b border-gray-200 dark:border-slate-700"
+        tabIndex={-1}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <div className="relative">
@@ -223,33 +227,52 @@ export default function FAQPage() {
                     {category}
                   </h2>
                   <div className="space-y-4">
-                    {questions.map((faq, index) => (
-                      <div
-                        key={index}
-                        className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden transition-all duration-300"
-                      >
-                        <button
-                          onClick={() => toggleQuestion(`${category}-${index}`)}
-                          className="w-full px-6 py-5 text-left flex items-start justify-between hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors"
+                    {questions.map((faq, index) => {
+                      const questionId = `${category}-${index}`
+                      const isOpen = openQuestion === questionId
+                      return (
+                        <div
+                          key={index}
+                          className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden transition-all duration-300"
                         >
-                          <span className="font-semibold text-gray-900 dark:text-white text-lg pr-4">
-                            {faq.question}
-                          </span>
-                          {openQuestion === `${category}-${index}` ? (
-                            <ChevronUp className="h-6 w-6 text-primary-600 dark:text-primary-400 flex-shrink-0" />
-                          ) : (
-                            <ChevronDown className="h-6 w-6 text-gray-400 flex-shrink-0" />
+                          <h3>
+                            <button
+                              onClick={() => toggleQuestion(questionId)}
+                              className="w-full px-6 py-5 text-left flex items-start justify-between hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors min-h-[44px]"
+                              aria-expanded={isOpen}
+                              aria-controls={`faq-answer-${questionId}`}
+                            >
+                              <span className="font-semibold text-gray-900 dark:text-white text-lg pr-4">
+                                {faq.question}
+                              </span>
+                              {isOpen ? (
+                                <ChevronUp
+                                  className="h-6 w-6 text-primary-600 dark:text-primary-400 flex-shrink-0 transition-transform"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <ChevronDown
+                                  className="h-6 w-6 text-gray-400 flex-shrink-0 transition-transform"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </button>
+                          </h3>
+                          {isOpen && (
+                            <div
+                              id={`faq-answer-${questionId}`}
+                              role="region"
+                              aria-labelledby={`faq-question-${questionId}`}
+                              className="px-6 py-5 bg-gray-50 dark:bg-slate-800 border-t border-gray-200 dark:border-slate-600"
+                            >
+                              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {faq.answer}
+                              </p>
+                            </div>
                           )}
-                        </button>
-                        {openQuestion === `${category}-${index}` && (
-                          <div className="px-6 py-5 bg-gray-50 dark:bg-slate-800 border-t border-gray-200 dark:border-slate-600">
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                              {faq.answer}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               ))
@@ -276,14 +299,14 @@ export default function FAQPage() {
                   Contact Us
                 </Button>
               </Link>
-              <a href="tel:+15551234567">
+              <a href="tel:+14133065053">
                 <Button
                   variant="outline"
                   size="lg"
                   className="border-white text-white hover:bg-white/10"
                 >
                   <Phone className="h-5 w-5 mr-2" />
-                  Call (555) 123-4567
+                  Call (413) 306-5053
                 </Button>
               </a>
             </div>

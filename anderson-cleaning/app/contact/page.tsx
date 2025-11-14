@@ -10,7 +10,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
       <Header />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main id="main-content" className="container mx-auto px-4 sm:px-6 lg:px-8 py-12" tabIndex={-1}>
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
@@ -55,10 +55,10 @@ export default function ContactPage() {
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-gray-100">Phone</p>
                       <a
-                        href="tel:+15551234567"
+                        href="tel:+14133065053"
                         className="text-primary-600 dark:text-primary-400 hover:underline"
                       >
-                        (555) 123-4567
+                        (413) 306-5053
                       </a>
                       <p className="text-sm text-gray-600 dark:text-gray-400">24/7 Support Line</p>
                     </div>
@@ -141,16 +141,16 @@ export default function ContactPage() {
                   line immediately:
                 </p>
                 <a
-                  href="tel:+15551234567"
+                  href="tel:+14133065053"
                   className="inline-block mt-2 font-bold text-error-dark dark:text-error-light hover:underline"
                 >
-                  (555) 123-4567
+                  (413) 306-5053
                 </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

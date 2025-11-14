@@ -137,8 +137,12 @@ export default function BeforeAfterSlider({
         onTouchStart={handleMouseDown}
         onKeyDown={handleKeyDown}
         tabIndex={0}
-        role="img"
-        aria-label={`Before and after comparison: ${currentItem.title}`}
+        role="slider"
+        aria-label={`Before and after comparison slider: ${currentItem.title}. Use left and right arrow keys to adjust.`}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(sliderPosition)}
+        aria-valuetext={`${Math.round(sliderPosition)}% after image visible`}
       >
         {/* After Image (background) */}
         <div

@@ -133,10 +133,10 @@ export default function Error({
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
             <a
-              href="tel:+15551234567"
+              href="tel:+14133065053"
               className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 hover:underline"
             >
-              Call (555) 123-4567
+              Call (413) 306-5053
             </a>
 
             <span className="hidden sm:inline text-gray-300 dark:text-gray-700">

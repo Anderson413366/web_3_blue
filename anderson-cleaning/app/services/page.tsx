@@ -26,7 +26,7 @@ export default function ServicesPage() {
       image: 'https://andersoncleaning.com/logo.png',
       '@id': 'https://andersoncleaning.com',
       url: 'https://andersoncleaning.com',
-      telephone: '+1-555-123-4567',
+      telephone: '+1-413-306-5053',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '103 Wayside Avenue',
