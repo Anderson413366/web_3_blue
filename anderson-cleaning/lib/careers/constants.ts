@@ -1,4 +1,4 @@
-import { FormDataShape, LanguageCode, Theme, SectionConfig, Translations } from './types'
+import { FormDataShape, LanguageCode, SectionConfig, Translations } from './types'
 
 // Components are imported and used directly in SECTIONS_CONFIG
 import PersonalInfoSection from '@/components/careers/sections/PersonalInfoSection'
@@ -14,7 +14,6 @@ import UploadsSection from '@/components/careers/sections/UploadsSection'
 import ReviewSection from '@/components/careers/sections/ReviewSection'
 
 export const DEFAULT_LANGUAGE: LanguageCode = 'en'
-export const DEFAULT_THEME: Theme = 'light'
 
 export const GEMINI_TEXT_MODEL = 'gemini-2.5-flash-preview-04-17' // General Text Tasks
 

@@ -1,7 +1,6 @@
 import React from 'react'
 
 export type LanguageCode = 'en' | 'es' | 'pt-BR' | 'ro'
-export type Theme = 'light' | 'dark'
 
 export interface Translations {
   [key: string]:
