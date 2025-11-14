@@ -25,8 +25,6 @@ const CareersPage: React.FC = () => {
   const {
     t,
     currentLanguage,
-    theme,
-    setTheme,
     formData,
     currentSectionIndex,
     setCurrentSectionIndex,
@@ -164,10 +162,10 @@ const CareersPage: React.FC = () => {
 
   if (showIntro) {
     return (
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <>
         <CareersHero onStartApplication={handleStartApplication} />
         <WhyWorkSection />
-      </main>
+      </>
     )
   }
 
@@ -175,8 +173,9 @@ const CareersPage: React.FC = () => {
   const currentFormStep = currentSectionIndex + 1
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="max-w-3xl mx-auto">
+    <main className="bg-white dark:bg-slate-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-3xl mx-auto">
         <ProgressBar
           currentStep={currentFormStep}
           totalSteps={totalFormSteps}
@@ -240,7 +239,7 @@ const CareersPage: React.FC = () => {
             </Button>
           )}
         </div>
-      </div>
+        </div>
 
       <Modal
         isOpen={applicationStatus === 'success'}

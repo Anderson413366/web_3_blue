@@ -148,8 +148,6 @@ export interface SectionConfig {
 export interface AppContextType {
   currentLanguage: LanguageCode
   setCurrentLanguage: (lang: LanguageCode) => void
-  theme: Theme
-  setTheme: (theme: Theme) => void
   t: (key: string, options?: Record<string, string | number>) => Translations[string] // Changed return type
   formData: FormDataShape
   setFormData: React.Dispatch<React.SetStateAction<FormDataShape>>

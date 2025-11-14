@@ -2,14 +2,15 @@
 
 import { AppProvider } from '@/lib/careers/AppContext'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import CareersPage from '@/components/careers/CareersPage'
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher'
 
 function CareersPageContent() {
   return (
     <>
-      <Header extraControls={<LanguageSwitcher />} />
+      <Header />
       <CareersPage />
+      <Footer />
     </>
   )
 }

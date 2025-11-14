@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback, useMemo, createContext, useContext } from 'react'
 import {
   LanguageCode,
-  Theme,
   Translations,
   FormDataShape,
   SparkType,
@@ -15,7 +14,6 @@ import {
   INITIAL_FORM_DATA,
   SECTIONS_CONFIG,
   DEFAULT_LANGUAGE,
-  DEFAULT_THEME,
 } from './constants'
 
 // Helper to get translations
@@ -57,17 +55,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return DEFAULT_LANGUAGE
   })
 
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('appTheme') as Theme
-      if (storedTheme) return storedTheme
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : DEFAULT_THEME
-    }
-    return DEFAULT_THEME
-  })
-
   const [formData, setFormData] = useState<FormDataShape>(INITIAL_FORM_DATA)
   const [currentSectionIndex, setCurrentSectionIndex] = useState<number>(0)
   const [applicationStatus, setApplicationStatus] = useState<
@@ -91,51 +78,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   }, [currentLanguage])
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('appTheme', theme)
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark')
-        document.documentElement.style.setProperty('--color-primary', '#3B82F6')
-        document.documentElement.style.setProperty('--color-primary-hover', '#2563EB')
-        document.documentElement.style.setProperty('--color-card', '#1F2937')
-        document.documentElement.style.setProperty('--color-card-foreground', '#F3F4F6')
-        document.documentElement.style.setProperty('--color-background', '#111827')
-        document.documentElement.style.setProperty('--color-foreground', '#F9FAFB')
-        document.documentElement.style.setProperty('--color-muted', '#374151')
-        document.documentElement.style.setProperty('--color-muted-foreground', '#9CA3AF')
-        document.documentElement.style.setProperty('--color-border', '#374151')
-        document.documentElement.style.setProperty('--color-input', '#4B5563')
-        document.documentElement.style.setProperty('--color-accent', '#374151')
-        document.documentElement.style.setProperty('--color-accent-foreground', '#F9FAFB')
-      } else {
-        document.documentElement.classList.remove('dark')
-        document.documentElement.style.setProperty('--color-primary', '#1D4ED8')
-        document.documentElement.style.setProperty('--color-primary-hover', '#1E40AF')
-        document.documentElement.style.setProperty('--color-card', '#FFFFFF')
-        document.documentElement.style.setProperty('--color-card-foreground', '#111827')
-        document.documentElement.style.setProperty('--color-background', '#FFFFFF')
-        document.documentElement.style.setProperty('--color-foreground', '#111827')
-        document.documentElement.style.setProperty('--color-muted', '#F3F4F6')
-        document.documentElement.style.setProperty('--color-muted-foreground', '#6B7280')
-        document.documentElement.style.setProperty('--color-border', '#D1D5DB')
-        document.documentElement.style.setProperty('--color-input', '#D1D5DB')
-        document.documentElement.style.setProperty('--color-accent', '#F3F4F6')
-        document.documentElement.style.setProperty('--color-accent-foreground', '#1F2937')
-      }
-    }
-  }, [theme])
-
   const t = useCallback(
     (key: string, options?: Record<string, string | number>): Translations[string] => {
       return getTranslatedText(currentLanguage, key, options)
     },
     [currentLanguage]
   )
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme)
-  }
 
   const handleChange = useCallback(
     (
@@ -259,8 +207,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     () => ({
       currentLanguage,
       setCurrentLanguage,
-      theme,
-      setTheme,
       t,
       formData,
       setFormData,
@@ -285,7 +231,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }),
     [
       currentLanguage,
-      theme,
       t,
       formData,
       handleChange,

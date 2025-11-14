@@ -24,13 +24,13 @@ const WhyWorkSection: React.FC = () => {
   const MotionCard = motion(Card)
 
   return (
-    <section id="why-work" className="py-16 md:py-24 bg-gray-50 dark:bg-slate-900/50">
-      <div className="container mx-auto px-6">
+    <section id="why-work" className="py-16 md:py-20 bg-gray-50 dark:bg-slate-800">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-100"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white"
         >
           {t('whyWorkTitle') as string}
         </motion.h2>
@@ -46,18 +46,16 @@ const WhyWorkSection: React.FC = () => {
                   delay: index * 0.15,
                   duration: 0.5,
                 }}
-                // whileInView="visible" // Use for scroll-triggered animations if preferred
-                // viewport={{ once: true, amount: 0.3 }}
-                className="h-full flex flex-col hover:shadow-xl transition-shadow duration-300 dark:bg-slate-800"
+                className="h-full flex flex-col hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-slate-700"
               >
                 <CardHeader className="flex-row items-center space-x-4">
-                  <div className="p-3 bg-primary/10 dark:bg-blue-500/20 rounded-full">
-                    <IconComponent className="h-6 w-6 text-primary dark:text-blue-400" />
+                  <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-full">
+                    <IconComponent className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                   </div>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
+                  <CardTitle className="text-lg text-gray-900 dark:text-white">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-muted-foreground dark:text-slate-400">{item.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
                 </CardContent>
               </MotionCard>
             )
