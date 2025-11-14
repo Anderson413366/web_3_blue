@@ -25,6 +25,7 @@ export default function Header({ extraControls }: HeaderProps = {}) {
     { name: 'Services', href: '/services' },
     { name: 'Industries', href: '/industries' },
     { name: 'About', href: '/about' },
+    { name: 'Careers', href: '/apply' },
     { name: 'Resources', href: '/blog' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
