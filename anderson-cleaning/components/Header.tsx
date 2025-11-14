@@ -25,9 +25,9 @@ export default function Header({ extraControls }: HeaderProps = {}) {
     { name: 'Services', href: '/services' },
     { name: 'Industries', href: '/industries' },
     { name: 'About', href: '/about' },
-    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Resources', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Careers', href: '/apply' },
   ]
 
   // Prevent hydration mismatch
