@@ -20,8 +20,7 @@
     "test:all": "npm run lint && npm run type-check && npm run test:unit && npm run test:e2e",
     "lighthouse": "lhci autorun",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "prepare": "husky install"
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
     "@google/genai": "^1.3.0",
