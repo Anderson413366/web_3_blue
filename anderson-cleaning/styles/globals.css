@@ -14,16 +14,28 @@
   margin: 0;
 }
 
-html,
-body {
+html {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: #ffffff;
+}
+
+html.dark {
+  background-color: #0f172a;
 }
 
 body {
+  max-width: 100vw;
+  overflow-x: hidden;
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.dark body {
+  background-color: #0f172a;
 }
 
 /* Custom scrollbar */
