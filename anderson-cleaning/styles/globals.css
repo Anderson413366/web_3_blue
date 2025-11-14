@@ -1,3 +1,8 @@
+/* =============================================================================
+   Import Design System - Single source of truth for all design tokens
+   ============================================================================= */
+@import './design-system.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
