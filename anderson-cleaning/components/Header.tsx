@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/lib/ThemeProvider'
@@ -25,6 +24,7 @@ export default function Header({ extraControls }: HeaderProps = {}) {
     { name: 'Services', href: '/services' },
     { name: 'Industries', href: '/industries' },
     { name: 'About', href: '/about' },
+    { name: 'Careers', href: '/apply' },
     { name: 'Resources', href: '/blog' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
@@ -37,21 +37,15 @@ export default function Header({ extraControls }: HeaderProps = {}) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <Image
+              <img
                 src="/images/logo.svg"
                 alt="Anderson Cleaning Logo"
-                width={160}
-                height={40}
                 className="h-10 w-auto dark:hidden transition-transform group-hover:scale-105"
-                priority
               />
-              <Image
+              <img
                 src="/images/logo-dark.svg"
                 alt="Anderson Cleaning Logo"
-                width={160}
-                height={40}
                 className="h-10 w-auto hidden dark:block transition-transform group-hover:scale-105"
-                priority
               />
             </Link>
           </div>
@@ -66,21 +60,15 @@ export default function Header({ extraControls }: HeaderProps = {}) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <Image
+            <img
               src="/images/logo.svg"
               alt="Anderson Cleaning Logo"
-              width={160}
-              height={40}
               className="h-10 w-auto dark:hidden transition-transform group-hover:scale-105"
-              priority
             />
-            <Image
+            <img
               src="/images/logo-dark.svg"
               alt="Anderson Cleaning Logo"
-              width={160}
-              height={40}
               className="h-10 w-auto hidden dark:block transition-transform group-hover:scale-105"
-              priority
             />
           </Link>
 

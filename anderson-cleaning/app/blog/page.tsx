@@ -21,7 +21,7 @@ const blogPosts = [
     slug: 'benefits-green-cleaning-workplace',
     title: 'Benefits of Green Cleaning in the Workplace',
     excerpt:
-      'Discover how eco-friendly cleaning products and practices can improve air quality, reduce employee sick days, and demonstrate your company's commitment to sustainability.',
+      'Discover how eco-friendly cleaning products and practices can improve air quality, reduce employee sick days, and demonstrate your company\'s commitment to sustainability.',
     category: 'Sustainability',
     readTime: '6 min read',
     publishedDate: '2024-10-08',
@@ -51,8 +51,8 @@ const blogPosts = [
     slug: 'choosing-commercial-cleaning-company',
     title: '10 Questions to Ask Before Hiring a Commercial Cleaning Company',
     excerpt:
-      'Make an informed decision with our facility manager's guide. From insurance coverage to employee vetting, here's what you need to know before signing a contract.',
-    category: 'Buyer's Guide',
+      'Make an informed decision with our facility manager\'s guide. From insurance coverage to employee vetting, here\'s what you need to know before signing a contract.',
+    category: 'Buyer\'s Guide',
     readTime: '10 min read',
     publishedDate: '2024-08-28',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80',
@@ -69,7 +69,7 @@ const blogPosts = [
   },
 ]
 
-const categories = ['All', 'Health & Safety', 'Sustainability', 'Best Practices', 'Healthcare', "Buyer's Guide", 'Maintenance']
+const categories = ['All', 'Health & Safety', 'Sustainability', 'Best Practices', 'Healthcare', "Buyer\'s Guide", 'Maintenance']
 
 export default function BlogPage() {
   return (
