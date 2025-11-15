@@ -6,7 +6,11 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { getCSPHeader, getDevCSPHeader } from './lib/security/csp'
+import {
+  getCSPHeaderWithNonce,
+  getDevCSPHeaderWithNonce,
+  generateNonce,
+} from './lib/security/csp'
 
 // ===== RATE LIMITING =====
 
@@ -166,12 +170,12 @@ function isIpAllowed(request: NextRequest): boolean {
 
 // ===== SECURITY HEADERS =====
 
-function getSecurityHeaders(pathname: string): Record<string, string> {
+function getSecurityHeaders(pathname: string, nonce: string): Record<string, string> {
   const isDev = process.env.NODE_ENV === 'development'
-  const cspHeader = isDev ? getDevCSPHeader() : getCSPHeader()
+  const cspHeader = isDev ? getDevCSPHeaderWithNonce(nonce) : getCSPHeaderWithNonce(nonce)
 
   const headers: Record<string, string> = {
-    // Content Security Policy
+    // Content Security Policy with nonce
     'Content-Security-Policy': cspHeader,
 
     // Prevent MIME type sniffing
@@ -192,7 +196,7 @@ function getSecurityHeaders(pathname: string): Record<string, string> {
 
   // HSTS (only in production and over HTTPS)
   if (!isDev) {
-    headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
   }
 
   // X-Frame-Options (vary by route)
@@ -219,6 +223,9 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith('/_next') || pathname.startsWith('/static') || pathname.includes('.')) {
     return NextResponse.next()
   }
+
+  // Generate a unique CSP nonce for this request
+  const nonce = generateNonce()
 
   // Check rate limit
   const rateLimit = checkRateLimit(request)
@@ -248,9 +255,19 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Create response with security headers
-  const response = NextResponse.next()
-  const securityHeaders = getSecurityHeaders(pathname)
+  // Create a new request headers object with the nonce
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-nonce', nonce)
+
+  // Create response with modified request headers
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+
+  // Get security headers with nonce
+  const securityHeaders = getSecurityHeaders(pathname, nonce)
 
   // Apply security headers
   Object.entries(securityHeaders).forEach(([key, value]) => {

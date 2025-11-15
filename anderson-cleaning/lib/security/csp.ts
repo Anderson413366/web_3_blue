@@ -153,7 +153,65 @@ export function getDevCSPHeader(): string {
  * Get CSP nonce for inline scripts (if using nonce-based CSP)
  */
 export function generateNonce(): string {
-  return Buffer.from(crypto.randomUUID()).toString('base64')
+  // Generate a cryptographically secure random nonce
+  const bytes = new Uint8Array(16)
+  crypto.getRandomValues(bytes)
+  return Buffer.from(bytes).toString('base64')
+}
+
+/**
+ * Get CSP header with nonce support
+ * @param nonce - Optional nonce to include in script-src and style-src
+ */
+export function getCSPHeaderWithNonce(nonce?: string): string {
+  const directives = { ...cspDirectives }
+
+  if (nonce) {
+    // Replace unsafe-inline with nonce for script-src
+    directives['script-src'] = [
+      "'self'",
+      `'nonce-${nonce}'`,
+      // Remove unsafe-inline and unsafe-eval for production
+      ...cspDirectives['script-src'].filter(
+        (src) => !["'unsafe-eval'", "'unsafe-inline'"].includes(src)
+      ),
+    ]
+
+    // Keep unsafe-inline for styles (Tailwind CSS requires it)
+    // We could use nonces for critical styles, but Tailwind generates many classes
+    directives['style-src'] = [
+      "'self'",
+      "'unsafe-inline'", // Still needed for Tailwind
+      ...cspDirectives['style-src'].filter((src) => !["'unsafe-inline'"].includes(src)),
+    ]
+  }
+
+  return generateCSPHeader(directives)
+}
+
+/**
+ * Get dev CSP header with nonce support
+ * @param nonce - Optional nonce to include in script-src
+ */
+export function getDevCSPHeaderWithNonce(nonce?: string): string {
+  const devDirectives = { ...cspDirectives }
+
+  // More permissive for development
+  devDirectives['script-src'] = [
+    "'self'",
+    "'unsafe-eval'", // Required for Next.js dev mode HMR
+    "'unsafe-inline'", // Required for Next.js dev mode
+    ...cspDirectives['script-src'].filter(
+      (src) => !["'unsafe-eval'", "'unsafe-inline'"].includes(src)
+    ),
+  ]
+
+  if (nonce) {
+    // Add nonce to dev script-src
+    devDirectives['script-src'].push(`'nonce-${nonce}'`)
+  }
+
+  return generateCSPHeader(devDirectives)
 }
 
 /**

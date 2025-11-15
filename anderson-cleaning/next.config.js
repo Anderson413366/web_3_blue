@@ -51,6 +51,8 @@ const nextConfig = {
 
   // Headers for security and caching
   async headers() {
+    const isProduction = process.env.NODE_ENV === 'production'
+
     return [
       {
         // Security headers for all pages
@@ -76,6 +78,15 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          // HSTS - only in production
+          ...(isProduction
+            ? [
+                {
+                  key: 'Strict-Transport-Security',
+                  value: 'max-age=31536000; includeSubDomains; preload',
+                },
+              ]
+            : []),
         ],
       },
       {

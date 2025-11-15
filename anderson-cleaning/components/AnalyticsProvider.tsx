@@ -13,10 +13,11 @@ import { useAnalytics } from '@/lib/analytics/hooks'
 
 interface AnalyticsProviderProps {
   gtmId?: string
+  nonce?: string
   children: React.ReactNode
 }
 
-export default function AnalyticsProvider({ gtmId, children }: AnalyticsProviderProps) {
+export default function AnalyticsProvider({ gtmId, nonce, children }: AnalyticsProviderProps) {
   // Use combined analytics hook for automatic tracking
   useAnalytics()
 
@@ -40,7 +41,7 @@ export default function AnalyticsProvider({ gtmId, children }: AnalyticsProvider
 
   return (
     <>
-      {gtmIdValue && <GoogleTagManager gtmId={gtmIdValue} />}
+      {gtmIdValue && <GoogleTagManager gtmId={gtmIdValue} nonce={nonce} />}
       {children}
     </>
   )

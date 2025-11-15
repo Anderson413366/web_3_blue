@@ -15,9 +15,10 @@ import { initializeConsentDefaults } from '@/lib/consent'
 
 interface GTMProps {
   gtmId: string
+  nonce?: string
 }
 
-export default function GoogleTagManager({ gtmId }: GTMProps) {
+export default function GoogleTagManager({ gtmId, nonce }: GTMProps) {
   useEffect(() => {
     // CRITICAL: Initialize consent defaults BEFORE GTM loads
     // This ensures no tracking happens until user grants consent
@@ -40,10 +41,11 @@ export default function GoogleTagManager({ gtmId }: GTMProps) {
 
   return (
     <>
-      {/* Google Tag Manager with Consent Mode */}
+      {/* Google Tag Manager with Consent Mode and CSP Nonce */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"
+        nonce={nonce}
         dangerouslySetInnerHTML={{
           __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
