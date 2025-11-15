@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from './ui/Button'
 import { X, Cookie } from 'lucide-react'
+import { grantConsent, denyConsent, hasConsentChoice } from '@/lib/utils/consent'
 
 /**
  * Cookie consent banner component
  *
  * Features:
  * - GDPR/CCPA compliant consent banner
+ * - Google Consent Mode v2 integration
  * - LocalStorage persistence
  * - Accessible keyboard navigation
  * - Smooth animations
@@ -23,9 +25,8 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Check if user has already consented
-    const consent = localStorage.getItem('cookie-consent')
-    if (!consent) {
+    // Check if user has already made a consent choice
+    if (!hasConsentChoice()) {
       // Delay showing banner for better UX
       const timer = setTimeout(() => {
         setShowBanner(true)
@@ -37,15 +38,19 @@ export default function CookieBanner() {
   }, [])
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted')
-    localStorage.setItem('cookie-consent-date', new Date().toISOString())
+    // Grant consent via Consent Mode v2
+    grantConsent()
+
+    // Hide banner
     setIsVisible(false)
     setTimeout(() => setShowBanner(false), 300)
   }
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined')
-    localStorage.setItem('cookie-consent-date', new Date().toISOString())
+    // Deny consent via Consent Mode v2
+    denyConsent()
+
+    // Hide banner
     setIsVisible(false)
     setTimeout(() => setShowBanner(false), 300)
   }

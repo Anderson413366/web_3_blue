@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
+import ConsentInit from '@/components/ConsentInit'
 import CookieBanner from '@/components/CookieBanner'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
 import SkipLink from '@/components/SkipLink'
@@ -146,6 +147,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased">
         <SkipLink />
+        <ConsentInit />
         <AccessibilityProvider>
           <ThemeProvider>
             <Header />
