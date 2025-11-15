@@ -53,11 +53,108 @@ jobs:
           path: anderson-cleaning/.next
           retention-days: 7
 
-  # Job 2: Cypress E2E Tests
+  # Job 2: Playwright E2E & Visual Regression Tests
+  playwright:
+    name: Playwright Tests
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: anderson-cleaning/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./anderson-cleaning
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        working-directory: ./anderson-cleaning
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Next.js application
+        working-directory: ./anderson-cleaning
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SITE_URL: https://andersoncleaning.com
+        run: npm run build
+
+      - name: Run Playwright tests
+        working-directory: ./anderson-cleaning
+        run: npm run test
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: anderson-cleaning/playwright-report/
+          retention-days: 30
+
+  # Job 3: Visual Regression Tests (on UI changes)
+  visual-regression:
+    name: Visual Regression Tests
+    runs-on: ubuntu-latest
+    needs: build
+    # Only run on changes to UI-related files
+    if: |
+      contains(github.event.head_commit.modified, 'app/') ||
+      contains(github.event.head_commit.modified, 'components/') ||
+      contains(github.event.head_commit.modified, 'styles/') ||
+      github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: anderson-cleaning/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./anderson-cleaning
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        working-directory: ./anderson-cleaning
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Next.js application
+        working-directory: ./anderson-cleaning
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SITE_URL: https://andersoncleaning.com
+        run: npm run build
+
+      - name: Run Visual Regression Tests
+        working-directory: ./anderson-cleaning
+        run: npm run test:visual
+
+      - name: Upload Visual Regression Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visual-regression-report
+          path: |
+            anderson-cleaning/playwright-report/
+            anderson-cleaning/test-results/
+          retention-days: 30
+
+  # Job 4: Cypress E2E Tests (Legacy - can be removed once Playwright is stable)
   cypress:
     name: Cypress Tests
     runs-on: ubuntu-latest
     needs: build
+    if: false  # Disabled in favor of Playwright
 
     steps:
       - name: Checkout code
@@ -101,7 +198,7 @@ jobs:
           path: anderson-cleaning/cypress/videos
           retention-days: 7
 
-  # Job 3: Lighthouse CI
+  # Job 5: Lighthouse CI
   lighthouse:
     name: Lighthouse Audit
     runs-on: ubuntu-latest
@@ -144,7 +241,7 @@ jobs:
           path: anderson-cleaning/.lighthouseci
           retention-days: 30
 
-  # Job 4: Accessibility Tests with axe-core
+  # Job 6: Accessibility Tests with axe-core
   accessibility:
     name: Accessibility Audit
     runs-on: ubuntu-latest
@@ -172,11 +269,11 @@ jobs:
           sleep 10
           npx @axe-core/cli http://localhost:3000 --exit
 
-  # Job 5: Deploy to Vercel (on main branch only)
+  # Job 7: Deploy to Vercel (on main branch only)
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: [build, cypress, lighthouse, accessibility]
+    needs: [build, playwright, lighthouse, accessibility]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
@@ -192,11 +289,11 @@ jobs:
           working-directory: ./anderson-cleaning
           vercel-args: '--prod'
 
-  # Job 6: Preview Deployment (on PRs)
+  # Job 8: Preview Deployment (on PRs)
   preview:
     name: Deploy Preview
     runs-on: ubuntu-latest
-    needs: [build, cypress]
+    needs: [build, playwright]
     if: github.event_name == 'pull_request'
 
     steps:

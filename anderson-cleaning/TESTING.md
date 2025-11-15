@@ -7,11 +7,12 @@ This document provides comprehensive testing and QA procedures for the Anderson 
 ## Table of Contents
 
 1. [Running Tests Locally](#running-tests-locally)
-2. [Cypress E2E Tests](#cypress-e2e-tests)
-3. [Lighthouse Audits](#lighthouse-audits)
-4. [Accessibility Testing](#accessibility-testing)
-5. [CI/CD Pipeline](#cicd-pipeline)
-6. [Performance Optimization](#performance-optimization)
+2. [Playwright Visual Regression & E2E Tests](#playwright-visual-regression--e2e-tests)
+3. [Cypress E2E Tests](#cypress-e2e-tests)
+4. [Lighthouse Audits](#lighthouse-audits)
+5. [Accessibility Testing](#accessibility-testing)
+6. [CI/CD Pipeline](#cicd-pipeline)
+7. [Performance Optimization](#performance-optimization)
 
 ---
 
@@ -27,24 +28,186 @@ npm install
 ### Available Test Commands
 
 ```bash
-# Run Cypress tests (interactive)
-npm run cypress:open
+# Playwright tests
+npm run test                    # Run all Playwright tests
+npm run test:visual             # Run visual regression tests only
+npm run test:visual:ui          # Run visual tests with UI mode
+npm run test:e2e:update         # Update visual regression snapshots
+npm run test:headed             # Run tests in headed mode (watch browser)
+npm run test:debug              # Run tests in debug mode
+npm run test:report             # View test report
 
-# Run Cypress tests (headless)
-npm run cypress:run
+# Cypress tests (legacy)
+npm run cypress:open            # Run Cypress tests (interactive)
+npm run cypress:run             # Run Cypress tests (headless)
 
-# Run Lighthouse audit
-npm run lighthouse
-
-# Run type checking
-npm run type-check
-
-# Run linting
-npm run lint
-
-# Run all tests
-npm run test:all
+# Other tests
+npm run lighthouse              # Run Lighthouse audit
+npm run type-check              # Run type checking
+npm run lint                    # Run linting
+npm run check:links             # Check internal links
+npm run check:i18n              # Check i18n coverage
 ```
+
+---
+
+## Playwright Visual Regression & E2E Tests
+
+### Overview
+
+Playwright provides comprehensive testing including:
+- **Visual Regression Tests** - Detects unintended visual changes via screenshot comparison
+- **E2E Tests** - Tests user workflows and functionality
+- **Accessibility Tests** - Automated accessibility checks with axe-core
+- **Layout Parity Assertions** - Ensures consistent page structure
+
+### Visual Regression Testing
+
+The visual regression test suite (`tests/e2e/snapshots.spec.ts`) automatically detects layout drift, spacing issues, duplicate headers/footers, and design inconsistencies by comparing screenshots against baseline images.
+
+#### Routes Tested
+
+- `/` (Homepage)
+- `/services`
+- `/industries`
+- `/about`
+- `/apply`
+- `/contact`
+- `/faq`
+
+#### Viewports Tested
+
+- **Mobile**: 360x800px
+- **Tablet**: 768x1024px
+- **Desktop**: 1366x768px
+
+#### Layout Parity Assertions
+
+Each page is automatically validated for:
+
+1. ✅ **Exactly 1 header** element
+2. ✅ **Exactly 1 footer** element
+3. ✅ **No horizontal scrollbars** (body width ≤ viewport width)
+4. ✅ **Container width consistency**
+5. ✅ **No console errors** during page load
+
+#### Running Visual Regression Tests
+
+```bash
+# Run all visual regression tests
+npm run test:visual
+
+# Run with UI mode for interactive debugging
+npm run test:visual:ui
+
+# Run in headed mode (watch browser)
+npm run test:headed snapshots
+
+# Run specific test
+npx playwright test snapshots -g "homepage"
+```
+
+#### Generate Baseline Snapshots (First Time)
+
+```bash
+# Generate baseline snapshots for all browsers and viewports
+npm run test:e2e:update
+
+# Or generate for specific browser only
+npx playwright test snapshots --project=chromium --update-snapshots
+```
+
+#### Update Snapshots After Intentional Design Changes
+
+When you intentionally change the UI (colors, spacing, layout), update the baseline snapshots:
+
+```bash
+# Update all snapshots
+npm run test:e2e:update
+
+# Update only failed snapshots
+npx playwright test snapshots --update-snapshots
+
+# Update for specific viewport
+npx playwright test snapshots --project=chromium --update-snapshots
+```
+
+#### Snapshot Storage
+
+Snapshots are stored in:
+```
+tests/e2e/snapshots.spec.ts-snapshots/
+├── chromium/
+│   ├── home-mobile.png
+│   ├── home-tablet.png
+│   ├── home-desktop.png
+│   ├── services-mobile.png
+│   └── ...
+└── ... (other browsers)
+```
+
+#### Best Practices
+
+**✅ DO Update Snapshots When:**
+- Making intentional UI/design changes
+- Adding new features that change layout
+- Fixing bugs that affect appearance
+- Updating design system (colors, spacing, typography)
+
+**❌ DON'T Update Snapshots When:**
+- Tests are failing (investigate first!)
+- You don't understand why visuals changed
+- CI is failing (fix the issue, don't blindly update)
+
+#### Review Process
+
+1. Run tests locally: `npm run test:visual`
+2. Review diff images in the test report: `npm run test:report`
+3. Verify changes are intentional
+4. Update snapshots: `npm run test:e2e:update`
+5. Commit updated snapshots with clear message
+6. Include before/after screenshots in PR description
+
+### E2E Test Files
+
+Located in `tests/e2e/`:
+- **home.spec.ts** - Homepage functionality tests
+- **apply.spec.ts** - Careers application form tests
+- **apply-header.spec.ts** - Apply page header tests
+- **accessibility.spec.ts** - Accessibility tests with axe-core
+- **visual-regression.spec.ts** - Legacy visual regression tests
+- **snapshots.spec.ts** - NEW: Visual regression with layout parity
+
+### Running E2E Tests
+
+```bash
+# Run all E2E tests
+npm run test
+
+# Run specific test file
+npx playwright test tests/e2e/home.spec.ts
+
+# Run with debug mode
+npm run test:debug
+
+# Run in UI mode (interactive)
+npx playwright test --ui
+```
+
+### Viewing Test Reports
+
+```bash
+# Show latest test report
+npm run test:report
+
+# Test report automatically opens after failed test run
+```
+
+Reports include:
+- Test results with pass/fail status
+- Screenshots on failure
+- Visual diff images (expected vs actual)
+- Trace viewer for debugging
 
 ---
 
@@ -172,19 +335,25 @@ File: `.github/workflows/ci-cd.yml`
    - ESLint checks
    - Next.js build
 
-2. **Cypress E2E Tests**
-   - Run all Cypress tests
-   - Upload screenshots on failure
+2. **Playwright E2E Tests**
+   - Run all Playwright tests
+   - Upload test reports
 
-3. **Lighthouse CI**
+3. **Visual Regression Tests** (on UI changes)
+   - Triggered when app/, components/, or styles/ files change
+   - Compares screenshots against baseline
+   - Fails PR if snapshots differ (unless explicitly updated)
+   - Upload visual regression reports
+
+4. **Lighthouse CI**
    - Performance audits
    - Accessibility audits
    - SEO checks
 
-4. **Accessibility Tests**
+5. **Accessibility Tests**
    - axe-core automated tests
 
-5. **Deploy**
+6. **Deploy**
    - Production deploy (main branch)
    - Preview deploy (pull requests)
 
@@ -208,7 +377,8 @@ LHCI_GITHUB_APP_TOKEN=xxx (optional)
 
 **Checks Required:**
 - Build and Test
-- Cypress Tests
+- Playwright Tests
+- Visual Regression Tests (on UI changes)
 - Lighthouse Audit
 - Accessibility Audit
 

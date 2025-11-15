@@ -13,6 +13,7 @@
     "test:visual": "playwright test visual-regression",
     "test:visual:update": "playwright test visual-regression --update-snapshots",
     "test:visual:ui": "playwright test visual-regression --ui",
+    "test:e2e:update": "playwright test --update-snapshots",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
