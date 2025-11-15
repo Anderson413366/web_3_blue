@@ -124,25 +124,37 @@ export function generateCSPHeader(directives: CSPDirectives): string {
 }
 
 /**
- * Get CSP header value for production
+ * Get CSP header value for production with nonce
  */
-export function getCSPHeader(): string {
-  return generateCSPHeader(cspDirectives)
+export function getCSPHeader(nonce: string): string {
+  const nonceDirectives = { ...cspDirectives }
+
+  // Replace 'unsafe-inline' with nonce for scripts
+  nonceDirectives['script-src'] = [
+    "'self'",
+    "'unsafe-eval'", // Required for Next.js dev mode
+    `'nonce-${nonce}'`, // Use nonce instead of unsafe-inline
+    ...cspDirectives['script-src'].filter(
+      (src) => !["'self'", "'unsafe-eval'", "'unsafe-inline'"].includes(src)
+    ),
+  ]
+
+  return generateCSPHeader(nonceDirectives)
 }
 
 /**
  * Get CSP header value for development (more permissive)
  */
-export function getDevCSPHeader(): string {
+export function getDevCSPHeader(nonce: string): string {
   const devDirectives = { ...cspDirectives }
 
-  // More permissive for development
+  // More permissive for development, but still use nonce
   devDirectives['script-src'] = [
     "'self'",
     "'unsafe-eval'",
-    "'unsafe-inline'",
+    `'nonce-${nonce}'`, // Use nonce instead of unsafe-inline
     ...cspDirectives['script-src'].filter(
-      (src) => !["'unsafe-eval'", "'unsafe-inline'"].includes(src)
+      (src) => !["'self'", "'unsafe-eval'", "'unsafe-inline'"].includes(src)
     ),
   ]
 

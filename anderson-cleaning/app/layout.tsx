@@ -14,6 +14,7 @@ import {
   generateLocalBusinessSchema,
   generateWebsiteSchema,
 } from '@/lib/seo/jsonld'
+import { getNonce } from '@/lib/utils/nonce'
 
 // Font optimization with display swap and preloading
 const inter = Inter({
@@ -97,7 +98,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Get CSP nonce for this request
+  const nonce = await getNonce()
+
   // Generate JSON-LD structured data
   const organizationSchema = generateOrganizationSchema()
   const localBusinessSchema = generateLocalBusinessSchema()
@@ -131,17 +135,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#1D4ED8" />
         <meta name="msapplication-TileColor" content="#1D4ED8" />
 
-        {/* JSON-LD Structured Data */}
+        {/* JSON-LD Structured Data with CSP nonce */}
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>

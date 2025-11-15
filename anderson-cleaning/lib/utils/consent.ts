@@ -180,14 +180,5 @@ export function resetConsent() {
 }
 
 /**
- * Global type extensions for gtag consent
+ * Note: gtag type is declared in lib/utils/analytics.ts
  */
-declare global {
-  interface Window {
-    gtag?: (
-      command: 'consent' | 'event' | 'config' | 'set',
-      action: string,
-      params?: Record<string, any>
-    ) => void
-  }
-}

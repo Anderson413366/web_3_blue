@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { getCSPHeader, getDevCSPHeader } from './lib/security/csp'
+import { getCSPHeader, getDevCSPHeader, generateNonce } from './lib/security/csp'
 
 // ===== RATE LIMITING =====
 
@@ -166,9 +166,9 @@ function isIpAllowed(request: NextRequest): boolean {
 
 // ===== SECURITY HEADERS =====
 
-function getSecurityHeaders(pathname: string): Record<string, string> {
+function getSecurityHeaders(pathname: string, nonce: string): Record<string, string> {
   const isDev = process.env.NODE_ENV === 'development'
-  const cspHeader = isDev ? getDevCSPHeader() : getCSPHeader()
+  const cspHeader = isDev ? getDevCSPHeader(nonce) : getCSPHeader(nonce)
 
   const headers: Record<string, string> = {
     // Content Security Policy
@@ -220,6 +220,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // Generate nonce for this request
+  const nonce = generateNonce()
+
   // Check rate limit
   const rateLimit = checkRateLimit(request)
   if (!rateLimit.allowed) {
@@ -248,9 +251,19 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Create response with security headers
-  const response = NextResponse.next()
-  const securityHeaders = getSecurityHeaders(pathname)
+  // Clone the request headers and add the nonce
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-nonce', nonce)
+
+  // Create response with modified request headers
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+
+  // Get security headers with nonce
+  const securityHeaders = getSecurityHeaders(pathname, nonce)
 
   // Apply security headers
   Object.entries(securityHeaders).forEach(([key, value]) => {
