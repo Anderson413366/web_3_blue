@@ -17,6 +17,8 @@
     "test:e2e:snapshots": "playwright test tests/e2e/snapshots.spec.ts",
     "test:e2e:update": "playwright test --update-snapshots",
     "test:e2e:snapshots:update": "playwright test tests/e2e/snapshots.spec.ts --update-snapshots",
+    "lhci": "lhci autorun",
+    "lhci:mobile": "lhci autorun --config=lighthouserc.js",
     "crawl:prod": "tsx scripts/crawl-internal.ts"
   },
   "dependencies": {
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
     "@axe-core/react": "^4.11.0",
+    "@lhci/cli": "^0.13.0",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
