@@ -1,57 +1,53 @@
 /**
- * Google Tag Manager Script Component
+ * Google Tag Manager Component
  *
- * Injects GTM container script and initializes dataLayer
- * Must be placed in root layout or _app
+ * Loads Google Tag Manager with proper Consent Mode v2 integration.
+ * Must be rendered AFTER ConsentInit to ensure consent defaults are set first.
+ *
+ * @see https://developers.google.com/tag-platform/tag-manager/web
  */
 
 'use client'
 
-import { useEffect } from 'react'
 import Script from 'next/script'
+import { useEffect } from 'react'
 
-interface GTMProps {
-  gtmId: string
-}
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
 
-export default function GoogleTagManager({ gtmId }: GTMProps) {
-  useEffect(() => {
-    // Initialize dataLayer if it doesn't exist
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js',
-      })
-    }
-  }, [])
-
-  if (!gtmId || gtmId.startsWith('GTM-X')) {
-    // Don't load GTM in development or if ID not configured
+export default function GoogleTagManager() {
+  // Only load in production or if GTM_ID is explicitly set
+  if (!GTM_ID) {
     return null
   }
 
+  useEffect(() => {
+    // Initialize dataLayer if not already done by ConsentInit
+    window.dataLayer = window.dataLayer || []
+
+    // Push GTM initialization event
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js',
+    })
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[GTM] Google Tag Manager initialized:', GTM_ID)
+    }
+  }, [])
+
   return (
     <>
-      {/* Google Tag Manager */}
+      {/* Google Tag Manager Script */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${gtmId}');
-          `,
-        }}
+        src={\`https://www.googletagmanager.com/gtm.js?id=\${GTM_ID}\`}
       />
 
-      {/* GTM Noscript iframe */}
+      {/* Google Tag Manager NoScript Fallback */}
       <noscript>
         <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          src={\`https://www.googletagmanager.com/ns.html?id=\${GTM_ID}\`}
           height="0"
           width="0"
           style={{ display: 'none', visibility: 'hidden' }}
@@ -60,11 +56,4 @@ export default function GoogleTagManager({ gtmId }: GTMProps) {
       </noscript>
     </>
   )
-}
-
-// TypeScript declaration for dataLayer
-declare global {
-  interface Window {
-    dataLayer?: any[]
-  }
 }

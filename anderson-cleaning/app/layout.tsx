@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
 import ConsentInit from '@/components/ConsentInit'
+import GoogleTagManager from '@/components/GoogleTagManager'
 import CookieBanner from '@/components/CookieBanner'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
 import SkipLink from '@/components/SkipLink'
@@ -154,7 +155,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className="antialiased">
         <SkipLink />
+        {/* Initialize consent defaults BEFORE GTM loads */}
         <ConsentInit />
+        {/* Load GTM after consent defaults are set */}
+        <GoogleTagManager />
         <AccessibilityProvider>
           <ThemeProvider>
             <Header />

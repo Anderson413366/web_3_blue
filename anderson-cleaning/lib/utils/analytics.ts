@@ -292,10 +292,11 @@ export function observeLongTasks() {
 }
 
 /**
- * Global type for gtag
+ * Global types for gtag and dataLayer
  */
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void
+    dataLayer?: any[]
   }
 }

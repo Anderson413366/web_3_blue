@@ -43,19 +43,21 @@ const ACCEPTED_CONSENT: ConsentSettings = {
 
 /**
  * Initialize Google Consent Mode v2
- * Call this BEFORE loading gtag.js
+ * Call this BEFORE loading gtag.js/GTM
+ *
+ * This pushes consent defaults to dataLayer BEFORE GTM loads,
+ * ensuring GTM respects the consent state from the start.
  */
 export function initializeConsentMode() {
   if (typeof window === 'undefined') return
 
-  // Check if gtag is available
-  if (!window.gtag) {
-    console.warn('[Consent] gtag not available. Make sure Google Analytics is loaded.')
-    return
-  }
+  // Initialize dataLayer if it doesn't exist
+  window.dataLayer = window.dataLayer || []
 
-  // Set default consent state (before user interaction)
-  window.gtag('consent', 'default', {
+  // Push consent defaults to dataLayer BEFORE GTM loads
+  // This is the correct way per Google's Consent Mode v2 documentation
+  window.dataLayer.push({
+    event: 'consent_default',
     ...DEFAULT_CONSENT,
     wait_for_update: 500, // Wait 500ms for user consent before loading tags
     region: ['US', 'EU'], // Apply to US and EU
@@ -64,11 +66,20 @@ export function initializeConsentMode() {
   // Check if user has previously given consent
   const savedConsent = getSavedConsent()
   if (savedConsent) {
-    updateConsent(savedConsent === 'accepted')
+    // If user already made a choice, update immediately
+    if (savedConsent === 'accepted') {
+      window.dataLayer.push({
+        event: 'consent_update',
+        ...ACCEPTED_CONSENT,
+      })
+    }
   }
 
   if (process.env.NODE_ENV === 'development') {
     console.log('[Consent Mode v2] Initialized with default:', DEFAULT_CONSENT)
+    if (savedConsent) {
+      console.log('[Consent Mode v2] Restored saved consent:', savedConsent)
+    }
   }
 }
 
@@ -77,11 +88,23 @@ export function initializeConsentMode() {
  * Call this when user accepts/declines cookies
  */
 export function updateConsent(accepted: boolean) {
-  if (typeof window === 'undefined' || !window.gtag) return
+  if (typeof window === 'undefined') return
 
   const consentSettings = accepted ? ACCEPTED_CONSENT : DEFAULT_CONSENT
 
-  window.gtag('consent', 'update', consentSettings)
+  // Initialize dataLayer if it doesn't exist
+  window.dataLayer = window.dataLayer || []
+
+  // Push consent update to dataLayer
+  window.dataLayer.push({
+    event: 'consent_update',
+    ...consentSettings,
+  })
+
+  // Also update via gtag if available (for backwards compatibility)
+  if (window.gtag) {
+    window.gtag('consent', 'update', consentSettings)
+  }
 
   // Save consent choice to localStorage
   saveConsentChoice(accepted ? 'accepted' : 'declined')
