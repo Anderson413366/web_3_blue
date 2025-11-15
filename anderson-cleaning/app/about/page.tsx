@@ -1,7 +1,5 @@
 'use client'
 
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import StatsBar from '@/components/sections/StatsBar'
 import { useRouter } from 'next/navigation'
@@ -23,7 +21,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
@@ -414,8 +411,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

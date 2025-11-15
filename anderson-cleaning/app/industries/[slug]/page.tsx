@@ -10,8 +10,6 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import IndustryTemplate from '@/components/industries/IndustryTemplate'
 import { getIndustryBySlug, getAllIndustrySlugs } from '@/lib/industries-data'
 
@@ -64,9 +62,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
       <IndustryTemplate industry={industry} showQuoteForm={false} />
-      <Footer />
     </div>
   )
 }

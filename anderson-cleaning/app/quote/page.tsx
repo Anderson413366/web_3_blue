@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import QuoteForm from '@/components/forms/QuoteForm'
 import { CheckCircle2, Sparkles } from 'lucide-react'
 
@@ -16,8 +14,6 @@ export default function QuotePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
-      <Header />
-
       {/* Hero Section */}
       <section className="py-12 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
         <div className="container mx-auto px-6 text-center">
@@ -164,8 +160,6 @@ export default function QuotePage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

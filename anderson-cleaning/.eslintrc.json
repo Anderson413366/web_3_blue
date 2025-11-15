@@ -8,6 +8,23 @@
   },
   "overrides": [
     {
+      "files": ["anderson-cleaning/app/**/page.tsx", "anderson-cleaning/app/**/layout.tsx"],
+      "excludedFiles": ["anderson-cleaning/app/layout.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/components/Header*", "@/components/Footer*"],
+                "message": "Use the global Header/Footer from app/layout.tsx only. Do not import Header or Footer in nested layouts or pages."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "files": ["app/apply/**/*.{ts,tsx,js,jsx}"],
       "rules": {
         "no-restricted-imports": [

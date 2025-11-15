@@ -8,8 +8,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { Metadata } from 'next'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import { industries } from '@/lib/industries-data'
 import { getIconComponent } from '@/lib/icon-map'
@@ -28,8 +26,6 @@ export default function IndustriesPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-24">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -175,8 +171,6 @@ export default function IndustriesPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

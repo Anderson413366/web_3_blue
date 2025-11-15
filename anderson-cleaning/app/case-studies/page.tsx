@@ -11,7 +11,6 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Header from '@/components/Header'
 import { Button } from '@/components/ui/Button'
 import { caseStudies } from '@/lib/case-studies-data'
 import { ArrowRight, TrendingUp } from 'lucide-react'
@@ -20,8 +19,6 @@ import { getIconComponent } from '@/lib/icon-map'
 export default function CaseStudiesPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
-
       {/* ===================================================================
           HERO SECTION
           =================================================================== */}

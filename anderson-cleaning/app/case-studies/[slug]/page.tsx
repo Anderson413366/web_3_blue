@@ -12,7 +12,6 @@
 
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Header from '@/components/Header'
 import CaseStudyTemplate from '@/components/case-studies/CaseStudyTemplate'
 import {
   getCaseStudyBySlug,
@@ -95,7 +94,6 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
   return (
     <div>
-      <Header />
       <CaseStudyTemplate caseStudy={caseStudy} />
     </div>
   )

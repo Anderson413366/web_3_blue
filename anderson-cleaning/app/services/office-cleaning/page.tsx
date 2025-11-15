@@ -1,15 +1,12 @@
 'use client'
 
 import { Button } from '@/components/ui/Button'
-import Header from '@/components/Header'
 import ProcessSteps from '@/components/sections/ProcessSteps'
 import { CheckCircle2, Clock, Shield, Users, Sparkles } from 'lucide-react'
 
 export default function OfficeCleaningPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
-
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
         <div className="container mx-auto px-6">

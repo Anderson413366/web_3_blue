@@ -1,7 +1,5 @@
 'use client'
 
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import {
@@ -47,7 +45,6 @@ export default function SupplyManagementPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
@@ -426,8 +423,6 @@ export default function SupplyManagementPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import BeforeAfterSlider from '@/components/sections/BeforeAfterSlider'
 import {
   Phone,
@@ -24,7 +22,6 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Header />
 
       {/* Promotional Banner */}
       <div className="bg-gradient-to-r from-accent-500 to-accent-600 text-white py-3">
@@ -792,8 +789,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

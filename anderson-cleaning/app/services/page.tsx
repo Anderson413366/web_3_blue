@@ -11,8 +11,6 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 
 export default function ServicesPage() {
   // JSON-LD Structured Data for SEO
@@ -164,7 +162,6 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
 
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
@@ -419,8 +416,6 @@ export default function ServicesPage() {
           </Button>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

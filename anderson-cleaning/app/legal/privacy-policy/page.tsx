@@ -1,7 +1,5 @@
 'use client'
 
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -10,8 +8,6 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <Header />
-
       <div className="container mx-auto px-6 py-12">
         <div className="max-w-4xl mx-auto">
           <button
@@ -253,8 +249,6 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   )
 }

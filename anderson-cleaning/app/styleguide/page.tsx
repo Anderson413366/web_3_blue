@@ -1,16 +1,12 @@
 'use client'
 
 import React from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import { CheckCircle2, AlertCircle, Info, AlertTriangle } from 'lucide-react'
 
 export default function StyleGuidePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <Header />
-
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Title */}
         <div className="max-w-6xl mx-auto mb-16">
@@ -456,8 +452,6 @@ export default function StyleGuidePage() {
           </section>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

@@ -3,8 +3,6 @@
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Calendar, Clock, ArrowLeft, Share2, CheckCircle2, AlertTriangle } from 'lucide-react'
 
 const blogContent: { [key: string]: any } = {
@@ -289,8 +287,6 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <Header />
-
       {/* Article Header */}
       <article className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -427,8 +423,6 @@ export default function BlogPost() {
           </div>
         </div>
       </article>
-
-      <Footer />
     </div>
   )
 }

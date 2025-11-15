@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import { Star, ExternalLink, Filter } from 'lucide-react'
 
@@ -239,8 +237,6 @@ export default function TestimonialsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Header />
-
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
         <div className="container mx-auto px-6 text-center">
@@ -407,8 +403,6 @@ export default function TestimonialsPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

@@ -1,8 +1,6 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/Button'
 import { CheckCircle2, ArrowLeft, Clock, Shield, Users, Award } from 'lucide-react'
 
@@ -543,7 +541,6 @@ export default function ServiceDetailPage() {
   if (!service) {
     return (
       <div className="min-h-screen bg-white dark:bg-slate-900">
-        <Header />
         <div className="container mx-auto px-6 py-20 text-center">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Service Not Found
@@ -553,7 +550,6 @@ export default function ServiceDetailPage() {
           </p>
           <Button onClick={() => router.push('/services')}>View All Services</Button>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -567,7 +563,6 @@ export default function ServiceDetailPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <Header />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
@@ -872,8 +867,6 @@ export default function ServiceDetailPage() {
           </Button>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }

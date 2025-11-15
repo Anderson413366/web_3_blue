@@ -122,7 +122,7 @@ export default function NotFound() {
             <span className="text-gray-300 dark:text-gray-700">•</span>
 
             <Link
-              href="/en/apply"
+              href="/apply"
               className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 hover:underline"
             >
               Careers

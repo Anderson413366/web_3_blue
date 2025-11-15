@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { ChevronDown, ChevronUp, Search, HelpCircle, Phone, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
@@ -159,8 +157,6 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-20">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -316,8 +312,6 @@ export default function FAQPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }
