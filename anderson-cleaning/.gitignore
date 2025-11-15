@@ -35,3 +35,4 @@ next-env.d.ts
 
 # Script outputs
 link-integrity-report.json
+i18n-coverage-report.json

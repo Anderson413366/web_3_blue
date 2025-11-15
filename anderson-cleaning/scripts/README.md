@@ -210,6 +210,179 @@ jobs:
 - **Link Extraction:** DOM parsing (finds all `<a href="">` elements)
 - **Normalization:** URLs normalized to avoid duplicates (trailing slashes, fragments removed)
 
+### i18n Coverage Validator
+
+**File:** `check-i18n-coverage.ts`
+
+Validates translation coverage for the careers application (i18next). Detects missing translations, ensures consistency across languages, and optionally finds unused translation keys.
+
+#### Features
+
+- **Missing Translation Detection:** Identifies keys missing in any language
+- **Language Consistency:** Ensures all languages have the same keys
+- **Unused Key Detection:** Optionally finds translation keys not used in code
+- **Multi-Language Support:** Validates en, es, pt-BR, ro translations
+- **JSON Report:** Generates machine-readable report for CI/CD
+- **Exit Codes:** Returns exit code 1 if missing translations found
+
+#### Usage
+
+```bash
+# Check translation coverage
+npm run check:i18n
+
+# Also check for unused translation keys (slower)
+npm run check:i18n:unused
+
+# Verbose output with usage details
+npm run check:i18n:verbose
+
+# Direct execution
+tsx scripts/check-i18n-coverage.ts --verbose --unused
+```
+
+#### Configuration
+
+Edit `scripts/check-i18n-coverage.ts` to customize:
+
+- `RESOURCES_PATH`: Path to resources.ts file
+- `SOURCE_DIRS`: Directories to scan for key usage
+- `REPORT_PATH`: Output path for JSON report
+
+#### Report Output
+
+**Console Report**
+
+```
+================================================================================
+i18n COVERAGE REPORT - Careers Application
+================================================================================
+
+📊 SUMMARY
+--------------------------------------------------------------------------------
+  Supported Languages:   4
+  Languages:             en, es, pt-BR, ro
+  Total Translation Keys: 28
+  Missing Translations:   0
+  Unused Keys:            2
+
+✅ ALL TRANSLATIONS COMPLETE
+
+⚠️  UNUSED TRANSLATION KEYS
+--------------------------------------------------------------------------------
+  Found 2 keys that may be unused:
+
+    - oldFeatureButton
+    - deprecatedLabel
+
+  Note: This is based on static analysis and may have false positives.
+```
+
+**JSON Report** (`i18n-coverage-report.json`)
+
+```json
+{
+  "summary": {
+    "totalLanguages": 4,
+    "totalKeys": 28,
+    "missingTranslations": 0,
+    "unusedKeys": 2
+  },
+  "languages": ["en", "es", "pt-BR", "ro"],
+  "missingByLanguage": {},
+  "unusedKeys": [
+    "oldFeatureButton",
+    "deprecatedLabel"
+  ]
+}
+```
+
+#### CI/CD Integration
+
+Add to your CI pipeline to prevent incomplete translations from reaching production:
+
+**GitHub Actions Example:**
+
+```yaml
+name: i18n Coverage Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check i18n Coverage
+        run: npm run check:i18n
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: i18n-coverage-report
+          path: i18n-coverage-report.json
+```
+
+#### Exit Codes
+
+- `0`: All translations complete (success)
+- `1`: Missing translations found (failure)
+
+#### Best Practices
+
+1. **Run Before Adding Translations**
+   - Check coverage before adding new translation keys
+   - Ensures all languages are updated together
+
+2. **Regular Audits**
+   - Run periodically to catch missing translations
+   - Use `--unused` flag to identify cleanup opportunities
+
+3. **Fix Missing Translations Immediately**
+   - Missing translations hurt user experience
+   - Update all languages when adding new features
+
+4. **Review Unused Keys**
+   - Unused keys indicate dead code or outdated translations
+   - Clean up regularly to reduce bundle size
+
+#### Troubleshooting
+
+**Script can't find resources.ts:**
+- Verify path in `RESOURCES_PATH` constant
+- Ensure file exists at `lib/careers-i18n/resources.ts`
+
+**False positives for unused keys:**
+- Static analysis may miss dynamic key usage
+- Review each unused key manually before removing
+- Keys used in templates or dynamic content may not be detected
+
+**Missing keys not detected:**
+- Ensure all language objects have `translation` property
+- Check that resources are properly exported as `const`
+- Verify TypeScript object structure is correct
+
+#### Scope
+
+This validator is specifically designed for the **careers application** i18n (i18next-based). The main website does not use i18n.
+
+For details on the careers i18n implementation, see `docs/CAREERS_I18N.md`.
+
+---
+
 ## Adding New Scripts
 
 1. Create TypeScript file in `scripts/` directory

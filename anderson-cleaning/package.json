@@ -18,7 +18,10 @@
     "test:report": "playwright show-report",
     "check:links": "BASE_URL=${BASE_URL:-https://andersoncleaning.com} tsx scripts/check-internal-links.ts",
     "check:links:local": "BASE_URL=http://localhost:3000 tsx scripts/check-internal-links.ts",
-    "check:links:verbose": "BASE_URL=http://localhost:3000 tsx scripts/check-internal-links.ts --verbose"
+    "check:links:verbose": "BASE_URL=http://localhost:3000 tsx scripts/check-internal-links.ts --verbose",
+    "check:i18n": "tsx scripts/check-i18n-coverage.ts",
+    "check:i18n:unused": "tsx scripts/check-i18n-coverage.ts --unused",
+    "check:i18n:verbose": "tsx scripts/check-i18n-coverage.ts --verbose"
   },
   "dependencies": {
     "@google/genai": "^1.3.0",
