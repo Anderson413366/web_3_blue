@@ -6,6 +6,8 @@ import CookieBanner from '@/components/CookieBanner'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
 import SkipLink from '@/components/SkipLink'
 import AccessibilityProvider from '@/components/AccessibilityProvider'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import {
   generateOrganizationSchema,
   generateLocalBusinessSchema,
@@ -146,7 +148,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SkipLink />
         <AccessibilityProvider>
           <ThemeProvider>
+            <Header />
             {children}
+            <Footer />
             <CookieBanner />
           </ThemeProvider>
         </AccessibilityProvider>

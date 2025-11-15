@@ -1,26 +1,16 @@
-'use client'
-
+import type { Metadata } from 'next'
 import { AppProvider } from '@/lib/careers/AppContext'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import CareersPage from '@/components/careers/CareersPage'
 
-function CareersPageContent() {
-  return (
-    <>
-      <Header />
-      <CareersPage />
-      <Footer />
-    </>
-  )
+export const metadata: Metadata = {
+  title: 'Careers — Anderson Cleaning',
+  description: 'Join our full-time, trained team with great benefits.',
 }
 
 export default function ApplyPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <AppProvider>
-        <CareersPageContent />
-      </AppProvider>
-    </div>
+    <AppProvider>
+      <CareersPage />
+    </AppProvider>
   )
 }
