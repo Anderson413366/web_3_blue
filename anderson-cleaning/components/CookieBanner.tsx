@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from './ui/Button'
 import { X, Cookie } from 'lucide-react'
+import { acceptAllConsent, declineAllConsent, hasConsentChoice } from '@/lib/consent'
 
 /**
- * Cookie consent banner component
+ * Cookie consent banner component with Google Consent Mode v2
  *
  * Features:
- * - GDPR/CCPA compliant consent banner
+ * - GDPR/CCPA/Privacy law compliant
+ * - Google Consent Mode v2 integration
  * - LocalStorage persistence
  * - Accessible keyboard navigation
  * - Smooth animations
@@ -23,9 +25,8 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Check if user has already consented
-    const consent = localStorage.getItem('cookie-consent')
-    if (!consent) {
+    // Check if user has already made a consent choice
+    if (!hasConsentChoice()) {
       // Delay showing banner for better UX
       const timer = setTimeout(() => {
         setShowBanner(true)
@@ -37,20 +38,23 @@ export default function CookieBanner() {
   }, [])
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted')
-    localStorage.setItem('cookie-consent-date', new Date().toISOString())
+    // Grant all consent and push to GTM dataLayer
+    acceptAllConsent()
+
     setIsVisible(false)
     setTimeout(() => setShowBanner(false), 300)
   }
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined')
-    localStorage.setItem('cookie-consent-date', new Date().toISOString())
+    // Decline all non-essential consent and push to GTM dataLayer
+    declineAllConsent()
+
     setIsVisible(false)
     setTimeout(() => setShowBanner(false), 300)
   }
 
   const handleDismiss = () => {
+    // Dismiss without making a choice (defaults remain denied)
     setIsVisible(false)
     setTimeout(() => setShowBanner(false), 300)
   }

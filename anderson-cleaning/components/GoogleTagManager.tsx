@@ -1,14 +1,17 @@
 /**
- * Google Tag Manager Script Component
+ * Google Tag Manager Script Component with Consent Mode v2
  *
- * Injects GTM container script and initializes dataLayer
- * Must be placed in root layout or _app
+ * Implements Google Consent Mode v2 for GDPR/CCPA compliance
+ * Sets consent defaults BEFORE GTM loads, then loads GTM
+ *
+ * @see https://developers.google.com/tag-platform/security/guides/consent
  */
 
 'use client'
 
 import { useEffect } from 'react'
 import Script from 'next/script'
+import { initializeConsentDefaults } from '@/lib/consent'
 
 interface GTMProps {
   gtmId: string
@@ -16,7 +19,11 @@ interface GTMProps {
 
 export default function GoogleTagManager({ gtmId }: GTMProps) {
   useEffect(() => {
-    // Initialize dataLayer if it doesn't exist
+    // CRITICAL: Initialize consent defaults BEFORE GTM loads
+    // This ensures no tracking happens until user grants consent
+    initializeConsentDefaults()
+
+    // Initialize dataLayer and GTM start event
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || []
       window.dataLayer.push({
@@ -33,7 +40,7 @@ export default function GoogleTagManager({ gtmId }: GTMProps) {
 
   return (
     <>
-      {/* Google Tag Manager */}
+      {/* Google Tag Manager with Consent Mode */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"

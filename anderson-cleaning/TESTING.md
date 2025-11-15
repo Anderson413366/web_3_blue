@@ -9,12 +9,13 @@ This document provides comprehensive testing and QA procedures for the Anderson 
 1. [Running Tests Locally](#running-tests-locally)
 2. [Playwright E2E Tests](#playwright-e2e-tests)
 3. [Visual Regression Testing (VRT)](#visual-regression-testing-vrt)
-4. [Cypress E2E Tests](#cypress-e2e-tests)
-5. [Lighthouse Audits](#lighthouse-audits)
-6. [Accessibility Testing](#accessibility-testing)
-7. [CI/CD Pipeline](#cicd-pipeline)
-8. [Performance Optimization](#performance-optimization)
-9. [Link Integrity Crawler](#link-integrity-crawler)
+4. [Cookie Consent & Privacy Compliance](#cookie-consent--privacy-compliance)
+5. [Cypress E2E Tests](#cypress-e2e-tests)
+6. [Lighthouse Audits](#lighthouse-audits)
+7. [Accessibility Testing](#accessibility-testing)
+8. [CI/CD Pipeline](#cicd-pipeline)
+9. [Performance Optimization](#performance-optimization)
+10. [Link Integrity Crawler](#link-integrity-crawler)
 
 ---
 
@@ -247,6 +248,247 @@ The CI will automatically comment on your PR with update instructions if snapsho
   ```ts
   threshold: 0.3, // Increase from 0.2
   ```
+
+---
+
+## Cookie Consent & Privacy Compliance
+
+### Overview
+
+The site implements **Google Consent Mode v2** for GDPR, CCPA, and privacy law compliance. This ensures analytics and advertising tracking only occurs after explicit user consent.
+
+### What is Consent Mode v2?
+
+Google Consent Mode v2 is a framework that:
+- Sets default consent states to "denied" before tags load
+- Updates consent states when users make choices
+- Allows tags (GA4, GTM, Ads) to adjust behavior based on consent
+- Enables privacy-safe measurement through modeling when consent is denied
+
+### Implementation
+
+#### **Consent Defaults (lib/consent.ts)**
+
+Before GTM loads, we push consent defaults to dataLayer:
+
+```javascript
+window.dataLayer = window.dataLayer || []
+window.dataLayer.push({
+  event: 'consent_default',
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted', // Essential
+  security_storage: 'granted' // Essential
+})
+```
+
+#### **Consent Updates**
+
+When users click "Accept All" or "Decline":
+
+```javascript
+window.dataLayer.push({
+  event: 'consent_update',
+  analytics_storage: 'granted', // or 'denied'
+  ad_storage: 'granted', // or 'denied'
+  ad_user_data: 'granted', // or 'denied'
+  ad_personalization: 'granted' // or 'denied'
+})
+```
+
+### Cookie Banner Actions
+
+| Action | Effect | Consent State | Persisted |
+|--------|--------|---------------|-----------|
+| **Accept All** | Grants all consent | All `'granted'` | ✅ Yes (localStorage) |
+| **Decline** | Denies all non-essential consent | All `'denied'` | ✅ Yes (localStorage) |
+| **Dismiss** | Closes banner without choice | Defaults (`'denied'`) | ❌ No (defaults remain) |
+
+### Consent Storage
+
+Consent preferences are stored in `localStorage`:
+
+**Key:** `cookie-consent-v2`
+
+**Value:**
+```json
+{
+  "choice": "accepted" | "declined" | "custom",
+  "timestamp": "2025-01-15T12:34:56.789Z",
+  "state": {
+    "analytics_storage": "granted",
+    "ad_storage": "granted",
+    "ad_user_data": "granted",
+    "ad_personalization": "granted",
+    "functionality_storage": "granted",
+    "personalization_storage": "granted",
+    "security_storage": "granted"
+  }
+}
+```
+
+### Tracking Helper (lib/track.ts)
+
+The `track` helper queues analytics events until consent is granted:
+
+```typescript
+import { track } from '@/lib/track'
+
+// Events are queued if consent not granted
+track.event('button_click', { button_name: 'cta' })
+track.pageview('/about', 'About Us')
+track.formSubmit('contact_form')
+track.phoneClick('1-800-555-0123')
+```
+
+**Features:**
+- ✅ Queues events until consent granted
+- ✅ Flushes queue when consent received
+- ✅ Clears queue if consent revoked
+- ✅ Listens for `consentchange` events
+
+### Testing Consent
+
+**Run consent tests:**
+```bash
+npm run test:e2e tests/e2e/consent.spec.ts
+```
+
+**Test Coverage:**
+
+| Test | Description |
+|------|-------------|
+| Cookie banner shows on first visit | Banner appears after 1s delay |
+| Banner doesn't show if consent given | Respects stored consent |
+| No GA requests until consent | Analytics blocked by default |
+| Accept All enables analytics | Consent update pushed to GTM |
+| Decline keeps analytics denied | Defaults remain denied |
+| Dismiss closes without storing | No localStorage persistence |
+| Consent persists across pages | Works after navigation |
+| Consent defaults set before GTM | `consent_default` pushed first |
+| Privacy policy link works | Links to `/legal/privacy-policy` |
+| Events are queued until consent | Track helper queues events |
+
+### Consent API
+
+#### **Check Consent Status**
+
+```typescript
+import {
+  hasAnalyticsConsent,
+  hasAdConsent,
+  hasConsentChoice,
+  getStoredConsent
+} from '@/lib/consent'
+
+if (hasAnalyticsConsent()) {
+  // Analytics is allowed
+}
+
+if (hasConsentChoice()) {
+  // User has made a choice (don't show banner)
+}
+
+const consent = getStoredConsent()
+console.log(consent?.choice) // 'accepted' | 'declined' | 'custom'
+```
+
+#### **Update Consent**
+
+```typescript
+import { acceptAllConsent, declineAllConsent, updateConsent } from '@/lib/consent'
+
+// Accept all
+acceptAllConsent()
+
+// Decline all
+declineAllConsent()
+
+// Custom consent state
+updateConsent({
+  analytics_storage: 'granted',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+})
+```
+
+#### **Listen for Consent Changes**
+
+```typescript
+window.addEventListener('consentchange', (event: CustomEvent) => {
+  console.log('Consent changed:', event.detail)
+  // event.detail = { analytics_storage: 'granted', ... }
+})
+```
+
+### GTM Configuration
+
+In GTM, configure triggers based on consent:
+
+**Analytics Trigger:**
+```
+Trigger Type: Consent Initialization - All Pages
+Consent Settings: Require analytics_storage = granted
+```
+
+**Custom Event Trigger:**
+```
+Event Name: consent_update
+Condition: analytics_storage = granted
+```
+
+### Privacy Policy
+
+Ensure your privacy policy (`/legal/privacy-policy`) includes:
+- What cookies are used
+- Why you use cookies (analytics, ads, functionality)
+- How users can control cookies
+- Third-party cookies (Google Analytics, GTM)
+- Data retention policies
+- User rights (GDPR, CCPA)
+
+### Best Practices
+
+1. **Always set defaults before GTM loads:**
+   - Done automatically in `GoogleTagManager` component
+
+2. **Store consent preferences:**
+   - Use `localStorage` with versioned key (`cookie-consent-v2`)
+   - Include timestamp for audit trail
+
+3. **Respect user choices:**
+   - Don't auto-accept after banner dismissal
+   - Keep defaults as "denied"
+
+4. **Test thoroughly:**
+   - Use Playwright tests to verify consent flow
+   - Check network requests (no GA until consent)
+
+5. **Update privacy policy:**
+   - Keep it current with actual cookie usage
+   - Link to it prominently in banner
+
+### Compliance Checklist
+
+- [x] Consent defaults set to "denied" before tags load
+- [x] User can accept or decline all cookies
+- [x] User can dismiss without choosing (defaults remain)
+- [x] Consent choice is stored and persists
+- [x] No tracking occurs until consent granted
+- [x] Privacy policy link provided
+- [x] Consent can be revoked (future: preference center)
+- [x] Automated tests verify consent flow
+
+### Future Enhancements
+
+- **Preference Center:** Allow granular consent per category
+- **Consent Expiration:** Auto-expire consent after 12 months
+- **Regional Defaults:** Auto-deny in EU/CA, auto-grant elsewhere
+- **Consent History:** Track consent changes over time
+- **Cookie Declaration:** Auto-generate list of all cookies
 
 ---
 
