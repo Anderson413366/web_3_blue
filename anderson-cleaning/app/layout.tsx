@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
 import ConsentInit from '@/components/ConsentInit'
@@ -15,15 +14,6 @@ import {
   generateWebsiteSchema,
 } from '@/lib/seo/jsonld'
 import { getNonce } from '@/lib/utils/nonce'
-
-// Font optimization with display swap and preloading
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  preload: true,
-  fallback: ['system-ui', 'arial'],
-})
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com'
 
@@ -108,7 +98,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const websiteSchema = generateWebsiteSchema()
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
         {/* Resource Hints - Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,6 +106,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
+
+        {/* Load Inter font from Google Fonts (runtime loading to avoid build-time fetch) */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
 
         {/* DNS Prefetch for additional third-party services */}
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
