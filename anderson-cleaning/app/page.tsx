@@ -245,36 +245,42 @@ export default function Home() {
                 title: 'Office & Commercial Cleaning',
                 description: 'Daily/weekly programs for spotless workplaces',
                 icon: '🏢',
+                iconLabel: 'Office building',
                 available: true,
               },
               {
                 title: 'Janitorial Services',
                 description: 'Reliable, accountable facility care',
                 icon: '🧹',
+                iconLabel: 'Broom',
                 available: true,
               },
               {
                 title: 'Floor & Carpet Care',
                 description: 'Strip, wax, buff, and deep cleaning',
                 icon: '✨',
+                iconLabel: 'Sparkles',
                 available: false,
               },
               {
                 title: 'Window Cleaning',
                 description: 'Interior & exterior, streak-free results',
                 icon: '🪟',
+                iconLabel: 'Window',
                 available: false,
               },
               {
                 title: 'Post-Construction',
                 description: 'Move-in ready cleanup after renovations',
                 icon: '🏗️',
+                iconLabel: 'Construction',
                 available: false,
               },
               {
                 title: 'Supply Management',
                 description: 'Auto-replenishment of consumables',
                 icon: '📦',
+                iconLabel: 'Package',
                 available: false,
               },
             ].map((service, i) => (
@@ -283,7 +289,7 @@ export default function Home() {
                 className="bg-white dark:bg-slate-700 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start space-x-4">
-                  <div className="text-4xl flex-shrink-0">{service.icon}</div>
+                  <div className="text-4xl flex-shrink-0" role="img" aria-label={service.iconLabel}>{service.icon}</div>
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                       {service.title}
@@ -396,9 +402,9 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               What Our Clients Say
             </h2>
-            <div className="flex items-center justify-center space-x-1 mb-2">
+            <div className="flex items-center justify-center space-x-1 mb-2" role="img" aria-label="5 out of 5 stars">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="h-6 w-6 text-accent-500 fill-accent-500" />
+                <Star key={star} className="h-6 w-6 text-accent-500 fill-accent-500" aria-hidden="true" />
               ))}
             </div>
             <p className="text-gray-600 dark:text-gray-400">5.0 stars from satisfied clients</p>
@@ -429,9 +435,9 @@ export default function Home() {
               },
             ].map((testimonial, i) => (
               <div key={i} className="bg-white dark:bg-slate-700 rounded-xl p-6 shadow-md">
-                <div className="flex items-center space-x-1 mb-4">
+                <div className="flex items-center space-x-1 mb-4" role="img" aria-label={`${testimonial.rating} out of 5 stars`}>
                   {[...Array(testimonial.rating)].map((_, j) => (
-                    <Star key={j} className="h-5 w-5 text-accent-500 fill-accent-500" />
+                    <Star key={j} className="h-5 w-5 text-accent-500 fill-accent-500" aria-hidden="true" />
                   ))}
                 </div>
                 <blockquote className="text-gray-700 dark:text-gray-300 mb-4">
@@ -604,7 +610,7 @@ export default function Home() {
             {/* Blog/Resources Card */}
             <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-                <div className="text-4xl mb-3">📚</div>
+                <div className="text-4xl mb-3" role="img" aria-label="Books">📚</div>
                 <h3 className="text-2xl font-bold mb-2">Blog & Resources</h3>
                 <p className="text-blue-100">Expert cleaning tips and industry insights</p>
               </div>
@@ -641,7 +647,7 @@ export default function Home() {
             {/* FAQ Card */}
             <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <div className="bg-gradient-to-r from-green-600 to-green-700 p-6 text-white">
-                <div className="text-4xl mb-3">❓</div>
+                <div className="text-4xl mb-3" role="img" aria-label="Question mark">❓</div>
                 <h3 className="text-2xl font-bold mb-2">Frequently Asked Questions</h3>
                 <p className="text-green-100">Get answers to common questions</p>
               </div>
@@ -676,7 +682,7 @@ export default function Home() {
             {/* Promotions Card */}
             <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <div className="bg-gradient-to-r from-accent-500 to-accent-600 p-6 text-white">
-                <div className="text-4xl mb-3">🎁</div>
+                <div className="text-4xl mb-3" role="img" aria-label="Gift">🎁</div>
                 <h3 className="text-2xl font-bold mb-2">Special Offers</h3>
                 <p className="text-accent-100">Exclusive promotions and referral rewards</p>
               </div>
@@ -775,17 +781,21 @@ export default function Home() {
             Get your free, no-obligation quote today. We respond within 30 minutes.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="accent" size="lg">
-              Get Your Free Quote
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white/10"
-            >
-              <Phone className="h-5 w-5 mr-2" />
-              Call Now
-            </Button>
+            <Link href="/quote">
+              <Button variant="accent" size="lg">
+                Get Your Free Quote
+              </Button>
+            </Link>
+            <a href="tel:+14133065053">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white text-white hover:bg-white/10"
+              >
+                <Phone className="h-5 w-5 mr-2" />
+                Call Now
+              </Button>
+            </a>
           </div>
         </div>
       </section>
