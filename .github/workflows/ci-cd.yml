@@ -48,7 +48,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./anderson-cleaning
-        run: npm ci
+        run: npm install
 
       - name: Run TypeScript type checking
         working-directory: ./anderson-cleaning
@@ -94,7 +94,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./anderson-cleaning
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright browsers
         working-directory: ./anderson-cleaning
