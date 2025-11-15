@@ -103,15 +103,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Resource Hints - Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
 
         {/* Load Inter font from Google Fonts (runtime loading to avoid build-time fetch) */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
           rel="stylesheet"
         />
-        <link rel="preconnect" href="https://cdn.sanity.io" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
 
         {/* DNS Prefetch for additional third-party services */}
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
