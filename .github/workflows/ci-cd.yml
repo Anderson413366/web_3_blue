@@ -119,3 +119,46 @@ jobs:
           name: playwright-videos
           path: anderson-cleaning/test-results/
           retention-days: 7
+
+  # Lighthouse CI - Performance Monitoring
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: anderson-cleaning/package-lock.json
+
+      - name: Install npm 11.3.0
+        run: npm install -g npm@11.3.0
+
+      - name: Install dependencies
+        working-directory: ./anderson-cleaning
+        run: npm install
+
+      - name: Build Next.js application
+        working-directory: ./anderson-cleaning
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SITE_URL: https://andersoncleaning.com
+        run: npm run build
+
+      - name: Run Lighthouse CI
+        working-directory: ./anderson-cleaning
+        run: npx lhci autorun
+
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: anderson-cleaning/.lighthouseci/
+          retention-days: 7
