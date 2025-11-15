@@ -6,6 +6,7 @@ import ConsentInit from '@/components/ConsentInit'
 import GoogleTagManager from '@/components/GoogleTagManager'
 import CookieBanner from '@/components/CookieBanner'
 import WebVitalsReporter from '@/components/WebVitalsReporter'
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import SkipLink from '@/components/SkipLink'
 import AccessibilityProvider from '@/components/AccessibilityProvider'
 import Header from '@/components/Header'
@@ -159,6 +160,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ConsentInit />
         {/* Load GTM after consent defaults are set */}
         <GoogleTagManager />
+        {/* Register service worker for PWA/offline support */}
+        <ServiceWorkerRegistration />
         <AccessibilityProvider>
           <ThemeProvider>
             <Header />
