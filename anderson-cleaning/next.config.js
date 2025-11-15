@@ -1,3 +1,29 @@
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
+  sw: 'sw.js',
+  runtimeCaching: [
+    {
+      urlPattern: /^https?.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'offlineCache',
+        expiration: {
+          maxEntries: 200,
+        },
+        networkTimeoutSeconds: 10,
+      },
+    },
+  ],
+  buildExcludes: [/middleware-manifest\.json$/, /build-manifest\.json$/],
+  publicExcludes: ['!robots.txt', '!sitemap.xml'],
+  fallbacks: {
+    document: '/offline',
+  },
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // React Strict Mode for better development experience
@@ -197,4 +223,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
