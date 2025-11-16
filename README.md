@@ -1,21 +1,82 @@
-# Anderson Cleaning Production Source Notes
+# Anderson Cleaning - Production Website
 
-This repo is intentionally trimmed down so future maintainers can focus on the `anderson-cleaning/` Next.js application that powers the live Vercel deployment.
+This repository contains the **Anderson Cleaning** Next.js application that powers the live Vercel deployment at [andersoncleaning.com](https://andersoncleaning.com).
 
-## Why `anderson-cleaning/` is the production app
-- `package.json` defines the expected Next.js 14 workflow (dev/build/start), QA tooling (lint, `tsc --noEmit`, Playwright visual suites), and link/i18n audit scripts that the current Vercel project runs before shipping.
-- `README.md` already documents the site map, content focus, and App Router structure (marketing pages, CMS-powered studio, APIs, careers flows), matching what is in production today.
+## Repository Structure
 
-## Deployment & parity with Vercel
-- `anderson-cleaning/DEPLOYMENT.md` is the authoritative release checklist (env setup, Sanity dataset population, analytics/Sentry/CRM provisioning) that mirrors the production pipeline.
-- `anderson-cleaning/vercel.old.json` captures the build/install commands plus the security headers, caching policy, and redirects/rewrites used in Vercel. Keep it around when re-linking the project so parity checks are easy.
-- Beginner-friendly deployment reminders for Netlify/Vercel live at the repo root in `DEPLOY_INSTRUCTIONS.md` if stakeholders need a static export instead.
+The production website lives in the `anderson-cleaning/` directory:
 
-## Environment variables & external services
-- `.env.example` lists every required integration: public site metadata, multi-locale config, GA4/Clarity, HubSpot, Resend, Sanity CMS, CAPTCHA (reCAPTCHA or Turnstile), Sentry, Studio auth/ip-allow list, Google site verification, Gemini-powered careers AI, and NODE_ENV. Copy it to `.env.local` before running builds.
+```
+web_3_blue/
+├── anderson-cleaning/          # Production Next.js application
+│   ├── app/                   # Next.js App Router pages
+│   ├── components/            # React components
+│   ├── lib/                   # Utilities and configurations
+│   ├── public/                # Static assets
+│   ├── scripts/               # Build and validation scripts
+│   ├── tests/                 # E2E and integration tests
+│   ├── package.json           # Dependencies and scripts
+│   ├── DEPLOYMENT.md          # Deployment checklist
+│   ├── README.md              # Application documentation
+│   └── ...                    # Configuration files
+├── .github/                   # CI/CD workflows
+├── .husky/                    # Git hooks for quality gates
+└── README.md                  # This file
+```
 
-## Assets that still live outside `anderson-cleaning/`
-- `website-ready-to-deploy/` contains a static careers microsite (HTML + assets) that was previously dropped onto Netlify; keep it only if you need that standalone marketing handoff.
-- `anderson-cleaning-website.tar.gz` is an archived snapshot of the same production build for manual transfers/backups.
+## Getting Started
 
-These notes explain why only the `anderson-cleaning/` folder is maintained while other artifacts remain for reference during handoffs.
+1. **Navigate to the application directory:**
+   ```bash
+   cd anderson-cleaning
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your values
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open [http://localhost:3000](http://localhost:3000)** in your browser.
+
+## Deployment
+
+The application is deployed on **Vercel**. See `anderson-cleaning/DEPLOYMENT.md` for the complete deployment checklist including:
+- Environment variable setup
+- Sanity CMS dataset configuration
+- Analytics and monitoring (GA4, Clarity, Sentry)
+- Integration with HubSpot, Resend, and other services
+
+## Key Features
+
+- **Next.js 14** with App Router
+- **Sanity CMS** for content management
+- **Multi-language support** (EN/ES/PT) via next-intl
+- **E2E testing** with Playwright
+- **Performance monitoring** with Lighthouse CI
+- **Security** with CSP, Sentry error tracking
+- **Pre-commit quality gates** (lint, type-check, format)
+
+## Documentation
+
+All documentation lives in `anderson-cleaning/`:
+- `README.md` - Application overview and site map
+- `DEPLOYMENT.md` - Deployment guide
+- `TESTING.md` - Testing strategy
+- `ANALYTICS.md` - Analytics setup
+- `QA_REPORT.md` - Quality assurance report
+- `docs/` - Additional guides (architecture, CMS, design system, etc.)
+
+## Support
+
+For issues or questions, please refer to the documentation in the `anderson-cleaning/` directory.
