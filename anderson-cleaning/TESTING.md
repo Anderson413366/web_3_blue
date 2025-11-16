@@ -7,11 +7,12 @@ This document provides comprehensive testing and QA procedures for the Anderson 
 ## Table of Contents
 
 1. [Running Tests Locally](#running-tests-locally)
-2. [Cypress E2E Tests](#cypress-e2e-tests)
-3. [Lighthouse Audits](#lighthouse-audits)
-4. [Accessibility Testing](#accessibility-testing)
-5. [CI/CD Pipeline](#cicd-pipeline)
-6. [Performance Optimization](#performance-optimization)
+2. [Playwright E2E Tests](#playwright-e2e-tests)
+3. [Visual Regression Testing](#visual-regression-testing)
+4. [Lighthouse Audits](#lighthouse-audits)
+5. [Accessibility Testing](#accessibility-testing)
+6. [CI/CD Pipeline](#cicd-pipeline)
+7. [Performance Optimization](#performance-optimization)
 
 ---
 
@@ -27,14 +28,26 @@ npm install
 ### Available Test Commands
 
 ```bash
-# Run Cypress tests (interactive)
-npm run cypress:open
+# Run Playwright tests (headless)
+npx playwright test
 
-# Run Cypress tests (headless)
-npm run cypress:run
+# Run Playwright tests (headed mode - see browser)
+npm run test:headed
 
-# Run Lighthouse audit
-npm run lighthouse
+# Run Playwright tests (debug mode)
+npm run test:debug
+
+# Run visual regression tests
+npm run test:visual
+
+# Update visual regression snapshots
+npm run test:visual:update
+
+# Run Playwright UI mode
+npm run test:visual:ui
+
+# Show test report
+npm run test:report
 
 # Run type checking
 npm run type-check
@@ -42,54 +55,103 @@ npm run type-check
 # Run linting
 npm run lint
 
-# Run all tests
-npm run test:all
+# Format code
+npm run format
 ```
 
 ---
 
-## Cypress E2E Tests
+## Playwright E2E Tests
 
 ### Test Files
 
-Located in `cypress/e2e/`:
+Located in `tests/e2e/`:
 
-- **navigation.cy.ts** - Header, footer, routing tests
-- **forms.cy.ts** - Contact form, quote form validation
-- **accessibility.cy.ts** - WCAG compliance, dark mode, keyboard navigation
+- **quote.spec.ts** - Quote form submission and validation
+- **contact.spec.ts** - Contact form submission and validation
+- Additional tests configured in CI/CD
 
-### Running Cypress Tests
-
-**Interactive Mode (with UI):**
-```bash
-npm run cypress:open
-```
+### Running Playwright Tests
 
 **Headless Mode (CI):**
 ```bash
-npm run cypress:run
+npx playwright test
 ```
 
-### Custom Commands
+**Headed Mode (see browser):**
+```bash
+npm run test:headed
+```
 
-Defined in `cypress/support/commands.ts`:
+**Debug Mode (step through tests):**
+```bash
+npm run test:debug
+```
 
-- `cy.checkA11y()` - Run axe accessibility tests
-- `cy.testKeyboardNav()` - Test keyboard navigation
-- `cy.toggleDarkMode()` - Toggle dark/light theme
-- `cy.checkBrokenLinks()` - Check for broken links
+**Interactive UI Mode:**
+```bash
+npm run test:visual:ui
+```
+
+### Playwright Configuration
+
+Configuration is in `playwright.config.ts`:
+
+- Tests run against `http://localhost:3000`
+- Supports Chrome, Firefox, and WebKit browsers
+- Screenshots captured on test failure
+- Videos recorded for failing tests
+- Parallel test execution enabled
 
 ### Example Test
 
 ```typescript
-describe('Navigation', () => {
-  it('should navigate to contact page', () => {
-    cy.visit('/')
-    cy.contains('Contact').click()
-    cy.url().should('include', '/contact')
-  })
+import { test, expect } from '@playwright/test'
+
+test('should submit quote form successfully', async ({ page }) => {
+  await page.goto('/quote')
+  await page.fill('[name="name"]', 'Test User')
+  await page.fill('[name="email"]', 'test@example.com')
+  await page.click('button[type="submit"]')
+  await expect(page.locator('.success-message')).toBeVisible()
 })
 ```
+
+---
+
+## Visual Regression Testing
+
+### Overview
+
+Visual regression tests compare screenshots to detect unintended visual changes.
+
+### Test Files
+
+Located in `tests/visual-regression/`:
+
+- Comprehensive layout parity tests
+- Snapshot-based comparisons
+- Multi-browser testing
+
+### Running Visual Tests
+
+```bash
+# Run visual regression tests
+npm run test:visual
+
+# Update snapshots (when changes are intentional)
+npm run test:visual:update
+
+# Interactive UI mode
+npm run test:visual:ui
+```
+
+### How It Works
+
+1. Tests capture screenshots of pages/components
+2. Compare against baseline snapshots
+3. Flag differences as test failures
+4. Update baselines when changes are intentional
 
 ---
 
@@ -97,10 +159,10 @@ describe('Navigation', () => {
 
 ### Configuration
 
-Lighthouse CI is configured in `lighthouserc.js` with the following targets:
+Lighthouse CI is configured in `lighthouserc.json` with the following targets:
 
 - **Performance:** ≥ 90
-- **Accessibility:** ≥ 90
+- **Accessibility:** ≥ 95
 - **Best Practices:** ≥ 90
 - **SEO:** ≥ 90
 
@@ -113,7 +175,10 @@ npm install -g @lhci/cli
 # Build the project
 npm run build
 
-# Run Lighthouse audit
+# Start production server
+npm run start
+
+# Run Lighthouse audit (in another terminal)
 lhci autorun
 ```
 
@@ -131,18 +196,23 @@ lhci autorun
 
 ### Tools Used
 
-1. **axe-core** - Automated accessibility testing
-2. **Cypress** - Interactive testing
+1. **@axe-core/playwright** - Automated accessibility testing in Playwright
+2. **Lighthouse CI** - Accessibility score ≥ 95
 3. **Manual testing** - Screen readers (NVDA, JAWS, VoiceOver)
 
 ### Running Accessibility Tests
 
-```bash
-# Start dev server
-npm run dev
+Accessibility tests are integrated into Playwright E2E tests:
 
-# Run axe tests
-npx @axe-core/cli http://localhost:3000
+```typescript
+import { test } from '@playwright/test'
+import AxeBuilder from '@axe-core/playwright'
+
+test('should not have accessibility violations', async ({ page }) => {
+  await page.goto('/')
+  const results = await new AxeBuilder({ page }).analyze()
+  expect(results.violations).toEqual([])
+})
 ```
 
 ### WCAG 2.1 AA Compliance Checklist
@@ -162,41 +232,44 @@ npx @axe-core/cli http://localhost:3000
 
 ### GitHub Actions Workflow
 
-File: `.github/workflows/ci-cd.yml`
+File: `.github/workflows/ci.yml`
 
 ### Pipeline Stages
 
 1. **Build & Type Check**
-   - Install dependencies
+   - Install dependencies (`npm ci`)
    - TypeScript compilation
    - ESLint checks
-   - Next.js build
+   - Next.js production build
 
-2. **Cypress E2E Tests**
-   - Run all Cypress tests
-   - Upload screenshots on failure
+2. **Playwright E2E Tests**
+   - Install Playwright browsers
+   - Run quote and contact form tests
+   - Upload test results on failure
 
 3. **Lighthouse CI**
-   - Performance audits
-   - Accessibility audits
-   - SEO checks
+   - Performance audits (≥90 score)
+   - Accessibility audits (≥95 score)
+   - SEO checks (≥90 score)
+   - Best practices (≥90 score)
 
-4. **Accessibility Tests**
-   - axe-core automated tests
+### Required Environment Variables
 
-5. **Deploy**
-   - Production deploy (main branch)
-   - Preview deploy (pull requests)
-
-### Required Secrets
-
-Set these in GitHub repository settings:
+Set these in GitHub repository settings or Vercel:
 
 ```env
-VERCEL_TOKEN=xxx
-VERCEL_ORG_ID=xxx
-VERCEL_PROJECT_ID=xxx
-LHCI_GITHUB_APP_TOKEN=xxx (optional)
+# Sanity CMS
+NEXT_PUBLIC_SANITY_PROJECT_ID=xxx
+NEXT_PUBLIC_SANITY_DATASET=xxx
+SANITY_API_TOKEN=xxx
+
+# Email & Forms
+RESEND_API_KEY=xxx
+
+# Analytics
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=xxx
+
+# See .env.example for complete list
 ```
 
 ### Branch Protection Rules
@@ -207,10 +280,9 @@ LHCI_GITHUB_APP_TOKEN=xxx (optional)
 - Require linear history
 
 **Checks Required:**
-- Build and Test
-- Cypress Tests
+- Build and Type Check
+- Playwright E2E Tests
 - Lighthouse Audit
-- Accessibility Audit
 
 ---
 
@@ -294,11 +366,10 @@ dataLayer.push({
 
 ### Before Each Release
 
-- [ ] All Cypress tests pass
-- [ ] Lighthouse scores ≥ 90
+- [ ] All Playwright tests pass
+- [ ] Lighthouse scores ≥ 90 (95 for accessibility)
 - [ ] No console errors on any page
 - [ ] Forms submit successfully
-- [ ] Dark mode works correctly
 - [ ] Mobile responsive on all pages
 - [ ] No horizontal scroll on mobile
 - [ ] All images load correctly
@@ -327,11 +398,12 @@ Test on:
 
 ## Troubleshooting
 
-### Cypress Tests Failing
+### Playwright Tests Failing
 
-1. Clear cache: `npm run cypress:cache:clear`
-2. Reinstall: `npm ci`
-3. Check baseUrl in `cypress.config.ts`
+1. Clear Playwright cache: `npx playwright install --force`
+2. Reinstall dependencies: `npm ci`
+3. Check baseUrl in `playwright.config.ts`
+4. Verify dev server is running on port 3000
 
 ### Lighthouse Scores Low
 
@@ -339,22 +411,25 @@ Test on:
 2. Disable browser extensions
 3. Test on stable network
 4. Check for console errors
+5. Ensure production build (`npm run build && npm start`)
 
 ### Build Errors
 
 1. Clear `.next` folder: `rm -rf .next`
 2. Clear node_modules: `rm -rf node_modules && npm ci`
 3. Check TypeScript errors: `npm run type-check`
+4. Run linting: `npm run lint`
 
 ---
 
 ## Resources
 
-- [Cypress Documentation](https://docs.cypress.io/)
+- [Playwright Documentation](https://playwright.dev/)
 - [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
 - [Next.js Testing](https://nextjs.org/docs/testing)
 - [Web Vitals](https://web.dev/vitals/)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [Axe Accessibility Testing](https://www.deque.com/axe/)
 
 ---
 
