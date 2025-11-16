@@ -74,21 +74,25 @@ Located in `tests/e2e/`:
 ### Running Playwright Tests
 
 **Headless Mode (CI):**
+
 ```bash
 npx playwright test
 ```
 
 **Headed Mode (see browser):**
+
 ```bash
 npm run test:headed
 ```
 
 **Debug Mode (step through tests):**
+
 ```bash
 npm run test:debug
 ```
 
 **Interactive UI Mode:**
+
 ```bash
 npm run test:visual:ui
 ```
@@ -164,7 +168,7 @@ Lighthouse CI is configured in `lighthouserc.json` with the following targets:
 - **Performance:** ≥ 90
 - **Accessibility:** ≥ 95
 - **Best Practices:** ≥ 90
-- **SEO:** ≥ 90
+- **SEO:** ≥ 95
 
 ### Running Lighthouse Locally
 
@@ -250,7 +254,7 @@ File: `.github/workflows/ci.yml`
 3. **Lighthouse CI**
    - Performance audits (≥90 score)
    - Accessibility audits (≥95 score)
-   - SEO checks (≥90 score)
+   - SEO checks (≥95 score)
    - Best practices (≥90 score)
 
 ### Required Environment Variables
@@ -275,11 +279,13 @@ NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=xxx
 ### Branch Protection Rules
 
 **Main Branch:**
+
 - Require status checks to pass
 - Require review before merging
 - Require linear history
 
 **Checks Required:**
+
 - Build and Type Check
 - Playwright E2E Tests
 - Lighthouse Audit
@@ -318,7 +324,7 @@ NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=xxx
 import { LazyBeforeAfterSlider } from '@/components/LazyLoad'
 
 // Component will be loaded only when needed
-<LazyBeforeAfterSlider items={items} />
+;<LazyBeforeAfterSlider items={items} />
 ```
 
 ---
@@ -342,6 +348,7 @@ import { LazyBeforeAfterSlider } from '@/components/LazyLoad'
 ### Testing Analytics
 
 **In Browser Console:**
+
 ```javascript
 // Check if dataLayer exists
 window.dataLayer
@@ -350,11 +357,12 @@ window.dataLayer
 dataLayer.push({
   event: 'test_event',
   category: 'test',
-  action: 'manual_test'
+  action: 'manual_test',
 })
 ```
 
 **In GTM Preview Mode:**
+
 1. Open GTM container
 2. Click "Preview"
 3. Enter site URL
@@ -379,6 +387,7 @@ dataLayer.push({
 ### Cross-Browser Testing
 
 Test on:
+
 - [ ] Chrome (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (latest)
