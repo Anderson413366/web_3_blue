@@ -1,13 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
-import ConsentInit from '@/components/ConsentInit'
-import CookieBanner from '@/components/CookieBanner'
-import WebVitalsReporter from '@/components/WebVitalsReporter'
-import SkipLink from '@/components/SkipLink'
-import AccessibilityProvider from '@/components/AccessibilityProvider'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import {
   generateOrganizationSchema,
   generateLocalBusinessSchema,
@@ -149,17 +142,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className="antialiased">
-        <SkipLink />
-        <ConsentInit />
-        <AccessibilityProvider>
-          <ThemeProvider>
-            <Header />
-            {children}
-            <Footer />
-            <CookieBanner />
-          </ThemeProvider>
-        </AccessibilityProvider>
-        <WebVitalsReporter />
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
