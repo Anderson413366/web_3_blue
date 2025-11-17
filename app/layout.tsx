@@ -8,7 +8,7 @@ import {
 } from '@/lib/seo/jsonld'
 import { getNonce } from '@/lib/utils/nonce'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

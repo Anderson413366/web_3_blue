@@ -24,8 +24,8 @@ export default function TermsOfServicePage() {
             <Scale className="h-4 w-4" />
             <span>
               This is a legal document. For questions, contact{' '}
-              <a href="mailto:legal@andersoncleaning.com" className="underline font-medium">
-                legal@andersoncleaning.com
+              <a href="mailto:legal@anderson-cleaning-site.vercel.app" className="underline font-medium">
+                legal@anderson-cleaning-site.vercel.app
               </a>
             </span>
           </div>

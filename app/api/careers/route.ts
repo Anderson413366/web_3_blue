@@ -177,7 +177,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: 'An error occurred while submitting your application. Please try again or email info@andersoncleaning.com.',
+        error: 'An error occurred while submitting your application. Please try again or email info@anderson-cleaning-site.vercel.app.',
       },
       { status: 500 }
     )

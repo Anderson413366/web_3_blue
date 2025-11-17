@@ -689,11 +689,11 @@ export default function QuoteForm({ onSuccess }: QuoteFormProps) {
                 <span className="font-semibold">(413) 306-5053</span>
               </a>
               <a
-                href="mailto:info@andersoncleaning.com"
+                href="mailto:info@anderson-cleaning-site.vercel.app"
                 className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               >
                 <Mail className="h-5 w-5 flex-shrink-0" />
-                <span className="text-sm">info@andersoncleaning.com</span>
+                <span className="text-sm">info@anderson-cleaning-site.vercel.app</span>
               </a>
             </div>
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">

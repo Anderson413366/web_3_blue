@@ -24,7 +24,7 @@ export const ENV_VARIABLES: EnvVariable[] = [
     required: true,
     description: 'Public URL of the website',
     type: 'url',
-    example: 'https://andersoncleaning.com',
+    example: 'https://anderson-cleaning-site.vercel.app',
   },
 
   // Sanity CMS
@@ -73,7 +73,7 @@ export const ENV_VARIABLES: EnvVariable[] = [
     required: false,
     description: 'From email address for Resend',
     type: 'email',
-    example: 'noreply@andersoncleaning.com',
+    example: 'noreply@anderson-cleaning-site.vercel.app',
   },
 
   // HubSpot CRM

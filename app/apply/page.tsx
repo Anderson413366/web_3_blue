@@ -3,7 +3,7 @@ import { AppProvider } from '@/lib/careers/AppContext'
 import CareersPage from '@/components/careers/CareersPage'
 import { generateJobPostingSchema, generateBreadcrumbSchema } from '@/lib/seo/jsonld'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app'
 
 export const metadata: Metadata = {
   title: 'Careers at Anderson Cleaning - Join Our Team',

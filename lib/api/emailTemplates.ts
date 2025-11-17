@@ -105,7 +105,7 @@ function getBaseTemplate(content: string): string {
         <strong>Anderson Cleaning, Inc.</strong><br>
         103 Wayside Avenue, West Springfield, MA 01089<br>
         Phone: <a href="tel:+14133065053">(413) 306-5053</a><br>
-        Email: <a href="mailto:info@andersoncleaning.com">info@andersoncleaning.com</a>
+        Email: <a href="mailto:info@anderson-cleaning-site.vercel.app">info@anderson-cleaning-site.vercel.app</a>
       </p>
       <p style="margin: 16px 0 0 0; font-size: 12px; color: #9ca3af;">
         This is an automated notification from your website contact form.

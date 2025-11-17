@@ -14,7 +14,7 @@ Disallow: /studio
 Disallow: /api/*
 
 # Host
-Host: https://andersoncleaning.com
+Host: https://anderson-cleaning-site.vercel.app
 
 # Sitemaps
-Sitemap: https://andersoncleaning.com/sitemap.xml
+Sitemap: https://anderson-cleaning-site.vercel.app/sitemap.xml

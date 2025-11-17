@@ -25,8 +25,8 @@ export default function PrivacyPolicyPage() {
             <Shield className="h-4 w-4" />
             <span>
               This is a legal document. For questions, contact{' '}
-              <a href="mailto:privacy@andersoncleaning.com" className="underline font-medium">
-                privacy@andersoncleaning.com
+              <a href="mailto:privacy@anderson-cleaning-site.vercel.app" className="underline font-medium">
+                privacy@anderson-cleaning-site.vercel.app
               </a>
             </span>
           </div>
@@ -144,10 +144,10 @@ export default function PrivacyPolicyPage() {
               committed to protecting your privacy. This Privacy Policy explains how we collect,
               use, disclose, and safeguard your information when you visit our website{' '}
               <a
-                href="https://andersoncleaning.com"
+                href="https://anderson-cleaning-site.vercel.app"
                 className="text-primary-600 dark:text-primary-400 hover:underline"
               >
-                andersoncleaning.com
+                anderson-cleaning-site.vercel.app
               </a>
               , use our services, or interact with us.
             </p>
@@ -521,10 +521,10 @@ export default function PrivacyPolicyPage() {
                   You have the right to access the personal information we hold about you and
                   request corrections if it is inaccurate or incomplete. Contact us at{' '}
                   <a
-                    href="mailto:privacy@andersoncleaning.com"
+                    href="mailto:privacy@anderson-cleaning-site.vercel.app"
                     className="text-primary-600 dark:text-primary-400 hover:underline"
                   >
-                    privacy@andersoncleaning.com
+                    privacy@anderson-cleaning-site.vercel.app
                   </a>{' '}
                   to make a request.
                 </p>
@@ -603,10 +603,10 @@ export default function PrivacyPolicyPage() {
                       Privacy Inquiries
                     </p>
                     <a
-                      href="mailto:privacy@andersoncleaning.com"
+                      href="mailto:privacy@anderson-cleaning-site.vercel.app"
                       className="text-primary-600 dark:text-primary-400 hover:underline"
                     >
-                      privacy@andersoncleaning.com
+                      privacy@anderson-cleaning-site.vercel.app
                     </a>
                   </div>
                 </div>
@@ -617,10 +617,10 @@ export default function PrivacyPolicyPage() {
                       General Inquiries
                     </p>
                     <a
-                      href="mailto:info@andersoncleaning.com"
+                      href="mailto:info@anderson-cleaning-site.vercel.app"
                       className="text-primary-600 dark:text-primary-400 hover:underline"
                     >
-                      info@andersoncleaning.com
+                      info@anderson-cleaning-site.vercel.app
                     </a>
                   </div>
                 </div>

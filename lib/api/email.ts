@@ -30,7 +30,7 @@ async function sendViaResend(options: EmailOptions): Promise<{ success: boolean;
     throw new Error('RESEND_API_KEY not configured')
   }
 
-  const fromEmail = options.from || process.env.RESEND_FROM_EMAIL || 'noreply@andersoncleaning.com'
+  const fromEmail = options.from || process.env.RESEND_FROM_EMAIL || 'noreply@anderson-cleaning-site.vercel.app'
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -96,7 +96,7 @@ function isValidEmail(email: string): boolean {
  * Get notification email address from environment
  */
 export function getNotificationEmail(): string {
-  return process.env.NOTIFICATION_EMAIL || 'info@andersoncleaning.com'
+  return process.env.NOTIFICATION_EMAIL || 'info@anderson-cleaning-site.vercel.app'
 }
 
 /**

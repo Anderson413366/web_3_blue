@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app',
   generateRobotsTxt: true,
   generateIndexSitemap: false, // Set to true if you expect > 50k URLs
   exclude: ['/studio', '/studio/*', '/api/*', '/apply/success', '/_next/*', '/404', '/500'],

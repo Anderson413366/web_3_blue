@@ -5,7 +5,7 @@
  * Helps search engines understand your content better
  */
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app'
 
 // ===== ORGANIZATION SCHEMA =====
 
@@ -20,7 +20,7 @@ export function generateOrganizationSchema() {
     description:
       'Professional commercial cleaning and janitorial services for businesses in Western Massachusetts and Northern Connecticut.',
     foundingDate: '2000',
-    email: 'info@andersoncleaning.com',
+    email: 'info@anderson-cleaning-site.vercel.app',
     telephone: '+1-413-306-5053',
     address: {
       '@type': 'PostalAddress',
@@ -37,7 +37,7 @@ export function generateOrganizationSchema() {
         contactType: 'Customer Service',
         areaServed: ['US-MA', 'US-CT'],
         availableLanguage: ['en', 'es', 'pt', 'ro'],
-        email: 'info@andersoncleaning.com',
+        email: 'info@anderson-cleaning-site.vercel.app',
       },
       {
         '@type': 'ContactPoint',
@@ -45,7 +45,7 @@ export function generateOrganizationSchema() {
         contactType: 'Sales',
         areaServed: ['US-MA', 'US-CT'],
         availableLanguage: ['en', 'es', 'pt', 'ro'],
-        email: 'info@andersoncleaning.com',
+        email: 'info@anderson-cleaning-site.vercel.app',
       },
     ],
     sameAs: [
@@ -75,7 +75,7 @@ export function generateLocalBusinessSchema() {
     image: `${baseUrl}/images/og-image.jpg`,
     url: baseUrl,
     telephone: '+1-413-306-5053',
-    email: 'info@andersoncleaning.com',
+    email: 'info@anderson-cleaning-site.vercel.app',
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',

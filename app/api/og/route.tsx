@@ -168,7 +168,7 @@ export async function GET(request: NextRequest) {
                 fontWeight: 500,
               }}
             >
-              andersoncleaning.com
+              anderson-cleaning-site.vercel.app
             </div>
           </div>
         </div>

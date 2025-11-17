@@ -21,9 +21,9 @@ export default function ServicesPage() {
     provider: {
       '@type': 'LocalBusiness',
       name: 'Anderson Cleaning',
-      image: 'https://andersoncleaning.com/logo.png',
-      '@id': 'https://andersoncleaning.com',
-      url: 'https://andersoncleaning.com',
+      image: 'https://anderson-cleaning-site.vercel.app/logo.png',
+      '@id': 'https://anderson-cleaning-site.vercel.app',
+      url: 'https://anderson-cleaning-site.vercel.app',
       telephone: '+1-413-306-5053',
       address: {
         '@type': 'PostalAddress',
