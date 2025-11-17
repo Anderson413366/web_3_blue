@@ -164,7 +164,7 @@ export default function ServicesPage() {
       />
 
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
             Comprehensive Commercial Cleaning Solutions

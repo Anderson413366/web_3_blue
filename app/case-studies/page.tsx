@@ -22,7 +22,7 @@ export default function CaseStudiesPage() {
       {/* ===================================================================
           HERO SECTION
           =================================================================== */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
+      <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">

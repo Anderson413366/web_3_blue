@@ -8,7 +8,7 @@ export default function OfficeCleaningPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-700 to-indigo-900 text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-6xl mb-6">🏢</div>

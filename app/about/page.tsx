@@ -23,7 +23,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">About Anderson Cleaning</h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">

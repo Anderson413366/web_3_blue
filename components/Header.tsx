@@ -6,9 +6,13 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, Mail } from 'lucide-react'
 
 const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
   { name: 'Industries', href: '/industries' },
   { name: 'About', href: '/about' },
+  { name: 'FAQ', href: '/faq' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Testimonials', href: '/testimonials' },
   { name: 'Careers', href: '/careers' },
   { name: 'Contact', href: '/contact' },
 ]
