@@ -1,0 +1,31 @@
+{
+  "name": "Anderson Cleaning - Commercial Cleaning Services",
+  "short_name": "Anderson Cleaning",
+  "description": "Professional B2B commercial cleaning and janitorial services in Western MA & CT",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1D4ED8",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "orientation": "portrait-primary"
+}

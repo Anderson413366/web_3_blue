@@ -1,0 +1,629 @@
+/* =============================================================================
+   ANDERSON CLEANING - DESIGN SYSTEM
+   =============================================================================
+
+   A centralized, ADHD/OCD-friendly design system with semantic CSS variables.
+   All values meet WCAG 2.1 AA accessibility standards for contrast and sizing.
+
+   USAGE EXAMPLE:
+   ──────────────────────────────────────────────────────────────────────────
+
+   Instead of:
+     background-color: #1D4ED8;
+     color: #FFFFFF;
+     padding: 1rem 2rem;
+
+   Use:
+     background-color: var(--color-primary-base);
+     color: var(--color-neutral-white);
+     padding: var(--spacing-medium) var(--spacing-large);
+
+   Benefits:
+   - Consistent values across the entire site
+   - Easy theme switching (light/dark mode)
+   - Centralized updates (change once, applies everywhere)
+   - Clear, semantic naming (self-documenting code)
+   - Accessibility built-in (WCAG-compliant colors)
+
+============================================================================= */
+
+:root {
+  /* ==========================================================================
+     COLORS - PRIMARY PALETTE
+     ==========================================================================
+     Blue color scheme representing trust, professionalism, and cleanliness.
+     All colors meet WCAG 2.1 AA contrast requirements when used correctly.
+  ========================================================================== */
+
+  /* Primary Blue - Main brand color */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;     /* Base primary color */
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+
+  /* Primary color shortcuts (semantic) */
+  --color-primary-base: var(--color-primary-700);
+  --color-primary-hover: var(--color-primary-800);
+  --color-primary-active: var(--color-primary-900);
+  --color-primary-light: var(--color-primary-100);
+  --color-primary-lighter: var(--color-primary-50);
+  --color-primary-dark: var(--color-primary-900);
+
+
+  /* ==========================================================================
+     COLORS - ACCENT PALETTE
+     ==========================================================================
+     Green accent for calls-to-action, success states, and emphasis.
+     Yellow accent for promotional elements and highlights.
+  ========================================================================== */
+
+  /* Accent Green - CTAs and Success */
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;       /* Base accent color */
+  --color-accent-600: #059669;
+  --color-accent-700: #047857;
+  --color-accent-800: #065f46;
+  --color-accent-900: #064e3b;
+  --color-accent-950: #022c22;
+
+  /* Accent color shortcuts (semantic) */
+  --color-accent-base: var(--color-accent-500);
+  --color-accent-hover: var(--color-accent-600);
+  --color-accent-active: var(--color-accent-700);
+  --color-accent-light: var(--color-accent-100);
+  --color-accent-lighter: var(--color-accent-50);
+  --color-accent-dark: var(--color-accent-800);
+
+  /* Accent Yellow - Promotional highlights */
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+
+
+  /* ==========================================================================
+     COLORS - NEUTRAL PALETTE
+     ==========================================================================
+     Gray scale for text, backgrounds, borders, and UI elements.
+     Carefully calibrated for optimal readability and visual hierarchy.
+  ========================================================================== */
+
+  /* Light mode neutrals */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+  --color-neutral-950: #030712;
+
+  /* Semantic neutral shortcuts */
+  --color-neutral-white: #ffffff;
+  --color-neutral-black: #000000;
+  --color-text-primary: var(--color-neutral-900);       /* Main text color */
+  --color-text-secondary: var(--color-neutral-600);     /* Secondary text */
+  --color-text-tertiary: var(--color-neutral-500);      /* Muted text */
+  --color-text-disabled: var(--color-neutral-400);      /* Disabled state */
+  --color-background-base: var(--color-neutral-white);  /* Main background */
+  --color-background-muted: var(--color-neutral-50);    /* Secondary background */
+  --color-background-elevated: var(--color-neutral-100); /* Cards, modals */
+  --color-border-base: var(--color-neutral-300);        /* Default borders */
+  --color-border-muted: var(--color-neutral-200);       /* Subtle borders */
+
+  /* Slate palette (for dark mode support) */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+
+  /* ==========================================================================
+     COLORS - SEMANTIC (STATE-BASED)
+     ==========================================================================
+     State-based colors for feedback, alerts, and status indicators.
+     All combinations meet WCAG 2.1 AA contrast ratios (4.5:1 for text).
+  ========================================================================== */
+
+  /* Success - Positive feedback, completed states */
+  --color-success-base: #10b981;
+  --color-success-hover: #059669;
+  --color-success-active: #047857;
+  --color-success-light: #d1fae5;
+  --color-success-lighter: #ecfdf5;
+  --color-success-dark: #047857;
+  --color-success-text: #065f46;         /* Text on light backgrounds */
+  --color-success-text-light: #a7f3d0;   /* Text on dark backgrounds */
+
+  /* Warning - Caution, important notices */
+  --color-warning-base: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-warning-active: #b45309;
+  --color-warning-light: #fef3c7;
+  --color-warning-lighter: #fefce8;
+  --color-warning-dark: #d97706;
+  --color-warning-text: #92400e;         /* Text on light backgrounds */
+  --color-warning-text-light: #fde68a;   /* Text on dark backgrounds */
+
+  /* Error - Errors, destructive actions, validation failures */
+  --color-error-base: #ef4444;
+  --color-error-hover: #dc2626;
+  --color-error-active: #b91c1c;
+  --color-error-light: #fee2e2;
+  --color-error-lighter: #fef2f2;
+  --color-error-dark: #dc2626;
+  --color-error-text: #991b1b;           /* Text on light backgrounds */
+  --color-error-text-light: #fca5a5;     /* Text on dark backgrounds */
+
+  /* Info - Informational messages, tips */
+  --color-info-base: #3b82f6;
+  --color-info-hover: #2563eb;
+  --color-info-active: #1d4ed8;
+  --color-info-light: #dbeafe;
+  --color-info-lighter: #eff6ff;
+  --color-info-dark: #1d4ed8;
+  --color-info-text: #1e40af;            /* Text on light backgrounds */
+  --color-info-text-light: #93c5fd;      /* Text on dark backgrounds */
+
+
+  /* ==========================================================================
+     TYPOGRAPHY - FONT FAMILIES
+     ==========================================================================
+     Consistent font stack across the application.
+  ========================================================================== */
+
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                      'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+                      'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-heading: var(--font-family-base);
+  --font-family-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
+
+
+  /* ==========================================================================
+     TYPOGRAPHY - FONT SIZES
+     ==========================================================================
+     Typographic scale optimized for readability and visual hierarchy.
+     Minimum body text: 16px (WCAG guideline).
+     All sizes include line-height for optimal readability.
+  ========================================================================== */
+
+  /* Body text sizes */
+  --font-size-xs: 0.75rem;      /* 12px - Use sparingly, minimum for legal text */
+  --font-size-sm: 0.875rem;     /* 14px - Small labels, captions */
+  --font-size-base: 1rem;       /* 16px - Body text (WCAG minimum) */
+  --font-size-lg: 1.125rem;     /* 18px - Large body text */
+  --font-size-xl: 1.25rem;      /* 20px - Lead paragraphs */
+
+  /* Heading sizes */
+  --font-size-heading-6: 1rem;       /* 16px - H6 */
+  --font-size-heading-5: 1.125rem;   /* 18px - H5 */
+  --font-size-heading-4: 1.25rem;    /* 20px - H4 */
+  --font-size-heading-3: 1.5rem;     /* 24px - H3 */
+  --font-size-heading-2: 1.875rem;   /* 30px - H2 */
+  --font-size-heading-1: 2.25rem;    /* 36px - H1 */
+
+  /* Display sizes (hero text, large headings) */
+  --font-size-display-sm: 3rem;      /* 48px */
+  --font-size-display-md: 3.75rem;   /* 60px */
+  --font-size-display-lg: 4.5rem;    /* 72px */
+
+
+  /* ==========================================================================
+     TYPOGRAPHY - FONT WEIGHTS
+     ==========================================================================
+     Weight scale for emphasis and hierarchy.
+  ========================================================================== */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+
+  /* ==========================================================================
+     TYPOGRAPHY - LINE HEIGHTS
+     ==========================================================================
+     Line heights optimized for readability (WCAG recommends 1.5+ for body).
+  ========================================================================== */
+
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;       /* Body text default */
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+
+  /* ==========================================================================
+     TYPOGRAPHY - LETTER SPACING
+     ==========================================================================
+     Tracking adjustments for different text styles.
+  ========================================================================== */
+
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+
+
+  /* ==========================================================================
+     SPACING SCALE
+     ==========================================================================
+     Consistent spacing rhythm based on 4px baseline grid.
+     Creates visual harmony and predictable layouts.
+
+     Formula: Each step is 4px apart (0.25rem)
+     Usage: Padding, margins, gaps between elements
+  ========================================================================== */
+
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;     /* 4px */
+  --spacing-2: 0.5rem;      /* 8px */
+  --spacing-3: 0.75rem;     /* 12px */
+  --spacing-4: 1rem;        /* 16px */
+  --spacing-5: 1.25rem;     /* 20px */
+  --spacing-6: 1.5rem;      /* 24px */
+  --spacing-8: 2rem;        /* 32px */
+  --spacing-10: 2.5rem;     /* 40px */
+  --spacing-12: 3rem;       /* 48px */
+  --spacing-16: 4rem;       /* 64px */
+  --spacing-20: 5rem;       /* 80px */
+  --spacing-24: 6rem;       /* 96px */
+  --spacing-32: 8rem;       /* 128px */
+
+  /* Semantic spacing shortcuts */
+  --spacing-xs: var(--spacing-1);      /* 4px */
+  --spacing-sm: var(--spacing-2);      /* 8px */
+  --spacing-md: var(--spacing-4);      /* 16px */
+  --spacing-lg: var(--spacing-6);      /* 24px */
+  --spacing-xl: var(--spacing-8);      /* 32px */
+  --spacing-2xl: var(--spacing-12);    /* 48px */
+  --spacing-3xl: var(--spacing-16);    /* 64px */
+
+  /* Component-specific spacing */
+  --spacing-section-sm: var(--spacing-16);   /* 64px - Small section padding */
+  --spacing-section-md: var(--spacing-20);   /* 80px - Medium section padding */
+  --spacing-section-lg: var(--spacing-24);   /* 96px - Large section padding */
+
+
+  /* ==========================================================================
+     LAYOUT - CONTAINER WIDTHS
+     ==========================================================================
+     Maximum content widths for different layouts.
+     Optimized for readability (45-75 characters per line).
+  ========================================================================== */
+
+  --container-xs: 20rem;      /* 320px - Very narrow content */
+  --container-sm: 24rem;      /* 384px - Narrow content, forms */
+  --container-md: 28rem;      /* 448px - Medium content */
+  --container-lg: 32rem;      /* 512px - Standard content */
+  --container-xl: 36rem;      /* 576px - Wide content */
+  --container-2xl: 42rem;     /* 672px - Max text width (optimal readability) */
+  --container-3xl: 48rem;     /* 768px - Very wide content */
+  --container-4xl: 56rem;     /* 896px - Extra wide */
+  --container-5xl: 64rem;     /* 1024px - Full content */
+  --container-6xl: 72rem;     /* 1152px - Maximum width */
+  --container-7xl: 80rem;     /* 1280px - Ultra-wide */
+  --container-full: 100%;     /* Full viewport width */
+
+  /* Semantic container shortcuts */
+  --container-text: var(--container-2xl);      /* Optimal for reading */
+  --container-content: var(--container-5xl);   /* Standard content */
+  --container-site: var(--container-7xl);      /* Site max-width */
+
+
+  /* ==========================================================================
+     LAYOUT - BREAKPOINTS
+     ==========================================================================
+     Responsive design breakpoints matching Tailwind defaults.
+     Mobile-first approach.
+  ========================================================================== */
+
+  --breakpoint-sm: 640px;      /* Small tablets, large phones */
+  --breakpoint-md: 768px;      /* Tablets */
+  --breakpoint-lg: 1024px;     /* Small laptops */
+  --breakpoint-xl: 1280px;     /* Desktops */
+  --breakpoint-2xl: 1536px;    /* Large desktops */
+
+
+  /* ==========================================================================
+     BORDERS - RADIUS
+     ==========================================================================
+     Consistent border radius for rounded corners.
+  ========================================================================== */
+
+  --border-radius-none: 0;
+  --border-radius-sm: 0.375rem;    /* 6px - Subtle rounding */
+  --border-radius-base: 0.5rem;    /* 8px - Default */
+  --border-radius-md: 0.5rem;      /* 8px - Medium */
+  --border-radius-lg: 0.75rem;     /* 12px - Large */
+  --border-radius-xl: 1rem;        /* 16px - Extra large */
+  --border-radius-2xl: 1.5rem;     /* 24px - Very large */
+  --border-radius-3xl: 2rem;       /* 32px - Huge */
+  --border-radius-full: 9999px;    /* Fully rounded (pills, circles) */
+
+
+  /* ==========================================================================
+     BORDERS - WIDTH
+     ==========================================================================
+     Border thickness scale.
+  ========================================================================== */
+
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  /* Semantic shortcuts */
+  --border-width-base: var(--border-width-1);
+  --border-width-thick: var(--border-width-2);
+  --border-width-thicker: var(--border-width-4);
+
+
+  /* ==========================================================================
+     SHADOWS - ELEVATION SYSTEM
+     ==========================================================================
+     Box shadow scale for visual depth and hierarchy.
+     Creates the illusion of elevation from the page.
+  ========================================================================== */
+
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  /* Semantic elevation scale */
+  --shadow-card: var(--shadow-md);
+  --shadow-dropdown: var(--shadow-lg);
+  --shadow-modal: var(--shadow-2xl);
+  --shadow-focus: 0 0 0 3px rgb(59 130 246 / 0.3);  /* Focus ring */
+
+
+  /* ==========================================================================
+     TRANSITIONS & ANIMATIONS
+     ==========================================================================
+     Consistent timing functions and durations.
+     Respects prefers-reduced-motion (handled in globals.css).
+  ========================================================================== */
+
+  /* Duration */
+  --transition-duration-instant: 75ms;
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 200ms;
+  --transition-duration-medium: 300ms;
+  --transition-duration-slow: 500ms;
+  --transition-duration-slower: 700ms;
+
+  /* Timing functions (easing) */
+  --transition-timing-linear: linear;
+  --transition-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --transition-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-timing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Common transition properties */
+  --transition-colors: color var(--transition-duration-base) var(--transition-timing-ease-in-out),
+                       background-color var(--transition-duration-base) var(--transition-timing-ease-in-out),
+                       border-color var(--transition-duration-base) var(--transition-timing-ease-in-out);
+
+  --transition-opacity: opacity var(--transition-duration-base) var(--transition-timing-ease-in-out);
+
+  --transition-transform: transform var(--transition-duration-base) var(--transition-timing-ease-in-out);
+
+  --transition-all: all var(--transition-duration-base) var(--transition-timing-ease-in-out);
+
+
+  /* ==========================================================================
+     Z-INDEX SCALE
+     ==========================================================================
+     Layering system with semantic names instead of arbitrary numbers.
+     Prevents z-index conflicts and makes intent clear.
+  ========================================================================== */
+
+  --z-index-base: 0;
+  --z-index-dropdown: 10;
+  --z-index-sticky: 20;
+  --z-index-fixed: 30;
+  --z-index-modal-backdrop: 40;
+  --z-index-modal: 50;
+  --z-index-popover: 60;
+  --z-index-tooltip: 70;
+  --z-index-notification: 80;
+  --z-index-skip-link: 9999;
+
+
+  /* ==========================================================================
+     COMPONENT-SPECIFIC VARIABLES
+     ==========================================================================
+     Reusable component patterns.
+  ========================================================================== */
+
+  /* Buttons */
+  --button-padding-sm: var(--spacing-2) var(--spacing-4);     /* 8px 16px */
+  --button-padding-md: var(--spacing-3) var(--spacing-6);     /* 12px 24px */
+  --button-padding-lg: var(--spacing-4) var(--spacing-8);     /* 16px 32px */
+  --button-border-radius: var(--border-radius-lg);
+  --button-font-weight: var(--font-weight-semibold);
+
+  /* Input fields */
+  --input-padding: var(--spacing-3) var(--spacing-4);         /* 12px 16px */
+  --input-border-radius: var(--border-radius-md);
+  --input-border-color: var(--color-border-base);
+  --input-border-color-focus: var(--color-primary-base);
+  --input-height-sm: 2.5rem;     /* 40px */
+  --input-height-md: 2.75rem;    /* 44px - Minimum touch target */
+  --input-height-lg: 3rem;       /* 48px */
+
+  /* Cards */
+  --card-padding: var(--spacing-6);
+  --card-border-radius: var(--border-radius-xl);
+  --card-shadow: var(--shadow-card);
+  --card-background: var(--color-background-base);
+
+  /* Modals */
+  --modal-max-width: var(--container-lg);
+  --modal-padding: var(--spacing-6);
+  --modal-border-radius: var(--border-radius-2xl);
+  --modal-backdrop: rgba(0, 0, 0, 0.5);
+
+  /* Navigation */
+  --nav-height: 4rem;            /* 64px */
+  --nav-padding: var(--spacing-4) var(--spacing-6);
+
+  /* Section spacing */
+  --section-padding-y: var(--spacing-section-md);
+  --section-padding-x: var(--spacing-6);
+}
+
+
+/* =============================================================================
+   DARK MODE OVERRIDES
+   =============================================================================
+   Dark mode color palette with optimal contrast for readability.
+   Automatically applied when .dark class is present on <html> element.
+============================================================================= */
+
+.dark {
+  /* ==========================================================================
+     DARK MODE - NEUTRAL COLORS
+     ==========================================================================
+     Inverted neutral palette for dark backgrounds.
+  ========================================================================== */
+
+  --color-text-primary: var(--color-neutral-50);        /* Light text */
+  --color-text-secondary: var(--color-neutral-300);     /* Muted light text */
+  --color-text-tertiary: var(--color-neutral-400);      /* Very muted text */
+  --color-text-disabled: var(--color-neutral-600);      /* Disabled state */
+  --color-background-base: var(--color-slate-900);      /* Dark background */
+  --color-background-muted: var(--color-slate-800);     /* Slightly lighter */
+  --color-background-elevated: var(--color-slate-700);  /* Cards, modals */
+  --color-border-base: var(--color-slate-600);          /* Borders */
+  --color-border-muted: var(--color-slate-700);         /* Subtle borders */
+
+
+  /* ==========================================================================
+     DARK MODE - PRIMARY & ACCENT ADJUSTMENTS
+     ==========================================================================
+     Slightly lighter shades for better visibility on dark backgrounds.
+  ========================================================================== */
+
+  --color-primary-base: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-400);
+  --color-primary-active: var(--color-primary-600);
+
+  --color-accent-base: var(--color-accent-400);
+  --color-accent-hover: var(--color-accent-300);
+  --color-accent-active: var(--color-accent-500);
+
+
+  /* ==========================================================================
+     DARK MODE - SEMANTIC COLORS
+     ==========================================================================
+     Adjusted for visibility on dark backgrounds.
+  ========================================================================== */
+
+  --color-success-base: var(--color-success-text-light);
+  --color-warning-base: var(--color-warning-text-light);
+  --color-error-base: var(--color-error-text-light);
+  --color-info-base: var(--color-info-text-light);
+
+
+  /* ==========================================================================
+     DARK MODE - SHADOWS
+     ==========================================================================
+     Softer shadows for dark mode (less contrast).
+  ========================================================================== */
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+  --shadow-focus: 0 0 0 3px rgb(96 165 250 / 0.4);
+
+
+  /* ==========================================================================
+     DARK MODE - COMPONENT ADJUSTMENTS
+     ==========================================================================
+  ========================================================================== */
+
+  --card-background: var(--color-background-elevated);
+  --input-border-color: var(--color-border-base);
+  --input-border-color-focus: var(--color-primary-base);
+}
+
+
+/* =============================================================================
+   UTILITY CLASSES
+   =============================================================================
+   Helper classes using design system variables.
+============================================================================= */
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary-base);
+}
+
+.bg-accent {
+  background-color: var(--color-accent-base);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.transition-colors {
+  transition: var(--transition-colors);
+}
+
+.container-text {
+  max-width: var(--container-text);
+}
+
+.container-content {
+  max-width: var(--container-content);
+}
+
+.container-site {
+  max-width: var(--container-site);
+}

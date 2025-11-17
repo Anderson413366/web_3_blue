@@ -1,0 +1,2225 @@
+import { FormDataShape, LanguageCode, SectionConfig, Translations } from './types'
+
+// Components are imported and used directly in SECTIONS_CONFIG
+import PersonalInfoSection from '@/components/careers/sections/PersonalInfoSection'
+import JobDetailsSection from '@/components/careers/sections/JobDetailsSection'
+import AvailabilitySection from '@/components/careers/sections/AvailabilitySection'
+import EducationSection from '@/components/careers/sections/EducationSection'
+import WorkHistorySection from '@/components/careers/sections/WorkHistorySection'
+import ReferencesSection from '@/components/careers/sections/ReferencesSection'
+import MilitaryServiceSection from '@/components/careers/sections/MilitaryServiceSection'
+import GettingToKnowYouSection from '@/components/careers/sections/GettingToKnowYouSection'
+import StatementsSection from '@/components/careers/sections/StatementsSection'
+import UploadsSection from '@/components/careers/sections/UploadsSection'
+import ReviewSection from '@/components/careers/sections/ReviewSection'
+
+export const DEFAULT_LANGUAGE: LanguageCode = 'en'
+
+export const GEMINI_TEXT_MODEL = 'gemini-2.5-flash-preview-04-17' // General Text Tasks
+
+export const INITIAL_FORM_DATA: FormDataShape = {
+  personalInfo: {
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
+    addressLine2: '',
+    city: '',
+    stateProvince: '',
+    zipCode: '',
+    email: '',
+    phone: '',
+  },
+  jobDetails: {
+    applyingFor: '',
+    howDidYouHear: '',
+    liftCarry: '',
+    physicalAbilityGeneral: '',
+    physicalAbilityExplanation: '',
+    performDuties: '',
+    performDutiesExplanation: '',
+    hasDriversLicense: false,
+    otherAbility: '',
+    experienceWith: {
+      houseCleaning: false,
+      officeCleaning: false,
+      windowCleaning: false,
+      floorStripWax: false,
+      carpetCleaning: false,
+      supervising: false,
+      managing: false,
+      pagesNumbers: false,
+    },
+    otherExperienceText: '',
+  },
+  availability: {
+    workLocations: {
+      Agawam: false,
+      Springfield: false,
+      Chicopee: false,
+      Holyoke: false,
+      Northampton: false,
+      Florence: false,
+      SouthHadley: false,
+      Amherst: false,
+      Westfield: false,
+      Longmeadow: false,
+      EastLongmeadow: false,
+      Wilbraham: false,
+    },
+    otherLocationText: '',
+    generalAvailability: '',
+    hoursPerWeek: '',
+    daysAvailable: {
+      Sunday: false,
+      Monday: false,
+      Tuesday: false,
+      Wednesday: false,
+      Thursday: false,
+      Friday: false,
+      Saturday: false,
+    },
+    shiftsAvailable: {
+      Morning: false,
+      Afternoon: false,
+      Evening: false,
+      LateNight: false,
+      FlexibleAny: false,
+    },
+    otherShiftText: '',
+    weekendsHolidays: '',
+  },
+  education: {
+    educationLevel: '',
+  },
+  workHistory: {
+    howManyEmployers: '',
+    entries: [],
+  },
+  references: {
+    entries: [],
+  },
+  militaryService: {
+    branch: '',
+    rankAtDischarge: '',
+    serviceFrom: '',
+    serviceTo: '',
+    typeOfDischarge: '',
+  },
+  gettingToKnowYou: {
+    knowAnyone: '',
+    hardestJob: '',
+    magicSpell: '',
+    shorterWorkday: '',
+    winSomeoneOver: '',
+    addOneThingRestroom: '',
+    helpedCoworker: '',
+    ruleDisagree: '',
+    lastBossDescription: '',
+    fitInWell: '',
+    getOutOfBed: '',
+    busyOrDowntime: '',
+    oneHourConversation: '',
+    wishWeAsked: '',
+  },
+  statements: {
+    drugTestingAck: false,
+    applicantStatementAck: false,
+    partTimeStatementAck: false,
+  },
+  uploads: {
+    driversLicense: null,
+    resume: null,
+    coverLetterText: '',
+  },
+}
+
+export const SECTIONS_CONFIG: SectionConfig[] = [
+  {
+    id: 'personalInfo',
+    titleKey: 'personalInfoSectionTitle',
+    component: PersonalInfoSection,
+    requiredFields: [
+      'personalInfo.firstName',
+      'personalInfo.lastName',
+      'personalInfo.email',
+      'personalInfo.phone',
+      'personalInfo.streetAddress',
+      'personalInfo.city',
+      'personalInfo.stateProvince',
+      'personalInfo.zipCode',
+    ],
+  },
+  {
+    id: 'jobDetails',
+    titleKey: 'jobDescSectionTitle',
+    component: JobDetailsSection,
+    requiredFields: [
+      'jobDetails.applyingFor',
+      'jobDetails.liftCarry',
+      'jobDetails.physicalAbilityGeneral',
+      'jobDetails.performDuties',
+    ],
+  },
+  {
+    id: 'availability',
+    titleKey: 'availabilitySectionTitle',
+    component: AvailabilitySection,
+    requiredFields: ['availability.generalAvailability', 'availability.weekendsHolidays'],
+  },
+  {
+    id: 'education',
+    titleKey: 'educationSectionTitle',
+    component: EducationSection,
+    requiredFields: ['education.educationLevel'],
+  },
+  { id: 'workHistory', titleKey: 'workHistorySectionTitle', component: WorkHistorySection }, // Required fields handled internally for dynamic entries
+  { id: 'references', titleKey: 'referencesSectionTitle', component: ReferencesSection }, // Required fields handled internally for dynamic entries
+  {
+    id: 'militaryService',
+    titleKey: 'militaryServiceSectionTitle',
+    component: MilitaryServiceSection,
+  },
+  {
+    id: 'gettingToKnowYou',
+    titleKey: 'gettingToKnowYouSectionTitle',
+    component: GettingToKnowYouSection,
+  },
+  {
+    id: 'statements',
+    titleKey: 'statementsSectionTitle',
+    component: StatementsSection,
+    requiredFields: ['statements.drugTestingAck', 'statements.applicantStatementAck'],
+  }, // partTimeStatementAck might be conditional
+  {
+    id: 'uploads',
+    titleKey: 'uploadsSectionTitle',
+    component: UploadsSection,
+    requiredFields: ['uploads.driversLicense'],
+  },
+  { id: 'review', titleKey: 'reviewSectionTitle', component: ReviewSection },
+]
+
+// --- Mock Translations (from user prompt) ---
+export const mockTranslations: Record<LanguageCode, Translations> = {
+  en: {
+    nextButton: 'Next Section',
+    prevButton: 'Previous Section',
+    reviewAppButton: 'Review Application',
+    submitFinalAppButton: 'Submit Final Application',
+    editSectionButton: 'Edit',
+    reviewSectionTitle: 'Review Your Application',
+    reviewIntro:
+      "Please carefully review all the information you've provided below. If you need to make any changes, click the 'Edit' button next to the relevant section.",
+    allSectionsComplete: 'All sections seem complete! Please review and submit.',
+    incompleteSectionError:
+      'Please complete all required (*) fields in the current section before proceeding.',
+    generateCoverLetterSparkButton: '✨ Get Cover Letter Spark',
+    generatingCoverLetterSpark: 'Generating suggestion...',
+    coverLetterSparkSuggestion: 'AI Generated Suggestion:',
+    useSparkSuggestionButton: 'Use this Suggestion',
+    coverLetterSparkError:
+      'Could not generate a suggestion at this time. Please try again later or write your own.',
+    coverLetterPromptDetailsMissing:
+      "Please fill in 'Position Applying For' and select at least one 'Experience' to generate a cover letter suggestion.",
+    interviewPrepSectionTitle: '✨ Interview Prep Spark',
+    generateInterviewPrepButton: 'Get Interview Prep Tips',
+    generatingInterviewPrep: 'Generating tips...',
+    interviewPrepTips: 'AI Generated Interview Tips:',
+    interviewPrepError: 'Could not generate interview tips at this time. Please try again later.',
+    interviewPrepPromptDetailsMissing:
+      "Please fill in 'Position Applying For' and at least one 'Getting to Know You' answer to generate interview tips.",
+    interviewQuestionLabel: 'Potential Question:',
+    interviewTipLabel: 'Tip:',
+    strengthsSectionTitle: '✨ My Strengths Spark',
+    generateStrengthsButton: 'Discover My Key Strengths',
+    generatingStrengths: 'Identifying strengths...',
+    strengthsSummary: 'AI Identified Strengths:',
+    strengthsError:
+      'Could not identify strengths at this time. Please ensure relevant sections are filled.',
+    strengthsPromptDetailsMissing:
+      "Please fill in 'Position Applying For', select experiences, and answer some 'Getting to Know You' questions to identify strengths.",
+    heroTitle: 'Join Our Team at Anderson Cleaning',
+    heroSubtitle:
+      'Discover exciting career opportunities and grow with a company that values dedication and excellence.',
+    whyWorkTitle: 'Why Choose Anderson Cleaning?',
+    whyWorkItems: [
+      {
+        title: 'Growth Opportunities',
+        description: 'We invest in your professional development and offer paths for advancement.',
+        benefits: [
+          'Clear career advancement pathways',
+          'Leadership development programs',
+          'Performance-based promotions and raises',
+        ],
+      },
+      {
+        title: 'Supportive Culture',
+        description: 'Become part of a collaborative, respectful, and inclusive team environment.',
+        benefits: [
+          'Respectful, family-like team atmosphere',
+          'Regular team building and recognition events',
+          'Open communication with management',
+        ],
+      },
+      {
+        title: 'Impactful Work',
+        description:
+          'Make a tangible difference for our clients by providing top-quality cleaning services.',
+        benefits: [
+          'See immediate results of your work',
+          'Receive direct appreciation from satisfied clients',
+          'Contribute to healthier, safer environments',
+        ],
+      },
+      {
+        title: 'Competitive Benefits',
+        description: "We offer comprehensive packages to support you and your family's well-being.",
+        benefits: [
+          'Health insurance options for you and your family',
+          'Paid time off and holidays',
+          'Employee referral bonuses',
+        ],
+      },
+    ],
+
+    // What We Offer Section
+    whatWeOfferTitle: 'What We Offer',
+    whatWeOfferSubtitle: 'Comprehensive benefits and support for our team members',
+    compensationTitle: 'Compensation & Pay',
+    compensationItems: [
+      'Competitive hourly wages',
+      'Full-time W-2 employment positions',
+      'Weekly pay schedule',
+      'Opportunities for pay increases based on performance',
+    ],
+    benefitsPackageTitle: 'Benefits Package',
+    benefitsPackageItems: [
+      'Health insurance options',
+      'Paid time off (PTO)',
+      'Paid holidays',
+      'Employee referral bonuses',
+    ],
+    trainingTitle: 'Training & Development',
+    trainingItems: [
+      '40+ hours of comprehensive paid training',
+      'Ongoing skill development programs',
+      'Clear career advancement pathways',
+      'Leadership development opportunities',
+    ],
+    workLifeBalanceTitle: 'Work-Life Balance',
+    workLifeBalanceItems: [
+      'Flexible schedule options',
+      'No mandatory 7-day work weeks',
+      'Predictable shift schedules',
+      'Work close to home opportunities',
+    ],
+
+    // Employee Stories Section
+    employeeStoriesTitle: 'Hear From Our Team',
+    employeeStoriesSubtitle: 'Real stories from Anderson Cleaning team members',
+    employeeTestimonials: [
+      {
+        name: 'Maria Rodriguez',
+        position: 'Team Lead',
+        quote:
+          'Anderson Cleaning invested in my growth from day one. I started as a cleaner and now I lead my own team. The training and support here are unmatched.',
+      },
+      {
+        name: 'James Thompson',
+        position: 'Cleaning Specialist',
+        quote:
+          'The work-life balance here is real. I have a consistent schedule, great benefits, and I actually enjoy coming to work every day.',
+      },
+      {
+        name: 'Sofia Chen',
+        position: 'Floor Care Technician',
+        quote:
+          'What I appreciate most is the respect and professionalism. Management listens to our feedback and we are treated as valued team members, not just employees.',
+      },
+    ],
+
+    // Company Culture Section
+    companyCultureTitle: 'Our Company Culture',
+    companyCultureSubtitle: 'The values that guide how we work and grow together',
+    investInPeopleTitle: 'We Invest in People',
+    investInPeopleDescription:
+      'Your success is our success. We provide extensive training, mentorship, and clear pathways for career advancement.',
+    systemsStandardsTitle: 'Systems & Standards',
+    systemsStandardsDescription:
+      'We have proven processes that set you up for success. You will never be left guessing about expectations or procedures.',
+    personalTouchTitle: 'Personal Touch',
+    personalTouchDescription:
+      'You are not just a number. We build genuine relationships with our team members and celebrate individual contributions.',
+
+    // Application Process Section
+    applicationProcessTitle: 'How to Join Our Team',
+    applicationProcessSubtitle: 'A simple, straightforward application process',
+    processStep1Title: 'Submit Application',
+    processStep1Description: 'Complete our online application form. It takes about 10-15 minutes.',
+    processStep2Title: 'Interview',
+    processStep2Description:
+      'Meet with our hiring team to discuss the role and answer any questions.',
+    processStep3Title: 'Training',
+    processStep3Description: '40+ hours of paid training to set you up for success.',
+    processStep4Title: 'Start Working',
+    processStep4Description:
+      'Begin your career with Anderson Cleaning and join a supportive team.',
+    processTimeframe: 'Most candidates complete the process in 2-3 weeks',
+    startApplicationButton: 'Start Your Application',
+
+    // Career FAQs Section
+    careerFAQTitle: 'Frequently Asked Questions',
+    careerFAQSubtitle: 'Everything you need to know about joining our team',
+    careerFAQs: [
+      {
+        question: 'What are the hiring requirements?',
+        answer:
+          "We require a valid driver's license, reliable transportation, and the ability to perform physical work. Prior cleaning experience is helpful but not required - we provide comprehensive training.",
+      },
+      {
+        question: 'What is the typical work schedule?',
+        answer:
+          'Most positions are Monday-Friday with shifts typically between 6 AM - 6 PM. We offer flexible scheduling options and work with you to find a schedule that fits your life.',
+      },
+      {
+        question: 'How much does the position pay?',
+        answer:
+          'We offer competitive wages based on experience and position. Starting pay ranges from $15-$18/hour with opportunities for increases based on performance and additional certifications.',
+      },
+      {
+        question: 'What does the training process involve?',
+        answer:
+          'All new team members complete 40+ hours of paid training covering cleaning techniques, safety protocols, equipment operation, and customer service. Training is hands-on and conducted by experienced team leaders.',
+      },
+      {
+        question: 'Are there opportunities for career growth?',
+        answer:
+          'Absolutely! Many of our supervisors and team leads started in entry-level positions. We prioritize promoting from within and provide clear pathways for advancement.',
+      },
+      {
+        question: 'What benefits do you offer?',
+        answer:
+          'Full-time employees receive health insurance options, paid time off, paid holidays, and access to employee referral bonuses. We also offer performance-based bonuses and recognition programs.',
+      },
+      {
+        question: 'Do I need my own cleaning supplies or equipment?',
+        answer:
+          'No, we provide all cleaning supplies, equipment, and protective gear. You just need to show up ready to work.',
+      },
+      {
+        question: 'How soon can I start after applying?',
+        answer:
+          'The typical timeline from application to start date is 2-3 weeks, depending on background check processing and training schedule availability.',
+      },
+    ],
+    stillHaveQuestions:
+      'Still have questions? Start your application and we will answer them during the interview process.',
+    applyNowButton: 'Apply Now',
+    applicationTitle: 'Employment Application',
+    applicationSubtitle:
+      'Please complete all sections accurately. We look forward to learning more about you!',
+    selectLanguage: 'Language:',
+    sectionProgressIndicator: 'Step {current} of {total}: {title}',
+    personalInfoSectionTitle: 'Personal Information',
+    jobDescSectionTitle: 'Job Details & Physical Requirements',
+    availabilitySectionTitle: 'Your Availability',
+    educationSectionTitle: 'Education History',
+    workHistorySectionTitle: 'Work History',
+    referencesSectionTitle: 'Professional References',
+    militaryServiceSectionTitle: 'Military Service (Optional)',
+    gettingToKnowYouSectionTitle: 'Getting to Know You',
+    statementsSectionTitle: 'Important Statements & Consent',
+    uploadsSectionTitle: 'Document Uploads',
+    firstNameLabel: 'First Name',
+    firstNamePlaceholder: 'e.g., John',
+    lastNameLabel: 'Last Name',
+    lastNamePlaceholder: 'e.g., Doe',
+    streetAddressLabel: 'Street Address',
+    streetAddressPlaceholder: 'e.g., 123 Main St',
+    addressLine2Label: 'Address Line 2',
+    addressLine2Placeholder: 'Apt, Suite, Unit, Building, Floor, etc.',
+    cityLabel: 'City',
+    cityPlaceholder: 'e.g., Springfield',
+    stateProvinceLabel: 'State/Province',
+    stateProvincePlaceholder: 'e.g., MA',
+    zipCodeLabel: 'ZIP/Postal Code',
+    zipCodePlaceholder: 'e.g., 01101',
+    emailLabel: 'Email Address',
+    emailPlaceholder: 'you@example.com',
+    phoneLabel: 'Phone Number',
+    phonePlaceholder: '(413) 306-5053',
+    applyingForLabel: 'Position Applying For',
+    applyingForPlaceholder: 'Select a position',
+    positionOptions: [
+      { value: '', label: 'Select a position' },
+      { value: 'cleaner', label: 'Cleaner' },
+      { value: 'supervisor', label: 'Supervisor' },
+      { value: 'manager', label: 'Manager' },
+      { value: 'office_staff', label: 'Office Staff' },
+    ],
+    howDidYouHearLabel: 'How did you hear about this position?',
+    howDidYouHearPlaceholder: 'e.g., Indeed, Friend, Company Website',
+    liftCarryLabel: 'I can comfortably lift, carry, push, or pull:',
+    liftCarryPlaceholder: 'Select weight capacity',
+    liftOptions: [
+      { value: '', label: 'Select an option' },
+      { value: 'up_to_25', label: 'Up to 25 lbs (11 kg)' },
+      { value: '25_50', label: '25-50 lbs (11-23 kg)' },
+      { value: '50_plus', label: '50+ lbs (23+ kg)' },
+    ],
+    iAmAbleToLabelGeneral: 'Regarding general physical tasks (bending, standing, walking):',
+    iAmAbleToPlaceholderGeneral: 'Select your ability',
+    physicalAbilityOptions: [
+      { value: '', label: 'Select an option' },
+      { value: 'no_restrictions', label: 'I can perform these tasks without restrictions.' },
+      {
+        value: 'some_restrictions',
+        label: 'I can perform these tasks with some restrictions (please explain below).',
+      },
+    ],
+    physicalAbilityExplanationLabel: 'If you have restrictions, please explain:',
+    physicalAbilityExplanationPlaceholder: 'Explain any restrictions here',
+    performDutiesLabel:
+      "Are you able to perform the essential duties of the position you're applying for, with or without reasonable accommodation?",
+    yesLabel: 'Yes',
+    noLabel: 'No',
+    otherLabel: 'Other (Specify)',
+    performDutiesOtherPlaceholder: "If 'No' or 'Other', please explain",
+    iAmAbleToLabelSpecific: 'Specific Abilities (check all that apply):',
+    driveMultipleBuildingsLabel:
+      "I have a valid driver's license and am willing to drive to multiple work locations if required.",
+    otherAbilityLabel:
+      'Please list any other specific abilities or physical limitations relevant to the job:',
+    otherAbilityPlaceholder:
+      'e.g., Allergic to certain chemicals, experience with specific equipment',
+    experienceWithLabel: 'I have professional experience with (check all that apply):',
+    houseCleaningLabel: 'Residential House Cleaning',
+    officeCleaningLabel: 'Commercial Office Cleaning',
+    windowCleaningLabel: 'Window Cleaning (Interior/Exterior)',
+    floorStripWaxLabel: 'Floor Stripping & Waxing',
+    carpetCleaningLabel: 'Carpet & Upholstery Cleaning',
+    supervisingLabel: 'Supervising Cleaning Teams',
+    managingLabel: 'Managing Cleaning Operations',
+    pagesNumbersLabel: 'Using Scheduling/Work Order Software',
+    otherExperienceLabel: 'Other relevant cleaning or supervisory experience (please specify)',
+    availableWorkLocationsLabel:
+      'I am available to work in the following locations (check all that apply):',
+    locations: [
+      'Agawam',
+      'Springfield',
+      'Chicopee',
+      'Holyoke',
+      'Northampton',
+      'Florence',
+      'South Hadley',
+      'Amherst',
+      'Westfield',
+      'Longmeadow',
+      'East Longmeadow',
+      'Wilbraham',
+    ],
+    AgawamLabel: 'Agawam',
+    SpringfieldLabel: 'Springfield',
+    ChicopeeLabel: 'Chicopee',
+    HolyokeLabel: 'Holyoke',
+    NorthamptonLabel: 'Northampton',
+    FlorenceLabel: 'Florence',
+    SouthHadleyLabel: 'South Hadley',
+    AmherstLabel: 'Amherst',
+    WestfieldLabel: 'Westfield',
+    LongmeadowLabel: 'Longmeadow',
+    EastLongmeadowLabel: 'East Longmeadow',
+    WilbrahamLabel: 'Wilbraham',
+    otherLocationLabel: 'Other preferred locations (please specify)',
+    ableToWorkGeneralLabel: 'I am primarily seeking:',
+    ableToWorkGeneralPlaceholder: 'Select work type',
+    generalAvailabilityOptions: [
+      { value: '', label: 'Select an option' },
+      { value: 'full_time', label: 'Full-Time employment' },
+      { value: 'part_time', label: 'Part-Time employment' },
+      { value: 'flexible', label: 'Flexible/Variable hours' },
+    ],
+    hoursPerWeekLabel: 'Desired number of hours per week:',
+    hoursPerWeekPlaceholder: 'e.g., 20-25, or 40',
+    daysAvailableLabel: 'Days I am available to work (check all that apply):',
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    SundayLabel: 'Sunday',
+    MondayLabel: 'Monday',
+    TuesdayLabel: 'Tuesday',
+    WednesdayLabel: 'Wednesday',
+    ThursdayLabel: 'Thursday',
+    FridayLabel: 'Friday',
+    SaturdayLabel: 'Saturday',
+    shiftsAvailableLabel: 'Shifts I am available for (check all that apply):',
+    shifts: ['Morning', 'Afternoon', 'Evening', 'LateNight', 'FlexibleAny'],
+    MorningLabel: 'Morning (e.g., 8 AM - 12 PM)',
+    AfternoonLabel: 'Afternoon (e.g., 12 PM - 5 PM)',
+    EveningLabel: 'Evening (e.g., 5 PM - 9 PM)',
+    LateNightLabel: 'Late Night (e.g., 9 PM onwards)',
+    FlexibleAnyLabel: 'Flexible/Any Shift',
+    otherShiftLabel:
+      "Specific shift preferences or restrictions (e.g., 'Not available after 10 PM on weekdays')",
+    educationLevelLabel: 'Highest Level of Education Completed:',
+    educationLevelPlaceholder: 'Select education level',
+    educationOptions: [
+      { value: '', label: 'Select an option' },
+      { value: 'some_high_school', label: 'Some High School' },
+      { value: 'high_school_ged', label: 'High School Diploma / GED' },
+      { value: 'some_college_tech', label: 'Some College / Technical School' },
+      { value: 'associates_degree', label: "Associate's Degree" },
+      { value: 'bachelors_degree', label: "Bachelor's Degree" },
+      { value: 'masters_higher', label: "Master's Degree or Higher" },
+    ],
+    howManyEmployersLabel: 'How many employers have you had in the past three years?',
+    howManyEmployersPlaceholder: 'e.g., 2',
+    prevCompanyLabel: 'Company Name',
+    prevStreetAddressLabel: 'Company Street Address',
+    prevCityLabel: 'City',
+    prevZipCodeLabel: 'ZIP/Postal Code',
+    prevFromLabel: 'Employed From (MM/YYYY)',
+    prevToLabel: 'Employed To (MM/YYYY)',
+    prevPositionLabel: 'Your Position/Title',
+    prevSupervisorLabel: "Supervisor's Name & Title",
+    prevReasonForLeavingLabel: 'Reason for Leaving',
+    prevMayWeContactLabel: 'May we contact this employer for a reference?',
+    prevMayWeContactPlaceholder: 'Select Yes/No',
+    addWorkHistoryButton: 'Add Employer',
+    removeWorkHistoryButton: 'Remove Last Employer',
+    referenceNameLabel: 'Full Name',
+    referenceRelationshipLabel: 'Relationship (e.g., Former Supervisor, Colleague)',
+    referencePhoneLabel: 'Phone Number',
+    addReferenceButton: 'Add Reference',
+    removeReferenceButton: 'Remove Last Reference',
+    branchLabel: 'Branch of Service',
+    rankAtDischargeLabel: 'Rank at Discharge',
+    militaryFromLabel: 'Service From (MM/YYYY)',
+    militaryToLabel: 'Service To (MM/YYYY)',
+    typeOfDischargeLabel: 'Type of Discharge',
+    gettingToKnowYouIntro:
+      'Your responses to these questions help us understand you better. Please answer thoughtfully. Incomplete answers may affect consideration.',
+    knowAnyoneLabel:
+      'Do you know anyone currently or previously employed by Anderson Cleaning? If so, who?',
+    hardestJobLabel:
+      "Describe the hardest job (paid or unpaid) you've ever had and what made it challenging.",
+    magicSpellLabel:
+      'If you could use a magic spell to instantly improve one thing about your previous workplace or role, what would it be and why?',
+    shorterWorkdayLabel:
+      'What kind of tasks or work environment makes a long workday feel shorter and more engaging for you?',
+    winSomeoneOverLabel:
+      'Tell us about a time you had to win someone over to your point of view or get their cooperation. How did you approach it?',
+    addOneThingRestroomLabel:
+      'If you could add one innovative feature or service to every public restroom you clean to enhance user experience, what would it be?',
+    helpedCoworkerLabel:
+      'Describe a specific instance where you helped a coworker who was struggling with a task or a difficult situation.',
+    ruleDisagreeLabel:
+      "Think about a rule or policy at a previous job that you didn't fully agree with. How did you handle it?",
+    lastBossDescriptionLabel:
+      'If we asked your most recent direct supervisor to describe you in three words, what do you think they would say?',
+    fitInWellLabel:
+      'Based on what you know about Anderson Cleaning (or the cleaning industry), why do you think you would fit in well with our team?',
+    getOutOfBedLabel:
+      'What motivates you to get out of bed and go to work each day, especially when facing a challenging day?',
+    busyOrDowntimeLabel:
+      'Do you prefer a job that keeps you consistently busy, or one that has periods of downtime? How do you utilize downtime effectively?',
+    weekendsHolidaysLabel:
+      'Are you available and willing to work on weekends or holidays if the schedule requires it?',
+    oneHourConversationLabel:
+      'If you could have a one-hour conversation with any person in history (living or deceased) to learn from them, who would it be and what would you want to discuss?',
+    wishWeAskedLabel:
+      "Is there anything else you'd like us to know about you, or a question you wish we had asked in this application?",
+    drugTestingStatement:
+      "DRUG & ALCOHOL TESTING POLICY: Anderson Cleaning, Inc. is committed to maintaining a safe, healthy, and productive work environment. We reserve the right to conduct tests for alcohol, drugs, or controlled substances under lawful circumstances, including: pre-employment screening, random testing (for safety-sensitive positions, if applicable), post-incident/accident investigation, and when there is reasonable suspicion of impairment. All testing will be administered in compliance with applicable federal, state, and local laws, and Anderson Cleaning, Inc.'s written procedures (available upon request). Anderson Cleaning, Inc. will cover the costs of these tests. Refusal to submit to testing or a positive test result may result in withdrawal of a job offer or disciplinary action, up to and including termination.",
+    applicantStatement:
+      'APPLICANT\'S CERTIFICATION & AGREEMENT: I certify that all answers and statements I have provided in this application and in any accompanying documents are true, complete, and correct to the best of my knowledge and belief. I understand that any misrepresentation, falsification, or material omission of information may be grounds for refusal to hire, or for immediate dismissal if I am employed, regardless of the time elapsed before discovery. I hereby authorize Anderson Cleaning, Inc. to investigate all statements contained in this application and to contact my previous employers, references, and educational institutions to verify the information provided. I release all parties from any liability for any damage that may result from furnishing such information. I understand that this application is not, and is not intended to be, a contract of employment. If hired, I understand that my employment will be "At Will," meaning that either I or Anderson Cleaning, Inc. may terminate the employment relationship at any time, for any reason or no reason, with or without cause, and with or without notice, unless otherwise prohibited by law or a legally binding written agreement. This "At Will" relationship cannot be altered except by a written agreement signed by an authorized representative of Anderson Cleaning, Inc.',
+    partTimeStatement:
+      'PART-TIME EMPLOYMENT COMMITMENT (if applicable): I understand that if I am applying for or accept a part-time position, it demands a reliable and committed employee who will consistently adhere to the agreed-upon work schedule. I am committed to being punctual and dependable. I recognize that excessive absences, tardiness, or failure to meet these scheduling obligations could result in disciplinary action, up to and including the termination of my employment.',
+    acknowledgeLabel: 'I have read, understand, and agree to this statement.',
+    driversLicenseLabel: "Driver's License Upload (Required)",
+    driversLicenseHelper:
+      "Upload a clear, color image or PDF of the front of your valid driver's license. Ensure all information is legible. Required for identity verification and positions involving driving. Max file size: 5MB. Accepted: JPG, PNG, PDF.",
+    resumeLabel: 'Upload Resume (Optional, but Recommended)',
+    resumeHelper: 'Accepted formats: PDF, DOC, DOCX. Max file size: 5MB.',
+    coverLetterLabel: 'Cover Letter (Optional)',
+    coverLetterPlaceholder:
+      "Tell us more about why you're a great fit for Anderson Cleaning and this role...",
+    submitButton: 'Submit Application',
+    submittingButton: 'Submitting, please wait...',
+    submissionSuccessTitle: 'Application Submitted!',
+    submissionSuccessMessage:
+      'Thank you for applying! We have received your application and will be in touch if your qualifications meet our needs.',
+    submissionErrorTitle: 'Submission Error',
+    submissionErrorMessage:
+      'An error occurred while submitting your application. Please check your internet connection and try again. If the problem persists, please contact us.',
+    validationErrorMissingFile: "A required file is missing. Please upload your Driver's License.",
+    validationErrorGeneric: 'Please correct the errors in the form.',
+    lightModeButton: 'Light Mode',
+    darkModeButton: 'Dark Mode',
+    requiredFieldIndicator: '*',
+    requiredErrorText: 'This field is required.',
+    uploadFileButton: 'Choose File',
+    noFileChosenText: 'No file chosen',
+    fileTypeError: 'Invalid file type. Accepted: {types}',
+    fileSizeError: 'File too large. Max size: {size}MB',
+    removeFileButton: 'Remove',
+    experienceOptions: [
+      'houseCleaning',
+      'officeCleaning',
+      'windowCleaning',
+      'floorStripWax',
+      'carpetCleaning',
+      'supervising',
+      'managing',
+      'pagesNumbers',
+    ],
+    experienceWith_houseCleaningLabel: 'Residential House Cleaning',
+    experienceWith_officeCleaningLabel: 'Commercial Office Cleaning',
+    experienceWith_windowCleaningLabel: 'Window Cleaning (Interior/Exterior)',
+    experienceWith_floorStripWaxLabel: 'Floor Stripping & Waxing',
+    experienceWith_carpetCleaningLabel: 'Carpet & Upholstery Cleaning',
+    experienceWith_supervisingLabel: 'Supervising Cleaning Teams',
+    experienceWith_managingLabel: 'Managing Cleaning Operations',
+    experienceWith_pagesNumbersLabel: 'Using Scheduling/Work Order Software',
+    otherText: 'Other',
+    otherSpecifyPlaceholder: 'Please specify',
+    changeFileButton: 'Change File', // Added for FileUpload component
+    employer: 'Employer', // Added for WorkHistorySection
+    reference: 'Reference', // Added for ReferencesSection
+    removeEmployer: 'Remove Employer', // Added for WorkHistorySection
+    removeReference: 'Remove Reference', // Added for ReferencesSection
+    emailInvalidError: 'Invalid email format.', // Added for validation
+    phoneInvalidError: 'Invalid phone number format.', // Added for validation
+    dateInvalidError: 'Invalid date (MM/YYYY).', // Added for validation
+    dateToBeforeFromError: 'End date cannot be before start date.', // Added for validation
+  },
+  es: {
+    // Spanish translations ...
+    nextButton: 'Siguiente Sección',
+    prevButton: 'Sección Anterior',
+    reviewAppButton: 'Revisar Solicitud',
+    submitFinalAppButton: 'Enviar Solicitud Final',
+    editSectionButton: 'Editar',
+    reviewSectionTitle: 'Revise Su Solicitud',
+    reviewIntro:
+      "Por favor, revise cuidadosamente toda la información que ha proporcionado a continuación. Si necesita realizar algún cambio, haga clic en el botón 'Editar' junto a la sección correspondiente.",
+    allSectionsComplete: '¡Todas las secciones parecen completas! Por favor, revise y envíe.',
+    incompleteSectionError:
+      'Por favor, complete todos los campos requeridos (*) en la sección actual antes de continuar.',
+    generateCoverLetterSparkButton: '✨ Generar Idea para Carta',
+    generatingCoverLetterSpark: 'Generando sugerencia...',
+    coverLetterSparkSuggestion: 'Sugerencia Generada por IA:',
+    useSparkSuggestionButton: 'Usar esta Sugerencia',
+    coverLetterSparkError:
+      'No se pudo generar una sugerencia en este momento. Por favor, inténtelo más tarde o escriba la suya.',
+    coverLetterPromptDetailsMissing:
+      "Por favor, complete 'Puesto al que Aplica' y selecione al menos una 'Experiencia' para generar una sugerencia de carta de presentación.",
+    interviewPrepSectionTitle: '✨ Preparación para Entrevista con IA',
+    generateInterviewPrepButton: 'Obtener Consejos de Entrevista',
+    generatingInterviewPrep: 'Generando consejos...',
+    interviewPrepTips: 'Consejos de Entrevista Generados por IA:',
+    interviewPrepError:
+      'No se pudieron generar consejos de entrevista en este momento. Por favor, inténtelo más tarde.',
+    interviewPrepPromptDetailsMissing:
+      "Por favor, complete 'Puesto al que Aplica' y al menos una respuesta en 'Conociéndole Mejor' para generar consejos de entrevista.",
+    interviewQuestionLabel: 'Pregunta Potencial:',
+    interviewTipLabel: 'Consejo:',
+    strengthsSectionTitle: '✨ Mis Fortalezas con IA',
+    generateStrengthsButton: 'Descubrir Mis Fortalezas Clave',
+    generatingStrengths: 'Identificando fortalezas...',
+    strengthsSummary: 'Fortalezas Identificadas por IA:',
+    strengthsError:
+      'No se pudieron identificar las fortalezas en este momento. Asegúrese de que las secciones relevantes estén completas.',
+    strengthsPromptDetailsMissing:
+      "Por favor, complete 'Puesto al que Aplica', seleccione experiencias y responda algunas preguntas de 'Conociéndole Mejor' para identificar fortalezas.",
+    heroTitle: 'Únase a Nuestro Equipo en Anderson Cleaning',
+    heroSubtitle:
+      'Descubra emocionantes oportunidades de carrera y crezca con una empresa que valora la dedicación y la excelencia.',
+    whyWorkTitle: '¿Por Qué Elegir Anderson Cleaning?',
+    whyWorkItems: [
+      {
+        title: 'Oportunidades de Crecimiento',
+        description: 'Invertimos en su desarrollo profesional y ofrecemos caminos para avanzar.',
+        benefits: [
+          'Caminos claros de avance profesional',
+          'Programas de desarrollo de liderazgo',
+          'Promociones y aumentos basados en el rendimiento',
+        ] as string[],
+      },
+      {
+        title: 'Cultura de Apoyo',
+        description: 'Forme parte de un ambiente de equipo colaborativo, respetuoso e inclusivo.',
+        benefits: [
+          'Ambiente de equipo respetuoso, como una familia',
+          'Eventos regulares de construcción de equipo y reconocimiento',
+          'Comunicación abierta con la gerencia',
+        ] as string[],
+      },
+      {
+        title: 'Trabajo Impactante',
+        description:
+          'Marque una diferencia tangível para nuestros clientes proporcionando servicios de limpieza de alta calidad.',
+        benefits: [
+          'Vea resultados inmediatos de su trabajo',
+          'Reciba apreciación directa de clientes satisfechos',
+          'Contribuya a entornos más saludables y seguros',
+        ] as string[],
+      },
+      {
+        title: 'Beneficios Competitivos',
+        description: 'Oferecemos paquetes integrales para apoyar su bienestar y el de su familia.',
+        benefits: [
+          'Opciones de seguro de salud para usted y su familia',
+          'Tiempo libre pagado y días festivos',
+          'Bonos por referencias de empleados',
+        ] as string[],
+      },
+    ],
+
+    // What We Offer Section
+    whatWeOfferTitle: 'Lo Que Ofrecemos',
+    whatWeOfferSubtitle: 'Beneficios integrales y apoyo para los miembros de nuestro equipo',
+    compensationTitle: 'Compensación y Pago',
+    compensationItems: [
+      'Salarios por hora competitivos',
+      'Posiciones de empleo W-2 a tiempo completo',
+      'Horario de pago semanal',
+      'Oportunidades de aumentos salariales basados en el rendimiento',
+    ],
+    benefitsPackageTitle: 'Paquete de Beneficios',
+    benefitsPackageItems: [
+      'Opciones de seguro de salud',
+      'Tiempo libre pagado (PTO)',
+      'Días festivos pagados',
+      'Bonos por referencias de empleados',
+    ],
+    trainingTitle: 'Capacitación y Desarrollo',
+    trainingItems: [
+      'Más de 40 horas de capacitación integral pagada',
+      'Programas continuos de desarrollo de habilidades',
+      'Caminos claros de avance profesional',
+      'Oportunidades de desarrollo de liderazgo',
+    ],
+    workLifeBalanceTitle: 'Equilibrio Trabajo-Vida',
+    workLifeBalanceItems: [
+      'Opciones de horario flexible',
+      'No se requieren semanas laborales obligatorias de 7 días',
+      'Horarios de turnos predecibles',
+      'Oportunidades de trabajar cerca de casa',
+    ],
+
+    // Employee Stories Section
+    employeeStoriesTitle: 'Escuche a Nuestro Equipo',
+    employeeStoriesSubtitle: 'Historias reales de los miembros del equipo de Anderson Cleaning',
+    employeeTestimonials: [
+      {
+        name: 'Maria Rodriguez',
+        position: 'Líder de Equipo',
+        quote:
+          'Anderson Cleaning invirtió en mi crecimiento desde el primer día. Comencé como limpiadora y ahora dirijo mi propio equipo. La capacitación y el apoyo aquí son incomparables.',
+      },
+      {
+        name: 'James Thompson',
+        position: 'Especialista en Limpieza',
+        quote:
+          'El equilibrio trabajo-vida aquí es real. Tengo un horario consistente, excelentes beneficios y realmente disfruto venir a trabajar todos los días.',
+      },
+      {
+        name: 'Sofia Chen',
+        position: 'Técnica de Cuidado de Pisos',
+        quote:
+          'Lo que más aprecio es el respeto y la profesionalidad. La gerencia escucha nuestros comentarios y somos tratados como miembros valiosos del equipo, no solo empleados.',
+      },
+    ],
+
+    // Company Culture Section
+    companyCultureTitle: 'Nuestra Cultura Empresarial',
+    companyCultureSubtitle: 'Los valores que guían cómo trabajamos y crecemos juntos',
+    investInPeopleTitle: 'Invertimos en las Personas',
+    investInPeopleDescription:
+      'Su éxito es nuestro éxito. Proporcionamos capacitación extensa, mentoría y caminos claros para el avance profesional.',
+    systemsStandardsTitle: 'Sistemas y Estándares',
+    systemsStandardsDescription:
+      'Tenemos procesos probados que lo preparan para el éxito. Nunca se quedará adivinando sobre las expectativas o los procedimientos.',
+    personalTouchTitle: 'Toque Personal',
+    personalTouchDescription:
+      'No es solo un número. Construimos relaciones genuinas con los miembros de nuestro equipo y celebramos las contribuciones individuales.',
+
+    // Application Process Section
+    applicationProcessTitle: 'Cómo Unirse a Nuestro Equipo',
+    applicationProcessSubtitle: 'Un proceso de solicitud simple y directo',
+    processStep1Title: 'Enviar Solicitud',
+    processStep1Description:
+      'Complete nuestro formulario de solicitud en línea. Toma alrededor de 10-15 minutos.',
+    processStep2Title: 'Entrevista',
+    processStep2Description:
+      'Reúnase con nuestro equipo de contratación para discutir el puesto y responder cualquier pregunta.',
+    processStep3Title: 'Capacitación',
+    processStep3Description: 'Más de 40 horas de capacitación pagada para prepararlo para el éxito.',
+    processStep4Title: 'Comenzar a Trabajar',
+    processStep4Description:
+      'Comience su carrera con Anderson Cleaning y únase a un equipo de apoyo.',
+    processTimeframe: 'La mayoría de los candidatos completan el proceso en 2-3 semanas',
+    startApplicationButton: 'Iniciar Su Solicitud',
+
+    // Career FAQs Section
+    careerFAQTitle: 'Preguntas Frecuentes',
+    careerFAQSubtitle: 'Todo lo que necesita saber sobre unirse a nuestro equipo',
+    careerFAQs: [
+      {
+        question: '¿Cuáles son los requisitos de contratación?',
+        answer:
+          'Requerimos una licencia de conducir válida, transporte confiable y la capacidad de realizar trabajo físico. La experiencia previa en limpieza es útil pero no requerida: proporcionamos capacitación integral.',
+      },
+      {
+        question: '¿Cuál es el horario de trabajo típico?',
+        answer:
+          'La mayoría de los puestos son de lunes a viernes con turnos típicamente entre 6 AM - 6 PM. Ofrecemos opciones de horarios flexibles y trabajamos con usted para encontrar un horario que se ajuste a su vida.',
+      },
+      {
+        question: '¿Cuánto paga el puesto?',
+        answer:
+          'Ofrecemos salarios competitivos basados en la experiencia y el puesto. El pago inicial varía de $15-$18/hora con oportunidades de aumentos basados en el rendimiento y certificaciones adicionales.',
+      },
+      {
+        question: '¿Qué implica el proceso de capacitación?',
+        answer:
+          'Todos los nuevos miembros del equipo completan más de 40 horas de capacitación pagada que cubre técnicas de limpieza, protocolos de seguridad, operación de equipos y servicio al cliente. La capacitación es práctica y dirigida por líderes de equipo experimentados.',
+      },
+      {
+        question: '¿Hay oportunidades de crecimiento profesional?',
+        answer:
+          '¡Absolutamente! Muchos de nuestros supervisores y líderes de equipo comenzaron en puestos de nivel inicial. Priorizamos la promoción desde dentro y proporcionamos caminos claros para el avance.',
+      },
+      {
+        question: '¿Qué beneficios ofrecen?',
+        answer:
+          'Los empleados a tiempo completo reciben opciones de seguro de salud, tiempo libre pagado, días festivos pagados y acceso a bonos por referencias de empleados. También ofrecemos bonos basados en el rendimiento y programas de reconocimiento.',
+      },
+      {
+        question: '¿Necesito mis propios suministros o equipo de limpieza?',
+        answer:
+          'No, proporcionamos todos los suministros de limpieza, equipos y equipo de protección. Solo necesita presentarse listo para trabajar.',
+      },
+      {
+        question: '¿Qué tan pronto puedo comenzar después de solicitar?',
+        answer:
+          'El plazo típico desde la solicitud hasta la fecha de inicio es de 2-3 semanas, dependiendo del procesamiento de la verificación de antecedentes y la disponibilidad del horario de capacitación.',
+      },
+    ],
+    stillHaveQuestions:
+      '¿Todavía tiene preguntas? Inicie su solicitud y las responderemos durante el proceso de entrevista.',
+    applyNowButton: 'Solicitar Ahora',
+    applicationTitle: 'Solicitud de Empleo',
+    applicationSubtitle:
+      'Por favor, complete todas las secciones con precisión. ¡Estamos deseando saber más de usted!',
+    selectLanguage: 'Idioma:',
+    sectionProgressIndicator: 'Paso {current} de {total}: {title}',
+    personalInfoSectionTitle: 'Información Personal',
+    jobDescSectionTitle: 'Detalles del Trabajo y Requisitos Físicos',
+    availabilitySectionTitle: 'Su Disponibilidad',
+    educationSectionTitle: 'Historial Educativo',
+    workHistorySectionTitle: 'Historial Laboral',
+    referencesSectionTitle: 'Referencias Profesionales',
+    militaryServiceSectionTitle: 'Servicio Militar (Opcional)',
+    gettingToKnowYouSectionTitle: 'Conociéndole Mejor',
+    statementsSectionTitle: 'Declaraciones Importantes y Consentimiento',
+    uploadsSectionTitle: 'Carga de Documentos',
+    firstNameLabel: 'Nombre',
+    firstNamePlaceholder: 'Ej: Ana',
+    lastNameLabel: 'Apellido',
+    lastNamePlaceholder: 'Ej: García',
+    streetAddressLabel: 'Dirección (Calle y Número)',
+    streetAddressPlaceholder: 'Ej: Calle Falsa 123',
+    addressLine2Label: 'Línea de Dirección 2',
+    addressLine2Placeholder: 'Apartamento, Suite, Unidad, Edificio, Piso, etc.',
+    cityLabel: 'Ciudad',
+    cityPlaceholder: 'Ej: Madrid',
+    stateProvinceLabel: 'Estado/Provincia',
+    stateProvincePlaceholder: 'Ej: Comunidad de Madrid',
+    zipCodeLabel: 'Código Postal',
+    zipCodePlaceholder: 'Ej: 28001',
+    emailLabel: 'Correo Electrónico',
+    emailPlaceholder: 'usted@ejemplo.com',
+    phoneLabel: 'Número de Teléfono',
+    phonePlaceholder: '(+34) 600 123 456',
+    applyingForLabel: 'Puesto al que Aplica',
+    applyingForPlaceholder: 'Seleccione un puesto',
+    positionOptions: [
+      { value: '', label: 'Seleccione un puesto' },
+      { value: 'cleaner', label: 'Limpiador/a' },
+      { value: 'supervisor', label: 'Supervisor/a' },
+      { value: 'manager', label: 'Gerente' },
+      { value: 'office_staff', label: 'Personal de Oficina' },
+    ],
+    howDidYouHearLabel: '¿Cómo se enteró de esta vacante?',
+    howDidYouHearPlaceholder: 'Ej: LinkedIn, Amigo, Sitio Web de la Empresa',
+    liftCarryLabel: 'Puedo levantar, cargar, empujar o tirar cómodamente:',
+    liftCarryPlaceholder: 'Seleccione capacidad de peso',
+    liftOptions: [
+      { value: '', label: 'Seleccione una opción' },
+      { value: 'up_to_25', label: 'Hasta 11 kg (25 lbs)' },
+      { value: '25_50', label: '11-23 kg (25-50 lbs)' },
+      { value: '50_plus', label: 'Más de 23 kg (50+ lbs)' },
+    ],
+    iAmAbleToLabelGeneral:
+      'Respecto a tareas físicas generales (agacharse, estar de pie, caminar):',
+    iAmAbleToPlaceholderGeneral: 'Seleccione su capacidad',
+    physicalAbilityOptions: [
+      { value: '', label: 'Seleccione una opción' },
+      { value: 'no_restrictions', label: 'Puedo realizar estas tareas sin restricciones.' },
+      {
+        value: 'some_restrictions',
+        label: 'Puedo realizar estas tareas con algunas restricciones (explique a continuación).',
+      },
+    ],
+    physicalAbilityExplanationLabel: 'Si tiene restricciones, explique:',
+    physicalAbilityExplanationPlaceholder: 'Explique cualquier restricción aquí',
+    performDutiesLabel:
+      '¿Puede realizar las tareas esenciales del puesto al que aplica, con o sin adaptaciones razonables?',
+    yesLabel: 'Sí',
+    noLabel: 'No',
+    otherLabel: 'Otro (Especifique)',
+    performDutiesOtherPlaceholder: "Si es 'No' u 'Otro', por favor explique",
+    iAmAbleToLabelSpecific: 'Habilidades Específicas (marque todas las que apliquen):',
+    driveMultipleBuildingsLabel:
+      'Tengo una licencia de conducir válida y estoy dispuesto/a a conducir a múltiples lugares de trabajo si es necesario.',
+    otherAbilityLabel:
+      'Liste cualquier otra habilidad específica o limitación física relevante para el trabajo:',
+    otherAbilityPlaceholder: 'Ej: Alergia a ciertos químicos, experiencia con equipos específicos',
+    experienceWithLabel: 'Tengo experiencia profesional con (marque todas las que apliquen):',
+    houseCleaningLabel: 'Limpieza Residencial',
+    officeCleaningLabel: 'Limpieza de Oficinas Comerciales',
+    windowCleaningLabel: 'Limpieza de Ventanas (Interior/Exterior)',
+    floorStripWaxLabel: 'Decapado y Encerado de Suelos',
+    carpetCleaningLabel: 'Limpieza de Alfombras y Tapicerías',
+    supervisingLabel: 'Supervisión de Equipos de Limpieza',
+    managingLabel: 'Gestión de Operaciones de Limpieza',
+    pagesNumbersLabel: 'Uso de Software de Programación/Órdenes de Trabajo',
+    otherExperienceLabel: 'Otra experiencia relevante en limpieza o supervisión (especifique)',
+    availableWorkLocationsLabel:
+      'Estoy disponible para trabajar en las siguientes ubicaciones (marque todas las que apliquen):',
+    locations: [
+      'Agawam',
+      'Springfield',
+      'Chicopee',
+      'Holyoke',
+      'Northampton',
+      'Florence',
+      'South Hadley',
+      'Amherst',
+      'Westfield',
+      'Longmeadow',
+      'East Longmeadow',
+      'Wilbraham',
+    ],
+    AgawamLabel: 'Agawam',
+    SpringfieldLabel: 'Springfield',
+    ChicopeeLabel: 'Chicopee',
+    HolyokeLabel: 'Holyoke',
+    NorthamptonLabel: 'Northampton',
+    FlorenceLabel: 'Florence',
+    SouthHadleyLabel: 'South Hadley',
+    AmherstLabel: 'Amherst',
+    WestfieldLabel: 'Westfield',
+    LongmeadowLabel: 'Longmeadow',
+    EastLongmeadowLabel: 'East Longmeadow',
+    WilbrahamLabel: 'Wilbraham',
+    otherLocationLabel: 'Otras ubicaciones preferidas (especifique)',
+    ableToWorkGeneralLabel: 'Busco principalmente:',
+    ableToWorkGeneralPlaceholder: 'Seleccione tipo de trabajo',
+    generalAvailabilityOptions: [
+      { value: '', label: 'Seleccione una opción' },
+      { value: 'full_time', label: 'Empleo a tiempo completo' },
+      { value: 'part_time', label: 'Empleo a tiempo parcial' },
+      { value: 'flexible', label: 'Horario flexible/variable' },
+    ],
+    hoursPerWeekLabel: 'Número deseado de horas por semana:',
+    hoursPerWeekPlaceholder: 'Ej: 20-25, o 40',
+    daysAvailableLabel: 'Días disponibles para trabajar (marque todos los que apliquen):',
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    SundayLabel: 'Domingo',
+    MondayLabel: 'Lunes',
+    TuesdayLabel: 'Martes',
+    WednesdayLabel: 'Miércoles',
+    ThursdayLabel: 'Jueves',
+    FridayLabel: 'Viernes',
+    SaturdayLabel: 'Sábado',
+    shiftsAvailableLabel: 'Turnos disponibles para trabajar (marque todos los que apliquen):',
+    shifts: ['Morning', 'Afternoon', 'Evening', 'LateNight', 'FlexibleAny'],
+    MorningLabel: 'Mañana (ej: 8 AM - 12 PM)',
+    AfternoonLabel: 'Tarde (ej: 12 PM - 5 PM)',
+    EveningLabel: 'Noche (ej: 5 PM - 9 PM)',
+    LateNightLabel: 'Nocturno (ej: 9 PM en adelante)',
+    FlexibleAnyLabel: 'Flexible/Cualquier Turno',
+    otherShiftLabel:
+      "Preferencias o restricciones de turno específicas (ej: 'No disponible después de las 10 PM entre semana')",
+    educationLevelLabel: 'Nivel más alto de educación completado:',
+    educationLevelPlaceholder: 'Seleccione nivel educativo',
+    educationOptions: [
+      { value: '', label: 'Seleccione una opción' },
+      { value: 'some_high_school', label: 'Educación Secundaria Incompleta' },
+      { value: 'high_school_ged', label: 'Diploma de Educación Secundaria / GED' },
+      {
+        value: 'some_college_tech',
+        label: 'Estudios Universitarios Incompletos / Escuela Técnica',
+      },
+      { value: 'associates_degree', label: 'Grado Asociado / Ciclo Formativo de Grado Superior' },
+      { value: 'bachelors_degree', label: 'Licenciatura / Grado Universitario' },
+      { value: 'masters_higher', label: 'Máster o Superior' },
+    ],
+    howManyEmployersLabel: '¿Cuántos empleadores ha tenido en los últimos tres años?',
+    howManyEmployersPlaceholder: 'Ej: 2',
+    prevCompanyLabel: 'Nombre de la Empresa',
+    prevStreetAddressLabel: 'Dirección de la Empresa',
+    prevCityLabel: 'Ciudad',
+    prevZipCodeLabel: 'Código Postal',
+    prevFromLabel: 'Empleado Desde (MM/AAAA)',
+    prevToLabel: 'Empleado Hasta (MM/AAAA)',
+    prevPositionLabel: 'Su Puesto/Cargo',
+    prevSupervisorLabel: 'Nombre y Cargo del Supervisor',
+    prevReasonForLeavingLabel: 'Motivo de Salida',
+    prevMayWeContactLabel: '¿Podemos contactar a este empleador para una referencia?',
+    prevMayWeContactPlaceholder: 'Seleccione Sí/No',
+    addWorkHistoryButton: 'Añadir Empleador',
+    removeWorkHistoryButton: 'Eliminar Último Empleador',
+    referenceNameLabel: 'Nombre Completo',
+    referenceRelationshipLabel: 'Relación (Ej: Ex Supervisor, Colega)',
+    referencePhoneLabel: 'Número de Teléfono',
+    addReferenceButton: 'Añadir Referencia',
+    removeReferenceButton: 'Eliminar Última Referencia',
+    branchLabel: 'Rama del Servicio',
+    rankAtDischargeLabel: 'Rango al Darse de Baja',
+    militaryFromLabel: 'Servicio Desde (MM/AAAA)',
+    militaryToLabel: 'Servicio Hasta (MM/AAAA)',
+    typeOfDischargeLabel: 'Tipo de Baja',
+    gettingToKnowYouIntro:
+      'Sus respuestas a estas preguntas nos ayudan a entenderle mejor. Por favor, responda reflexivamente. Las respuestas incompletas pueden afectar la consideración.',
+    knowAnyoneLabel:
+      '¿Conoce a alguien empleado actual o anteriormente por Anderson Cleaning? Si es así, ¿quién?',
+    hardestJobLabel:
+      'Describa el trabajo más duro (remunerado o no) que haya tenido y qué lo hizo desafiante.',
+    magicSpellLabel:
+      'Si pudiera usar un hechizo mágico para mejorar instantáneamente una cosa de su anterior lugar de trabajo o puesto, ¿qué sería y por qué?',
+    shorterWorkdayLabel:
+      '¿Qué tipo de tareas o ambiente de trabajo hace que un largo día laboral se sienta más corto y atractivo para usted?',
+    winSomeoneOverLabel:
+      'Cuéntenos sobre una vez que tuvo que convencer a alguien de su punto de vista u obtener su cooperación. ¿Cómo lo abordó?',
+    addOneThingRestroomLabel:
+      'Si pudiera agregar una característica o servicio innovador a cada baño público que limpia para mejorar la experiencia del usuario, ¿cuál sería?',
+    helpedCoworkerLabel:
+      'Describa una instancia específica en la que ayudó a un compañero de trabajo que estaba luchando con una tarea o una situación difícil.',
+    ruleDisagreeLabel:
+      'Piense en una regla o política en un trabajo anterior con la que no estaba completamente de acuerdo. ¿Cómo lo manejó?',
+    lastBossDescriptionLabel:
+      'Si le pidiéramos a su supervisor directo más reciente que le describiera en tres palabras, ¿qué cree que diría?',
+    fitInWellLabel:
+      'Basado en lo que sabe sobre Anderson Cleaning (o la industria de la limpieza), ¿por qué cree que encajaría bien en nuestro equipo?',
+    getOutOfBedLabel:
+      '¿Qué le motiva a levantarse de la cama e ir a trabajar cada día, especialmente cuando enfrenta un día desafiante?',
+    busyOrDowntimeLabel:
+      '¿Prefiere un trabajo que le mantenga constantemente ocupado, o uno que tenga períodos de inactividad? ¿Cómo utiliza eficazmente el tiempo de inactividad?',
+    weekendsHolidaysLabel:
+      '¿Está disponible y dispuesto/a a trabajar los fines de semana o días festivos si el horario lo requiere?',
+    oneHourConversationLabel:
+      'Si pudiera tener una conversación de una hora con cualquier persona de la historia (viva o fallecida) para aprender de ella, ¿quién sería y qué le gustaría discutir?',
+    wishWeAskedLabel:
+      '¿Hay algo más que le gustaría que supiéramos sobre usted, o alguna pregunta que desearía que le hubiéramos hecho en esta solicitud?',
+    drugTestingStatement:
+      'POLÍTICA DE PRUEBAS DE DROGAS Y ALCOHOL: Anderson Cleaning, Inc. se compromete a mantener un ambiente de trabajo seguro, saludable y productivo. Nos reservamos el derecho de realizar pruebas de alcohol, drogas o sustancias controladas en circunstancias legales, incluyendo: evaluación previa al empleo, pruebas aleatorias (para puestos sensibles a la seguridad, si aplica), investigación posterior a incidentes/accidentes, y cuando exista sospecha razonable de deterioro. Todas las pruebas se administrarán de conformidad con las leyes federales, estatales y locales aplicables, y los procedimientos escritos de Anderson Cleaning, Inc. (disponibles bajo solicitud). Anderson Cleaning, Inc. cubrirá los costos de estas pruebas. La negativa a someterse a las pruebas o un resultado positivo pueden resultar en el retiro de una oferta de trabajo o en medidas disciplinarias, incluyendo la terminación.',
+    applicantStatement:
+      'CERTIFICACIÓN Y ACUERDO DEL SOLICITANTE: Certifico que todas las respuestas y declaraciones que he proporcionado en esta solicitud y en cualquier documento adjunto son verdaderas, completas y correctas a mi leal saber y entender. Entiendo que cualquier tergiversación, falsificación u omisión material de información puede ser motivo para rechazar la contratación, o para el despido inmediato si soy empleado, independientemente del tiempo transcurrido antes de su descubrimiento. Por la presente, autorizo a Anderson Cleaning, Inc. a investigar todas las declaraciones contenidas en esta solicitud y a contactar a mis empleadores anteriores, referencias e instituciones educativas para verificar la información proporcionada. Libero a todas las partes de cualquier responsabilidad por cualquier daño que pueda resultar del suministro de dicha información. Entiendo que esta solicitud no es, ni pretende ser, un contrato de empleo. Si soy contratado, entiendo que mi empleo será "A Voluntad", lo que significa que tanto yo como Anderson Cleaning, Inc. podemos terminar la relación laboral en cualquier momento, por cualquier motivo o sin motivo, con o sin causa, y con o sin previo aviso, a menos que la ley o un acuerdo escrito legalmente vinculante lo prohíban. Esta relación "A Voluntad" no puede ser alterada excepto por un acuerdo escrito firmado por un representante autorizado de Anderson Cleaning, Inc.',
+    partTimeStatement:
+      'COMPROMISO DE EMPLEO A TIEMPO PARCIAL (si aplica): Entiendo que si estoy solicitando o acepto un puesto a tiempo parcial, este exige un empleado confiable y comprometido que cumplirá consistentemente con el horario de trabajo acordado. Me comprometo a ser puntual y responsable. Reconozco que las ausencias excesivas, tardanzas o el incumplimiento de estas obligaciones horarias podrían resultar en medidas disciplinarias, incluyendo la terminación de mi empleo.',
+    acknowledgeLabel: 'He leído, entiendo y acepto esta declaración.',
+    driversLicenseLabel: 'Cargar Licencia de Conducir (Requerido)',
+    driversLicenseHelper:
+      'Suba una imagen o PDF clara y a color del anverso de su licencia de conducir válida. Asegúrese de que toda la información sea legible. Requerido para verificación de identidad y puestos que implican conducir. Tamaño máximo: 5MB. Aceptados: JPG, PNG, PDF.',
+    resumeLabel: 'Cargar Currículum (Opcional, pero Recomendado)',
+    resumeHelper: 'Formatos aceptados: PDF, DOC, DOCX. Tamaño máximo: 5MB.',
+    coverLetterLabel: 'Carta de Presentación (Opcional)',
+    coverLetterPlaceholder:
+      'Cuéntenos más sobre por qué es un gran candidato para Anderson Cleaning y este puesto...',
+    submitButton: 'Enviar Solicitud',
+    submittingButton: 'Enviando, por favor espere...',
+    submissionSuccessTitle: '¡Solicitud Enviada!',
+    submissionSuccessMessage:
+      '¡Gracias por aplicar! Hemos recibido su solicitud y nos pondremos en contacto si sus cualificaciones satisfacen nuestras necesidades.',
+    submissionErrorTitle: 'Error de Envío',
+    submissionErrorMessage:
+      'Ocurrió un error al enviar su solicitud. Por favor, revise su conexión a internet e inténtelo de nuevo. Si el problema persiste, contáctenos.',
+    validationErrorMissingFile:
+      'Falta un archivo requerido. Por favor, cargue su Licencia de Conducir.',
+    validationErrorGeneric: 'Por favor corrija los errores en el formulario.',
+    lightModeButton: 'Modo Claro',
+    darkModeButton: 'Modo Oscuro',
+    requiredFieldIndicator: '*',
+    requiredErrorText: 'Este campo es obligatorio.',
+    uploadFileButton: 'Elegir Archivo',
+    noFileChosenText: 'Ningún archivo elegido',
+    fileTypeError: 'Tipo de archivo inválido. Aceptados: {types}',
+    fileSizeError: 'Archivo demasiado grande. Tamaño máx.: {size}MB',
+    removeFileButton: 'Quitar',
+    experienceOptions: [
+      'houseCleaning',
+      'officeCleaning',
+      'windowCleaning',
+      'floorStripWax',
+      'carpetCleaning',
+      'supervising',
+      'managing',
+      'pagesNumbers',
+    ],
+    experienceWith_houseCleaningLabel: 'Limpieza Residencial',
+    experienceWith_officeCleaningLabel: 'Limpieza de Oficinas Comerciales',
+    experienceWith_windowCleaningLabel: 'Limpieza de Ventanas (Interior/Exterior)',
+    experienceWith_floorStripWaxLabel: 'Decapado y Encerado de Suelos',
+    experienceWith_carpetCleaningLabel: 'Limpieza de Alfombras y Tapicerías',
+    experienceWith_supervisingLabel: 'Supervisión de Equipos de Limpieza',
+    experienceWith_managingLabel: 'Gestión de Operaciones de Limpieza',
+    experienceWith_pagesNumbersLabel: 'Uso de Software de Programación',
+    otherText: 'Otro',
+    otherSpecifyPlaceholder: 'Por favor especifique',
+    changeFileButton: 'Cambiar Archivo',
+    employer: 'Empleador',
+    reference: 'Referencia',
+    removeEmployer: 'Eliminar Empleador',
+    removeReference: 'Eliminar Referencia',
+    emailInvalidError: 'Formato de correo electrónico inválido.',
+    phoneInvalidError: 'Formato de número de teléfono inválido.',
+    dateInvalidError: 'Fecha inválida (MM/AAAA).',
+    dateToBeforeFromError: 'La fecha de finalización no puede ser anterior a la fecha de inicio.',
+  },
+  'pt-BR': {
+    // Portuguese translations ...
+    nextButton: 'Próxima Seção',
+    prevButton: 'Seção Anterior',
+    reviewAppButton: 'Revisar Candidatura',
+    submitFinalAppButton: 'Enviar Candidatura Final',
+    editSectionButton: 'Editar',
+    reviewSectionTitle: 'Revise Sua Candidatura',
+    reviewIntro:
+      "Por favor, revise cuidadosamente todas as informações que você forneceu abaixo. Se precisar fazer alguma alteração, clique no botão 'Editar' ao lado da seção relevante.",
+    allSectionsComplete: 'Todas as seções parecem completas! Por favor, revise e envie.',
+    incompleteSectionError:
+      'Por favor, complete todos os campos obrigatórios (*) na seção atual antes de prosseguir.',
+    generateCoverLetterSparkButton: '✨ Gerar Ideia para Carta',
+    generatingCoverLetterSpark: 'A gerar sugestão...',
+    coverLetterSparkSuggestion: 'Sugestão Gerada por IA:',
+    useSparkSuggestionButton: 'Usar esta Sugestão',
+    coverLetterSparkError:
+      'Não foi possível gerar uma sugestão neste momento. Por favor, tente mais tarde ou escreva a sua.',
+    coverLetterPromptDetailsMissing:
+      "Por favor, preencha 'Cargo ao Qual se Candidata' e selecione pelo menos uma 'Experiência' para gerar uma sugestão de carta de apresentação.",
+    interviewPrepSectionTitle: '✨ Preparação para Entrevista com IA',
+    generateInterviewPrepButton: 'Obter Dicas de Entrevista',
+    generatingInterviewPrep: 'A gerar dicas...',
+    interviewPrepTips: 'Dicas de Entrevista Geradas por IA:',
+    interviewPrepError:
+      'Não foi possível gerar dicas de entrevista neste momento. Por favor, tente mais tarde.',
+    interviewPrepPromptDetailsMissing:
+      "Por favor, preencha 'Cargo ao Qual se Candidata' e pelo menos uma resposta em 'Conhecendo Você Melhor' para gerar dicas de entrevista.",
+    interviewQuestionLabel: 'Pergunta Potencial:',
+    interviewTipLabel: 'Dica:',
+    strengthsSectionTitle: '✨ Minhas Forças com IA',
+    generateStrengthsButton: 'Descobrir Minhas Principais Forças',
+    generatingStrengths: 'A identificar forças...',
+    strengthsSummary: 'Forças Identificadas por IA:',
+    strengthsError:
+      'Não foi possível identificar as forças neste momento. Certifique-se de que as seções relevantes estão preenchidas.',
+    strengthsPromptDetailsMissing:
+      "Por favor, preencha 'Cargo ao Qual se Candidata', selecione experiências e responda algumas perguntas de 'Conhecendo Você Melhor' para identificar forças.",
+    heroTitle: 'Junte-se à Nossa Equipe na Anderson Cleaning',
+    heroSubtitle:
+      'Descubra emocionantes oportunidades de carreira e cresça com uma empresa que valoriza dedicação e excelência.',
+    whyWorkTitle: 'Por Que Escolher a Anderson Cleaning?',
+    whyWorkItems: [
+      {
+        title: 'Oportunidades de Crescimento',
+        description:
+          'Investimos no seu desenvolvimento profissional e oferecemos caminhos para progredir.',
+        benefits: [
+          'Caminhos claros de avanço na carreira',
+          'Programas de desenvolvimento de liderança',
+          'Promoções e aumentos baseados no desempenho',
+        ] as string[],
+      },
+      {
+        title: 'Cultura de Apoio',
+        description: 'Faça parte de um ambiente de equipe colaborativo, respeitoso e inclusivo.',
+        benefits: [
+          'Ambiente de equipe respeitoso, como uma família',
+          'Eventos regulares de construção de equipe e reconhecimento',
+          'Comunicação aberta com a gestão',
+        ] as string[],
+      },
+      {
+        title: 'Trabalho Impactante',
+        description:
+          'Faça uma diferença tangível para nossos clientes, fornecendo serviços de limpeza de alta qualidade.',
+        benefits: [
+          'Veja resultados imediatos do seu trabalho',
+          'Receba apreciação direta de clientes satisfeitos',
+          'Contribua para ambientes mais saudáveis e seguros',
+        ] as string[],
+      },
+      {
+        title: 'Benefícios Competitivos',
+        description:
+          'Oferecemos pacotes abrangentes para apoiar o seu bem-estar e o da sua família.',
+        benefits: [
+          'Opções de seguro de saúde para você e sua família',
+          'Folgas remuneradas e feriados',
+          'Bónus por indicação de funcionários',
+        ] as string[],
+      },
+    ],
+
+    // What We Offer Section
+    whatWeOfferTitle: 'O Que Oferecemos',
+    whatWeOfferSubtitle: 'Benefícios abrangentes e apoio para os membros da nossa equipe',
+    compensationTitle: 'Compensação e Pagamento',
+    compensationItems: [
+      'Salários por hora competitivos',
+      'Posições de emprego W-2 a tempo inteiro',
+      'Horário de pagamento semanal',
+      'Oportunidades de aumentos salariais baseados no desempenho',
+    ],
+    benefitsPackageTitle: 'Pacote de Benefícios',
+    benefitsPackageItems: [
+      'Opções de seguro de saúde',
+      'Folgas remuneradas (PTO)',
+      'Feriados pagos',
+      'Bónus por indicação de funcionários',
+    ],
+    trainingTitle: 'Formação e Desenvolvimento',
+    trainingItems: [
+      'Mais de 40 horas de formação abrangente remunerada',
+      'Programas contínuos de desenvolvimento de habilidades',
+      'Caminhos claros de avanço na carreira',
+      'Oportunidades de desenvolvimento de liderança',
+    ],
+    workLifeBalanceTitle: 'Equilíbrio Trabalho-Vida',
+    workLifeBalanceItems: [
+      'Opções de horário flexível',
+      'Não são obrigatórias semanas de trabalho de 7 dias',
+      'Horários de turnos previsíveis',
+      'Oportunidades de trabalhar perto de casa',
+    ],
+
+    // Employee Stories Section
+    employeeStoriesTitle: 'Ouça Nossa Equipe',
+    employeeStoriesSubtitle: 'Histórias reais dos membros da equipe da Anderson Cleaning',
+    employeeTestimonials: [
+      {
+        name: 'Maria Rodriguez',
+        position: 'Líder de Equipe',
+        quote:
+          'A Anderson Cleaning investiu no meu crescimento desde o primeiro dia. Comecei como faxineira e agora lidero a minha própria equipe. A formação e o apoio aqui são incomparáveis.',
+      },
+      {
+        name: 'James Thompson',
+        position: 'Especialista em Limpeza',
+        quote:
+          'O equilíbrio trabalho-vida aqui é real. Tenho um horário consistente, ótimos benefícios e realmente gosto de vir trabalhar todos os dias.',
+      },
+      {
+        name: 'Sofia Chen',
+        position: 'Técnica de Cuidados de Pisos',
+        quote:
+          'O que mais aprecio é o respeito e o profissionalismo. A gestão ouve o nosso feedback e somos tratados como membros valiosos da equipe, não apenas funcionários.',
+      },
+    ],
+
+    // Company Culture Section
+    companyCultureTitle: 'Nossa Cultura Empresarial',
+    companyCultureSubtitle: 'Os valores que orientam como trabalhamos e crescemos juntos',
+    investInPeopleTitle: 'Investimos nas Pessoas',
+    investInPeopleDescription:
+      'O seu sucesso é o nosso sucesso. Fornecemos formação extensa, mentoria e caminhos claros para o avanço na carreira.',
+    systemsStandardsTitle: 'Sistemas e Padrões',
+    systemsStandardsDescription:
+      'Temos processos comprovados que o preparam para o sucesso. Você nunca ficará a adivinhar sobre expectativas ou procedimentos.',
+    personalTouchTitle: 'Toque Pessoal',
+    personalTouchDescription:
+      'Você não é apenas um número. Construímos relacionamentos genuínos com os membros da nossa equipe e celebramos as contribuições individuais.',
+
+    // Application Process Section
+    applicationProcessTitle: 'Como Se Juntar à Nossa Equipe',
+    applicationProcessSubtitle: 'Um processo de candidatura simples e direto',
+    processStep1Title: 'Enviar Candidatura',
+    processStep1Description:
+      'Complete o nosso formulário de candidatura online. Leva cerca de 10-15 minutos.',
+    processStep2Title: 'Entrevista',
+    processStep2Description:
+      'Encontre-se com a nossa equipe de recrutamento para discutir o cargo e responder a quaisquer perguntas.',
+    processStep3Title: 'Formação',
+    processStep3Description: 'Mais de 40 horas de formação remunerada para prepará-lo para o sucesso.',
+    processStep4Title: 'Começar a Trabalhar',
+    processStep4Description:
+      'Comece a sua carreira com a Anderson Cleaning e junte-se a uma equipe de apoio.',
+    processTimeframe: 'A maioria dos candidatos completa o processo em 2-3 semanas',
+    startApplicationButton: 'Iniciar Sua Candidatura',
+
+    // Career FAQs Section
+    careerFAQTitle: 'Perguntas Frequentes',
+    careerFAQSubtitle: 'Tudo o que você precisa saber sobre se juntar à nossa equipe',
+    careerFAQs: [
+      {
+        question: 'Quais são os requisitos de contratação?',
+        answer:
+          'Exigimos carta de condução válida, transporte confiável e capacidade de realizar trabalho físico. Experiência prévia em limpeza é útil, mas não obrigatória - fornecemos formação abrangente.',
+      },
+      {
+        question: 'Qual é o horário de trabalho típico?',
+        answer:
+          'A maioria dos cargos é de segunda a sexta-feira, com turnos tipicamente entre 6h - 18h. Oferecemos opções de horário flexível e trabalhamos consigo para encontrar um horário que se ajuste à sua vida.',
+      },
+      {
+        question: 'Quanto paga o cargo?',
+        answer:
+          'Oferecemos salários competitivos baseados na experiência e no cargo. O salário inicial varia de $15-$18/hora com oportunidades de aumentos baseados no desempenho e certificações adicionais.',
+      },
+      {
+        question: 'O que envolve o processo de formação?',
+        answer:
+          'Todos os novos membros da equipe completam mais de 40 horas de formação remunerada que cobre técnicas de limpeza, protocolos de segurança, operação de equipamentos e atendimento ao cliente. A formação é prática e conduzida por líderes de equipe experientes.',
+      },
+      {
+        question: 'Existem oportunidades de crescimento na carreira?',
+        answer:
+          'Absolutamente! Muitos dos nossos supervisores e líderes de equipe começaram em cargos de nível inicial. Priorizamos a promoção interna e fornecemos caminhos claros para o avanço.',
+      },
+      {
+        question: 'Que benefícios vocês oferecem?',
+        answer:
+          'Funcionários a tempo inteiro recebem opções de seguro de saúde, folgas remuneradas, feriados pagos e acesso a bónus por indicação de funcionários. Também oferecemos bónus baseados no desempenho e programas de reconhecimento.',
+      },
+      {
+        question: 'Preciso dos meus próprios materiais ou equipamentos de limpeza?',
+        answer:
+          'Não, fornecemos todos os materiais de limpeza, equipamentos e equipamento de proteção. Você só precisa aparecer pronto para trabalhar.',
+      },
+      {
+        question: 'Quanto tempo depois de me candidatar posso começar?',
+        answer:
+          'O prazo típico desde a candidatura até à data de início é de 2-3 semanas, dependendo do processamento da verificação de antecedentes e da disponibilidade do horário de formação.',
+      },
+    ],
+    stillHaveQuestions:
+      'Ainda tem perguntas? Inicie a sua candidatura e nós responderemos durante o processo de entrevista.',
+    applyNowButton: 'Candidatar-se Agora',
+    applicationTitle: 'Candidatura de Emprego',
+    applicationSubtitle:
+      'Por favor, complete todas as seções com precisão. Estamos ansiosos para saber mais sobre você!',
+    selectLanguage: 'Idioma:',
+    sectionProgressIndicator: 'Passo {current} de {total}: {title}',
+    personalInfoSectionTitle: 'Informações Pessoais',
+    jobDescSectionTitle: 'Detalhes do Trabalho e Requisitos Físicos',
+    availabilitySectionTitle: 'Sua Disponibilidade',
+    educationSectionTitle: 'Histórico Educacional',
+    workHistorySectionTitle: 'Histórico de Trabalho',
+    referencesSectionTitle: 'Referências Profissionais',
+    militaryServiceSectionTitle: 'Serviço Militar (Opcional)',
+    gettingToKnowYouSectionTitle: 'Conhecendo Você Melhor',
+    statementsSectionTitle: 'Declarações Importantes e Consentimento',
+    uploadsSectionTitle: 'Upload de Documentos',
+    firstNameLabel: 'Nome',
+    firstNamePlaceholder: 'Ex: Maria',
+    lastNameLabel: 'Sobrenome',
+    lastNamePlaceholder: 'Ex: Silva',
+    streetAddressLabel: 'Endereço (Rua e Número)',
+    streetAddressPlaceholder: 'Ex: Rua Principal, 123',
+    addressLine2Label: 'Complemento do Endereço',
+    addressLine2Placeholder: 'Apto, Bloco, Casa, etc.',
+    cityLabel: 'Cidade',
+    cityPlaceholder: 'Ex: Lisboa',
+    stateProvinceLabel: 'Distrito/Estado',
+    stateProvincePlaceholder: 'Ex: Lisboa',
+    zipCodeLabel: 'Código Postal',
+    zipCodePlaceholder: 'Ex: 1000-001',
+    emailLabel: 'Endereço de Email',
+    emailPlaceholder: 'voce@exemplo.com',
+    phoneLabel: 'Número de Telefone',
+    phonePlaceholder: '(+351) 912 345 678',
+    applyingForLabel: 'Cargo ao Qual se Candidata',
+    applyingForPlaceholder: 'Selecione um cargo',
+    positionOptions: [
+      { value: '', label: 'Selecione um cargo' },
+      { value: 'cleaner', label: 'Funcionário/a de Limpeza' },
+      { value: 'supervisor', label: 'Supervisor/a' },
+      { value: 'manager', label: 'Gerente' },
+      { value: 'office_staff', label: 'Pessoal de Escritório' },
+    ],
+    howDidYouHearLabel: 'Como soube desta vaga?',
+    howDidYouHearPlaceholder: 'Ex: Sapo Emprego, Amigo, Site da Empresa',
+    liftCarryLabel: 'Consigo levantar, carregar, empurrar ou puxar confortavelmente:',
+    liftCarryPlaceholder: 'Selecione capacidade de peso',
+    liftOptions: [
+      { value: '', label: 'Selecione uma opção' },
+      { value: 'up_to_25', label: 'Até 11 kg (25 lbs)' },
+      { value: '25_50', label: '11-23 kg (25-50 lbs)' },
+      { value: '50_plus', label: 'Mais de 23 kg (50+ lbs)' },
+    ],
+    iAmAbleToLabelGeneral:
+      'Relativamente a tarefas físicas gerais (curvar-se, estar de pé, caminhar):',
+    iAmAbleToPlaceholderGeneral: 'Selecione sua capacidade',
+    physicalAbilityOptions: [
+      { value: '', label: 'Selecione uma opção' },
+      { value: 'no_restrictions', label: 'Consigo realizar estas tarefas sem restrições.' },
+      {
+        value: 'some_restrictions',
+        label: 'Consigo realizar estas tarefas com algumas restrições (explique abaixo).',
+      },
+    ],
+    physicalAbilityExplanationLabel: 'Se tiver restrições, explique:',
+    physicalAbilityExplanationPlaceholder: 'Explique quaisquer restrições aqui',
+    performDutiesLabel:
+      'Consegue realizar as tarefas essenciais do cargo a que se candidata, com ou sem adaptações razoáveis?',
+    yesLabel: 'Sim',
+    noLabel: 'Não',
+    otherLabel: 'Outro (Especifique)',
+    performDutiesOtherPlaceholder: "Se 'Não' ou 'Outro', por favor explique",
+    iAmAbleToLabelSpecific: 'Habilidades Específicas (marque todas as que se aplicam):',
+    driveMultipleBuildingsLabel:
+      'Tenho carta de condução válida e estou disposto/a a conduzir para múltiplos locais de trabalho, se necessário.',
+    otherAbilityLabel:
+      'Liste quaisquer outras habilidades específicas ou limitações físicas relevantes para o trabalho:',
+    otherAbilityPlaceholder:
+      'Ex: Alergia a certos químicos, experiência com equipamentos específicos',
+    experienceWithLabel: 'Tenho experiência profissional com (marque todas as que se aplicam):',
+    houseCleaningLabel: 'Limpeza Residencial',
+    officeCleaningLabel: 'Limpeza de Escritórios Comerciais',
+    windowCleaningLabel: 'Limpeza de Janelas (Interior/Exterior)',
+    floorStripWaxLabel: 'Decapagem e Enceramento de Pisos',
+    carpetCleaningLabel: 'Limpeza de Carpetes e Estofos',
+    supervisingLabel: 'Supervisão de Equipes de Limpeza',
+    managingLabel: 'Gestão de Operações de Limpeza',
+    pagesNumbersLabel: 'Uso de Software de Agendamento/Ordens de Trabalho',
+    otherExperienceLabel: 'Outra experiência relevante em limpeza ou supervisão (especifique)',
+    availableWorkLocationsLabel:
+      'Estou disponível para trabalhar nas seguintes localidades (marque todas as que se aplicam):',
+    locations: [
+      'Agawam',
+      'Springfield',
+      'Chicopee',
+      'Holyoke',
+      'Northampton',
+      'Florence',
+      'South Hadley',
+      'Amherst',
+      'Westfield',
+      'Longmeadow',
+      'East Longmeadow',
+      'Wilbraham',
+    ],
+    AgawamLabel: 'Agawam',
+    SpringfieldLabel: 'Springfield',
+    ChicopeeLabel: 'Chicopee',
+    HolyokeLabel: 'Holyoke',
+    NorthamptonLabel: 'Northampton',
+    FlorenceLabel: 'Florence',
+    SouthHadleyLabel: 'South Hadley',
+    AmherstLabel: 'Amherst',
+    WestfieldLabel: 'Westfield',
+    LongmeadowLabel: 'Longmeadow',
+    EastLongmeadowLabel: 'East Longmeadow',
+    WilbrahamLabel: 'Wilbraham',
+    otherLocationLabel: 'Outras localidades preferidas (especifique)',
+    ableToWorkGeneralLabel: 'Procuro principalmente:',
+    ableToWorkGeneralPlaceholder: 'Selecione tipo de trabalho',
+    generalAvailabilityOptions: [
+      { value: '', label: 'Selecione uma opção' },
+      { value: 'full_time', label: 'Emprego a tempo inteiro' },
+      { value: 'part_time', label: 'Emprego a tempo parcial' },
+      { value: 'flexible', label: 'Horário flexível/variável' },
+    ],
+    hoursPerWeekLabel: 'Número desejado de horas por semana:',
+    hoursPerWeekPlaceholder: 'Ex: 20-25, ou 40',
+    daysAvailableLabel: 'Dias disponíveis para trabalhar (marque todos os que se aplicam):',
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    SundayLabel: 'Domingo',
+    MondayLabel: 'Segunda-feira',
+    TuesdayLabel: 'Terça-feira',
+    WednesdayLabel: 'Quarta-feira',
+    ThursdayLabel: 'Quinta-feira',
+    FridayLabel: 'Sexta-feira',
+    SaturdayLabel: 'Sábado',
+    shiftsAvailableLabel: 'Turnos disponíveis para trabalhar (marque todos os que se aplicam):',
+    shifts: ['Morning', 'Afternoon', 'Evening', 'LateNight', 'FlexibleAny'],
+    MorningLabel: 'Manhã (ex: 8h - 12h)',
+    AfternoonLabel: 'Tarde (ex: 12h - 17h)',
+    EveningLabel: 'Noite (ex: 17h - 21h)',
+    LateNightLabel: 'Madrugada (ex: 21h em diante)',
+    FlexibleAnyLabel: 'Flexível/Qualquer Turno',
+    otherShiftLabel:
+      "Preferências ou restrições de turno específicas (ex: 'Não disponível depois das 22h durante a semana')",
+    educationLevelLabel: 'Nível mais alto de escolaridade concluído:',
+    educationLevelPlaceholder: 'Selecione nível de escolaridade',
+    educationOptions: [
+      { value: '', label: 'Selecione uma opção' },
+      { value: 'some_high_school', label: 'Ensino Secundário Incompleto' },
+      { value: 'high_school_ged', label: 'Diploma do Ensino Secundário / Equivalente' },
+      { value: 'some_college_tech', label: 'Formação Superior Incompleta / Escola Técnica' },
+      {
+        value: 'associates_degree',
+        label: 'Curso Técnico Superior Profissional (CTeSP) / Bacharelato',
+      },
+      { value: 'bachelors_degree', label: 'Licenciatura' },
+      { value: 'masters_higher', label: 'Mestrado ou Superior' },
+    ],
+    howManyEmployersLabel: 'Quantos empregadores teve nos últimos três anos?',
+    howManyEmployersPlaceholder: 'Ex: 2',
+    prevCompanyLabel: 'Nome da Empresa',
+    prevStreetAddressLabel: 'Endereço da Empresa',
+    prevCityLabel: 'Cidade',
+    prevZipCodeLabel: 'Código Postal',
+    prevFromLabel: 'Empregado Desde (MM/AAAA)',
+    prevToLabel: 'Empregado Até (MM/AAAA)',
+    prevPositionLabel: 'Seu Cargo/Função',
+    prevSupervisorLabel: 'Nome e Cargo do Supervisor',
+    prevReasonForLeavingLabel: 'Motivo da Saída',
+    prevMayWeContactLabel: 'Podemos contactar este empregador para uma referência?',
+    prevMayWeContactPlaceholder: 'Selecione Sim/Não',
+    addWorkHistoryButton: 'Adicionar Empregador',
+    removeWorkHistoryButton: 'Remover Último Empregador',
+    referenceNameLabel: 'Nome Completo',
+    referenceRelationshipLabel: 'Relação (Ex: Ex-Supervisor, Colega)',
+    referencePhoneLabel: 'Número de Telefone',
+    addReferenceButton: 'Adicionar Referência',
+    removeReferenceButton: 'Remover Última Referência',
+    branchLabel: 'Ramo do Serviço',
+    rankAtDischargeLabel: 'Posto na Passagem à Reserva/Reforma',
+    militaryFromLabel: 'Serviço Desde (MM/AAAA)',
+    militaryToLabel: 'Serviço Até (MM/AAAA)',
+    typeOfDischargeLabel: 'Tipo de Passagem à Reserva/Reforma',
+    gettingToKnowYouIntro:
+      'As suas respostas a estas perguntas ajudam-nos a conhecê-lo/a melhor. Por favor, responda ponderadamente. Respostas incompletas podem afetar a consideração.',
+    knowAnyoneLabel:
+      'Conhece alguém atualmente ou anteriormente empregado pela Anderson Cleaning? Se sim, quem?',
+    hardestJobLabel:
+      'Descreva o trabalho mais difícil (remunerado ou não) que já teve e o que o tornou desafiador.',
+    magicSpellLabel:
+      'Se pudesse usar um feitiço mágico para mejorar instantaneamente uma coisa no seu local de trabalho ou função anterior, o que seria e porquê?',
+    shorterWorkdayLabel:
+      'Que tipo de tarefas ou ambiente de trabalho faz com que um longo dia de trabalho pareça mais curto e envolvente para si?',
+    winSomeoneOverLabel:
+      'Conte-nos sobre uma vez em que teve de convencer alguém do seu ponto de vista ou obter a sua cooperação. Como abordou a situação?',
+    addOneThingRestroomLabel:
+      'Se pudesse adicionar uma característica ou serviço inovador a cada casa de banho pública que limpa para melhorar a experiência do utilizador, qual seria?',
+    helpedCoworkerLabel:
+      'Descreva uma instância específica em que ajudou um colega de trabalho que estava com dificuldades numa tarefa ou numa situação difícil.',
+    ruleDisagreeLabel:
+      'Pense numa regra ou política num emprego anterior com a qual não concordava totalmente. Como lidou com isso?',
+    lastBossDescriptionLabel:
+      'Se pedíssemos ao seu supervisor direto mais recente para o/a descrever em três palavras, o que acha que ele/ela diria?',
+    fitInWellLabel:
+      'Com base no que sabe sobre a Anderson Cleaning (ou a indústria da limpeza), por que acha que se enquadraria bem na nossa equipe?',
+    getOutOfBedLabel:
+      'O que o/a motiva a levantar-se da cama e ir trabalhar todos os dias, especialmente quando enfrenta um dia desafiador?',
+    busyOrDowntimeLabel:
+      'Prefere um trabalho que o/a mantenha consistentemente ocupado/a, ou um que tenha períodos de inatividade? Como utiliza eficazmente o tempo de inatividade?',
+    weekendsHolidaysLabel:
+      'Está disponível e disposto/a a trabalhar aos fins de semana ou feriados, se o horário o exigir?',
+    oneHourConversationLabel:
+      'Se pudesse ter uma conversa de uma hora com qualquer pessoa da história (viva ou falecida) para aprender com ela, quem seria e o que gostaria de discutir?',
+    wishWeAskedLabel:
+      'Há mais alguma coisa que gostaria que soubéssemos sobre si, ou alguma pergunta que gostaria que tivéssemos feito nesta candidatura?',
+    drugTestingStatement:
+      'POLÍTICA DE TESTES DE DROGAS E ÁLCOOL: A Anderson Cleaning, Inc. está empenhada em manter um ambiente de trabalho seguro, saudável e produtivo. Reservamo-nos o direito de realizar testes de álcool, drogas ou substâncias controladas em circunstâncias legais, incluindo: rastreio pré-emprego, testes aleatórios (para posições sensíveis à segurança, se aplicável), investigação pós-incidente/acidente, e quando houver suspeita razoável de incapacidade. Todos os testes serão administrados em conformidade com as leis federais, estatais e locais aplicáveis, e os procedimentos escritos da Anderson Cleaning, Inc. (disponíveis mediante solicitação). A Anderson Cleaning, Inc. cobrirá os custos destes testes. A recusa em submeter-se a testes ou um resultado positivo pode resultar na retirada de uma oferta de emprego ou em ação disciplinar, incluindo a cessação do contrato.',
+    applicantStatement:
+      'CERTIFICAÇÃO E ACORDO DO CANDIDATO: Certifico que todas as respostas e declarações que forneci nesta candidatura e em quaisquer documentos anexos são verdadeiras, completas e corretas, tanto quanto é do meu conhecimento e convicção. Entendo que qualquer deturpação, falsificação ou omissão material de informação pode constituir motivo para recusa de contratação, ou para despedimento imediato se eu for empregado, independentemente do tempo decorrido antes da descoberta. Pelo presente, autorizo a Anderson Cleaning, Inc. a investigar todas as declarações contidas nesta candidatura e a contactar os meus empregadores anteriores, referências e instituições de ensino para verificar as informações fornecidas. Isento todas as partes de qualquer responsabilidade por qualquer dano que possa resultar do fornecimento de tais informações. Entendo que esta candidatura não é, nem se destina a ser, um contrato de trabalho. Se contratado, entendo que o meu emprego será "At Will" (por mútuo acordo), o que significa que tanto eu como a Anderson Cleaning, Inc. podemos terminar a relação de trabalho a qualquer momento, por qualquer motivo ou sem motivo, com ou sem justa causa, e com ou sem aviso prévio, salvo disposição legal em contrário ou acordo escrito legalmente vinculativo. Esta relação "At Will" não pode ser alterada exceto por um acordo escrito assinado por um representante autorizado da Anderson Cleaning, Inc.',
+    partTimeStatement:
+      'COMPROMISSO DE EMPREGO A TEMPO PARCIAL (se aplicável): Entendo que se me candidatar ou aceitar um cargo a tempo parcial, tal exige um funcionário fiável e empenhado que cumprirá consistentemente o horário de trabalho acordado. Comprometo-me a ser pontual e assíduo. Reconheço que ausências excessivas, atrasos ou incumprimento destas obrigações horárias podem resultar em ação disciplinar, incluindo a cessação do meu contrato de trabalho.',
+    acknowledgeLabel: 'Li, compreendo e concordo com esta declaração.',
+    driversLicenseLabel: 'Upload da Carta de Condução (Obrigatório)',
+    driversLicenseHelper:
+      'Faça upload de uma imagem ou PDF nítido e a cores da frente da sua carta de condução válida. Certifique-se de que toda a informação está legível. Obrigatório para verificação de identidade e cargos que envolvam condução. Tamanho máximo do ficheiro: 5MB. Aceites: JPG, PNG, PDF.',
+    resumeLabel: 'Upload do Currículo (Opcional, mas Recomendado)',
+    resumeHelper: 'Formatos aceites: PDF, DOC, DOCX. Tamanho máximo do ficheiro: 5MB.',
+    coverLetterLabel: 'Carta de Apresentação (Opcional)',
+    coverLetterPlaceholder:
+      'Diga-nos mais sobre porque é um ótimo candidato para a Anderson Cleaning e para este cargo...',
+    submitButton: 'Enviar Candidatura',
+    submittingButton: 'A enviar, por favor aguarde...',
+    submissionSuccessTitle: 'Candidatura Enviada!',
+    submissionSuccessMessage:
+      'Obrigado por se candidatar! Recebemos a sua candidatura e entraremos em contacto se as suas qualificações corresponderem às nossas necessidades.',
+    submissionErrorTitle: 'Erro no Envio',
+    submissionErrorMessage:
+      'Ocorreu um erro ao enviar a sua candidatura. Por favor, verifique a sua ligação à internet e tente novamente. Se o problema persistir, contacte-nos.',
+    validationErrorMissingFile:
+      'Falta um ficheiro obrigatório. Por favor, faça upload da sua Carta de Condução.',
+    validationErrorGeneric: 'Por favor, corrija os erros no formulário.',
+    lightModeButton: 'Modo Claro',
+    darkModeButton: 'Modo Escuro',
+    requiredFieldIndicator: '*',
+    requiredErrorText: 'Este campo é obrigatório.',
+    uploadFileButton: 'Escolher Ficheiro',
+    noFileChosenText: 'Nenhum ficheiro escolhido',
+    fileTypeError: 'Tipo de ficheiro inválido. Aceites: {types}',
+    fileSizeError: 'Ficheiro demasiado grande. Tamanho máx.: {size}MB',
+    removeFileButton: 'Remover',
+    experienceOptions: [
+      'houseCleaning',
+      'officeCleaning',
+      'windowCleaning',
+      'floorStripWax',
+      'carpetCleaning',
+      'supervising',
+      'managing',
+      'pagesNumbers',
+    ],
+    experienceWith_houseCleaningLabel: 'Limpeza Residencial',
+    experienceWith_officeCleaningLabel: 'Limpeza de Escritórios Comerciais',
+    experienceWith_windowCleaningLabel: 'Limpeza de Janelas (Interior/Exterior)',
+    experienceWith_floorStripWaxLabel: 'Decapagem e Enceramento de Pavimentos',
+    experienceWith_carpetCleaningLabel: 'Limpeza de Carpetes e Estofos',
+    experienceWith_supervisingLabel: 'Supervisão de Equipas de Limpeza',
+    experienceWith_managingLabel: 'Gestão de Operações de Limpeza',
+    experienceWith_pagesNumbersLabel: 'Utilização de Software de Agendamento',
+    otherText: 'Outro',
+    otherSpecifyPlaceholder: 'Por favor, especifique',
+    changeFileButton: 'Mudar Ficheiro',
+    employer: 'Empregador',
+    reference: 'Referência',
+    removeEmployer: 'Remover Empregador',
+    removeReference: 'Remover Referência',
+    emailInvalidError: 'Formato de email inválido.',
+    phoneInvalidError: 'Formato de número de telefone inválido.',
+    dateInvalidError: 'Data inválida (MM/AAAA).',
+    dateToBeforeFromError: 'A data de fim não pode ser anterior à data de início.',
+  },
+  ro: {
+    // Romanian translations
+    nextButton: 'Secțiunea următoare',
+    prevButton: 'Secțiunea anterioară',
+    reviewAppButton: 'Revizuiește aplicația',
+    submitFinalAppButton: 'Trimite aplicația finală',
+    editSectionButton: 'Editează',
+    reviewSectionTitle: 'Revizuiește aplicația',
+    reviewIntro:
+      "Vă rugăm să revizuiți cu atenție toate informațiile pe care le-ați furnizat mai jos. Dacă trebuie să faceți modificări, faceți clic pe butonul 'Editează' de lângă secțiunea relevantă.",
+    allSectionsComplete: 'Toate secțiunile par complete! Vă rugăm să revizuiți și să trimiteți.',
+    incompleteSectionError:
+      'Vă rugăm să completați toate câmpurile obligatorii (*) din secțiunea curentă înainte de a continua.',
+    generateCoverLetterSparkButton: '✨ Generează scrisoare de intenție',
+    generatingCoverLetterSpark: 'Se generează sugestia...',
+    coverLetterSparkSuggestion: 'Sugestie generată de AI:',
+    useSparkSuggestionButton: 'Folosește această sugestie',
+    coverLetterSparkError:
+      'Nu s-a putut genera o sugestie în acest moment. Vă rugăm să încercați mai târziu sau să scrieți propria versiune.',
+    coverLetterPromptDetailsMissing:
+      "Vă rugăm să completați 'Poziția pentru care aplicați' și să selectați cel puțin o 'Experiență' pentru a genera o sugestie de scrisoare de intenție.",
+    interviewPrepSectionTitle: '✨ Pregătire interviu AI',
+    generateInterviewPrepButton: 'Obține sfaturi pentru interviu',
+    generatingInterviewPrep: 'Se generează sfaturi...',
+    interviewPrepTips: 'Sfaturi pentru interviu generate de AI:',
+    interviewPrepError:
+      'Nu s-au putut genera sfaturi pentru interviu în acest moment. Vă rugăm să încercați mai târziu.',
+    interviewPrepPromptDetailsMissing:
+      "Vă rugăm să completați 'Poziția pentru care aplicați' și cel puțin un răspuns din 'Să te cunoaștem mai bine' pentru a genera sfaturi pentru interviu.",
+    interviewQuestionLabel: 'Întrebare potențială:',
+    interviewTipLabel: 'Sfat:',
+    strengthsSectionTitle: '✨ Punctele mele tari AI',
+    generateStrengthsButton: 'Descoperă punctele mele tari cheie',
+    generatingStrengths: 'Se identifică punctele tari...',
+    strengthsSummary: 'Puncte tari identificate de AI:',
+    strengthsError:
+      'Nu s-au putut identifica punctele tari în acest moment. Asigurați-vă că secțiunile relevante sunt completate.',
+    strengthsPromptDetailsMissing:
+      "Vă rugăm să completați 'Poziția pentru care aplicați', să selectați experiențe și să răspundeți la câteva întrebări din 'Să te cunoaștem mai bine' pentru a identifica punctele tari.",
+    heroTitle: 'Alătură-te echipei Anderson Cleaning',
+    heroSubtitle:
+      'Descoperă oportunități de carieră interesante și crește împreună cu o companie care prețuiește dedicarea și excelența.',
+    whyWorkTitle: 'De ce să alegi Anderson Cleaning?',
+    whyWorkItems: [
+      {
+        title: 'Oportunități de creștere',
+        description: 'Investim în dezvoltarea ta profesională și oferim căi de avansare.',
+        benefits: [
+          'Căi clare de avansare în carieră',
+          'Programe de dezvoltare a conducerii',
+          'Promovări și creșteri salariale bazate pe performanță',
+        ] as string[],
+      },
+      {
+        title: 'Cultură de sprijin',
+        description: 'Fii parte dintr-un mediu de echipă colaborativ, respectuos și incluziv.',
+        benefits: [
+          'Atmosferă de echipă respectuoasă, ca o familie',
+          'Evenimente regulate de team building și recunoaștere',
+          'Comunicare deschisă cu managementul',
+        ] as string[],
+      },
+      {
+        title: 'Muncă cu impact',
+        description:
+          'Fă o diferență tangibilă pentru clienții noștri oferind servicii de curățenie de top.',
+        benefits: [
+          'Vezi rezultatele imediate ale muncii tale',
+          'Primește apreciere directă de la clienți mulțumiți',
+          'Contribuie la medii mai sănătoase și mai sigure',
+        ] as string[],
+      },
+      {
+        title: 'Beneficii competitive',
+        description: 'Oferim pachete complete pentru a sprijini bunăstarea ta și a familiei tale.',
+        benefits: [
+          'Opțiuni de asigurare de sănătate pentru tine și familia ta',
+          'Zile libere plătite și sărbători',
+          'Bonusuri pentru recomandări de angajați',
+        ] as string[],
+      },
+    ],
+
+    // What We Offer Section
+    whatWeOfferTitle: 'Ce oferim',
+    whatWeOfferSubtitle: 'Beneficii complete și sprijin pentru membrii echipei noastre',
+    compensationTitle: 'Compensare și plată',
+    compensationItems: [
+      'Salarii orare competitive',
+      'Posturi de angajare W-2 cu normă întreagă',
+      'Program de plată săptămânal',
+      'Oportunități de creșteri salariale bazate pe performanță',
+    ],
+    benefitsPackageTitle: 'Pachet de beneficii',
+    benefitsPackageItems: [
+      'Opțiuni de asigurare de sănătate',
+      'Zile libere plătite (PTO)',
+      'Sărbători plătite',
+      'Bonusuri pentru recomandări de angajați',
+    ],
+    trainingTitle: 'Formare și dezvoltare',
+    trainingItems: [
+      'Peste 40 de ore de formare plătită cuprinzătoare',
+      'Programe continue de dezvoltare a abilităților',
+      'Căi clare de avansare în carieră',
+      'Oportunități de dezvoltare a conducerii',
+    ],
+    workLifeBalanceTitle: 'Echilibru muncă-viață',
+    workLifeBalanceItems: [
+      'Opțiuni de program flexibil',
+      'Nu sunt obligatorii săptămâni de lucru de 7 zile',
+      'Programe de schimburi previzibile',
+      'Oportunități de a lucra aproape de casă',
+    ],
+
+    // Employee Stories Section
+    employeeStoriesTitle: 'Ascultă de la echipa noastră',
+    employeeStoriesSubtitle: 'Povești reale de la membrii echipei Anderson Cleaning',
+    employeeTestimonials: [
+      {
+        name: 'Maria Rodriguez',
+        position: 'Lider de echipă',
+        quote:
+          'Anderson Cleaning a investit în creșterea mea din prima zi. Am început ca o persoană de curățenie și acum conduc propria mea echipă. Formarea și sprijinul de aici sunt de neegalat.',
+      },
+      {
+        name: 'James Thompson',
+        position: 'Specialist în curățenie',
+        quote:
+          'Echilibrul muncă-viață de aici este real. Am un program consistent, beneficii excelente și chiar îmi place să vin la muncă în fiecare zi.',
+      },
+      {
+        name: 'Sofia Chen',
+        position: 'Tehnician îngrijire podele',
+        quote:
+          'Ceea ce apreciez cel mai mult este respectul și profesionalismul. Managementul ascultă feedback-ul nostru și suntem tratați ca membri valoroși ai echipei, nu doar ca angajați.',
+      },
+    ],
+
+    // Company Culture Section
+    companyCultureTitle: 'Cultura companiei noastre',
+    companyCultureSubtitle: 'Valorile care ghidează cum lucrăm și creștem împreună',
+    investInPeopleTitle: 'Investim în oameni',
+    investInPeopleDescription:
+      'Succesul tău este succesul nostru. Oferim formare extinsă, mentorat și căi clare pentru avansarea în carieră.',
+    systemsStandardsTitle: 'Sisteme și standarde',
+    systemsStandardsDescription:
+      'Avem procese dovedite care te pregătesc pentru succes. Nu vei fi lăsat niciodată să ghicești despre așteptări sau proceduri.',
+    personalTouchTitle: 'Atingere personală',
+    personalTouchDescription:
+      'Nu ești doar un număr. Construim relații autentice cu membrii echipei noastre și celebrăm contribuțiile individuale.',
+
+    // Application Process Section
+    applicationProcessTitle: 'Cum să te alături echipei noastre',
+    applicationProcessSubtitle: 'Un proces de aplicare simplu și direct',
+    processStep1Title: 'Trimite aplicația',
+    processStep1Description:
+      'Completează formularul nostru de aplicare online. Durează aproximativ 10-15 minute.',
+    processStep2Title: 'Interviu',
+    processStep2Description:
+      'Întâlnește-te cu echipa noastră de recrutare pentru a discuta despre rol și a răspunde la orice întrebări.',
+    processStep3Title: 'Formare',
+    processStep3Description: 'Peste 40 de ore de formare plătită pentru a te pregăti pentru succes.',
+    processStep4Title: 'Începe să lucrezi',
+    processStep4Description:
+      'Începe-ți cariera cu Anderson Cleaning și alătură-te unei echipe de sprijin.',
+    processTimeframe: 'Majoritatea candidaților completează procesul în 2-3 săptămâni',
+    startApplicationButton: 'Începe aplicația ta',
+
+    // Career FAQs Section
+    careerFAQTitle: 'Întrebări frecvente',
+    careerFAQSubtitle: 'Tot ce trebuie să știi despre alăturarea echipei noastre',
+    careerFAQs: [
+      {
+        question: 'Care sunt cerințele de angajare?',
+        answer:
+          'Solicităm permis de conducere valabil, transport fiabil și capacitatea de a efectua muncă fizică. Experiența anterioară în curățenie este utilă, dar nu obligatorie - oferim formare cuprinzătoare.',
+      },
+      {
+        question: 'Care este programul de lucru tipic?',
+        answer:
+          'Majoritatea posturilor sunt luni-vineri, cu schimburi de obicei între 6:00 - 18:00. Oferim opțiuni de programare flexibilă și lucrăm cu tine pentru a găsi un program care se potrivește vieții tale.',
+      },
+      {
+        question: 'Cât plătește postul?',
+        answer:
+          'Oferim salarii competitive bazate pe experiență și post. Salariul de pornire variază de la $15-$18/oră cu oportunități de creșteri bazate pe performanță și certificări suplimentare.',
+      },
+      {
+        question: 'Ce implică procesul de formare?',
+        answer:
+          'Toți noii membri ai echipei completează peste 40 de ore de formare plătită care acoperă tehnici de curățenie, protocoale de siguranță, operarea echipamentelor și serviciul clienți. Formarea este practică și condusă de lideri de echipă experimentați.',
+      },
+      {
+        question: 'Există oportunități de creștere în carieră?',
+        answer:
+          'Absolut! Mulți dintre supervizori și liderii noștri de echipă au început în posturi de nivel de intrare. Prioritizăm promovarea din interior și oferim căi clare pentru avansare.',
+      },
+      {
+        question: 'Ce beneficii oferiți?',
+        answer:
+          'Angajații cu normă întreagă primesc opțiuni de asigurare de sănătate, zile libere plătite, sărbători plătite și acces la bonusuri pentru recomandări de angajați. De asemenea, oferim bonusuri bazate pe performanță și programe de recunoaștere.',
+      },
+      {
+        question: 'Am nevoie de propriile materiale sau echipamente de curățenie?',
+        answer:
+          'Nu, oferim toate materialele de curățenie, echipamentele și echipamentul de protecție. Trebuie doar să te prezinți gata să lucrezi.',
+      },
+      {
+        question: 'Cât de curând pot să încep după aplicare?',
+        answer:
+          'Perioada tipică de la aplicare la data de începere este de 2-3 săptămâni, în funcție de procesarea verificării antecedentelor și disponibilitatea programului de formare.',
+      },
+    ],
+    stillHaveQuestions:
+      'Încă mai ai întrebări? Începe aplicația ta și vom răspunde în timpul procesului de interviu.',
+    applyNowButton: 'Aplică acum',
+    applicationTitle: 'Cerere de angajare',
+    applicationSubtitle:
+      'Vă rugăm să completați toate secțiunile cu acuratețe. Așteptăm cu nerăbdare să aflăm mai multe despre dumneavoastră!',
+    selectLanguage: 'Limba:',
+    sectionProgressIndicator: 'Pasul {current} din {total}: {title}',
+    personalInfoSectionTitle: 'Informații personale',
+    jobDescSectionTitle: 'Detalii job & cerințe fizice',
+    availabilitySectionTitle: 'Disponibilitatea ta',
+    educationSectionTitle: 'Istoric educațional',
+    workHistorySectionTitle: 'Istoric de lucru',
+    referencesSectionTitle: 'Referințe profesionale',
+    militaryServiceSectionTitle: 'Serviciu militar (opțional)',
+    gettingToKnowYouSectionTitle: 'Să te cunoaștem mai bine',
+    statementsSectionTitle: 'Declarații importante & consimțământ',
+    uploadsSectionTitle: 'Încărcare documente',
+    firstNameLabel: 'Prenume',
+    firstNamePlaceholder: 'ex., Ion',
+    lastNameLabel: 'Nume',
+    lastNamePlaceholder: 'ex., Popescu',
+    streetAddressLabel: 'Adresa străzii',
+    streetAddressPlaceholder: 'ex., Str. Principală 123',
+    addressLine2Label: 'Adresa linia 2',
+    addressLine2Placeholder: 'Apartament, Suită, Unitate, Clădire, Etaj, etc.',
+    cityLabel: 'Oraș',
+    cityPlaceholder: 'ex., Springfield',
+    stateProvinceLabel: 'Stat/Provincie',
+    stateProvincePlaceholder: 'ex., MA',
+    zipCodeLabel: 'Cod poștal',
+    zipCodePlaceholder: 'ex., 01101',
+    emailLabel: 'Adresa de email',
+    emailPlaceholder: 'dvs@exemplu.com',
+    phoneLabel: 'Număr de telefon',
+    phonePlaceholder: '(413) 306-5053',
+    applyingForLabel: 'Poziția pentru care aplicați',
+    applyingForPlaceholder: 'Selectați o poziție',
+    positionOptions: [
+      { value: '', label: 'Selectați o poziție' },
+      { value: 'cleaner', label: 'Agent de curățenie' },
+      { value: 'supervisor', label: 'Supraveghetor' },
+      { value: 'manager', label: 'Manager' },
+      { value: 'office_staff', label: 'Personal birou' },
+    ],
+    howDidYouHearLabel: 'Cum ați aflat despre această poziție?',
+    howDidYouHearPlaceholder: 'ex., Indeed, Prieten, Site web companie',
+    liftCarryLabel: 'Pot ridica, transporta, împinge sau trage confortabil:',
+    liftCarryPlaceholder: 'Selectați capacitatea de greutate',
+    liftOptions: [
+      { value: '', label: 'Selectați o opțiune' },
+      { value: 'up_to_25', label: 'Până la 25 lbs (11 kg)' },
+      { value: '25_50', label: '25-50 lbs (11-23 kg)' },
+      { value: '50_plus', label: '50+ lbs (23+ kg)' },
+    ],
+    iAmAbleToLabelGeneral:
+      'În ceea ce privește sarcinile fizice generale (aplecare, stat în picioare, mers):',
+    iAmAbleToPlaceholderGeneral: 'Selectați capacitatea dvs.',
+    physicalAbilityOptions: [
+      { value: '', label: 'Selectați o opțiune' },
+      { value: 'no_restrictions', label: 'Pot îndeplini aceste sarcini fără restricții.' },
+      {
+        value: 'some_restrictions',
+        label: 'Pot îndeplini aceste sarcini cu unele restricții (vă rugăm să explicați mai jos).',
+      },
+    ],
+    physicalAbilityExplanationLabel: 'Dacă aveți restricții, vă rugăm să explicați:',
+    physicalAbilityExplanationPlaceholder: 'Explicați orice restricții aici',
+    performDutiesLabel:
+      'Sunteți capabil să îndepliniți sarcinile esențiale ale poziției pentru care aplicați, cu sau fără acomodare rezonabilă?',
+    yesLabel: 'Da',
+    noLabel: 'Nu',
+    otherLabel: 'Altele (Specificați)',
+    performDutiesOtherPlaceholder: "Dacă 'Nu' sau 'Altele', vă rugăm să explicați",
+    iAmAbleToLabelSpecific: 'Abilități specifice (bifați toate care se aplică):',
+    driveMultipleBuildingsLabel:
+      'Am permis de conducere valid și sunt dispus să conduc la mai multe locații de lucru dacă este necesar.',
+    otherAbilityLabel:
+      'Vă rugăm să enumerați orice alte abilități specifice sau limitări fizice relevante pentru job:',
+    otherAbilityPlaceholder:
+      'ex., Alergic la anumite substanțe chimice, experiență cu echipamente specifice',
+    experienceWithLabel: 'Am experiență profesională cu (bifați toate care se aplică):',
+    houseCleaningLabel: 'Curățenie rezidențială',
+    officeCleaningLabel: 'Curățenie comercială birouri',
+    windowCleaningLabel: 'Curățare geamuri (interior/exterior)',
+    floorStripWaxLabel: 'Decapare și cerare podele',
+    carpetCleaningLabel: 'Curățare covoare și tapițerie',
+    supervisingLabel: 'Supervizare echipe de curățenie',
+    managingLabel: 'Management operațiuni curățenie',
+    pagesNumbersLabel: 'Utilizare software programare/comenzi de lucru',
+    otherExperienceLabel:
+      'Altă experiență relevantă de curățenie sau supervizare (vă rugăm să specificați)',
+    availableWorkLocationsLabel:
+      'Sunt disponibil să lucrez în următoarele locații (bifați toate care se aplică):',
+    locations: [
+      'Agawam',
+      'Springfield',
+      'Chicopee',
+      'Holyoke',
+      'Northampton',
+      'Florence',
+      'South Hadley',
+      'Amherst',
+      'Westfield',
+      'Longmeadow',
+      'East Longmeadow',
+      'Wilbraham',
+    ],
+    AgawamLabel: 'Agawam',
+    SpringfieldLabel: 'Springfield',
+    ChicopeeLabel: 'Chicopee',
+    HolyokeLabel: 'Holyoke',
+    NorthamptonLabel: 'Northampton',
+    FlorenceLabel: 'Florence',
+    SouthHadleyLabel: 'South Hadley',
+    AmherstLabel: 'Amherst',
+    WestfieldLabel: 'Westfield',
+    LongmeadowLabel: 'Longmeadow',
+    EastLongmeadowLabel: 'East Longmeadow',
+    WilbrahamLabel: 'Wilbraham',
+    otherLocationLabel: 'Alte locații preferate (vă rugăm să specificați)',
+    ableToWorkGeneralLabel: 'Caut în principal:',
+    ableToWorkGeneralPlaceholder: 'Selectați tipul de muncă',
+    generalAvailabilityOptions: [
+      { value: '', label: 'Selectați o opțiune' },
+      { value: 'full_time', label: 'Angajare cu normă întreagă' },
+      { value: 'part_time', label: 'Angajare cu fracțiune de normă' },
+      { value: 'flexible', label: 'Ore flexibile/variabile' },
+    ],
+    hoursPerWeekLabel: 'Numărul dorit de ore pe săptămână:',
+    hoursPerWeekPlaceholder: 'ex., 20-25, sau 40',
+    daysAvailableLabel: 'Zilele în care sunt disponibil să lucrez (bifați toate care se aplică):',
+    days: ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'],
+    SundayLabel: 'Duminică',
+    MondayLabel: 'Luni',
+    TuesdayLabel: 'Marți',
+    WednesdayLabel: 'Miercuri',
+    ThursdayLabel: 'Joi',
+    FridayLabel: 'Vineri',
+    SaturdayLabel: 'Sâmbătă',
+    shiftsAvailableLabel: 'Schimburile pentru care sunt disponibil (bifați toate care se aplică):',
+    shifts: ['Dimineață', 'După-amiază', 'Seară', 'Noapte târziu', 'Flexibil/Orice'],
+    MorningLabel: 'Dimineață (ex., 8 AM - 12 PM)',
+    AfternoonLabel: 'După-amiază (ex., 12 PM - 5 PM)',
+    EveningLabel: 'Seară (ex., 5 PM - 9 PM)',
+    LateNightLabel: 'Noapte târziu (ex., 9 PM încolo)',
+    FlexibleAnyLabel: 'Flexibil/Orice schimb',
+    otherShiftLabel:
+      "Preferințe sau restricții specifice de schimb (ex., 'Indisponibil după 10 PM în zilele lucrătoare')",
+    educationLevelLabel: 'Cel mai înalt nivel de educație finalizat:',
+    educationLevelPlaceholder: 'Selectați nivelul de educație',
+    educationOptions: [
+      { value: '', label: 'Selectați o opțiune' },
+      { value: 'some_high_school', label: 'Liceu parțial' },
+      { value: 'high_school_ged', label: 'Diplomă liceu / GED' },
+      { value: 'some_college_tech', label: 'Colegiu parțial / Școală tehnică' },
+      { value: 'associates_degree', label: 'Diplomă de asociat' },
+      { value: 'bachelors_degree', label: 'Diplomă de licență' },
+      { value: 'masters_higher', label: 'Masterat sau superior' },
+    ],
+    howManyEmployersLabel: 'Câți angajatori ați avut în ultimii trei ani?',
+    howManyEmployersPlaceholder: 'ex., 2',
+    prevCompanyLabel: 'Numele companiei',
+    prevStreetAddressLabel: 'Adresa străzii companiei',
+    prevCityLabel: 'Oraș',
+    prevZipCodeLabel: 'Cod poștal',
+    prevFromLabel: 'Angajat din (LL/AAAA)',
+    prevToLabel: 'Angajat până (LL/AAAA)',
+    prevPositionLabel: 'Poziția/Titlul dvs.',
+    prevSupervisorLabel: 'Numele și titlul supraveghetorului',
+    prevReasonForLeavingLabel: 'Motivul plecării',
+    prevMayWeContactLabel: 'Putem contacta acest angajator pentru referințe?',
+    prevMayWeContactPlaceholder: 'Selectați Da/Nu',
+    addWorkHistoryButton: 'Adaugă angajator',
+    removeWorkHistoryButton: 'Șterge ultimul angajator',
+    referenceNameLabel: 'Nume complet',
+    referenceRelationshipLabel: 'Relație (ex., Fost supraveghetor, Coleg)',
+    referencePhoneLabel: 'Număr de telefon',
+    addReferenceButton: 'Adaugă referință',
+    removeReferenceButton: 'Șterge ultima referință',
+    branchLabel: 'Ramura serviciului',
+    rankAtDischargeLabel: 'Grad la eliberare',
+    militaryFromLabel: 'Serviciu din (LL/AAAA)',
+    militaryToLabel: 'Serviciu până (LL/AAAA)',
+    typeOfDischargeLabel: 'Tipul de eliberare',
+    gettingToKnowYouIntro:
+      'Răspunsurile dvs. la aceste întrebări ne ajută să vă înțelegem mai bine. Vă rugăm să răspundeți cu atenție. Răspunsurile incomplete pot afecta evaluarea.',
+    knowAnyoneLabel:
+      'Cunoașteți pe cineva care lucrează sau a lucrat la Anderson Cleaning? Dacă da, cine?',
+    hardestJobLabel:
+      'Descrieți cea mai grea muncă (plătită sau neplătită) pe care ați avut-o vreodată și ce a făcut-o dificilă.',
+    magicSpellLabel:
+      'Dacă ați putea folosi o vrajă magică pentru a îmbunătăți instant un lucru despre locul dvs. de muncă anterior sau rolul dvs., care ar fi acesta și de ce?',
+    shorterWorkdayLabel:
+      'Ce fel de sarcini sau mediu de lucru face o zi lungă de lucru să pară mai scurtă și mai interesantă pentru dvs.?',
+    winSomeoneOverLabel:
+      'Spuneți-ne despre o dată când a trebuit să convingeți pe cineva de punctul dvs. de vedere sau să obțineți cooperarea lor. Cum ați abordat situația?',
+    addOneThingRestroomLabel:
+      'Dacă ați putea adăuga o caracteristică sau serviciu inovator la fiecare toaletă publică pe care o curățați pentru a îmbunătăți experiența utilizatorului, care ar fi acesta?',
+    helpedCoworkerLabel:
+      'Descrieți o situație specifică în care ați ajutat un coleg care avea probleme cu o sarcină sau o situație dificilă.',
+    ruleDisagreeLabel:
+      'Gândiți-vă la o regulă sau politică de la un loc de muncă anterior cu care nu ați fost pe deplin de acord. Cum ați gestionat-o?',
+    lastBossDescriptionLabel:
+      'Dacă l-am întreba pe supraveghetorul dvs. direct cel mai recent să vă descrie în trei cuvinte, ce credeți că ar spune?',
+    fitInWellLabel:
+      'Pe baza a ceea ce știți despre Anderson Cleaning (sau industria de curățenie), de ce credeți că v-ați integra bine în echipa noastră?',
+    getOutOfBedLabel:
+      'Ce vă motivează să vă ridicați din pat și să mergeți la muncă în fiecare zi, mai ales când vă confruntați cu o zi dificilă?',
+    busyOrDowntimeLabel:
+      'Preferați un job care vă menține constant ocupat sau unul care are perioade de pauză? Cum folosiți eficient timpul de pauză?',
+    weekendsHolidaysLabel:
+      'Sunteți disponibil și dispus să lucrați în weekend-uri sau sărbători dacă programul o cere?',
+    oneHourConversationLabel:
+      'Dacă ați putea avea o conversație de o oră cu orice persoană din istorie (în viață sau decedată) pentru a învăța de la ea, cine ar fi și ce ați dori să discutați?',
+    wishWeAskedLabel:
+      'Mai este ceva pe care ați dori să-l știm despre dvs., sau o întrebare pe care doriți să o fi pus în această aplicație?',
+    drugTestingStatement:
+      'POLITICA DE TESTARE PENTRU DROGURI ȘI ALCOOL: Anderson Cleaning, Inc. este angajată să mențină un mediu de lucru sigur, sănătos și productiv. Ne rezervăm dreptul de a efectua teste pentru alcool, droguri sau substanțe controlate în circumstanțe legale, inclusiv: screening pre-angajare, testare aleatoare (pentru poziții sensibile la siguranță, dacă este cazul), investigare post-incident/accident și când există suspiciune rezonabilă de afectare. Toate testările vor fi administrate în conformitate cu legile federale, de stat și locale aplicabile și procedurile scrise ale Anderson Cleaning, Inc. (disponibile la cerere). Anderson Cleaning, Inc. va acoperi costurile acestor teste. Refuzul de a se supune testării sau un rezultat pozitiv al testului poate duce la retragerea ofertei de job sau acțiune disciplinară, până la și inclusiv concedierea.',
+    applicantStatement:
+      "CERTIFICARE ȘI ACORD AL SOLICITANTULUI: Certific că toate răspunsurile și declarațiile pe care le-am furnizat în această aplicație și în orice documente însoțitoare sunt adevărate, complete și corecte în cunoștința și convingerea mea. Înțeleg că orice denaturare, falsificare sau omisiune materială a informațiilor poate fi motive pentru refuzul de angajare sau pentru concediere imediată dacă sunt angajat, indiferent de timpul scurs înainte de descoperire. Autorizez prin aceasta Anderson Cleaning, Inc. să investigheze toate declarațiile conținute în această aplicație și să contacteze angajatorii mei anteriori, referințele și instituțiile de învățământ pentru a verifica informațiile furnizate. Eliberez toate părțile de orice răspundere pentru orice daune care pot rezulta din furnizarea unor astfel de informații. Înțeleg că această aplicație nu este și nu are intenția de a fi un contract de muncă. Dacă sunt angajat, înțeleg că angajarea mea va fi 'La Voință', ceea ce înseamnă că fie eu, fie Anderson Cleaning, Inc. putem înceta relația de muncă în orice moment, din orice motiv sau fără motiv, cu sau fără cauză și cu sau fără preaviz, cu excepția cazului în care este interzis prin lege sau printr-un acord scris cu forță juridică obligatorie. Această relație 'La Voință' nu poate fi modificată decât printr-un acord scris semnat de un reprezentant autorizat al Anderson Cleaning, Inc.",
+    partTimeStatement:
+      'ANGAJAMENT PENTRU ANGAJARE CU FRACȚIUNE DE NORMĂ (dacă este cazul): Înțeleg că dacă aplic pentru sau accept o poziție cu fracțiune de normă, aceasta necesită un angajat de încredere și angajat care va respecta în mod consecvent programul de lucru convenit. Mă angajez să fiu punctual și de încredere. Recunosc că absențele excesive, întârzierile sau nerespectarea acestor obligații de programare ar putea duce la acțiune disciplinară, până la și inclusiv încetarea angajării mele.',
+    acknowledgeLabel: 'Am citit, înțeleg și sunt de acord cu această declarație.',
+    driversLicenseLabel: 'Încărcare permis de conducere (obligatoriu)',
+    driversLicenseHelper:
+      'Încărcați o imagine clară, color sau PDF a feței permisului dvs. de conducere valid. Asigurați-vă că toate informațiile sunt lizibile. Obligatoriu pentru verificarea identității și pozițiile care implică conducere. Dimensiune maximă: 5MB. Acceptate: JPG, PNG, PDF.',
+    resumeLabel: 'Încărcare CV (opțional, dar recomandat)',
+    resumeHelper: 'Formate acceptate: PDF, DOC, DOCX. Dimensiune maximă: 5MB.',
+    coverLetterLabel: 'Scrisoare de intenție (opțional)',
+    coverLetterPlaceholder:
+      'Spuneți-ne mai multe despre de ce sunteți potrivit pentru Anderson Cleaning și acest rol...',
+    submitButton: 'Trimite aplicația',
+    submittingButton: 'Se trimite, vă rugăm așteptați...',
+    submissionSuccessTitle: 'Aplicație trimisă!',
+    submissionSuccessMessage:
+      'Vă mulțumim că ați aplicat! Am primit aplicația dvs. și vă vom contacta dacă calificările dvs. corespund nevoilor noastre.',
+    submissionErrorTitle: 'Eroare la trimitere',
+    submissionErrorMessage:
+      'A apărut o eroare la trimiterea aplicației dvs. Vă rugăm să verificați conexiunea la internet și să încercați din nou. Dacă problema persistă, vă rugăm să ne contactați.',
+    validationErrorMissingFile:
+      'Un fișier obligatoriu lipsește. Vă rugăm să încărcați permisul de conducere.',
+    validationErrorGeneric: 'Vă rugăm să corectați erorile din formular.',
+    lightModeButton: 'Mod luminos',
+    darkModeButton: 'Mod întunecat',
+    requiredFieldIndicator: '*',
+    requiredErrorText: 'Acest câmp este obligatoriu.',
+    uploadFileButton: 'Alegeți fișier',
+    noFileChosenText: 'Niciun fișier ales',
+    fileTypeError: 'Tip de fișier invalid. Acceptate: {types}',
+    fileSizeError: 'Fișier prea mare. Dimensiune maximă: {size}MB',
+    removeFileButton: 'Șterge',
+    experienceOptions: [
+      'houseCleaning',
+      'officeCleaning',
+      'windowCleaning',
+      'floorStripWax',
+      'carpetCleaning',
+      'supervising',
+      'managing',
+      'pagesNumbers',
+    ],
+    experienceWith_houseCleaningLabel: 'Curățenie rezidențială',
+    experienceWith_officeCleaningLabel: 'Curățenie comercială birouri',
+    experienceWith_windowCleaningLabel: 'Curățare geamuri (interior/exterior)',
+    experienceWith_floorStripWaxLabel: 'Decapare și cerare podele',
+    experienceWith_carpetCleaningLabel: 'Curățare covoare și tapițerie',
+    experienceWith_supervisingLabel: 'Supervizare echipe de curățenie',
+    experienceWith_managingLabel: 'Management operațiuni curățenie',
+    experienceWith_pagesNumbersLabel: 'Utilizare software programare/comenzi de lucru',
+    otherText: 'Altele',
+    otherSpecifyPlaceholder: 'Vă rugăm să specificați',
+    changeFileButton: 'Schimbă fișier',
+    employer: 'Angajator',
+    reference: 'Referință',
+    removeEmployer: 'Șterge angajator',
+    removeReference: 'Șterge referință',
+    emailInvalidError: 'Format email invalid.',
+    phoneInvalidError: 'Format număr de telefon invalid.',
+    dateInvalidError: 'Dată invalidă (LL/AAAA).',
+    dateToBeforeFromError: 'Data de sfârșit nu poate fi înainte de data de început.',
+  },
+}
+
+export const ExperienceOptionKeys = [
+  'houseCleaning',
+  'officeCleaning',
+  'windowCleaning',
+  'floorStripWax',
+  'carpetCleaning',
+  'supervising',
+  'managing',
+  'pagesNumbers',
+]
+
+export const LocationOptionKeys = [
+  'Agawam',
+  'Springfield',
+  'Chicopee',
+  'Holyoke',
+  'Northampton',
+  'Florence',
+  'SouthHadley',
+  'Amherst',
+  'Westfield',
+  'Longmeadow',
+  'EastLongmeadow',
+  'Wilbraham',
+]
+
+export const DayOptionKeys = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
+
+export const ShiftOptionKeys = ['Morning', 'Afternoon', 'Evening', 'LateNight', 'FlexibleAny']

@@ -1,0 +1,20 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /studio
+Disallow: /studio/*
+Disallow: /api/*
+Disallow: /_next/*
+Disallow: /apply/success
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /studio
+Disallow: /api/*
+
+# Host
+Host: https://andersoncleaning.com
+
+# Sitemaps
+Sitemap: https://andersoncleaning.com/sitemap.xml

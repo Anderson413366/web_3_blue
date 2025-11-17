@@ -1,0 +1,235 @@
+'use client'
+
+import React, { useState, useEffect, useCallback, useMemo, createContext, useContext } from 'react'
+import {
+  LanguageCode,
+  Translations,
+  FormDataShape,
+  AppContextType,
+  SectionError,
+} from './types'
+import {
+  mockTranslations,
+  INITIAL_FORM_DATA,
+  SECTIONS_CONFIG,
+  DEFAULT_LANGUAGE,
+} from './constants'
+
+// Helper to get translations
+const getTranslatedText = (
+  lang: LanguageCode,
+  key: string,
+  options?: Record<string, string | number>
+): Translations[string] => {
+  const langTranslations = mockTranslations[lang] || mockTranslations[DEFAULT_LANGUAGE]
+  const translationValue = langTranslations[key] || key
+
+  if (typeof translationValue === 'string' && options) {
+    let text = translationValue
+    Object.keys(options).forEach((k) => {
+      if (typeof text === 'string') {
+        text = text.replace(`{${k}}`, String(options[k]))
+      }
+    })
+    return text
+  }
+  return translationValue
+}
+
+export const AppContext = createContext<AppContextType | undefined>(undefined)
+
+export const useAppContext = () => {
+  const context = useContext(AppContext)
+  if (!context) {
+    throw new Error('useAppContext must be used within an AppProvider')
+  }
+  return context
+}
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageCode>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('appLanguage') as LanguageCode) || DEFAULT_LANGUAGE
+    }
+    return DEFAULT_LANGUAGE
+  })
+
+  const [formData, setFormData] = useState<FormDataShape>(INITIAL_FORM_DATA)
+  const [currentSectionIndex, setCurrentSectionIndex] = useState<number>(0)
+  const [applicationStatus, setApplicationStatus] = useState<
+    'idle' | 'submitting' | 'success' | 'error'
+  >('idle')
+  const [formErrors, setFormErrors] = useState<SectionError>({})
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('appLanguage', currentLanguage)
+    }
+  }, [currentLanguage])
+
+  const t = useCallback(
+    (key: string, options?: Record<string, string | number>): Translations[string] => {
+      return getTranslatedText(currentLanguage, key, options)
+    },
+    [currentLanguage]
+  )
+
+  const handleChange = useCallback(
+    (
+      section: keyof FormDataShape,
+      field: string,
+      value: any,
+      subIndex?: number,
+      subField?: string
+    ) => {
+      setFormData((prev) => {
+        const newSectionData = { ...prev[section] }
+        if (
+          subIndex !== undefined &&
+          subField &&
+          Array.isArray(newSectionData[field as keyof typeof newSectionData])
+        ) {
+          const arrayField = newSectionData[field as keyof typeof newSectionData] as any[]
+          if (arrayField[subIndex]) {
+            arrayField[subIndex] = { ...arrayField[subIndex], [subField]: value }
+          }
+        } else if (
+          typeof newSectionData[field as keyof typeof newSectionData] === 'object' &&
+          !Array.isArray(newSectionData[field as keyof typeof newSectionData]) &&
+          newSectionData[field as keyof typeof newSectionData] !== null
+        ) {
+          ;(newSectionData[field as keyof typeof newSectionData] as Record<string, any>)[
+            subField as string
+          ] = value
+        } else {
+          ;(newSectionData as Record<string, any>)[field] = value
+        }
+        return { ...prev, [section]: newSectionData }
+      })
+    },
+    []
+  )
+
+  const handleMultiCheckboxChange = useCallback(
+    (section: keyof FormDataShape, field: string, option: string, checked: boolean) => {
+      setFormData((prev) => {
+        const sectionData = prev[section] as any
+        const currentValues = { ...sectionData[field] } as Record<string, boolean>
+        currentValues[option] = checked
+        return {
+          ...prev,
+          [section]: {
+            ...sectionData,
+            [field]: currentValues,
+          },
+        }
+      })
+    },
+    []
+  )
+
+  const addWorkHistoryEntry = useCallback(() => {
+    setFormData((prev) => ({
+      ...prev,
+      workHistory: {
+        ...prev.workHistory,
+        entries: [
+          ...prev.workHistory.entries,
+          {
+            companyName: '',
+            streetAddress: '',
+            city: '',
+            zipCode: '',
+            fromDate: '',
+            toDate: '',
+            position: '',
+            supervisor: '',
+            reasonForLeaving: '',
+            mayContact: '',
+          },
+        ],
+      },
+    }))
+  }, [])
+
+  const removeWorkHistoryEntry = useCallback((index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      workHistory: {
+        ...prev.workHistory,
+        entries: prev.workHistory.entries.filter((_, i) => i !== index),
+      },
+    }))
+  }, [])
+
+  const addReferenceEntry = useCallback(() => {
+    setFormData((prev) => ({
+      ...prev,
+      references: {
+        ...prev.references,
+        entries: [...prev.references.entries, { name: '', relationship: '', phone: '' }],
+      },
+    }))
+  }, [])
+
+  const removeReferenceEntry = useCallback((index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      references: {
+        ...prev.references,
+        entries: prev.references.entries.filter((_, i) => i !== index),
+      },
+    }))
+  }, [])
+
+  const handleFileUpload = useCallback((field: 'driversLicense' | 'resume', file: File | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      uploads: {
+        ...prev.uploads,
+        [field]: file,
+      },
+    }))
+  }, [])
+
+  const appContextValue: AppContextType = useMemo(
+    () => ({
+      currentLanguage,
+      setCurrentLanguage,
+      t,
+      formData,
+      setFormData,
+      handleChange,
+      handleMultiCheckboxChange,
+      addWorkHistoryEntry,
+      removeWorkHistoryEntry,
+      addReferenceEntry,
+      removeReferenceEntry,
+      handleFileUpload,
+      currentSectionIndex,
+      setCurrentSectionIndex,
+      SECTIONS_CONFIG,
+      applicationStatus,
+      setApplicationStatus,
+      formErrors,
+      setFormErrors,
+    }),
+    [
+      currentLanguage,
+      t,
+      formData,
+      handleChange,
+      handleMultiCheckboxChange,
+      addWorkHistoryEntry,
+      removeWorkHistoryEntry,
+      addReferenceEntry,
+      removeReferenceEntry,
+      handleFileUpload,
+      currentSectionIndex,
+      applicationStatus,
+      formErrors,
+    ]
+  )
+
+  return <AppContext.Provider value={appContextValue}>{children}</AppContext.Provider>
+}
