@@ -15,6 +15,7 @@ import { checkRateLimit, getClientIdentifier } from '@/lib/api/rateLimit'
 import { sanitizeObject, validateHoneypot } from '@/lib/api/sanitize'
 import { sendEmail, getNotificationEmail, logEmailSend } from '@/lib/api/email'
 import { generateContactEmail } from '@/lib/api/emailTemplates'
+import { createSupabaseServer } from '@/lib/supabase/server'
 
 export const runtime = 'edge'
 
@@ -70,6 +71,31 @@ export async function POST(request: NextRequest) {
     }
 
     const data = validationResult.data
+
+    // Save to Supabase database
+    try {
+      const supabase = createSupabaseServer()
+      const { error: dbError } = await supabase.from('contact_submissions').insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company || null,
+        message: data.message,
+        source_page: request.headers.get('referer') || '/contact',
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
+        user_agent: request.headers.get('user-agent') || null,
+      })
+
+      if (dbError) {
+        console.error('[CONTACT] Database error:', dbError)
+        // Continue anyway - we still want to send email even if DB fails
+      } else {
+        console.log('[CONTACT] Saved to database successfully')
+      }
+    } catch (dbError) {
+      console.error('[CONTACT] Database save failed:', dbError)
+      // Continue anyway
+    }
 
     // Generate email content
     const { html, text } = generateContactEmail(data)

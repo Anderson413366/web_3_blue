@@ -14,6 +14,7 @@ import { checkRateLimit, getClientIdentifier } from '@/lib/api/rateLimit'
 import { sanitizeEmail } from '@/lib/api/sanitize'
 import { sendEmail, getNotificationEmail, logEmailSend } from '@/lib/api/email'
 import { generateNewsletterEmail } from '@/lib/api/emailTemplates'
+import { createSupabaseServer } from '@/lib/supabase/server'
 
 export const runtime = 'edge'
 
@@ -58,6 +59,27 @@ export async function POST(request: NextRequest) {
     }
 
     const { email } = validationResult.data
+
+    // Save to Supabase database
+    try {
+      const supabase = createSupabaseServer()
+      const { error: dbError } = await supabase.from('newsletter_subscriptions').insert({
+        email: email,
+        source_page: request.headers.get('referer') || '/',
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
+        user_agent: request.headers.get('user-agent') || null,
+      })
+
+      if (dbError) {
+        console.error('[NEWSLETTER] Database error:', dbError)
+        // Continue anyway - we still want to send email even if DB fails
+      } else {
+        console.log('[NEWSLETTER] Saved to database successfully')
+      }
+    } catch (dbError) {
+      console.error('[NEWSLETTER] Database save failed:', dbError)
+      // Continue anyway
+    }
 
     // Generate email notification
     const { html, text } = generateNewsletterEmail(email)

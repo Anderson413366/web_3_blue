@@ -15,6 +15,7 @@ import { checkRateLimit, getClientIdentifier } from '@/lib/api/rateLimit'
 import { sanitizeObject, sanitizeFilename } from '@/lib/api/sanitize'
 import { sendEmail, getNotificationEmail, logEmailSend } from '@/lib/api/email'
 import { generateCareersEmail } from '@/lib/api/emailTemplates'
+import { createSupabaseServer } from '@/lib/supabase/server'
 
 // Use Node.js runtime for file upload handling
 export const runtime = 'nodejs'
@@ -127,6 +128,33 @@ export async function POST(request: NextRequest) {
         content: buffer,
         contentType: resumeFile.type,
       }
+    }
+
+    // Save to Supabase database (resume file is NOT saved to DB, only sent via email)
+    try {
+      const supabase = createSupabaseServer()
+      const { error: dbError } = await supabase.from('career_applications').insert({
+        name: `${validData.firstName} ${validData.lastName}`,
+        email: validData.email,
+        phone: validData.phone,
+        position: validData.applyingFor || 'General Application',
+        cover_letter: validData.message || null,
+        resume_filename: resumeAttachment?.filename || null,
+        // Note: We don't save the actual resume file to DB, it's sent via email
+        source_page: request.headers.get('referer') || '/apply',
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
+        user_agent: request.headers.get('user-agent') || null,
+      })
+
+      if (dbError) {
+        console.error('[CAREERS] Database error:', dbError)
+        // Continue anyway - we still want to send email even if DB fails
+      } else {
+        console.log('[CAREERS] Saved to database successfully')
+      }
+    } catch (dbError) {
+      console.error('[CAREERS] Database save failed:', dbError)
+      // Continue anyway
     }
 
     // Generate email content
