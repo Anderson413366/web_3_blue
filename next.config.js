@@ -79,27 +79,27 @@ const nextConfig = {
         ],
       },
       {
-        // Cache static assets
+        // Cache static assets (reduced from 1 year to 1 day)
         source: '/static/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=86400, must-revalidate',
           },
         ],
       },
       {
-        // Cache images
+        // Cache images (reduced from 1 year to 7 days)
         source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=604800, must-revalidate',
           },
         ],
       },
       {
-        // Cache Next.js static files
+        // Cache Next.js hashed static files (keep 1 year - safe because hashed)
         source: '/_next/static/:path*',
         headers: [
           {
@@ -109,12 +109,12 @@ const nextConfig = {
         ],
       },
       {
-        // Cache fonts
+        // Cache fonts (reduced from 1 year to 30 days)
         source: '/fonts/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=2592000, must-revalidate',
           },
         ],
       },

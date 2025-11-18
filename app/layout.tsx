@@ -4,6 +4,11 @@ import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ConsentInit from '@/components/ConsentInit'
+import CookieBanner from '@/components/CookieBanner'
+import WebVitalsReporter from '@/components/WebVitalsReporter'
+import SkipLink from '@/components/SkipLink'
+import AccessibilityProvider from '@/components/AccessibilityProvider'
 import {
   generateOrganizationSchema,
   generateLocalBusinessSchema,
@@ -145,13 +150,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased">
-        <ThemeProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <ConsentInit />
+        <AccessibilityProvider>
+          <ThemeProvider>
+            <SkipLink />
+            <Header />
+            <main className="min-h-screen" id="main-content" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+            <CookieBanner />
+          </ThemeProvider>
+        </AccessibilityProvider>
+        <WebVitalsReporter />
       </body>
     </html>
   )
