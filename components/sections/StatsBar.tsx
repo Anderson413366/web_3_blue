@@ -75,10 +75,10 @@ interface StatsBarProps {
 const DEFAULT_STATS: Stat[] = [
   {
     id: 1,
-    value: '20+',
+    value: '18+',
     label: 'Years in Business',
     icon: Calendar,
-    numericValue: 20,
+    numericValue: 18,
     suffix: '+',
   },
   {

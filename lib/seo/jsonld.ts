@@ -19,7 +19,7 @@ export function generateOrganizationSchema() {
     logo: `${baseUrl}/images/logo.png`,
     description:
       'Professional commercial cleaning and janitorial services for businesses in Western Massachusetts and Northern Connecticut.',
-    foundingDate: '2000',
+    foundingDate: '2007',
     email: 'info@anderson-cleaning-site.vercel.app',
     telephone: '+1-413-306-5053',
     address: {
