@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/lib/ThemeProvider'
 import Header from '@/components/Header'
@@ -10,7 +11,14 @@ import {
 } from '@/lib/seo/jsonld'
 import { getNonce } from '@/lib/utils/nonce'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app'
+// Load Inter font with Next.js font optimization
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://andersoncleaning.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -83,9 +91,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Get CSP nonce for this request
-  const nonce = await getNonce()
+  // Returns empty string for static pages - middleware handles CSP at runtime
+  const nonce = getNonce()
 
   // Generate JSON-LD structured data
   const organizationSchema = generateOrganizationSchema()
@@ -93,20 +102,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const websiteSchema = generateWebsiteSchema()
 
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         {/* Resource Hints - Preconnect to critical third-party origins */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-
-        {/* Load Inter font from Google Fonts (runtime loading to avoid build-time fetch) */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-          rel="stylesheet"
-        />
 
         {/* DNS Prefetch for additional third-party services */}
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
