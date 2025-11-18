@@ -3,6 +3,7 @@
 import { useParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { CheckCircle2, ArrowLeft, Clock, Shield, Users, Award } from 'lucide-react'
+import StructuredData from '@/components/StructuredData'
 
 // Service data structure
 interface ServiceData {
@@ -557,12 +558,7 @@ export default function ServiceDetailPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* JSON-LD for SEO */}
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
+      {jsonLd && <StructuredData schema={jsonLd} />}
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">

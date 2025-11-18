@@ -14,7 +14,8 @@ import {
   generateLocalBusinessSchema,
   generateWebsiteSchema,
 } from '@/lib/seo/jsonld'
-import { getNonce } from '@/lib/utils/nonce'
+import { NonceProvider } from '@/lib/security/NonceProvider'
+import StructuredData from '@/components/StructuredData'
 
 // Load Inter font with Next.js font optimization
 const inter = Inter({
@@ -96,19 +97,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Get CSP nonce for this request
-  // This makes the layout dynamic, but ensures proper CSP protection
-  const nonce = await getNonce()
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Generate JSON-LD structured data
   const organizationSchema = generateOrganizationSchema()
   const localBusinessSchema = generateLocalBusinessSchema()
   const websiteSchema = generateWebsiteSchema()
 
   return (
-    <html lang="en" className={inter.variable}>
-      <head>
+    <NonceProvider>
+      <html lang="en" className={inter.variable}>
+        <head>
         {/* Resource Hints - Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -132,38 +130,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="theme-color" content="#1D4ED8" />
         <meta name="msapplication-TileColor" content="#1D4ED8" />
 
-        {/* JSON-LD Structured Data with CSP nonce */}
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-      </head>
-      <body className="antialiased">
-        <ConsentInit />
-        <AccessibilityProvider>
-          <ThemeProvider>
-            <SkipLink />
-            <Header />
-            <main className="min-h-screen" id="main-content" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-            <CookieBanner />
-          </ThemeProvider>
-        </AccessibilityProvider>
-        <WebVitalsReporter />
-      </body>
-    </html>
+          {/* JSON-LD Structured Data with CSP nonce */}
+          <StructuredData schema={organizationSchema} />
+          <StructuredData schema={localBusinessSchema} />
+          <StructuredData schema={websiteSchema} />
+        </head>
+        <body className="antialiased">
+          <ConsentInit />
+          <AccessibilityProvider>
+            <ThemeProvider>
+              <SkipLink />
+              <Header />
+              <main className="min-h-screen" id="main-content" tabIndex={-1}>
+                {children}
+              </main>
+              <Footer />
+              <CookieBanner />
+            </ThemeProvider>
+          </AccessibilityProvider>
+          <WebVitalsReporter />
+        </body>
+      </html>
+    </NonceProvider>
   )
 }

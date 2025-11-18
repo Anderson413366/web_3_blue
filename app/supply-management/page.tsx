@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
+import StructuredData from '@/components/StructuredData'
 import {
   Package,
   TrendingDown,
@@ -41,10 +42,7 @@ export default function SupplyManagementPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <StructuredData schema={jsonLd} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">

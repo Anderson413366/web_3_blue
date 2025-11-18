@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { AppProvider } from '@/lib/careers/AppContext'
 import CareersPage from '@/components/careers/CareersPage'
 import { generateJobPostingSchema, generateBreadcrumbSchema } from '@/lib/seo/jsonld'
+import StructuredData from '@/components/StructuredData'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anderson-cleaning-site.vercel.app'
 
@@ -78,16 +79,8 @@ export default function CareersPageRoute() {
 
   return (
     <>
-      {/* Structured Data - JobPosting Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
-      />
-      {/* Structured Data - Breadcrumb Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <StructuredData schema={jobPostingSchema} />
+      <StructuredData schema={breadcrumbSchema} />
       <AppProvider>
         <CareersPage />
       </AppProvider>
