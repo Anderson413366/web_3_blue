@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import BeforeAfterSlider from '@/components/sections/BeforeAfterSlider'
+import PromotionalModal from '@/components/PromotionalModal'
 import {
   Phone,
   Clock,
@@ -22,30 +23,13 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-
-      {/* Promotional Banner */}
-      <div className="bg-gradient-to-r from-accent-500 to-accent-600 text-white py-3 mt-16 lg:mt-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center sm:text-left">
-            <Sparkles className="h-5 w-5 flex-shrink-0" />
-            <p className="font-semibold">
-              <span className="hidden sm:inline">Special Offer: </span>
-              10% off first month for new clients + $100 referral rewards!
-            </p>
-            <Link href="/promotions" className="group">
-              <span className="text-sm font-medium underline underline-offset-2 hover:text-accent-200 transition-colors flex items-center">
-                Learn More
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* Promotional Modal */}
+      <PromotionalModal />
 
       {/* Hero Section with Quote Form */}
       <section
         id="main-content"
-        className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-24"
+        className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white pt-28 pb-16 md:pt-32 md:pb-24"
         tabIndex={-1}
       >
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
