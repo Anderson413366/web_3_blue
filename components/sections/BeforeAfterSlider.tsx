@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export interface BeforeAfterItem {
@@ -27,9 +28,12 @@ export interface BeforeAfterSliderProps {
 }
 
 /**
- * Interactive Before/After image comparison slider
+ * Interactive Before/After image comparison slider with Next.js Image optimization
  *
  * Features:
+ * - Next.js Image component with WebP/AVIF support
+ * - Automatic blur placeholder for better UX
+ * - Responsive sizing with priority loading
  * - Draggable divider for comparison
  * - Keyboard accessible (arrow keys to adjust)
  * - Touch-enabled for mobile devices
@@ -103,6 +107,7 @@ export default function BeforeAfterSlider({
       window.removeEventListener('touchmove', handleTouchMove)
       window.removeEventListener('touchend', handleMouseUp)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging])
 
   // Keyboard navigation
@@ -144,30 +149,47 @@ export default function BeforeAfterSlider({
         aria-valuenow={Math.round(sliderPosition)}
         aria-valuetext={`${Math.round(sliderPosition)}% after image visible`}
       >
-        {/* After Image (background) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${currentItem.afterImage})` }}
-          aria-hidden="true"
-        >
+        {/* After Image (background) - Optimized with Next.js Image */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src={currentItem.afterImage}
+            alt={`${currentItem.title} - After cleaning`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            className="object-cover"
+            priority={currentIndex === 0} // Priority load first image
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            quality={85}
+          />
           {currentItem.afterLabel && (
-            <div className="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+            <div className="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-xs font-semibold z-10">
               {currentItem.afterLabel || 'After'}
             </div>
           )}
         </div>
 
-        {/* Before Image (clipped overlay) */}
+        {/* Before Image (clipped overlay) - Optimized with Next.js Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url(${currentItem.beforeImage})`,
             clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
           }}
           aria-hidden="true"
         >
+          <Image
+            src={currentItem.beforeImage}
+            alt={`${currentItem.title} - Before cleaning`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            className="object-cover"
+            priority={currentIndex === 0}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            quality={85}
+          />
           {currentItem.beforeLabel && sliderPosition > 20 && (
-            <div className="absolute top-4 left-4 bg-gray-700 text-white px-3 py-1 rounded-full text-xs font-semibold">
+            <div className="absolute top-4 left-4 bg-gray-700 text-white px-3 py-1 rounded-full text-xs font-semibold z-10">
               {currentItem.beforeLabel || 'Before'}
             </div>
           )}
@@ -175,7 +197,7 @@ export default function BeforeAfterSlider({
 
         {/* Slider Handle */}
         <div
-          className="absolute top-0 bottom-0 w-1 bg-white shadow-lg"
+          className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-20"
           style={{ left: `${sliderPosition}%` }}
           aria-hidden="true"
         >
@@ -197,7 +219,7 @@ export default function BeforeAfterSlider({
         </div>
 
         {/* Keyboard hint */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1 rounded-full opacity-0 focus-within:opacity-100 transition-opacity">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1 rounded-full opacity-0 focus-within:opacity-100 transition-opacity z-10">
           Use ← → arrow keys to compare
         </div>
       </div>
