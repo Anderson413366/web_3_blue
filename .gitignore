@@ -36,3 +36,6 @@ next-env.d.ts
 # Script outputs
 link-integrity-report.json
 i18n-coverage-report.json
+
+# Archive folder (for review before deletion)
+_ARCHIVE_FOR_REVIEW/
