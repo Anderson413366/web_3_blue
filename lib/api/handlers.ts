@@ -99,7 +99,7 @@ export async function handleSubmission<T>({
 }
 
 async function defaultParser(request: NextRequest) {
-  return { payload: await request.json() }
+  return { payload: await request.json(), extras: undefined }
 }
 
 function successResponse(message: string, rateLimit: { limit: number; remaining: number; reset: number }) {

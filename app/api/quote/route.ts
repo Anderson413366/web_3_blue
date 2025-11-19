@@ -13,7 +13,7 @@ export function POST(request: NextRequest) {
     request,
     schema: quoteFormSchema,
     rateLimit: { limit: 3, windowMs: 5 * 60 * 1000 },
-    sanitize: (payload) => sanitizeObject(payload),
+    sanitize: (payload) => sanitizeObject(payload as Record<string, unknown>),
     honeypotCheck: (payload) => validateHoneypot((payload as Record<string, any>).website),
     store: (data, { request }) =>
       submitQuote({
