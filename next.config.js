@@ -34,9 +34,6 @@ const nextConfig = {
         : false,
   },
 
-  // Enable SWC minification
-  swcMinify: true,
-
   // Compression
   compress: true,
 

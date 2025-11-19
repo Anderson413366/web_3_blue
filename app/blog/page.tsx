@@ -1,9 +1,7 @@
 export const revalidate = 86400
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { Button } from '@/components/ui/Button'
-import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
+import BlogExplorer from '@/components/blog/BlogExplorer'
 
 const blogPosts = [
   {
@@ -95,119 +93,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 py-6">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  category === 'All'
-                    ? 'bg-primary-600 text-white shadow-md'
-                    : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Posts Grid */}
-      <section className="py-16 bg-white dark:bg-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                {/* Featured Image */}
-                <div className="relative h-48 bg-gray-200 dark:bg-slate-700 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 hover:scale-105"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    quality={85}
-                  />
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-block px-3 py-1 bg-accent-500 text-white text-xs font-semibold rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(post.publishedDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                      })}
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {post.readTime}
-                    </div>
-                  </div>
-
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <Link href={`/blog/${post.slug}`}>
-                    <Button variant="outline" size="sm" className="w-full group">
-                      Read Article
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-green-50 dark:from-slate-800 dark:to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Get Cleaning Tips Delivered
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-              Subscribe to our newsletter for monthly cleaning tips, industry updates, and exclusive
-              offers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="your.email@company.com"
-                className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
-              />
-              <Button variant="primary" size="lg">
-                Subscribe
-              </Button>
-            </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
-              We respect your privacy. Unsubscribe anytime.
-            </p>
-          </div>
-        </div>
-      </section>
+      <BlogExplorer posts={blogPosts} categories={categories} />
     </div>
   )
 }

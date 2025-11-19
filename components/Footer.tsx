@@ -41,31 +41,31 @@ export default function Footer() {
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+        <div className="xl:grid xl:grid-cols-4 xl:gap-12">
           {/* Company Info */}
-          <div className="space-y-8">
+          <div className="space-y-8 xl:col-span-1">
             <div>
               <h3 className="text-2xl font-bold text-white">Anderson Cleaning</h3>
               <p className="mt-4 text-sm leading-6 text-gray-300">
                 Professional commercial cleaning services for businesses in Western Massachusetts and Northern Connecticut.
               </p>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-4">
               <a
                 href="tel:4133065053"
-                className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition-colors"
               >
                 <Phone className="h-4 w-4" />
                 (413) 306-5053
               </a>
               <a
                 href="mailto:info@andersoncleaning.com"
-                className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition-colors"
               >
                 <Mail className="h-4 w-4" />
                 info@andersoncleaning.com
               </a>
-              <div className="flex items-start gap-2 text-sm text-gray-300">
+              <div className="flex items-start gap-3 text-sm text-gray-300 leading-relaxed">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>103 Wayside Avenue<br />West Springfield, MA 01089</span>
               </div>

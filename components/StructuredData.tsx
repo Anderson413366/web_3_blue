@@ -1,15 +1,12 @@
-'use client'
-
 import React from 'react'
-import { useNonce } from '@/lib/security/useNonce'
 
 interface StructuredDataProps {
   schema: Record<string, unknown> | string
   id?: string
+  nonce?: string | null
 }
 
-export default function StructuredData({ schema, id }: StructuredDataProps) {
-  const nonce = useNonce()
+export default function StructuredData({ schema, id, nonce }: StructuredDataProps) {
 
   if (!schema) return null
 
@@ -19,7 +16,7 @@ export default function StructuredData({ schema, id }: StructuredDataProps) {
     <script
       id={id}
       type="application/ld+json"
-      nonce={nonce}
+      nonce={nonce ?? undefined}
       dangerouslySetInnerHTML={{ __html: json }}
     />
   )

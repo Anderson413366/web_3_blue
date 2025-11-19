@@ -6,6 +6,8 @@ import { Button } from './ui/Button'
 import { X, Cookie } from 'lucide-react'
 import { grantConsent, denyConsent, hasConsentChoice } from '@/lib/utils/consent'
 
+const CONSENT_SHOWN_KEY = 'consentShown'
+
 /**
  * Cookie consent banner component
  *
@@ -25,9 +27,14 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Check if user has already made a consent choice
+    if (typeof window === 'undefined') return
+
+    const consentAlreadyShown = localStorage.getItem(CONSENT_SHOWN_KEY) === 'true'
+    if (consentAlreadyShown) {
+      return
+    }
+
     if (!hasConsentChoice()) {
-      // Delay showing banner for better UX
       const timer = setTimeout(() => {
         setShowBanner(true)
         setIsVisible(true)
@@ -40,6 +47,9 @@ export default function CookieBanner() {
   const handleAccept = () => {
     // Grant consent via Consent Mode v2
     grantConsent()
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(CONSENT_SHOWN_KEY, 'true')
+    }
 
     // Hide banner
     setIsVisible(false)

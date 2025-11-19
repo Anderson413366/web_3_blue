@@ -23,8 +23,20 @@ const FormCheckboxGroup: React.FC<FormCheckboxGroupProps> = ({
         {label}
       </label>
       <div className="mt-2 space-y-2">
-        {options.map((optionKey) => (
-          <div key={optionKey} className="flex items-center">
+        {options.map((optionKey) => {
+          const translationKey = translationKeyPrefix
+            ? `${translationKeyPrefix}_${optionKey}Label`
+            : `${optionKey}Label`
+          const translated = (t(translationKey, { defaultValue: '' }) as string) || ''
+          const labelFromKey = optionKey
+            .replace(/[_-]/g, ' ')
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/\s+/g, ' ')
+            .trim()
+          const cleanLabel = (translated || labelFromKey || optionKey).replace(/Label$/i, '')
+
+          return (
+            <div key={optionKey} className="flex items-center">
             <input
               id={`${namePrefix}-${optionKey}`}
               name={`${namePrefix}-${optionKey}`}
@@ -37,10 +49,10 @@ const FormCheckboxGroup: React.FC<FormCheckboxGroupProps> = ({
               htmlFor={`${namePrefix}-${optionKey}`}
               className="ml-2 block text-sm text-gray-900 dark:text-gray-200"
             >
-              {t(`${translationKeyPrefix}_${optionKey}Label`) as string}
+              {cleanLabel || optionKey}
             </label>
           </div>
-        ))}
+        )})}
       </div>
       {error && <p className="mt-1 text-xs text-red-500 dark:text-red-400">{error}</p>}
     </div>

@@ -7,6 +7,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.story-section::before,
+.story-section::after {
+  display: none !important;
+}
+
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
 }

@@ -15,7 +15,6 @@ import {
   generateLocalBusinessSchema,
   generateWebsiteSchema,
 } from '@/lib/seo/jsonld'
-import { NonceProvider } from '@/lib/security/NonceProvider'
 import StructuredData from '@/components/StructuredData'
 
 // Load Inter font with Next.js font optimization
@@ -98,17 +97,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const nonce = headers().get('x-nonce')
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonceHeader = await headers()
+  const nonce = nonceHeader.get('x-nonce')
   // Generate JSON-LD structured data
   const organizationSchema = generateOrganizationSchema()
   const localBusinessSchema = generateLocalBusinessSchema()
   const websiteSchema = generateWebsiteSchema()
 
   return (
-    <NonceProvider nonce={nonce}>
-      <html lang="en" className={inter.variable}>
-        <head>
+    <html lang="en" className={inter.variable}>
+      <head>
         {/* Resource Hints - Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -133,26 +132,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-TileColor" content="#1D4ED8" />
 
           {/* JSON-LD Structured Data with CSP nonce */}
-          <StructuredData schema={organizationSchema} />
-          <StructuredData schema={localBusinessSchema} />
-          <StructuredData schema={websiteSchema} />
-        </head>
-        <body className="antialiased">
-          <ConsentInit />
-          <AccessibilityProvider>
-            <ThemeProvider>
-              <SkipLink />
-              <Header />
-              <main className="min-h-screen" id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-              <Footer />
-              <CookieBanner />
-            </ThemeProvider>
-          </AccessibilityProvider>
-          <WebVitalsReporter />
-        </body>
-      </html>
-    </NonceProvider>
+        <StructuredData schema={organizationSchema} nonce={nonce} />
+        <StructuredData schema={localBusinessSchema} nonce={nonce} />
+        <StructuredData schema={websiteSchema} nonce={nonce} />
+      </head>
+      <body className="antialiased">
+        <ConsentInit />
+        <AccessibilityProvider>
+          <ThemeProvider>
+            <SkipLink />
+            <Header />
+            <main className="min-h-screen" id="main-content" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+            <CookieBanner />
+          </ThemeProvider>
+        </AccessibilityProvider>
+        <WebVitalsReporter />
+      </body>
+    </html>
   )
 }

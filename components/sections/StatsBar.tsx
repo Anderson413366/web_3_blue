@@ -83,18 +83,18 @@ const DEFAULT_STATS: Stat[] = [
   },
   {
     id: 2,
-    value: '50+',
+    value: '100+',
     label: 'Active Clients',
     icon: Users,
-    numericValue: 50,
+    numericValue: 100,
     suffix: '+',
   },
   {
     id: 3,
-    value: '2M+',
+    value: '3M+',
     label: 'Sq Ft Cleaned Monthly',
     icon: Building2,
-    numericValue: 2,
+    numericValue: 3,
     suffix: 'M+',
   },
   {

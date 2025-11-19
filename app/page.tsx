@@ -130,7 +130,7 @@ export default function Home() {
                       type="text"
                       id="hero-name"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100"
                       placeholder="John Smith"
                     />
                   </div>
@@ -146,7 +146,7 @@ export default function Home() {
                       type="text"
                       id="hero-company"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100"
                       placeholder="ABC Corp"
                     />
                   </div>
@@ -163,7 +163,7 @@ export default function Home() {
                       id="hero-phone"
                       required
                       autoComplete="tel"
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100"
                       placeholder="(413) 306-5053"
                     />
                   </div>
@@ -178,7 +178,7 @@ export default function Home() {
                     <select
                       id="hero-facility"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100"
                     >
                       <option value="">Select facility type</option>
                       <option>Office Building</option>
@@ -269,17 +269,21 @@ export default function Home() {
             ].map((service, i) => (
               <div
                 key={i}
-                className="bg-white dark:bg-slate-700 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white dark:bg-slate-700 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 min-h-[190px] flex"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="text-4xl flex-shrink-0" role="img" aria-label={service.iconLabel}>{service.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-                      {service.description}
-                    </p>
+                <div className="flex items-start space-x-4 w-full">
+                  <div className="text-4xl flex-shrink-0" role="img" aria-label={service.iconLabel}>
+                    {service.icon}
+                  </div>
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                        {service.description}
+                      </p>
+                    </div>
                     {!service.available && (
                       <span className="inline-block px-2 py-1 bg-warning-light dark:bg-warning-dark/30 text-warning-dark dark:text-warning-light text-xs rounded">
                         Premium add-on

@@ -500,8 +500,12 @@ const servicesData: Record<string, ServiceData> = {
   },
 }
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug
+export default async function ServiceDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
   const service = servicesData[slug]
 
   // JSON-LD Structured Data for SEO

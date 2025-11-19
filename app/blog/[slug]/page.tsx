@@ -1,8 +1,6 @@
-'use client'
-
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Calendar, Clock, ArrowLeft, Share2, CheckCircle2, AlertTriangle } from 'lucide-react'
 
@@ -280,11 +278,17 @@ const blogContent: { [key: string]: any } = {
   },
 }
 
-export default function BlogPost() {
-  const params = useParams()
-  const slug = params?.slug as string
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const post = blogContent[slug]
 
-  const post = blogContent[slug] || blogContent['office-cleaning-checklist-flu-season']
+  if (!post) {
+    notFound()
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
@@ -347,9 +351,9 @@ export default function BlogPost() {
             src={post.image}
             alt={post.title}
             fill
-            sizes="100vw"
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
             className="object-cover"
-            priority
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             quality={90}
@@ -360,46 +364,42 @@ export default function BlogPost() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div
-              className="prose prose-lg dark:prose-invert max-w-none
-                prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-                prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-                prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
-                prose-ul:my-6 prose-ul:space-y-2
-                prose-li:text-gray-700 dark:prose-li:text-gray-300
-                prose-strong:text-gray-900 dark:prose-strong:text-white
-                prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline"
+              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6 prose-ul:my-6 prose-ul:space-y-2 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-white prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
-            <style jsx global>{`
-              .callout {
-                background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-                border-left: 4px solid #3b82f6;
-                border-radius: 0.5rem;
-                padding: 2rem;
-                margin: 3rem 0;
-              }
-              .dark .callout {
-                background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-                border-left-color: #60a5fa;
-              }
-              .callout h3 {
-                color: #1e40af;
-                margin-top: 0 !important;
-                margin-bottom: 1rem;
-              }
-              .dark .callout h3 {
-                color: #93c5fd;
-              }
-              .callout p {
-                color: #1e40af;
-                margin-bottom: 0.5rem;
-              }
-              .dark .callout p {
-                color: #dbeafe;
-              }
-            `}</style>
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
+                  .callout {
+                    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+                    border-left: 4px solid #3b82f6;
+                    border-radius: 0.5rem;
+                    padding: 2rem;
+                    margin: 3rem 0;
+                  }
+                  .dark .callout {
+                    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+                    border-left-color: #60a5fa;
+                  }
+                  .callout h3 {
+                    color: #1e40af;
+                    margin-top: 0 !important;
+                    margin-bottom: 1rem;
+                  }
+                  .dark .callout h3 {
+                    color: #93c5fd;
+                  }
+                  .callout p {
+                    color: #1e40af;
+                    margin-bottom: 0.5rem;
+                  }
+                  .dark .callout p {
+                    color: #dbeafe;
+                  }
+                `,
+              }}
+            />
           </div>
         </div>
 
