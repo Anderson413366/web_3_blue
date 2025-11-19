@@ -6,12 +6,14 @@
  */
 
 import React from 'react'
-import Link from 'next/link'
 import { Metadata } from 'next'
+import Link from 'next/link'
+
+import { ArrowRight } from 'lucide-react'
+
 import { Button } from '@/components/ui/Button'
 import { industries } from '@/lib/industries-data'
 import { getIconComponent } from '@/lib/icon-map'
-import { ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Industries We Serve | Anderson Cleaning Services',

@@ -1,5 +1,5 @@
 import { captureException, captureMessage } from '@sentry/nextjs'
-import { createSupabaseServer } from '@/lib/supabase/server'
+import { createSupabaseServerAnon } from '@/lib/supabase/server'
 import type { Database } from '@/lib/supabase/types'
 
 export type SubmissionResult = { success: true } | { success: false; error: string }
@@ -15,7 +15,7 @@ async function insertRecord<TableName extends keyof Database['public']['Tables']
   payload: Database['public']['Tables'][TableName]['Insert']
 ): Promise<SubmissionResult> {
   try {
-    const supabase = createSupabaseServer()
+    const supabase = createSupabaseServerAnon()
     const { error } = await supabase.from(table).insert(payload as any)
 
     if (error) {

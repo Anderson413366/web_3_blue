@@ -131,7 +131,7 @@ function checkStudioAuth(request: NextRequest): boolean {
     return false
   }
 
-  const credentials = Buffer.from(base64Credentials, 'base64').toString('utf-8')
+  const credentials = atob(base64Credentials)
   const [username, password] = credentials.split(':')
 
   return username === authUser && password === authPass

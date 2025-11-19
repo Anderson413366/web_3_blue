@@ -1,174 +1,65 @@
-/**
- * Quote Form API Route
- *
- * Handles quote request submissions with:
- * - Zod validation
- * - Rate limiting
- * - Sanitization
- * - Email sending
- * - Error handling
- */
-
 import { NextRequest, NextResponse } from 'next/server'
-import { captureException, captureMessage } from '@sentry/nextjs'
 import { quoteFormSchema } from '@/lib/validation/quote'
-import { checkRateLimit, getClientIdentifier } from '@/lib/api/rateLimit'
 import { sanitizeObject, validateHoneypot } from '@/lib/api/sanitize'
 import { sendEmail, getNotificationEmail, logEmailSend } from '@/lib/api/email'
 import { generateQuoteEmail } from '@/lib/api/emailTemplates'
 import { submitQuote } from '@/lib/forms/submissions'
+import { handleSubmission } from '@/lib/api/handlers'
 
-export const runtime = 'edge' // Use Edge Runtime for faster responses
+export const runtime = 'edge'
 
-export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting - 3 requests per 5 minutes
-    const clientId = getClientIdentifier(request)
-    const rateLimitResult = checkRateLimit(clientId, { limit: 3, window: 5 * 60 * 1000 })
-
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Too many requests. Please try again later.',
-          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
-        },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
-            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
-            'X-RateLimit-Reset': rateLimitResult.reset.toString(),
-            'Retry-After': Math.ceil((rateLimitResult.reset - Date.now()) / 1000).toString(),
-          },
-        }
-      )
-    }
-
-    // Parse and validate request body
-    const body = await request.json()
-
-    // Check honeypot
-    if (!validateHoneypot(body.website)) {
-      captureMessage('quote_honeypot_triggered', {
-        level: 'warning',
-        extra: { clientId },
-      })
-      // Return success to avoid revealing the honeypot
-      return NextResponse.json({ success: true, message: 'Quote request submitted successfully' })
-    }
-
-    // Sanitize input
-    const sanitizedData = sanitizeObject(body)
-
-    // Validate with Zod schema
-    const validationResult = quoteFormSchema.safeParse(sanitizedData)
-
-    if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Invalid form data',
-          details: validationResult.error.flatten().fieldErrors,
-        },
-        { status: 400 }
-      )
-    }
-
-    const data = validationResult.data
-
-    const dbResult = await submitQuote({
-      company_name: data.company,
-      contact_name: data.fullName,
-      email: data.email,
-      phone: data.phone,
-      facility_type: data.facilityType,
-      square_footage: String(data.squareFootage),
-      num_restrooms: data.numRestrooms || null,
-      num_floors: data.numFloors || null,
-      address: data.address || null,
-      services: data.services,
-      cleaning_frequency: data.cleaningFrequency,
-      special_requirements: data.specialRequirements || null,
-      start_date: data.startDate || null,
-      current_provider: data.currentProvider || null,
-      budget_range: data.budgetRange || null,
-      how_heard: data.howHeard || null,
-      additional_notes: data.additionalNotes || null,
-      source_page: request.headers.get('referer') || '/quote',
-      ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
-      user_agent: request.headers.get('user-agent') || null,
-    })
-
-    if (!dbResult.success) {
-      captureException(new Error(dbResult.error), { tags: { route: 'quote' } })
-    } else {
-      captureMessage('quote_saved_to_db', { level: 'info', extra: { route: 'quote' } })
-    }
-
-    // Generate email content
-    const { html, text } = generateQuoteEmail(data)
-
-    // Send email notification
-    const emailResult = await sendEmail({
-      to: getNotificationEmail(),
-      subject: `New Quote Request from ${data.fullName} - ${data.company}`,
-      html,
-      text,
-      replyTo: data.email,
-    })
-
-    // Log email send
-    logEmailSend(
-      {
+export function POST(request: NextRequest) {
+  return handleSubmission({
+    request,
+    schema: quoteFormSchema,
+    rateLimit: { limit: 3, windowMs: 5 * 60 * 1000 },
+    sanitize: (payload) => sanitizeObject(payload),
+    honeypotCheck: (payload) => validateHoneypot((payload as Record<string, any>).website),
+    store: (data, { request }) =>
+      submitQuote({
+        company_name: data.company,
+        contact_name: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        facility_type: data.facilityType,
+        square_footage: String(data.squareFootage),
+        num_restrooms: data.numRestrooms || null,
+        num_floors: data.numFloors || null,
+        address: data.address || null,
+        services: data.services,
+        cleaning_frequency: data.cleaningFrequency,
+        special_requirements: data.specialRequirements || null,
+        start_date: data.startDate || null,
+        current_provider: data.currentProvider || null,
+        budget_range: data.budgetRange || null,
+        how_heard: data.howHeard || null,
+        additional_notes: data.additionalNotes || null,
+        source_page: request.headers.get('referer') || '/quote',
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
+        user_agent: request.headers.get('user-agent') || null,
+      }),
+    notify: async (data) => {
+      const { html, text } = generateQuoteEmail(data)
+      const emailResult = await sendEmail({
         to: getNotificationEmail(),
-        subject: `New Quote Request from ${data.fullName}`,
+        subject: `New Quote Request from ${data.fullName} - ${data.company}`,
         html,
-      },
-      emailResult
-    )
-
-    // Log successful submission
-    captureMessage('quote_submission_success', {
-      level: 'info',
-      extra: {
-        route: 'quote',
-        submittedAt: new Date().toISOString(),
-      },
-    })
-
-    // Track in Google Analytics dataLayer (if GTM is configured)
-    // This would be handled client-side after successful response
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Quote request submitted successfully. We will contact you within 30 minutes!',
-      },
-      {
-        status: 200,
-        headers: {
-          'X-RateLimit-Limit': rateLimitResult.limit.toString(),
-          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
-          'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+        text,
+        replyTo: data.email,
+      })
+      logEmailSend(
+        {
+          to: getNotificationEmail(),
+          subject: `New Quote Request from ${data.fullName}`,
+          html,
         },
-      }
-    )
-  } catch (error) {
-    captureException(error, { tags: { route: 'quote' } })
-
-    // Don't expose internal errors to client
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'An error occurred while processing your request. Please try again or call (413) 306-5053.',
-      },
-      { status: 500 }
-    )
-  }
+        emailResult
+      )
+    },
+    successMessage: 'Quote request submitted successfully. We will contact you within 30 minutes!',
+  })
 }
 
-// Handle OPTIONS for CORS preflight
 export async function OPTIONS() {
   return new NextResponse(null, {
     status: 204,

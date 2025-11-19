@@ -229,10 +229,7 @@ export default function QuoteFormInline({
     return !error
   }
 
-  /**
-   * Validate entire form
-   */
-  const validateForm = (): boolean => {
+  const validateForm = (): FormErrors => {
     const newErrors: FormErrors = {}
 
     if (!isValidName(formData.name)) {
@@ -249,7 +246,25 @@ export default function QuoteFormInline({
     }
 
     setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+    return newErrors
+  }
+
+  const focusFirstErrorField = (formErrors: FormErrors) => {
+    const firstErrorField = Object.keys(formErrors)[0]
+    if (!firstErrorField) return
+
+    document.getElementById(firstErrorField)?.focus()
+  }
+
+  const resetInlineForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      facilityType: '',
+    })
+    setTouched({})
+    setIsSuccess(false)
   }
 
   /**
@@ -258,7 +273,6 @@ export default function QuoteFormInline({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Mark all fields as touched
     setTouched({
       name: true,
       email: true,
@@ -266,51 +280,24 @@ export default function QuoteFormInline({
       facilityType: true,
     })
 
-    // Validate form
-    if (!validateForm()) {
-      // Focus first error field
-      const firstErrorField = Object.keys(errors)[0]
-      if (firstErrorField) {
-        const element = document.getElementById(firstErrorField)
-        element?.focus()
-      }
+    const formErrors = validateForm()
+    if (Object.keys(formErrors).length > 0) {
+      focusFirstErrorField(formErrors)
       return
     }
 
-    // Submit form
     setIsSubmitting(true)
 
     try {
-      // TODO: Connect to API endpoint
-      // Example: await fetch('/api/quote', { method: 'POST', body: JSON.stringify(formData) })
-
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      console.log('Form submitted:', formData)
-
-      // Show success state
       setIsSuccess(true)
-
-      // Call success callback if provided
-      if (onSubmitSuccess) {
-        onSubmitSuccess(formData)
-      }
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          facilityType: '',
-        })
-        setIsSuccess(false)
-        setTouched({})
-      }, 3000)
+      onSubmitSuccess?.(formData)
+      setTimeout(resetInlineForm, 3000)
     } catch (error) {
-      console.error('Form submission error:', error)
-      // Handle error (could add error state here)
+      setErrors((prev) => ({
+        ...prev,
+        form: 'Unable to submit your request right now. Please try again shortly.',
+      }))
     } finally {
       setIsSubmitting(false)
     }

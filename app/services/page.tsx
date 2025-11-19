@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import {
   Sparkles,
   Users,
@@ -9,6 +10,7 @@ import {
   UserCheck,
   TrendingUp,
 } from 'lucide-react'
+
 import { Button } from '@/components/ui/Button'
 import StructuredData from '@/components/StructuredData'
 

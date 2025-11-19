@@ -1,4 +1,9 @@
 import { captureException, captureMessage } from '@sentry/nextjs'
+import { Buffer } from 'buffer'
+
+if (typeof globalThis.Buffer === 'undefined') {
+  ;(globalThis as any).Buffer = Buffer
+}
 
 /**
  * Email Service

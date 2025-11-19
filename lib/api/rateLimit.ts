@@ -14,15 +14,16 @@ interface RateLimitEntry {
 
 const rateLimit = new Map<string, RateLimitEntry>()
 
-// Clean up expired entries every 5 minutes
-setInterval(() => {
-  const now = Date.now()
-  for (const [key, entry] of rateLimit.entries()) {
-    if (entry.resetAt < now) {
-      rateLimit.delete(key)
+if (typeof process === 'undefined' || !process?.env?.VERCEL) {
+  setInterval(() => {
+    const now = Date.now()
+    for (const [key, entry] of rateLimit.entries()) {
+      if (entry.resetAt < now) {
+        rateLimit.delete(key)
+      }
     }
-  }
-}, 5 * 60 * 1000)
+  }, 5 * 60 * 1000)
+}
 
 export interface RateLimitOptions {
   /**

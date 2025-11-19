@@ -11,9 +11,11 @@
 
 import React from 'react'
 import Link from 'next/link'
+
+import { ArrowRight, TrendingUp } from 'lucide-react'
+
 import { Button } from '@/components/ui/Button'
 import { caseStudies } from '@/lib/case-studies-data'
-import { ArrowRight, TrendingUp } from 'lucide-react'
 import { getIconComponent } from '@/lib/icon-map'
 
 export default function CaseStudiesPage() {

@@ -17,6 +17,10 @@ import Modal from '@/components/ui/Modal'
 import { SectionConfig, SectionError } from '@/lib/careers/types'
 import { validateSectionData } from '@/lib/careers/utils/validation'
 
+/**
+ * Client-side experience that combines the marketing hero sections with the
+ * multi-step application wizard backed by the careers context.
+ */
 const CareersPage: React.FC = () => {
   const context = useAppContext()
   if (!context) throw new Error('AppContext not found')

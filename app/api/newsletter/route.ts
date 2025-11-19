@@ -1,124 +1,49 @@
-/**
- * Newsletter Subscription API Route
- *
- * Handles newsletter subscriptions with:
- * - Email validation
- * - Rate limiting
- * - Email notification
- * - Error handling
- */
-
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { captureException, captureMessage } from '@sentry/nextjs'
-import { checkRateLimit, getClientIdentifier } from '@/lib/api/rateLimit'
 import { sanitizeEmail } from '@/lib/api/sanitize'
 import { sendEmail, getNotificationEmail, logEmailSend } from '@/lib/api/email'
 import { generateNewsletterEmail } from '@/lib/api/emailTemplates'
 import { submitNewsletter } from '@/lib/forms/submissions'
+import { handleSubmission } from '@/lib/api/handlers'
 
 export const runtime = 'edge'
 
-// Simple newsletter schema
 const newsletterSchema = z.object({
   email: z.string().email('Please enter a valid email address').toLowerCase(),
 })
 
-export async function POST(request: NextRequest) {
-  try {
-    // Rate limiting - 3 requests per 10 minutes
-    const clientId = getClientIdentifier(request)
-    const rateLimitResult = checkRateLimit(clientId, { limit: 3, window: 10 * 60 * 1000 })
-
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Too many requests. Please try again later.',
-        },
-        { status: 429 }
-      )
-    }
-
-    // Parse request body
-    const body = await request.json()
-
-    // Sanitize email
-    const sanitizedEmail = sanitizeEmail(body.email || '')
-
-    // Validate email
-    const validationResult = newsletterSchema.safeParse({ email: sanitizedEmail })
-
-    if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Please enter a valid email address',
-        },
-        { status: 400 }
-      )
-    }
-
-    const { email } = validationResult.data
-
-    const dbResult = await submitNewsletter({
-      email: email,
-      source_page: request.headers.get('referer') || '/',
-      ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
-      user_agent: request.headers.get('user-agent') || null,
-    })
-
-    if (!dbResult.success) {
-      captureException(new Error(dbResult.error), { tags: { route: 'newsletter' } })
-    } else {
-      captureMessage('newsletter_saved_to_db', { level: 'info', extra: { route: 'newsletter' } })
-    }
-
-    // Generate email notification
-    const { html, text } = generateNewsletterEmail(email)
-
-    // Send notification
-    const emailResult = await sendEmail({
-      to: getNotificationEmail(),
-      subject: `New Newsletter Subscription: ${email}`,
-      html,
-      text,
-    })
-
-    // Log email send
-    logEmailSend(
-      {
+export function POST(request: NextRequest) {
+  return handleSubmission({
+    request,
+    schema: newsletterSchema,
+    rateLimit: { limit: 3, windowMs: 10 * 60 * 1000 },
+    sanitize: (payload) => ({ email: sanitizeEmail((payload as Record<string, any>).email || '') }),
+    store: (data, { request }) =>
+      submitNewsletter({
+        email: data.email,
+        source_page: request.headers.get('referer') || '/',
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || null,
+        user_agent: request.headers.get('user-agent') || null,
+      }),
+    notify: async (data) => {
+      const { html, text } = generateNewsletterEmail(data.email)
+      const emailResult = await sendEmail({
         to: getNotificationEmail(),
-        subject: `New Newsletter Subscription: ${email}`,
+        subject: `New Newsletter Subscription: ${data.email}`,
         html,
-      },
-      emailResult
-    )
-
-    // Log successful subscription
-    captureMessage('newsletter_subscription_success', {
-      level: 'info',
-      extra: { route: 'newsletter', submittedAt: new Date().toISOString() },
-    })
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Thank you for subscribing! Check your email for a confirmation.',
-      },
-      { status: 200 }
-    )
-  } catch (error) {
-    captureException(error, { tags: { route: 'newsletter' } })
-
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'An error occurred. Please try again later.',
-      },
-      { status: 500 }
-    )
-  }
+        text,
+      })
+      logEmailSend(
+        {
+          to: getNotificationEmail(),
+          subject: `New Newsletter Subscription: ${data.email}`,
+          html,
+        },
+        emailResult
+      )
+    },
+    successMessage: 'Thank you for subscribing! Check your email for a confirmation.',
+  })
 }
 
 export async function OPTIONS() {
