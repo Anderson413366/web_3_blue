@@ -2,6 +2,8 @@
   "ci": {
     "collect": {
       "startServerCommand": "npm run build && npm run start",
+      "startServerReadyPattern": "Ready",
+      "startServerReadyTimeout": 180000,
       "url": [
         "http://localhost:3000",
         "http://localhost:3000/services",

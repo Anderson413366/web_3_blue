@@ -178,9 +178,7 @@ export default function FAQPage() {
 
       {/* Search Bar */}
       <section
-        id="main-content"
         className="bg-white dark:bg-slate-900 py-8 border-b border-gray-200 dark:border-slate-700"
-        tabIndex={-1}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">

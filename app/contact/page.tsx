@@ -6,7 +6,7 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react'
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
-      <main id="main-content" className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-20" tabIndex={-1}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-20">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
@@ -146,7 +146,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }

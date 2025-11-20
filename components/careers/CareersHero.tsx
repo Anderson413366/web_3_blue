@@ -24,9 +24,7 @@ const CareersHero: React.FC<CareersHeroProps> = ({ onStartApplication }) => {
 
   return (
     <section
-      id="main-content"
       className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 md:py-24"
-      tabIndex={-1}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" aria-hidden="true"></div>

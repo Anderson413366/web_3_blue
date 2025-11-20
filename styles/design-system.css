@@ -71,7 +71,7 @@
   --color-accent-300: #6ee7b7;
   --color-accent-400: #34d399;
   --color-accent-500: #10b981;       /* Base accent color */
-  --color-accent-600: #059669;
+  --color-accent-600: #047857; /* Darkened from #059669 for better contrast (WCAG 4.5:1) */
   --color-accent-700: #047857;
   --color-accent-800: #065f46;
   --color-accent-900: #064e3b;
@@ -86,7 +86,7 @@
   --color-accent-dark: var(--color-accent-800);
 
   /* Accent Yellow - Promotional highlights */
-  --color-yellow-400: #facc15;
+  --color-yellow-400: #f59e0b; /* Darkened from #facc15 for better contrast (WCAG 4.5:1) */
   --color-yellow-500: #eab308;
   --color-yellow-600: #ca8a04;
 
@@ -147,7 +147,7 @@
 
   /* Success - Positive feedback, completed states */
   --color-success-base: #10b981;
-  --color-success-hover: #059669;
+  --color-success-hover: #047857; /* Darkened from #059669 for better contrast (WCAG 4.5:1) */
   --color-success-active: #047857;
   --color-success-light: #d1fae5;
   --color-success-lighter: #ecfdf5;
@@ -167,11 +167,11 @@
 
   /* Error - Errors, destructive actions, validation failures */
   --color-error-base: #ef4444;
-  --color-error-hover: #dc2626;
+  --color-error-hover: #b91c1c; /* Darkened from #dc2626 for better contrast (WCAG 4.5:1) */
   --color-error-active: #b91c1c;
   --color-error-light: #fee2e2;
   --color-error-lighter: #fef2f2;
-  --color-error-dark: #dc2626;
+  --color-error-dark: #b91c1c; /* Darkened from #dc2626 for better contrast (WCAG 4.5:1) */
   --color-error-text: #991b1b;           /* Text on light backgrounds */
   --color-error-text-light: #fca5a5;     /* Text on dark backgrounds */
 
