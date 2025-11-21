@@ -220,6 +220,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  const shouldForceApiRewrite =
+    pathname.startsWith('/api/') && !request.headers.get('x-middleware-subrequest')
+
   // Generate nonce for this request
   const nonce = generateNonce()
 
@@ -269,6 +272,10 @@ export function middleware(request: NextRequest) {
   Object.entries(securityHeaders).forEach(([key, value]) => {
     response.headers.set(key, value)
   })
+
+  if (shouldForceApiRewrite) {
+    response.headers.set('x-middleware-rewrite', request.url)
+  }
 
   // Add rate limit headers
   response.headers.set('X-RateLimit-Limit', String(getRateLimitConfig(pathname).maxRequests))
