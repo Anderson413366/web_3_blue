@@ -7,6 +7,55 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getCSPHeader, getDevCSPHeader, generateNonce } from './lib/security/csp'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
+// ===== LEGACY REDIRECTS =====
+
+interface RedirectConfig {
+  destination: string
+  permanent: boolean
+}
+
+function normalizePath(path: string): string {
+  if (!path) return '/'
+  const lower = path.toLowerCase()
+  if (lower === '/') return '/'
+  return lower.replace(/\/+$/, '')
+}
+
+function loadRedirects(): Map<string, RedirectConfig> {
+  try {
+    const redirectsPath = join(process.cwd(), 'site_map', 'redirects.csv')
+    const csvContent = readFileSync(redirectsPath, 'utf-8')
+    const lines = csvContent.split('\n').slice(1) // Skip header
+
+    const redirectMap = new Map<string, RedirectConfig>()
+
+    for (const line of lines) {
+      if (!line.trim()) continue
+
+      const [sourceRaw, destination, permanentRaw] = line.split(',').map((value) => value.trim())
+      if (!sourceRaw || !destination) continue
+
+      const normalizedSource = normalizePath(sourceRaw) || '/'
+      redirectMap.set(normalizedSource, {
+        destination,
+        permanent: permanentRaw === 'true',
+      })
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Redirects] Loaded ${redirectMap.size} redirects from CSV`)
+    }
+    return redirectMap
+  } catch (error) {
+    console.error('[Redirects] Failed to load redirects.csv:', error)
+    return new Map()
+  }
+}
+
+const REDIRECTS = loadRedirects()
 
 // ===== RATE LIMITING =====
 
@@ -218,6 +267,25 @@ export function middleware(request: NextRequest) {
   // Skip middleware for static files and Next.js internals
   if (pathname.startsWith('/_next') || pathname.startsWith('/static') || pathname.includes('.')) {
     return NextResponse.next()
+  }
+
+  // Legacy WordPress redirects (before rate limiting)
+  const normalizedPath = normalizePath(pathname)
+  const redirect = REDIRECTS.get(normalizedPath)
+
+  if (redirect) {
+    const url = request.nextUrl.clone()
+    url.pathname = redirect.destination
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `[Redirect] ${pathname} → ${redirect.destination} (${redirect.permanent ? '301' : '302'})`
+      )
+    }
+
+    return NextResponse.redirect(url, {
+      status: redirect.permanent ? 301 : 302,
+    })
   }
 
   const shouldForceApiRewrite =
