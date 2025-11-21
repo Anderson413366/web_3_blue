@@ -7,8 +7,6 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getCSPHeader, getDevCSPHeader, generateNonce } from './lib/security/csp'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
 // ===== LEGACY REDIRECTS =====
 
@@ -24,38 +22,124 @@ function normalizePath(path: string): string {
   return lower.replace(/\/+$/, '')
 }
 
-function loadRedirects(): Map<string, RedirectConfig> {
-  try {
-    const redirectsPath = join(process.cwd(), 'site_map', 'redirects.csv')
-    const csvContent = readFileSync(redirectsPath, 'utf-8')
-    const lines = csvContent.split('\n').slice(1) // Skip header
-
-    const redirectMap = new Map<string, RedirectConfig>()
-
-    for (const line of lines) {
-      if (!line.trim()) continue
-
-      const [sourceRaw, destination, permanentRaw] = line.split(',').map((value) => value.trim())
-      if (!sourceRaw || !destination) continue
-
-      const normalizedSource = normalizePath(sourceRaw) || '/'
-      redirectMap.set(normalizedSource, {
-        destination,
-        permanent: permanentRaw === 'true',
-      })
-    }
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[Redirects] Loaded ${redirectMap.size} redirects from CSV`)
-    }
-    return redirectMap
-  } catch (error) {
-    console.error('[Redirects] Failed to load redirects.csv:', error)
-    return new Map()
-  }
+const REDIRECT_MAP: Record<string, RedirectConfig> = {
+  '/about-anderson-cleaning-west-springfield': { destination: '/about', permanent: true },
+  '/about-us': { destination: '/about', permanent: true },
+  '/account': { destination: '/contact', permanent: true },
+  '/anderson-biohazard-cleanup': { destination: '/services/post-construction', permanent: true },
+  '/anderson-cleaning-blog': { destination: '/blog', permanent: true },
+  '/blog': { destination: '/blog', permanent: true },
+  '/building-maintenance-cleaning-services-discover-professional-solutions-anderson-cleaning-about-us': {
+    destination: '/about',
+    permanent: true,
+  },
+  '/building-maintenance-cleaning-services-discover-professional-solutions-anderson-cleaning-about-us-copy': {
+    destination: '/about',
+    permanent: true,
+  },
+  '/building-maintenance-cleaning-services-discover-professional-solutions-anderson-cleaning-about-us-copy-2': {
+    destination: '/about',
+    permanent: true,
+  },
+  '/building-maintenance-cleaning-services-discover-professional-solutions-anderson-cleaning-about-us-copy-3': {
+    destination: '/about',
+    permanent: true,
+  },
+  '/c2536f34-7709-47a3-863d-208b52b007e3': { destination: '/', permanent: true },
+  '/careers': { destination: '/careers', permanent: true },
+  '/carpet-cleaning': { destination: '/services/floor-carpet-care', permanent: true },
+  '/category': { destination: '/blog', permanent: true },
+  '/cefa85af-b05c-45bd-93b5-39b834b16a0a': { destination: '/', permanent: true },
+  '/cleaning-consulting-services': { destination: '/services', permanent: true },
+  '/cleaning-services': { destination: '/services', permanent: true },
+  '/cleaning-services-copy': { destination: '/services', permanent: true },
+  '/cleaning-services-western-ma': { destination: '/services', permanent: true },
+  '/commercial-cleaning-blog': { destination: '/blog', permanent: true },
+  '/commercial-cleaning-faqs': { destination: '/faq', permanent: true },
+  '/commercial-cleaning-service': { destination: '/services', permanent: true },
+  '/commercial-cleaning-service-copy': { destination: '/services', permanent: true },
+  '/commercial-cleaning-service-copy-2': { destination: '/services', permanent: true },
+  '/commercial-cleaning-service-copy-2-copy': { destination: '/services', permanent: true },
+  '/commercial-cleaning-service-copy-copy': { destination: '/services', permanent: true },
+  '/contact-anderson-cleaning': { destination: '/contact', permanent: true },
+  '/contact-us': { destination: '/contact', permanent: true },
+  '/coronavirus-cleaning-covid19': { destination: '/services', permanent: true },
+  '/corporate-cleaning-services': { destination: '/industries/corporate-offices', permanent: true },
+  '/corporate-office-cleaning': { destination: '/industries/corporate-offices', permanent: true },
+  '/covid-19': { destination: '/services', permanent: true },
+  '/d6bf02ec-b3aa-4ca7-b182-674030df1de4': { destination: '/', permanent: true },
+  '/d846b89d-a925-4f7b-896e-6632c0729809': { destination: '/', permanent: true },
+  '/day-porter-services': { destination: '/services', permanent: true },
+  '/dynamik-gen': { destination: '/', permanent: true },
+  '/e68eea5f-0f59-4313-a4bc-86412bf98ad2': { destination: '/', permanent: true },
+  '/education-facilities-cleaning': { destination: '/industries/educational-facilities', permanent: true },
+  '/educational-facilities-cleaning': { destination: '/industries/educational-facilities', permanent: true },
+  '/eeab1613-c17e-4242-869f-2504075b8e98': { destination: '/', permanent: true },
+  '/erp-subscription': { destination: '/contact', permanent: true },
+  '/exceptional-cleaning-services': { destination: '/services', permanent: true },
+  '/f731860e-60dd-48eb-846d-871823e24357': { destination: '/', permanent: true },
+  '/faq': { destination: '/faq', permanent: true },
+  '/faqs': { destination: '/faq', permanent: true },
+  '/fl-builder-history': { destination: '/', permanent: true },
+  '/fl-builder-template': { destination: '/', permanent: true },
+  '/floor-care': { destination: '/services/floor-carpet-care', permanent: true },
+  '/floor-carpet-care-services': { destination: '/services/floor-carpet-care', permanent: true },
+  '/free-quote': { destination: '/quote', permanent: true },
+  '/green-cleaning-services': { destination: '/services', permanent: true },
+  '/healthcare-cleaning-service': { destination: '/industries/healthcare', permanent: true },
+  '/healthcare-cleaning-services': { destination: '/industries/healthcare', permanent: true },
+  '/healthcare-facilities-cleaning': { destination: '/industries/healthcare', permanent: true },
+  '/home-cleaning-company': { destination: '/services', permanent: true },
+  '/home-preview': { destination: '/', permanent: true },
+  '/industrial-cleaning': { destination: '/industries/manufacturing-warehouses', permanent: true },
+  '/industries': { destination: '/industries', permanent: true },
+  '/industries-served-tailored-commercial-cleaning-solutions': { destination: '/industries', permanent: true },
+  '/janitorial-cleaning-services': { destination: '/services/janitorial', permanent: true },
+  '/janitorial-services': { destination: '/services/janitorial', permanent: true },
+  '/join-our-team': { destination: '/careers', permanent: true },
+  '/join-team': { destination: '/careers', permanent: true },
+  '/login': { destination: '/contact', permanent: true },
+  '/login-2': { destination: '/contact', permanent: true },
+  '/logout': { destination: '/', permanent: true },
+  '/manufacturing-cleaning': { destination: '/industries/manufacturing-warehouses', permanent: true },
+  '/meet-our-team': { destination: '/about', permanent: true },
+  '/members': { destination: '/contact', permanent: true },
+  '/membership-join': { destination: '/contact', permanent: true },
+  '/membership-login': { destination: '/contact', permanent: true },
+  '/news': { destination: '/blog', permanent: true },
+  '/office-cleaning-services': { destination: '/services/office-cleaning', permanent: true },
+  '/password-reset': { destination: '/contact', permanent: true },
+  '/pay-my-bill': { destination: '/contact', permanent: true },
+  '/post-construction-cleaning': { destination: '/services/post-construction', permanent: true },
+  '/post-construction-cleaning-services': { destination: '/services/post-construction', permanent: true },
+  '/post-mortem-cleaning-services': { destination: '/services/post-construction', permanent: true },
+  '/product-category': { destination: '/', permanent: true },
+  '/promotions': { destination: '/promotions', permanent: true },
+  '/quote-request': { destination: '/quote', permanent: true },
+  '/register': { destination: '/contact', permanent: true },
+  '/retail-cleaning-services': { destination: '/industries/retail-stores', permanent: true },
+  '/retail-store-cleaning': { destination: '/industries/retail-stores', permanent: true },
+  '/services': { destination: '/services', permanent: true },
+  '/servicing': { destination: '/services', permanent: true },
+  '/sitemap': { destination: '/', permanent: true },
+  '/supply-management': { destination: '/services/supply-management', permanent: true },
+  '/supply-management-services': { destination: '/services/supply-management', permanent: true },
+  '/tag': { destination: '/blog', permanent: true },
+  '/testimonials': { destination: '/testimonials', permanent: true },
+  '/thank-you': { destination: '/contact', permanent: true },
+  '/um': { destination: '/contact', permanent: true },
+  '/user': { destination: '/contact', permanent: true },
+  '/warehouse-cleaning': { destination: '/industries/manufacturing-warehouses', permanent: true },
+  '/web-design-services': { destination: '/services/office-cleaning', permanent: true },
+  '/webp-net-resizeimage': { destination: '/', permanent: true },
+  '/window-cleaning-services': { destination: '/services/window-cleaning', permanent: true },
+  '/wonder-blocks-blank-template': { destination: '/', permanent: true },
+  '/wp-admin': { destination: '/', permanent: true },
+  '/wp-content': { destination: '/', permanent: true },
+  '/wp-includes': { destination: '/', permanent: true },
 }
 
-const REDIRECTS = loadRedirects()
+const REDIRECTS = new Map<string, RedirectConfig>(Object.entries(REDIRECT_MAP))
 
 // ===== RATE LIMITING =====
 
