@@ -57,7 +57,7 @@ export default function Footer() {
                 </div>
                 <a
                   href="tel:+14133065053"
-                  className="text-base md:text-lg leading-tight text-gray-300 hover:text-white/80 transition-colors"
+                  className="text-sm leading-6 text-gray-300 hover:text-white/80 transition-colors"
                 >
                   (413) 306-5053
                 </a>
@@ -68,7 +68,7 @@ export default function Footer() {
                 </div>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="text-base md:text-lg leading-tight text-gray-300 hover:text-white/80 transition-colors"
+                  className="text-sm leading-6 text-gray-300 hover:text-white/80 transition-colors"
                 >
                   info@andersoncleaning.com
                 </a>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <div className="w-7 flex-shrink-0 text-gray-300 mt-1">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="text-base md:text-lg leading-tight text-gray-300">
+                <p className="text-sm leading-6 text-gray-300">
                   103 Wayside Avenue
                   <br />
                   West Springfield, MA 01089
