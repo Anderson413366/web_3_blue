@@ -50,24 +50,38 @@ export default function Footer() {
                 Professional commercial cleaning services for businesses in Western Massachusetts and Northern Connecticut.
               </p>
             </div>
-            <div className="space-y-4">
-              <a
-                href="tel:4133065053"
-                className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition-colors"
-              >
-                <Phone className="h-4 w-4" />
-                (413) 306-5053
-              </a>
-              <a
-                href="mailto:info@andersoncleaning.com"
-                className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition-colors"
-              >
-                <Mail className="h-4 w-4" />
-                info@andersoncleaning.com
-              </a>
-              <div className="flex items-start gap-3 text-sm text-gray-300 leading-relaxed">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>103 Wayside Avenue<br />West Springfield, MA 01089</span>
+            <div className="mt-10 space-y-5">
+              <div className="flex items-start gap-4">
+                <div className="w-7 flex-shrink-0 text-gray-300 mt-1">
+                  <Phone className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <a
+                  href="tel:+14133065053"
+                  className="text-base md:text-lg leading-tight text-gray-300 hover:text-white/80 transition-colors"
+                >
+                  (413) 306-5053
+                </a>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-7 flex-shrink-0 text-gray-300 mt-1">
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <a
+                  href="mailto:info@andersoncleaning.com"
+                  className="text-base md:text-lg leading-tight text-gray-300 hover:text-white/80 transition-colors"
+                >
+                  info@andersoncleaning.com
+                </a>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-7 flex-shrink-0 text-gray-300 mt-1">
+                  <MapPin className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <p className="text-base md:text-lg leading-tight text-gray-300">
+                  103 Wayside Avenue
+                  <br />
+                  West Springfield, MA 01089
+                </p>
               </div>
             </div>
             <div className="flex space-x-6">
