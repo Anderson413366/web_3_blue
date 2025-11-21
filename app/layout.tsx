@@ -16,7 +16,6 @@ import {
   generateWebsiteSchema,
 } from '@/lib/seo/jsonld'
 import StructuredData from '@/components/StructuredData'
-import CustomElementsGuard from '@/components/CustomElementsGuard'
 
 // Load Inter font with Next.js font optimization
 const inter = Inter({
@@ -109,6 +108,32 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        <script
+          nonce={nonce || undefined}
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined' || !window.customElements) return;
+                var originalDefine = window.customElements.define;
+                if (!originalDefine.__patched) {
+                  var defined = new Set();
+                  var registry = window.customElements;
+                  var patched = function(name, constructor, options) {
+                    if (defined.has(name) || registry.get(name)) {
+                      console.warn('Prevented duplicate custom element:', name);
+                      return;
+                    }
+                    defined.add(name);
+                    return originalDefine.call(registry, name, constructor, options);
+                  };
+                  patched.__patched = true;
+                  registry.define = patched;
+                  originalDefine.__patched = true;
+                }
+              })();
+            `,
+          }}
+        />
         {/* Resource Hints - Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -139,7 +164,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className="antialiased">
         <ConsentInit />
-        <CustomElementsGuard />
         <AccessibilityProvider>
           <ThemeProvider>
             <SkipLink />
