@@ -69,19 +69,42 @@ const config: Config = {
           800: '#500612',
           900: '#280309',
         },
+
+        /* Neutral scales remapped to brand colors */
+        // Slate: Maps to brand-deep-blue tints/shades for dark mode backgrounds
         slate: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
+          50: '#E6F3FC',     // Very light blue (brand-bright-blue tint)
+          100: '#CCE7F9',    // Light blue
+          200: '#99CFF3',    // Lighter blue
+          300: '#66B7ED',    // Medium light blue
+          400: '#339FE7',    // Medium blue
+          500: '#0077D9',    // Brand bright blue
+          600: '#005FAE',    // Darker blue
+          700: '#004782',    // Deep blue
+          800: '#002A86',    // Brand deep blue (primary dark bg)
+          900: '#001A55',    // Darker deep blue
+          950: '#00081A',    // Almost black blue
         },
+
+        // Gray: Maps to deep blue tints for borders and subtle elements
+        gray: {
+          50: '#FFFFFF',      // White
+          100: '#F8F9FA',     // Off-white
+          200: '#E6ECF7',     // Very light blue-gray
+          300: '#CCD9EF',     // Light blue-gray
+          400: '#99B3DF',     // Medium blue-gray
+          500: '#668DCF',     // Medium blue
+          600: '#3367BF',     // Blue
+          700: '#002A86',     // Brand deep blue
+          800: '#001950',     // Darker deep blue
+          900: '#001135',     // Very dark blue
+        },
+
+        // Black: Maps to brand deep blue
+        black: '#002A86',
+
+        // White: Pure white for light mode
+        white: '#FFFFFF',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

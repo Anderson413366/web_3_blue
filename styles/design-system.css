@@ -131,19 +131,21 @@ html.dark {
    ==================================================================== */
 
 /* Desktop logo - Default (shows on larger screens) */
+/* Light mode uses the HTML src attribute (color variant) */
 .logo-desktop {
   display: block;
   height: 3rem; /* 48px */
   width: auto;
-  content: url('/brand/color/logo-full-2000.png');
+  /* NO content property here - let HTML src work naturally */
 }
 
 /* Mobile logo - Hidden by default */
+/* Light mode uses the HTML src attribute (color variant) */
 .logo-mobile {
   display: none;
   height: 2.5rem; /* 40px */
   width: auto;
-  content: url('/brand/color/logo-icon-512.png');
+  /* NO content property here - let HTML src work naturally */
 }
 
 /* Mobile breakpoint (≤767px) - Swap logos */
