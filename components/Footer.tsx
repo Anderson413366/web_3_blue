@@ -104,15 +104,23 @@ export default function Footer() {
           Footer
         </h2>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          {/* Footer Logo - Centered */}
+          <div className="mb-12 text-center">
+            <img
+              src="/brand/white/logo-full-2000-white.png"
+              alt="Anderson Cleaning"
+              className="mx-auto mb-4"
+              style={{ maxWidth: '240px', height: 'auto' }}
+            />
+            <p className="text-sm text-gray-400">Commercial Cleaning Excellence Since 2007</p>
+          </div>
+
           {/* Top Section - 4 Columns */}
           <div className="grid grid-cols-1 gap-8 border-b border-gray-800 pb-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Column 1: Company Info */}
             <div>
-              <div className="mb-4">
-                <h3 className="mb-1 text-lg font-bold text-white">Anderson Cleaning</h3>
-                <p className="text-sm text-gray-400">Commercial Cleaning Excellence Since 2007</p>
-              </div>
-              <p className="mb-4 text-sm leading-relaxed">
+              <h4 className="mb-4 font-semibold text-white">About Us</h4>
+              <p className="mb-4 text-sm leading-relaxed text-gray-300">
                 Professional facility maintenance for businesses throughout Western Massachusetts and
                 Northern Connecticut.
               </p>
