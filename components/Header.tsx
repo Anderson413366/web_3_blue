@@ -38,18 +38,45 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${
-        scrolled ? 'shadow-md' : 'shadow-sm'
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-lg transition-all duration-300 dark:bg-brand-deep-blue/85 ${
+        scrolled ? 'shadow-md border-b border-neutral-light-grey dark:border-white/10' : 'shadow-sm'
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-5 lg:px-8" aria-label="Global">
         {/* Logo */}
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5 transition-opacity hover:opacity-80">
             <span className="sr-only">Anderson Cleaning</span>
-            <div className="text-h3 font-bold text-brand-navy transition-colors">
-              Anderson Cleaning
-            </div>
+            {/* Desktop Logo */}
+            <img
+              src="/brand/color/logo-full-2000.png"
+              alt="Anderson Cleaning"
+              className="hidden h-12 w-auto dark:hidden md:block"
+              width="200"
+              height="48"
+            />
+            <img
+              src="/brand/white/logo-full-2000-white.png"
+              alt="Anderson Cleaning"
+              className="hidden h-12 w-auto dark:md:block"
+              width="200"
+              height="48"
+            />
+            {/* Mobile Logo Icon */}
+            <img
+              src="/brand/color/logo-icon-512.png"
+              alt="Anderson Cleaning"
+              className="block h-10 w-auto dark:hidden md:hidden"
+              width="40"
+              height="40"
+            />
+            <img
+              src="/brand/white/logo-icon-512-white.png"
+              alt="Anderson Cleaning"
+              className="hidden h-10 w-auto dark:block md:dark:hidden"
+              width="40"
+              height="40"
+            />
           </Link>
         </div>
 
@@ -66,27 +93,30 @@ export default function Header() {
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-10">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`text-sm font-semibold leading-6 transition-colors ${
+              className={`relative text-sm font-medium leading-6 transition-all duration-150 ${
                 pathname === item.href
                   ? 'text-brand-bright-blue'
-                  : 'text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-brand-bright-blue/90'
+                  : 'text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-white/80'
               }`}
             >
               {item.name}
+              {pathname === item.href && (
+                <span className="absolute -bottom-5 left-0 right-0 h-0.5 bg-brand-bright-blue rounded-full" />
+              )}
             </Link>
           ))}
         </div>
 
         {/* Dark Mode Toggle & CTA Button */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-5">
           <button
             onClick={toggleTheme}
-            className="rounded-md p-2 text-neutral-charcoal dark:text-white hover:bg-neutral-light-grey dark:hover:bg-gray-800 transition-colors"
+            className="rounded-full p-2.5 text-neutral-charcoal dark:text-white hover:bg-neutral-light-grey dark:hover:bg-white/10 transition-all duration-150"
             aria-label="Toggle dark mode"
           >
             {theme === 'dark' ? (
@@ -97,7 +127,7 @@ export default function Header() {
           </button>
           <Link
             href="/quote"
-            className="rounded-md bg-brand-bright-blue px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-bright-blue/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-bright-blue"
+            className="rounded-lg bg-brand-bright-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 hover:-translate-y-0.5 transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-bright-blue"
           >
             Get a Quote
           </Link>
@@ -107,18 +137,29 @@ export default function Header() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden">
-          <div className="fixed inset-0 z-50" />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-brand-deep-blue px-6 py-6 sm:max-w-sm sm:shadow-2xl">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Anderson Cleaning</span>
-                <div className="text-h3 font-bold text-brand-navy">
-                  Anderson Cleaning
-                </div>
+                <img
+                  src="/brand/color/logo-icon-512.png"
+                  alt="Anderson Cleaning"
+                  className="h-10 w-auto dark:hidden"
+                  width="40"
+                  height="40"
+                />
+                <img
+                  src="/brand/white/logo-icon-512-white.png"
+                  alt="Anderson Cleaning"
+                  className="hidden h-10 w-auto dark:block"
+                  width="40"
+                  height="40"
+                />
               </Link>
               <button
                 type="button"
-                className="-m-2.5 rounded-md p-2.5 text-neutral-charcoal dark:text-white"
+                className="-m-2.5 rounded-full p-2.5 text-neutral-charcoal dark:text-white hover:bg-neutral-light-grey dark:hover:bg-white/10 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
