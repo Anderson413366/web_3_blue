@@ -47,6 +47,82 @@ export interface Database {
           user_agent?: string | null
         }
       }
+      quote_requests_mini: {
+        Row: {
+          id: string
+          created_at: string
+          name: string
+          company: string | null
+          phone: string
+          message: string
+          source: string | null
+          submitted_at: string
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          name: string
+          company?: string | null
+          phone: string
+          message: string
+          source?: string | null
+          submitted_at: string
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          name?: string
+          company?: string | null
+          phone?: string
+          message?: string
+          source?: string | null
+          submitted_at?: string
+        }
+      }
+      quote_requests_full: {
+        Row: {
+          id: string
+          created_at: string
+          name: string
+          company: string
+          phone: string
+          email: string
+          square_footage: string
+          frequency: string
+          services: string[]
+          additional_notes: string | null
+          mini_quote_uuid: string | null
+          submitted_at: string
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          name: string
+          company: string
+          phone: string
+          email: string
+          square_footage: string
+          frequency: string
+          services: string[]
+          additional_notes?: string | null
+          mini_quote_uuid?: string | null
+          submitted_at: string
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          name?: string
+          company?: string
+          phone?: string
+          email?: string
+          square_footage?: string
+          frequency?: string
+          services?: string[]
+          additional_notes?: string | null
+          mini_quote_uuid?: string | null
+          submitted_at?: string
+        }
+      }
       quote_requests: {
         Row: {
           id: string

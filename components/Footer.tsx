@@ -1,5 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+
+import QuoteMiniForm from '@/components/forms/QuoteMiniForm'
+import QuoteAdvancedModal from '@/components/forms/QuoteAdvancedModal'
 
 const navigation = {
   services: [
@@ -33,6 +39,7 @@ const navigation = {
 }
 
 export default function Footer() {
+  const [showModal, setShowModal] = useState(false)
   const currentYear = new Date().getFullYear()
 
   return (
@@ -169,6 +176,16 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="mt-8 pt-8 border-t border-white/20">
+          <h3 className="text-lg font-semibold mb-4">Quick Quote Request</h3>
+          <div className="max-w-md">
+            <QuoteMiniForm
+              source="footer"
+              onOpenAdvanced={() => setShowModal(true)}
+            />
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-neutral-off-white/80 text-center">
@@ -176,6 +193,7 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <QuoteAdvancedModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </footer>
   )
 }

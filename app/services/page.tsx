@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 
 import type { LucideIcon } from 'lucide-react'
@@ -19,10 +22,11 @@ import {
 
 import { Button } from '@/components/ui/Button'
 import StructuredData from '@/components/StructuredData'
-
-export const revalidate = 86400
+import QuoteMiniForm from '@/components/forms/QuoteMiniForm'
+import QuoteAdvancedModal from '@/components/forms/QuoteAdvancedModal'
 
 export default function ServicesPage() {
+  const [showAdvancedModal, setShowAdvancedModal] = useState(false)
   // JSON-LD Structured Data for SEO
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -429,20 +433,49 @@ export default function ServicesPage() {
 
       {/* CTA */}
       <section className="py-20 bg-brand-navy text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-h2 leading-tight font-bold mb-6">
-            Ready to Experience the Anderson Difference?
-          </h2>
-          <p className="text-body text-white/80 mb-8 max-w-2xl mx-auto">
-            Get your free quote today and discover why businesses trust us with their facilities.
-          </p>
-          <Link href="/quote">
-            <Button variant="accent" size="lg">
-              Get Your Free Quote
-            </Button>
-          </Link>
+        <div className="container mx-auto px-6">
+          <div className="grid gap-10 lg:grid-cols-2 items-center">
+            <div>
+              <h2 className="text-h2 leading-tight font-bold mb-6">
+                Ready to Experience the Anderson Difference?
+              </h2>
+              <p className="text-body text-white/80 mb-6 max-w-2xl">
+                Answer four quick questions and we will call you within one business day with pricing
+                guidance. Prefer a deep dive? Use the detailed form for square footage, frequency,
+                and service mix.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="tel:+14133065053">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-white text-white hover:bg-white/10 w-full"
+                  >
+                    Call (413) 306-5053
+                  </Button>
+                </a>
+                <Link href="/contact">
+                  <Button variant="ghost" size="lg" className="text-white hover:text-brand-emerald">
+                    Schedule Walk-Through
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg border-2 border-brand-emerald p-6 text-brand-navy shadow-lg">
+              <h3 className="text-h3 mb-4">Get a Custom Quote</h3>
+              <QuoteMiniForm
+                source="services"
+                onOpenAdvanced={() => setShowAdvancedModal(true)}
+              />
+            </div>
+          </div>
         </div>
       </section>
+
+      <QuoteAdvancedModal
+        isOpen={showAdvancedModal}
+        onClose={() => setShowAdvancedModal(false)}
+      />
     </div>
   )
 }

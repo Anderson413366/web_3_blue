@@ -1,6 +1,10 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import HeroQuickQuoteForm from '@/components/forms/HeroQuickQuoteForm'
+import QuoteMiniForm from '@/components/forms/QuoteMiniForm'
+import QuoteAdvancedModal from '@/components/forms/QuoteAdvancedModal'
 import BeforeAfterSlider from '@/components/sections/BeforeAfterSlider'
 import StatsBar from '@/components/sections/StatsBar'
 import PromotionalModal from '@/components/PromotionalModal'
@@ -26,9 +30,8 @@ import {
   Gift,
 } from 'lucide-react'
 
-export const revalidate = 86400
-
 export default function Home() {
+  const [showAdvancedModal, setShowAdvancedModal] = useState(false)
   return (
     <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900 transition-colors duration-300">
       {/* Promotional Modal */}
@@ -119,8 +122,14 @@ export default function Home() {
             </div>
 
             {/* Right Column - Quick Quote Form */}
-            <div className="hidden lg:block">
-              <HeroQuickQuoteForm />
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-md rounded-lg bg-white p-6 text-brand-navy shadow-lg">
+                <h3 className="text-h3 mb-4">Get a Free Quote</h3>
+                <QuoteMiniForm
+                  source="hero"
+                  onOpenAdvanced={() => setShowAdvancedModal(true)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -711,6 +720,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <QuoteAdvancedModal
+        isOpen={showAdvancedModal}
+        onClose={() => setShowAdvancedModal(false)}
+      />
     </div>
   )
 }
