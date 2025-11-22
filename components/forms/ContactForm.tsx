@@ -75,7 +75,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-8">
+    <div className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl shadow-sm p-8">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <h2 className="text-h3 font-bold text-neutral-charcoal dark:text-white mb-2">
@@ -88,13 +88,13 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
         {/* Success Message */}
         {submitStatus === 'success' && (
-          <div className="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 flex items-start gap-3">
-            <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+          <div className="rounded-lg bg-brand-emerald/10 border border-brand-emerald/30 p-4 flex items-start gap-3">
+            <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <h4 className="text-sm font-semibold text-green-900 dark:text-green-300 mb-1">
+              <h4 className="text-sm font-semibold text-brand-navy mb-1">
                 Message Sent Successfully!
               </h4>
-              <p className="text-sm text-green-700 dark:text-green-400">
+              <p className="text-sm text-brand-navy/80">
                 Thank you for contacting us. We'll respond to your message within 1 business day.
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             {...register('name')}
             type="text"
             id="name"
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald"
             placeholder="John Smith"
           />
           {errors.name && (
@@ -149,7 +149,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             {...register('email')}
             type="email"
             id="email"
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald"
             placeholder="john@example.com"
           />
           {errors.email && (
@@ -170,7 +170,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             type="tel"
             id="phone"
             autoComplete="tel"
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald"
             placeholder="(413) 306-5053"
           />
           {errors.phone && (
@@ -191,7 +191,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             id="message"
             rows={6}
             maxLength={1000}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald"
             placeholder="Tell us about your cleaning needs, questions, or concerns..."
           />
           {errors.message && (

@@ -503,7 +503,7 @@ export default async function BlogPost({
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900">
       {/* Article Header */}
       <article className="pt-28 pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -520,7 +520,7 @@ export default async function BlogPost({
           {/* Article Meta */}
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <span className="inline-block px-3 py-1 bg-accent-500 text-white text-sm font-semibold rounded-full">
+              <span className="inline-block px-3 py-1 bg-brand-emerald text-white text-sm font-semibold rounded-full">
                 {post.category}
               </span>
             </div>
@@ -548,17 +548,17 @@ export default async function BlogPost({
             </div>
 
             {/* Share Buttons */}
-            <div className="flex items-center gap-4 pb-8 border-b border-gray-200 dark:border-slate-700">
+            <div className="flex items-center gap-4 pb-8 border-b border-neutral-light-grey dark:border-slate-700">
               <span className="text-sm font-medium text-neutral-charcoal/80 dark:text-white/80">Share:</span>
-              <button className="p-2 rounded-lg hover:bg-neutral-light-grey dark:hover:bg-slate-800 transition-colors">
-                <Share2 className="h-5 w-5 text-neutral-charcoal/70 dark:text-neutral-charcoal/50" />
+              <button className="p-2 rounded-lg hover:bg-neutral-light-grey dark:hover:bg-slate-800 transition-colors" aria-label="Share this article">
+                <Share2 className="h-5 w-5 text-neutral-charcoal/70 dark:text-white/70" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Featured Image */}
-        <div className="relative w-full h-96 bg-gray-200 dark:bg-slate-800 my-12">
+        <div className="relative w-full h-96 bg-neutral-light-grey dark:bg-slate-800 my-12">
           <Image
             src={post.image}
             alt={post.title}
@@ -576,7 +576,7 @@ export default async function BlogPost({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div
-              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-neutral-charcoal dark:prose-headings:text-white prose-h2:text-h2 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-h3 prose-h3:mt-8 prose-h3:mb-4 prose-p:text-neutral-charcoal/80 dark:prose-p:text-neutral-charcoal/40 prose-p:leading-relaxed prose-p:mb-6 prose-ul:my-6 prose-ul:space-y-2 prose-li:text-neutral-charcoal/80 dark:prose-li:text-neutral-charcoal/40 prose-strong:text-neutral-charcoal dark:prose-strong:text-white prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline"
+              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-neutral-charcoal dark:prose-headings:text-white prose-h2:text-h2 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-h3 prose-h3:mt-8 prose-h3:mb-4 prose-p:text-neutral-charcoal/80 dark:prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-6 prose-ul:my-6 prose-ul:space-y-2 prose-li:text-neutral-charcoal/80 dark:prose-li:text-white/80 prose-strong:text-neutral-charcoal dark:prose-strong:text-white prose-a:text-brand-emerald dark:prose-a:text-brand-emerald prose-a:no-underline hover:prose-a:underline"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
@@ -584,30 +584,32 @@ export default async function BlogPost({
               dangerouslySetInnerHTML={{
                 __html: `
                   .callout {
-                    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-                    border-left: 4px solid #3b82f6;
-                    border-radius: 0.5rem;
+                    background: #ffffff;
+                    border: 1px solid #dfe2e6;
+                    border-left: 4px solid #00A57E;
+                    border-radius: 0.75rem;
                     padding: 2rem;
                     margin: 3rem 0;
                   }
                   .dark .callout {
-                    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-                    border-left-color: #60a5fa;
+                    background: #0A2342;
+                    border-color: rgba(255,255,255,0.15);
+                    border-left-color: #00A57E;
                   }
                   .callout h3 {
-                    color: #1e40af;
+                    color: #0A2342;
                     margin-top: 0 !important;
                     margin-bottom: 1rem;
                   }
                   .dark .callout h3 {
-                    color: #93c5fd;
+                    color: #ffffff;
                   }
                   .callout p {
-                    color: #1e40af;
+                    color: #1A1A1A;
                     margin-bottom: 0.5rem;
                   }
                   .dark .callout p {
-                    color: #dbeafe;
+                    color: #ffffffcc;
                   }
                 `,
               }}
@@ -618,7 +620,7 @@ export default async function BlogPost({
         {/* Related Articles CTA */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-neutral-off-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 text-center">
+            <div className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-2xl p-8 text-center">
               <h2 className="text-h3 leading-normal font-bold text-neutral-charcoal dark:text-white mb-4">
                 Need Professional Cleaning Services?
               </h2>

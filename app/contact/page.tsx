@@ -5,7 +5,7 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react'
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-neutral-off-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
+    <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-20">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -28,9 +28,9 @@ export default function ContactPage() {
             {/* Contact Information Sidebar */}
             <div className="lg:col-span-1 space-y-6">
               {/* Fast Response */}
-              <div className="bg-primary-700 text-white rounded-xl p-6 shadow-lg">
-                <Clock className="h-12 w-12 mb-4 text-yellow-400" />
-                <h3 className="text-body font-bold mb-2">Here When You Need Us</h3>
+              <div className="bg-brand-navy text-white rounded-xl p-6 shadow-sm">
+                <Clock className="h-12 w-12 mb-4 text-brand-emerald" />
+                <h3 className="text-h3 leading-normal font-semibold mb-2">Here When You Need Us</h3>
                 <p className="text-white/80 mb-4">
                   Office hours: Monday – Friday, 9 AM – 5 PM EST. We respond to all inquiries within
                   24 hours.
@@ -42,19 +42,19 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Methods */}
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg space-y-6">
-                <h3 className="text-body font-bold text-neutral-charcoal dark:text-white">
+              <div className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 shadow-sm space-y-6">
+                <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white">
                   Contact Information
                 </h3>
 
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <Phone className="h-5 w-5 text-accent-500 mt-1 flex-shrink-0" />
+                    <Phone className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Phone</p>
                       <a
                         href="tel:+14133065053"
-                        className="text-primary-600 dark:text-primary-400 hover:underline"
+                        className="text-brand-emerald hover:underline"
                       >
                         (413) 306-5053
                       </a>
@@ -65,12 +65,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Mail className="h-5 w-5 text-accent-500 mt-1 flex-shrink-0" />
+                    <Mail className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Email</p>
                       <a
                         href="mailto:info@andersoncleaning.com"
-                        className="text-primary-600 dark:text-primary-400 hover:underline"
+                        className="text-brand-emerald hover:underline"
                       >
                         info@andersoncleaning.com
                       </a>
@@ -79,7 +79,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <MapPin className="h-5 w-5 text-accent-500 mt-1 flex-shrink-0" />
+                    <MapPin className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Office</p>
                       <address className="text-neutral-charcoal/80 dark:text-white/80 not-italic">
@@ -91,13 +91,13 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Clock className="h-5 w-5 text-accent-500 mt-1 flex-shrink-0" />
+                    <Clock className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Office Hours</p>
                       <p className="text-neutral-charcoal/80 dark:text-white/80">
                         Monday – Friday: 9 AM – 5 PM EST
                       </p>
-                      <p className="text-sm text-accent-600 dark:text-accent-400 font-medium mt-1">
+                      <p className="text-sm text-brand-emerald font-medium mt-1">
                         24/7 emergency support for current clients. On-site in 2 hours or less;
                         premium rates apply.
                       </p>
@@ -107,8 +107,8 @@ export default function ContactPage() {
               </div>
 
               {/* Service Area */}
-              <div className="bg-neutral-off-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
-                <h3 className="text-body font-bold text-neutral-charcoal dark:text-white mb-3">
+              <div className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 shadow-sm">
+                <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-3">
                   Service Area
                 </h3>
                 <p className="text-neutral-charcoal/80 dark:text-white/80 mb-3">
@@ -116,7 +116,7 @@ export default function ContactPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-neutral-charcoal/80 dark:text-white/80">
                   <li className="flex items-center">
-                    <CheckCircle2 className="h-4 w-4 text-accent-500 mr-2 flex-shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
                     Western Massachusetts
                   </li>
                   <li className="flex items-center">
@@ -131,8 +131,8 @@ export default function ContactPage() {
               </div>
 
               {/* Emergency Contact */}
-              <div className="bg-error-light dark:bg-error-dark/20 border-l-4 border-error rounded-lg p-6">
-                <p className="text-error-dark dark:text-error-light font-semibold mb-2">
+              <div className="bg-white dark:bg-slate-900 border border-red-200 dark:border-red-800 rounded-lg p-6">
+                <p className="text-red-700 dark:text-red-300 font-semibold mb-2">
                   Current Client Emergency?
                 </p>
                 <p className="text-sm text-neutral-charcoal/80 dark:text-white/80">
@@ -141,7 +141,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href="tel:+14133065053"
-                  className="inline-block mt-2 font-bold text-error-dark dark:text-error-light hover:underline"
+                  className="inline-block mt-2 font-bold text-red-700 dark:text-red-300 hover:underline"
                 >
                   (413) 306-5053
                 </a>

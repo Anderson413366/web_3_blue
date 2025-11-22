@@ -70,19 +70,19 @@ const categories = ['All', 'Health & Safety', 'Sustainability', 'Best Practices'
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-brand-navy text-white pt-28 pb-16 md:pt-32 md:pb-20">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <div className="mb-4">
-              <span className="inline-flex items-center px-4 py-2 bg-accent-500/20 border border-accent-400/30 rounded-full text-accent-300 text-sm font-medium">
+              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-emerald/40 bg-brand-emerald/10 text-brand-emerald text-body-sm font-medium">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Resources & Insights
               </span>
             </div>
-            <h1 className="text-h1 leading-tight font-extrabold mb-6 leading-tight">
+            <h1 className="text-h1 font-extrabold mb-6 leading-tight">
               Commercial Cleaning Resources & Tips
             </h1>
             <p className="text-body text-white/80 leading-relaxed">

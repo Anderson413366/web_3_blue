@@ -62,7 +62,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
 
   return (
     <>
-      <section className="bg-neutral-off-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 py-6">
+      <section className="bg-neutral-off-white dark:bg-slate-900 border-b border-neutral-light-grey dark:border-slate-700 py-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-3">
             {categories.map((category) => {
@@ -74,8 +74,8 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-lg font-medium transition-all border ${
                     isActive
-                      ? 'bg-primary-600 text-white border-primary-600 shadow-md'
-                      : 'bg-white dark:bg-slate-700 text-neutral-charcoal/80 dark:text-white/80 border-gray-200 dark:border-slate-600 hover:bg-neutral-light-grey dark:hover:bg-slate-600'
+                      ? 'bg-brand-emerald text-white border-brand-emerald shadow-sm'
+                      : 'bg-white dark:bg-slate-800 text-neutral-charcoal/80 dark:text-white/80 border-neutral-light-grey dark:border-slate-700 hover:bg-neutral-light-grey dark:hover:bg-slate-700'
                   }`}
                   aria-pressed={isActive}
                 >
@@ -94,9 +94,9 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                className="group bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl overflow-hidden shadow-sm hover:-translate-y-1 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald"
               >
-                <div className="relative h-48 bg-gray-200 dark:bg-slate-700 overflow-hidden">
+                <div className="relative h-48 bg-neutral-light-grey dark:bg-slate-700 overflow-hidden">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -109,7 +109,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
                     quality={85}
                   />
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-block px-3 py-1 bg-accent-500 text-white text-xs font-semibold rounded-full">
+                    <span className="inline-block px-3 py-1 bg-brand-emerald text-white text-xs font-semibold rounded-full">
                       {post.category}
                     </span>
                   </div>
@@ -131,7 +131,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
                     </div>
                   </div>
 
-                  <h2 className="text-body font-bold text-neutral-charcoal dark:text-white mb-3 line-clamp-2">
+                  <h2 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-3 line-clamp-2">
                     {post.title}
                   </h2>
 
@@ -140,7 +140,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
                   </p>
 
                   <div className="w-full">
-                    <span className="inline-flex items-center text-primary-600 dark:text-primary-400 text-sm font-semibold">
+                    <span className="inline-flex items-center text-brand-emerald text-sm font-semibold">
                       Read Article
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </span>
@@ -152,7 +152,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
         </div>
       </section>
 
-      <section className="py-16 bg-neutral-off-white dark:from-slate-800 dark:to-slate-900">
+      <section className="py-16 bg-neutral-off-white dark:bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-h2 leading-tight font-bold text-neutral-charcoal dark:text-white mb-4">
@@ -170,9 +170,9 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
                 onChange={(event) => setNewsletterEmail(event.target.value)}
                 placeholder="your.email@company.com"
                 required
-                className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                className="flex-1 px-4 py-3 border border-neutral-light-grey dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand-emerald focus:border-transparent dark:bg-slate-800 dark:text-white"
               />
-              <Button type="submit" variant="primary" size="lg" isLoading={newsletterStatus === 'loading'}>
+              <Button type="submit" variant="accent" size="lg" isLoading={newsletterStatus === 'loading'}>
                 {newsletterStatus === 'success' ? 'Subscribed!' : 'Subscribe'}
               </Button>
             </form>
@@ -180,7 +180,7 @@ export default function BlogExplorer({ posts, categories }: BlogExplorerProps) {
               <p className="text-sm text-red-500 mt-2">{newsletterError}</p>
             )}
             {newsletterStatus === 'success' && (
-              <p className="text-sm text-green-600 mt-2">Thanks! Check your inbox to confirm.</p>
+              <p className="text-sm text-brand-emerald mt-2">Thanks! Check your inbox to confirm.</p>
             )}
             <p className="text-xs text-neutral-charcoal/60 dark:text-neutral-charcoal/50 mt-4">
               We respect your privacy. Unsubscribe anytime.
