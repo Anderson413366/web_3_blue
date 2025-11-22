@@ -66,7 +66,7 @@ const WhatWeOfferSection: React.FC = () => {
                       key={idx}
                       className="flex items-start text-neutral-charcoal/70 dark:text-white/80"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 mt-1 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 mt-1 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

@@ -34,7 +34,7 @@ export default function NotFound() {
             <g transform="translate(250, 120)">
               <path
                 d="M30 40 L50 40 L45 60 L25 60 Z"
-                className="fill-brand-emerald dark:fill-brand-emerald/70"
+                className="fill-brand-bright-blue dark:fill-brand-bright-blue/70"
               />
               <path
                 d="M20 35 L60 35 L58 40 L22 40 Z"

@@ -72,24 +72,24 @@ export default function Footer() {
   return (
     <>
       {/* CTA Section - Above Footer */}
-      <section className="bg-gradient-to-r from-brand-emerald to-teal-700 py-12">
+      <section className="bg-gradient-to-r from-brand-bright-blue via-brand-deep-blue to-brand-deep-blue py-12">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="mb-4 text-3xl font-bold text-white">
             Ready to Experience Professional Cleaning?
           </h2>
-          <p className="mb-8 text-lg text-teal-50">
+          <p className="mb-8 text-lg text-white/90">
             Join 100+ businesses that trust Anderson Cleaning for their facility maintenance
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/quote"
-              className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-teal-700 transition-colors hover:bg-gray-50"
+              className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-brand-deep-blue transition-colors hover:bg-gray-50"
             >
               Get Your Free Quote
             </Link>
             <a
               href="tel:+14133065053"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-teal-700"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-brand-deep-blue"
             >
               <Phone className="h-5 w-5" />
               Call (413) 306-5053
@@ -99,7 +99,7 @@ export default function Footer() {
       </section>
 
       {/* Main Footer */}
-      <footer className="bg-gray-900 text-gray-300" aria-labelledby="footer-heading">
+      <footer className="bg-brand-deep-blue text-gray-300" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -126,7 +126,7 @@ export default function Footer() {
                     title={badge.name}
                     aria-label={badge.name}
                   >
-                    <badge.icon className="h-6 w-6 text-brand-emerald" aria-hidden="true" />
+                    <badge.icon className="h-6 w-6 text-brand-bright-blue" aria-hidden="true" />
                   </div>
                 ))}
               </div>
@@ -140,7 +140,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm transition-colors hover:text-brand-emerald"
+                      className="text-sm transition-colors hover:text-brand-bright-blue"
                     >
                       {item.name}
                     </Link>
@@ -149,7 +149,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/quote"
-                    className="text-sm font-semibold text-brand-emerald transition-colors hover:text-teal-300"
+                    className="text-sm font-semibold text-brand-bright-blue transition-colors hover:text-brand-bright-blue/80"
                   >
                     Get a Custom Quote →
                   </Link>
@@ -165,7 +165,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm transition-colors hover:text-brand-emerald"
+                      className="text-sm transition-colors hover:text-brand-bright-blue"
                     >
                       {item.name}
                     </Link>
@@ -180,9 +180,9 @@ export default function Footer() {
               <div className="space-y-3">
                 <a
                   href="tel:+14133065053"
-                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-emerald"
+                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-bright-blue"
                 >
-                  <Phone className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-emerald" />
+                  <Phone className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-bright-blue" />
                   <div>
                     <div className="font-semibold">(413) 306-5053</div>
                     <div className="text-xs text-gray-500">Mon-Fri, 9 AM - 5 PM EST</div>
@@ -190,9 +190,9 @@ export default function Footer() {
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-emerald"
+                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-bright-blue"
                 >
-                  <Mail className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-emerald" />
+                  <Mail className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-bright-blue" />
                   <div>
                     <div>info@andersoncleaning.com</div>
                     <div className="text-xs text-gray-500">24-hour response time</div>
@@ -212,7 +212,7 @@ export default function Footer() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="rounded bg-gray-800 p-2 transition-colors hover:bg-brand-emerald"
+                      className="rounded bg-gray-800 p-2 transition-colors hover:bg-brand-bright-blue"
                       aria-label={item.name}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -257,7 +257,7 @@ export default function Footer() {
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   aria-label="Toggle dark mode"
                 >
-                  <span className="relative h-5 w-5 text-brand-emerald" aria-hidden="true">
+                  <span className="relative h-5 w-5 text-brand-bright-blue" aria-hidden="true">
                     <Sun
                       className={`absolute inset-0 h-5 w-5 transition-all duration-200 ${
                         theme === 'dark' ? 'rotate-90 scale-75 opacity-0' : 'rotate-0 scale-100 opacity-100'
@@ -284,14 +284,14 @@ export default function Footer() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-sm text-gray-500 transition-colors hover:text-brand-emerald"
+                    className="text-sm text-gray-500 transition-colors hover:text-brand-bright-blue"
                   >
                     {item.name}
                   </Link>
                 ))}
                 <Link
                   href="/sitemap.xml"
-                  className="text-sm text-gray-500 transition-colors hover:text-brand-emerald"
+                  className="text-sm text-gray-500 transition-colors hover:text-brand-bright-blue"
                 >
                   Sitemap
                 </Link>

@@ -21,7 +21,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLDivElement, ButtonProps>(
         break
       case 'link':
         variantStyles =
-          'underline-offset-4 hover:underline text-brand-emerald dark:text-brand-emerald'
+          'underline-offset-4 hover:underline text-brand-bright-blue dark:text-brand-bright-blue'
         break
       case 'destructive':
         variantStyles = 'bg-red-600 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800'
@@ -32,7 +32,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLDivElement, ButtonProps>(
         break
       case 'accent':
         variantStyles =
-          'bg-brand-emerald text-white hover:bg-brand-emerald/90 dark:bg-brand-emerald dark:hover:bg-brand-emerald/80'
+          'bg-brand-bright-blue text-white hover:bg-brand-bright-blue/90 dark:bg-brand-bright-blue dark:hover:bg-brand-bright-blue/80'
         break
       default: // 'default' variant
         variantStyles =

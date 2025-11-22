@@ -301,7 +301,7 @@ export default function QuoteFormInline({
           aria-live="polite"
         >
           <div className="flex items-start gap-2">
-            <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+            <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">Thank you for your request!</p>
               <p className="text-sm mt-1">

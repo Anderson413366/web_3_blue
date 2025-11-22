@@ -199,16 +199,30 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://api.hubspot.com" />
         <link rel="dns-prefetch" href="https://api.resend.com" />
 
-        {/* Favicon and Icons */}
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-icon.svg" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/images/logo-icon.svg" color="#1D4ED8" />
+        {/* Favicon and Icons - Light Mode */}
+        <link rel="icon" type="image/png" sizes="16x16" href="/brand/color/favicon-16.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/brand/color/favicon-32.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/brand/color/favicon-48.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/brand/color/favicon-64.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/brand/color/favicon-128.png" media="(prefers-color-scheme: light)" />
 
-        {/* Theme Color */}
-        <meta name="theme-color" content="#1D4ED8" />
-        <meta name="msapplication-TileColor" content="#1D4ED8" />
+        {/* Favicon and Icons - Dark Mode */}
+        <link rel="icon" type="image/png" sizes="16x16" href="/brand/white/favicon-16-white.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/brand/white/favicon-32-white.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/brand/white/favicon-48-white.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/brand/white/favicon-64-white.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/brand/white/favicon-128-white.png" media="(prefers-color-scheme: dark)" />
+
+        {/* Apple Touch Icon and PWA */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/brand/color/favicon-180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/brand/color/favicon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/brand/color/favicon-512.png" />
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* Theme Color - Official Anderson Cleaning Deep Blue */}
+        <meta name="theme-color" content="#002A86" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#002A86" media="(prefers-color-scheme: dark)" />
+        <meta name="msapplication-TileColor" content="#002A86" />
 
           {/* JSON-LD Structured Data with CSP nonce */}
         <StructuredData schema={organizationSchema} nonce={nonce} />

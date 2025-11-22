@@ -115,15 +115,15 @@ export default function CareersPage() {
 
             <div className="flex flex-wrap justify-center gap-8 mb-10">
               <div className="flex flex-col items-center">
-                <DollarSign className="h-12 w-12 text-brand-emerald mb-2" />
+                <DollarSign className="h-12 w-12 text-brand-bright-blue mb-2" />
                 <span className="font-semibold">Competitive Pay</span>
               </div>
               <div className="flex flex-col items-center">
-                <GraduationCap className="h-12 w-12 text-brand-emerald mb-2" />
+                <GraduationCap className="h-12 w-12 text-brand-bright-blue mb-2" />
                 <span className="font-semibold">40+ Hours Training</span>
               </div>
               <div className="flex flex-col items-center">
-                <TrendingUp className="h-12 w-12 text-brand-emerald mb-2" />
+                <TrendingUp className="h-12 w-12 text-brand-bright-blue mb-2" />
                 <span className="font-semibold">Career Advancement</span>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function CareersPage() {
               ].map((role) => (
                 <div
                   key={role.title}
-                  className="bg-white rounded-lg border-2 border-neutral-light-grey hover:border-brand-emerald transition-colors p-6"
+                  className="bg-white rounded-lg border-2 border-neutral-light-grey hover:border-brand-bright-blue transition-colors p-6"
                 >
                   <h3 className="text-h3 mb-2">{role.title}</h3>
                   <div className="flex items-center gap-2 text-neutral-charcoal dark:text-white mb-1">
@@ -198,7 +198,7 @@ export default function CareersPage() {
                   <ul className="space-y-2 mb-6 text-body-sm">
                     {role.bullets.map((badge) => (
                       <li key={badge} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-brand-emerald mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mt-0.5 flex-shrink-0" />
                         <span>{badge}</span>
                       </li>
                     ))}

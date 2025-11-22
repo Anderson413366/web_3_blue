@@ -1,0 +1,31 @@
+{
+  "name": "Anderson Cleaning",
+  "short_name": "Anderson",
+  "description": "Commercial Cleaning Excellence Since 2007",
+  "theme_color": "#002A86",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/brand/color/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/color/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "lang": "en-US",
+  "dir": "ltr"
+}

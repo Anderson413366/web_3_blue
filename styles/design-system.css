@@ -1,50 +1,127 @@
 /* =============================================================================
    ANDERSON CLEANING DESIGN SYSTEM
-   Single source of truth for all design tokens
+   Official Brand Colors - Single source of truth for all design tokens
    ============================================================================= */
 
 :root {
-  /* Brand Colors */
-  --color-brand-navy: #0a2342;
-  --color-brand-emerald: #00a57e;
+  /* ====================================================================
+     OFFICIAL ANDERSON CLEANING BRAND COLORS (NON-NEGOTIABLE)
+     ==================================================================== */
+  --brand-deep-blue: #002A86;        /* Pantone 2747C - Dark backgrounds, headings */
+  --brand-bright-blue: #0077D9;      /* Pantone 3005C - Interactive elements, CTAs */
+  --brand-red: #C8102E;              /* Pantone 193C - Alerts, accents, premium badges */
+  --brand-white: #FFFFFF;            /* White - Text on dark backgrounds */
 
-  /* Neutrals */
-  --color-neutral-off-white: #f7f7f7;
-  --color-neutral-light-grey: #ededed;
-  --color-neutral-charcoal: #1a1a1a;
-  --color-neutral-white: #ffffff;
+  /* Legacy color mappings (deprecated - use brand colors above) */
+  --color-brand-navy: #002A86;       /* → Use --brand-deep-blue */
+  --color-brand-emerald: #0077D9;    /* → Use --brand-bright-blue */
 
-  /* Typography */
+  /* ====================================================================
+     SEMANTIC COLOR TOKENS (Apple-style design system)
+     ==================================================================== */
+  --color-primary: var(--brand-bright-blue);
+  --color-primary-dark: var(--brand-deep-blue);
+  --color-accent: var(--brand-red);
+
+  /* Backgrounds */
+  --color-background-light: #FFFFFF;
+  --color-background-dark: var(--brand-deep-blue);
+  --color-background-secondary: #F8F9FA;
+
+  /* Text Colors */
+  --color-text-light: var(--brand-white);
+  --color-text-dark: #1A1A1A;              /* Exception for body text readability */
+  --color-text-secondary: rgba(26, 26, 26, 0.6);
+
+  /* Neutrals (kept for compatibility) */
+  --color-neutral-off-white: #FFFFFF;
+  --color-neutral-light-grey: #F8F9FA;
+  --color-neutral-charcoal: #1A1A1A;
+  --color-neutral-white: #FFFFFF;
+
+  /* ====================================================================
+     INTERACTIVE STATES (Apple-level polish)
+     ==================================================================== */
+  --transition-default: 150ms ease;
+  --transition-medium: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --focus-outline: 2px solid var(--brand-bright-blue);
+  --focus-outline-offset: 2px;
+  --hover-opacity: 0.85;
+
+  /* ====================================================================
+     SPACING SYSTEM (Apple-style generous spacing)
+     ==================================================================== */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 64px;
+
+  /* ====================================================================
+     TYPOGRAPHY
+     ==================================================================== */
   --font-primary: var(--font-inter, 'Inter', system-ui, sans-serif);
 
-  /* Type Scale */
-  --text-h1: 40px;
-  --text-h2: 32px;
-  --text-h3: 24px;
-  --text-body: 18px;
-  --text-body-sm: 16px;
-  --text-button: 18px;
-  --text-button-sm: 16px;
+  /* Type Scale - Apple-style larger sizes */
+  --text-h1-desktop: 56px;
+  --text-h1-mobile: 32px;
+  --text-h2-desktop: 36px;
+  --text-h2-mobile: 28px;
+  --text-h3-desktop: 24px;
+  --text-h3-mobile: 20px;
+  --text-body: 16px;
+  --text-body-lg: 20px;
+  --text-body-sm: 14px;
+  --text-button: 16px;
+  --text-button-sm: 14px;
 
   /* Line Heights */
-  --leading-tight: 1.3;
-  --leading-normal: 1.4;
-  --leading-relaxed: 1.5;
+  --leading-tight: 1.15;           /* Headlines */
+  --leading-normal: 1.4;           /* Subheadings */
+  --leading-relaxed: 1.6;          /* Body text */
 
-  /* Shadows - Minimal */
-  --shadow-sm: 0 1px 3px rgba(10, 35, 66, 0.1);
-  --shadow-md: 0 4px 12px rgba(10, 35, 66, 0.12);
-  --shadow-lg: 0 8px 24px rgba(10, 35, 66, 0.15);
+  /* Letter Spacing (Apple-style tight tracking for headlines) */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+
+  /* ====================================================================
+     BORDERS & SHADOWS (Minimal, using brand colors)
+     ==================================================================== */
+  --border-color-light: rgba(0, 42, 134, 0.12);    /* Translucent deep blue */
+  --border-color-dark: rgba(255, 255, 255, 0.1);
+
+  --shadow-sm: 0 1px 3px rgba(0, 42, 134, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 42, 134, 0.1);
+  --shadow-lg: 0 10px 24px rgba(0, 42, 134, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 42, 134, 0.15);
 
   /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
 }
 
-/* Dark Mode Overrides */
+/* ====================================================================
+   DARK MODE OVERRIDES (prefers-color-scheme + manual toggle)
+   ==================================================================== */
 html.dark {
-  --color-neutral-off-white: #1a1a1a;
-  --color-neutral-light-grey: #2a2a2a;
-  --color-neutral-charcoal: #f7f7f7;
+  --color-background-light: #0A0F1E;
+  --color-background-secondary: #151B2E;
+  --color-text-dark: rgba(255, 255, 255, 0.95);
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
+
+  --color-neutral-off-white: #0A0F1E;
+  --color-neutral-light-grey: #151B2E;
+  --color-neutral-charcoal: rgba(255, 255, 255, 0.95);
+
+  --border-color-light: rgba(255, 255, 255, 0.1);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.5);
 }

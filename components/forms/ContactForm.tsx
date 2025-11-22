@@ -88,8 +88,8 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
 
         {/* Success Message */}
         {submitStatus === 'success' && (
-          <div className="rounded-lg bg-brand-emerald/10 border border-brand-emerald/30 p-4 flex items-start gap-3">
-            <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+          <div className="rounded-lg bg-brand-bright-blue/10 border border-brand-bright-blue/30 p-4 flex items-start gap-3">
+            <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
             <div className="flex-1">
               <h4 className="text-sm font-semibold text-brand-navy mb-1">
                 Message Sent Successfully!
@@ -129,7 +129,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             {...register('name')}
             type="text"
             id="name"
-            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-bright-blue focus:border-brand-bright-blue placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
             placeholder="John Smith"
           />
           {errors.name && (
@@ -149,7 +149,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             {...register('email')}
             type="email"
             id="email"
-            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-bright-blue focus:border-brand-bright-blue placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
             placeholder="john@example.com"
           />
           {errors.email && (
@@ -170,7 +170,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             type="tel"
             id="phone"
             autoComplete="tel"
-            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-bright-blue focus:border-brand-bright-blue placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
             placeholder="(413) 306-5053"
           />
           {errors.phone && (
@@ -191,7 +191,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
             id="message"
             rows={6}
             maxLength={1000}
-            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-emerald focus:border-brand-emerald placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+            className="w-full px-4 py-2 border border-neutral-light-grey dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-neutral-charcoal dark:text-white focus:ring-2 focus:ring-brand-bright-blue focus:border-brand-bright-blue placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
             placeholder="Tell us about your cleaning needs, questions, or concerns..."
           />
           {errors.message && (

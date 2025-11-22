@@ -77,7 +77,7 @@ export default function BlogPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
             <div className="mb-4">
-              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-emerald/40 bg-brand-emerald/10 text-brand-emerald text-body-sm font-medium">
+              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-body-sm font-medium">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Resources & Insights
               </span>

@@ -47,7 +47,7 @@ export default function Home() {
             {/* Left Column - Value Proposition */}
             <div>
               <div className="mb-4">
-                <span className="inline-block px-4 py-2 rounded-full border border-brand-emerald/40 bg-brand-emerald/10 text-brand-emerald text-body-sm font-medium">
+                <span className="inline-block px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-body-sm font-medium">
                   B2B Commercial Cleaning Experts
                 </span>
               </div>
@@ -56,7 +56,7 @@ export default function Home() {
               </h1>
 
               <div className="mb-4">
-                <span className="inline-block px-4 py-2 rounded-full bg-brand-emerald text-white text-body-sm font-semibold">
+                <span className="inline-block px-4 py-2 rounded-full bg-brand-bright-blue text-white text-body-sm font-semibold">
                   Serving Western MA & Northern CT
                 </span>
               </div>
@@ -64,23 +64,23 @@ export default function Home() {
               {/* Key Selling Points */}
               <div className="space-y-3 mb-8 text-body text-white/90">
                 <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
                   <span>
                     Full-time salaried cleaners — stable, trained professionals
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
                   <span>
                     24/7 emergency support for current clients — on-site within 2 hours
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
                   <span>Corporate-grade systems with small business care</span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
                   <span>Licensed, insured & background-checked teams</span>
                 </div>
               </div>
@@ -88,15 +88,15 @@ export default function Home() {
               {/* Trust Badges */}
               <div className="flex flex-wrap items-center gap-6 text-body-sm text-white/80 mb-8">
                 <div className="flex items-center space-x-2">
-                  <Shield className="h-5 w-5 text-brand-emerald" aria-hidden="true" />
+                  <Shield className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
                   <span>Licensed & Insured</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Award className="h-5 w-5 text-brand-emerald" aria-hidden="true" />
+                  <Award className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
                   <span>18 Years of Excellence</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Star className="h-5 w-5 text-brand-emerald" aria-hidden="true" />
+                  <Star className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
                   <span>100% Satisfaction</span>
                 </div>
               </div>
@@ -198,10 +198,10 @@ export default function Home() {
               return (
                 <div
                   key={i}
-                  className="bg-white dark:bg-slate-800 border-2 border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 shadow-sm hover:-translate-y-1 hover:border-brand-emerald transition-all duration-300 min-h-[190px] flex"
+                  className="bg-white dark:bg-slate-800 border-2 border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 shadow-sm hover:-translate-y-1 hover:border-brand-bright-blue transition-all duration-300 min-h-[190px] flex"
                 >
                   <div className="flex items-start space-x-4 w-full">
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-off-white text-brand-emerald">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-neutral-off-white text-brand-bright-blue">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                       <span className="sr-only">{service.label}</span>
                     </div>
@@ -254,48 +254,48 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-4 flex items-center">
-                    <MapPin className="h-6 w-6 text-brand-navy dark:text-brand-emerald mr-2" />
+                    <MapPin className="h-6 w-6 text-brand-navy dark:text-brand-bright-blue mr-2" />
                     Primary Service Areas
                   </h3>
                   <ul className="space-y-2 text-body text-neutral-charcoal/80 dark:text-white/80">
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Springfield & West Springfield
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Worcester County
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Northampton & Amherst
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Hartford, CT area
                     </li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-4 flex items-center">
-                    <Building2 className="h-6 w-6 text-brand-navy dark:text-brand-emerald mr-2" />
+                    <Building2 className="h-6 w-6 text-brand-navy dark:text-brand-bright-blue mr-2" />
                     We Serve
                   </h3>
                   <ul className="space-y-2 text-body text-neutral-charcoal/80 dark:text-white/80">
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Office buildings & corporate campuses
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Medical offices & clinics
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Educational facilities & schools
                     </li>
                     <li className="flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                       Retail stores & warehouses
                     </li>
                   </ul>
@@ -322,7 +322,7 @@ export default function Home() {
             </h2>
             <div className="flex items-center justify-center space-x-1 mb-2" role="img" aria-label="5 out of 5 stars">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="h-6 w-6 text-brand-emerald fill-brand-emerald" aria-hidden="true" />
+                <Star key={star} className="h-6 w-6 text-brand-bright-blue fill-brand-bright-blue" aria-hidden="true" />
               ))}
             </div>
             <p className="text-body text-neutral-charcoal/80 dark:text-white/70">5.0 stars from satisfied clients</p>
@@ -358,7 +358,7 @@ export default function Home() {
               >
                 <div className="flex items-center space-x-1 mb-4" role="img" aria-label={`${testimonial.rating} out of 5 stars`}>
                   {[...Array(testimonial.rating)].map((_, j) => (
-                    <Star key={j} className="h-5 w-5 text-brand-emerald fill-brand-emerald" aria-hidden="true" />
+                    <Star key={j} className="h-5 w-5 text-brand-bright-blue fill-brand-bright-blue" aria-hidden="true" />
                   ))}
                 </div>
                 <blockquote className="text-body leading-relaxed text-neutral-charcoal dark:text-white mb-4">
@@ -461,7 +461,7 @@ export default function Home() {
                   key={i}
                   className="bg-neutral-off-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 text-center shadow-sm"
                 >
-                  <Icon className="h-12 w-12 text-brand-navy dark:text-brand-emerald mx-auto mb-3" />
+                  <Icon className="h-12 w-12 text-brand-navy dark:text-brand-bright-blue mx-auto mb-3" />
                   <h3 className="font-bold text-neutral-charcoal dark:text-white mb-1 text-body-sm">
                     {badge.label}
                   </h3>
@@ -479,37 +479,37 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   Bonded & insured for your protection
                 </span>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   Full-time W2 employees only
                 </span>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   40+ hours of training per cleaner
                 </span>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   Quality audits & checklists
                 </span>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   EPA-registered disinfectants
                 </span>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">
                   Custom SOPs for your facility
                 </span>
@@ -542,19 +542,19 @@ export default function Home() {
               <div className="p-6">
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Office Cleaning Best Practices
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Green Cleaning Benefits
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Healthcare Facility Standards
                     </span>
@@ -571,7 +571,7 @@ export default function Home() {
 
             {/* FAQ Card */}
             <div className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl shadow-sm overflow-hidden hover:-translate-y-1 transition-all duration-300">
-              <div className="bg-brand-emerald p-6 text-white">
+              <div className="bg-brand-bright-blue p-6 text-white">
                 <HelpCircle className="h-8 w-8 mb-3" aria-hidden="true" />
                 <h3 className="text-h3 font-bold mb-2">Frequently Asked Questions</h3>
                 <p className="text-body text-white/80">Get answers to common questions</p>
@@ -579,17 +579,17 @@ export default function Home() {
               <div className="p-6">
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">Contract & Pricing Info</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Staff Vetting & Training
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Service Area & Scheduling
                     </span>
@@ -614,19 +614,19 @@ export default function Home() {
               <div className="p-6">
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       10% Off First Month for New Clients
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       $100 Referral Bonus Program
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-body text-neutral-charcoal dark:text-white">
                       Seasonal Promotions
                     </span>

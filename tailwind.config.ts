@@ -11,36 +11,63 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-navy': '#0A2342',
-        'brand-emerald': '#00A57E',
-        'neutral-off-white': '#F7F7F7',
-        'neutral-light-grey': '#EDEDED',
+        /* Official Anderson Cleaning Brand Colors */
+        'brand-deep-blue': '#002A86',      /* Pantone 2747C */
+        'brand-bright-blue': '#0077D9',    /* Pantone 3005C */
+        'brand-red': '#C8102E',            /* Pantone 193C */
+
+        /* Legacy aliases (deprecated - use brand-* colors above) */
+        'brand-navy': '#002A86',           /* → Use brand-deep-blue */
+        'brand-emerald': '#0077D9',        /* → Use brand-bright-blue */
+
+        /* Neutral system */
+        'neutral-off-white': '#FFFFFF',
+        'neutral-light-grey': '#F8F9FA',
         'neutral-charcoal': '#1A1A1A',
+
+        /* Primary scale - Deep Blue */
         primary: {
-          DEFAULT: '#0A2342',
-          50: '#E6EBF2',
-          100: '#CDD7E5',
-          200: '#9BAECB',
-          300: '#6986B1',
-          400: '#375D97',
-          500: '#0A2342',
-          600: '#081C35',
-          700: '#061528',
-          800: '#040E1A',
-          900: '#02070D',
+          DEFAULT: '#002A86',
+          50: '#E6ECF7',
+          100: '#CCD9EF',
+          200: '#99B3DF',
+          300: '#668DCF',
+          400: '#3367BF',
+          500: '#002A86',
+          600: '#00226B',
+          700: '#001950',
+          800: '#001135',
+          900: '#00081A',
         },
+
+        /* Accent scale - Bright Blue */
         accent: {
-          DEFAULT: '#00A57E',
-          50: '#E6F7F3',
-          100: '#CCEFE7',
-          200: '#99DFCF',
-          300: '#66CFB7',
-          400: '#33BF9F',
-          500: '#00A57E',
-          600: '#008465',
-          700: '#00634C',
-          800: '#004232',
-          900: '#002119',
+          DEFAULT: '#0077D9',
+          50: '#E6F3FC',
+          100: '#CCE7F9',
+          200: '#99CFF3',
+          300: '#66B7ED',
+          400: '#339FE7',
+          500: '#0077D9',
+          600: '#005FAE',
+          700: '#004782',
+          800: '#003057',
+          900: '#00182B',
+        },
+
+        /* Alert/Error scale - Red */
+        error: {
+          DEFAULT: '#C8102E',
+          50: '#FDE8EC',
+          100: '#FBD1D9',
+          200: '#F7A3B3',
+          300: '#F3758D',
+          400: '#EF4767',
+          500: '#C8102E',
+          600: '#A00D25',
+          700: '#780A1C',
+          800: '#500612',
+          900: '#280309',
         },
         slate: {
           50: '#f8fafc',

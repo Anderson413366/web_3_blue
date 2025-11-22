@@ -139,8 +139,8 @@ export default function CareerApplicationForm() {
 
   if (isSuccess) {
     return (
-      <div className="bg-white rounded-lg border-2 border-brand-emerald p-8 text-center">
-        <CheckCircle2 className="h-16 w-16 text-brand-emerald mx-auto mb-4" />
+      <div className="bg-white rounded-lg border-2 border-brand-bright-blue p-8 text-center">
+        <CheckCircle2 className="h-16 w-16 text-brand-bright-blue mx-auto mb-4" />
         <h3 className="text-h3 mb-2">Application Submitted!</h3>
         <p className="text-body-sm mb-4">We'll review your application and contact you within 48 hours.</p>
         {recoveryCode && (
@@ -166,7 +166,7 @@ export default function CareerApplicationForm() {
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                 step >= s
-                  ? 'bg-brand-emerald text-white'
+                  ? 'bg-brand-bright-blue text-white'
                   : 'bg-neutral-light-grey text-neutral-charcoal dark:text-white/80'
               }`}
             >
@@ -187,7 +187,7 @@ export default function CareerApplicationForm() {
               <input
                 {...register('full_name')}
                 onFocus={generateRecoveryCode}
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
               {errors.full_name && <p className="text-sm text-red-600 mt-1">{errors.full_name.message}</p>}
             </div>
@@ -198,7 +198,7 @@ export default function CareerApplicationForm() {
               <input
                 {...register('email')}
                 type="email"
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
               {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>}
             </div>
@@ -211,7 +211,7 @@ export default function CareerApplicationForm() {
                 type="tel"
                 placeholder="1234567890"
                 maxLength={10}
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
               {errors.phone && <p className="text-sm text-red-600 mt-1">{errors.phone.message}</p>}
             </div>
@@ -219,7 +219,7 @@ export default function CareerApplicationForm() {
               <label className="block text-body-sm font-semibold mb-2 text-neutral-charcoal dark:text-white">
                 Resume (PDF/DOC, max 5MB)
               </label>
-              <label className="flex items-center justify-center gap-2 border-2 border-dashed border-neutral-light-grey rounded px-4 py-6 cursor-pointer hover:border-brand-emerald transition-colors">
+              <label className="flex items-center justify-center gap-2 border-2 border-dashed border-neutral-light-grey rounded px-4 py-6 cursor-pointer hover:border-brand-bright-blue transition-colors">
                 <Upload className="h-5 w-5" />
                 <span>Upload File</span>
                 {/* Hidden native input lets screen readers trigger uploads while keeping the custom UI */}
@@ -250,7 +250,7 @@ export default function CareerApplicationForm() {
               </label>
               <select
                 {...register('position')}
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white"
               >
                 <option value="">Select a position...</option>
                 {POSITIONS.map((pos) => (
@@ -269,7 +269,7 @@ export default function CareerApplicationForm() {
                 {...register('why_anderson')}
                 rows={4}
                 placeholder="Tell us why you want to join our team..."
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
               {errors.why_anderson && (
                 <p className="text-sm text-red-600 mt-1">{errors.why_anderson.message}</p>
@@ -323,7 +323,7 @@ export default function CareerApplicationForm() {
                 {...register('cover_letter')}
                 rows={4}
                 placeholder="Additional information..."
-                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
             </div>
             <div className="flex gap-4">

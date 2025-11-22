@@ -78,7 +78,7 @@ export default function PromotionalModal() {
         {/* Content */}
         <div className="p-8 text-center">
           {/* Icon */}
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-emerald rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-bright-blue rounded-full mb-4">
             <Gift className="h-8 w-8 text-white" />
           </div>
 
@@ -91,10 +91,10 @@ export default function PromotionalModal() {
           </h2>
 
           {/* Offer Details */}
-          <div className="bg-neutral-off-white dark:bg-slate-800 rounded-xl p-6 mb-6 border-2 border-brand-emerald/20">
+          <div className="bg-neutral-off-white dark:bg-slate-800 rounded-xl p-6 mb-6 border-2 border-brand-bright-blue/20">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <Sparkles className="h-6 w-6 text-brand-emerald" />
-              <span className="text-h2 font-bold text-brand-emerald">10% OFF</span>
+              <Sparkles className="h-6 w-6 text-brand-bright-blue" />
+              <span className="text-h2 font-bold text-brand-bright-blue">10% OFF</span>
             </div>
             <p className="text-body font-semibold text-neutral-charcoal dark:text-white mb-2">
               Your First Month of Service

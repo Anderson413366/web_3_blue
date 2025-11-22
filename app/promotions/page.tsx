@@ -40,7 +40,7 @@ export default function PromotionsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* New Client Offer */}
-            <div className="bg-brand-emerald rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+            <div className="bg-brand-bright-blue rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
               <div className="relative z-10">
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-lg mb-4">
@@ -131,7 +131,7 @@ export default function PromotionsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-emerald rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-bright-blue rounded-full mb-6">
                 <Users className="h-8 w-8 text-white" />
               </div>
               <h2 className="text-h2 leading-tight font-bold text-neutral-charcoal dark:text-white mb-4">

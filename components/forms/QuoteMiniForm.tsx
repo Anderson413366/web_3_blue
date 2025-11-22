@@ -73,14 +73,14 @@ export default function QuoteMiniForm({
 
   if (isSuccess) {
     return (
-      <div className="bg-brand-emerald/10 border-2 border-brand-emerald rounded-lg p-6 text-center">
-        <CheckCircle2 className="h-12 w-12 text-brand-emerald mx-auto mb-3" />
+      <div className="bg-brand-bright-blue/10 border-2 border-brand-bright-blue rounded-lg p-6 text-center">
+        <CheckCircle2 className="h-12 w-12 text-brand-bright-blue mx-auto mb-3" />
         <h3 className="text-h3 mb-2">We'll call you soon!</h3>
         <p className="text-body-sm mb-4">Expect a call within 24 hours during business hours.</p>
         <button
           type="button"
           onClick={() => onOpenAdvanced?.()}
-          className="text-brand-navy hover:text-brand-emerald underline text-body-sm font-semibold"
+          className="text-brand-navy hover:text-brand-bright-blue underline text-body-sm font-semibold"
         >
           Need detailed quote? → Full form
         </button>
@@ -105,7 +105,7 @@ export default function QuoteMiniForm({
         </label>
         <input
           {...register('name')}
-          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
           placeholder="Your name"
         />
         {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>}
@@ -117,7 +117,7 @@ export default function QuoteMiniForm({
         </label>
         <input
           {...register('company')}
-          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
           placeholder="Optional"
         />
       </div>
@@ -130,7 +130,7 @@ export default function QuoteMiniForm({
           {...register('phone')}
           type="tel"
           maxLength={10}
-          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
           placeholder="1234567890"
         />
         {errors.phone && <p className="text-sm text-red-600 mt-1">{errors.phone.message}</p>}
@@ -143,7 +143,7 @@ export default function QuoteMiniForm({
         <textarea
           {...register('message')}
           rows={3}
-          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-emerald outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="w-full border-2 border-neutral-light-grey rounded px-4 py-2 focus:border-brand-bright-blue outline-none bg-white dark:bg-slate-800 text-neutral-charcoal dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 dark:placeholder:text-gray-400"
           placeholder="Tell us about your cleaning needs..."
         />
         {errors.message && <p className="text-sm text-red-600 mt-1">{errors.message.message}</p>}
@@ -157,7 +157,7 @@ export default function QuoteMiniForm({
         <button
           type="button"
           onClick={() => onOpenAdvanced?.()}
-          className="text-brand-navy hover:text-brand-emerald underline"
+          className="text-brand-navy hover:text-brand-bright-blue underline"
         >
           Need detailed quote? Click here
         </button>

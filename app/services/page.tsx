@@ -272,7 +272,7 @@ export default function ServicesPage() {
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-brand-navy text-white rounded-full flex items-center justify-center font-bold text-body shadow-lg">
                     {item.step}
                   </div>
-                  <Icon className="h-12 w-12 text-brand-emerald mx-auto mb-4 mt-4" />
+                  <Icon className="h-12 w-12 text-brand-bright-blue mx-auto mb-4 mt-4" />
                   <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-3">
                     {item.title}
                   </h3>
@@ -299,10 +299,10 @@ export default function ServicesPage() {
               return (
                 <div
                   key={i}
-                  className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-emerald"
+                  className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-bright-blue"
                 >
                   <div className="p-8">
-                    <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-neutral-off-white text-brand-emerald">
+                    <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-neutral-off-white text-brand-bright-blue">
                       <Icon className="h-8 w-8" aria-hidden="true" />
                     </div>
                     <h3 className="text-h3 font-bold text-neutral-charcoal dark:text-white mb-3">
@@ -322,14 +322,14 @@ export default function ServicesPage() {
                           key={j}
                           className="flex items-center text-body-sm text-neutral-charcoal/80 dark:text-white/80"
                         >
-                          <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                          <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
                     </ul>
                     <a
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center text-brand-navy dark:text-brand-emerald font-semibold hover:text-brand-emerald dark:hover:text-white group-hover:underline"
+                      className="inline-flex items-center text-brand-navy dark:text-brand-bright-blue font-semibold hover:text-brand-bright-blue dark:hover:text-white group-hover:underline"
                     >
                       Learn More →
                     </a>
@@ -419,16 +419,16 @@ export default function ServicesPage() {
             ].map((study) => (
               <div
                 key={study.title}
-                className="bg-white dark:bg-slate-800 rounded-xl border-2 border-neutral-light-grey dark:border-slate-700 p-6 hover:border-brand-emerald dark:hover:border-brand-emerald transition-all"
+                className="bg-white dark:bg-slate-800 rounded-xl border-2 border-neutral-light-grey dark:border-slate-700 p-6 hover:border-brand-bright-blue dark:hover:border-brand-bright-blue transition-all"
               >
                 <div className="mb-4">
-                  <div className="w-12 h-12 bg-brand-emerald/10 dark:bg-brand-emerald/20 rounded-lg flex items-center justify-center">
-                    <study.icon className="h-6 w-6 text-brand-emerald" />
+                  <div className="w-12 h-12 bg-brand-bright-blue/10 dark:bg-brand-bright-blue/20 rounded-lg flex items-center justify-center">
+                    <study.icon className="h-6 w-6 text-brand-bright-blue" />
                   </div>
                 </div>
 
                 <div className="mb-3">
-                  <span className="inline-block px-3 py-1 bg-brand-emerald/10 dark:bg-brand-emerald/20 text-brand-emerald text-sm font-semibold rounded-full">
+                  <span className="inline-block px-3 py-1 bg-brand-bright-blue/10 dark:bg-brand-bright-blue/20 text-brand-bright-blue text-sm font-semibold rounded-full">
                     {study.metric}
                   </span>
                 </div>
@@ -489,7 +489,7 @@ export default function ServicesPage() {
                     '50-mile radius of West Springfield',
                   ].map((area) => (
                     <li key={area} className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-brand-emerald mr-2 mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-brand-bright-blue mr-2 mt-0.5 flex-shrink-0" />
                       <span>{area}</span>
                     </li>
                   ))}
@@ -503,7 +503,7 @@ export default function ServicesPage() {
                 <ul className="space-y-2 text-body-sm text-neutral-charcoal/70 dark:text-white/80">
                   {['Springfield, MA', 'Hartford, CT', 'Worcester, MA', 'New Haven, CT'].map((city) => (
                     <li key={city} className="flex items-start">
-                      <MapPin className="h-5 w-5 text-brand-emerald mr-2 mt-0.5 flex-shrink-0" />
+                      <MapPin className="h-5 w-5 text-brand-bright-blue mr-2 mt-0.5 flex-shrink-0" />
                       <span>{city}</span>
                     </li>
                   ))}
@@ -588,7 +588,7 @@ export default function ServicesPage() {
                   <ul className="space-y-2">
                     {faq.items.map((item, j) => (
                       <li key={j} className="flex items-start text-body text-neutral-charcoal/80 dark:text-white/80">
-                        <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 mt-1 flex-shrink-0" />
+                        <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 mt-1 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -623,13 +623,13 @@ export default function ServicesPage() {
                   </Button>
                 </a>
                 <Link href="/contact">
-                  <Button variant="ghost" size="lg" className="text-white hover:text-brand-emerald">
+                  <Button variant="ghost" size="lg" className="text-white hover:text-brand-bright-blue">
                     Schedule Walk-Through
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="bg-white rounded-lg border-2 border-brand-emerald p-6 text-brand-navy shadow-lg">
+            <div className="bg-white rounded-lg border-2 border-brand-bright-blue p-6 text-brand-navy shadow-lg">
               <h3 className="text-h3 mb-4">Get a Custom Quote</h3>
               <QuoteMiniForm
                 source="services"

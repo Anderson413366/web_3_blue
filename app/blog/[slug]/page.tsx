@@ -520,7 +520,7 @@ export default async function BlogPost({
           {/* Article Meta */}
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <span className="inline-block px-3 py-1 bg-brand-emerald text-white text-sm font-semibold rounded-full">
+              <span className="inline-block px-3 py-1 bg-brand-bright-blue text-white text-sm font-semibold rounded-full">
                 {post.category}
               </span>
             </div>
@@ -576,7 +576,7 @@ export default async function BlogPost({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div
-              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-neutral-charcoal dark:text-white prose-h2:text-h2 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-h3 prose-h3:mt-8 prose-h3:mb-4 prose-p:text-neutral-charcoal/80 dark:prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-6 prose-ul:my-6 prose-ul:space-y-2 prose-li:text-neutral-charcoal/80 dark:prose-li:text-white/80 prose-strong:text-neutral-charcoal dark:text-white prose-a:text-brand-emerald dark:prose-a:text-brand-emerald prose-a:no-underline hover:prose-a:underline"
+              className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-neutral-charcoal dark:text-white prose-h2:text-h2 prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-h3 prose-h3:mt-8 prose-h3:mb-4 prose-p:text-neutral-charcoal/80 dark:prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-6 prose-ul:my-6 prose-ul:space-y-2 prose-li:text-neutral-charcoal/80 dark:prose-li:text-white/80 prose-strong:text-neutral-charcoal dark:text-white prose-a:text-brand-bright-blue dark:prose-a:text-brand-bright-blue prose-a:no-underline hover:prose-a:underline"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 

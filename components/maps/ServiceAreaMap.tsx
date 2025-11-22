@@ -52,7 +52,7 @@ export default function ServiceAreaMap() {
           center={centerPoint}
           radius={radiusInMeters}
           pathOptions={{
-            fillColor: '#00A57E', // brand-emerald
+            fillColor: '#00A57E', // brand-bright-blue
             fillOpacity: 0.15,
             color: '#00A57E',
             weight: 3,

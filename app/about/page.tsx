@@ -79,7 +79,7 @@ export default function AboutPage() {
                     key={index}
                     className="bg-neutral-off-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 text-center"
                   >
-                    <Icon className="h-12 w-12 text-brand-navy dark:text-brand-emerald mx-auto mb-4" />
+                    <Icon className="h-12 w-12 text-brand-navy dark:text-brand-bright-blue mx-auto mb-4" />
                     <h3 className="font-bold text-neutral-charcoal dark:text-white mb-2">
                       {principle.title}
                     </h3>
@@ -155,7 +155,7 @@ export default function AboutPage() {
                   key={index}
                   className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-6 shadow-sm"
                 >
-                  <Icon className="h-12 w-12 text-brand-emerald mb-4" />
+                  <Icon className="h-12 w-12 text-brand-bright-blue mb-4" />
                   <h3 className="text-h3 leading-normal font-semibold text-neutral-charcoal dark:text-white mb-3">
                     {item.title}
                   </h3>
@@ -241,35 +241,35 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-neutral-off-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <Leaf className="h-6 w-6 text-brand-emerald" />
+                  <Leaf className="h-6 w-6 text-brand-bright-blue" />
                   <h3 className="text-h3 font-bold text-neutral-charcoal dark:text-white">
                     Green Cleaning Practices
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>EPA Safer Choice Products:</strong> Where possible, we use cleaning
                       products certified by the EPA as safer for people and the environment
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>HEPA Filtration:</strong> Our vacuums use HEPA filters to trap 99.97%
                       of particles, improving indoor air quality
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>Microfiber Technology:</strong> Microfiber cloths reduce chemical use
                       while cleaning more effectively than traditional materials
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>Waste Reduction:</strong> Proper recycling protocols and concentrated
                       product use to minimize environmental impact
@@ -280,35 +280,35 @@ export default function AboutPage() {
 
               <div className="bg-neutral-off-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-xl p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <Shield className="h-6 w-6 text-brand-navy dark:text-brand-emerald" />
+                  <Shield className="h-6 w-6 text-brand-navy dark:text-brand-bright-blue" />
                   <h3 className="text-h3 font-bold text-neutral-charcoal dark:text-white">
                     Safety & Security Protocols
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>Background Checks:</strong> Every team member undergoes comprehensive
                       criminal background screening before employment
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>Drug Testing:</strong> Pre-employment and random drug screening
                       ensures a safe, reliable workforce
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>OSHA Compliance:</strong> All staff trained on safety data sheets,
                       bloodborne pathogens, and hazard communication
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-emerald flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-brand-navy dark:text-brand-bright-blue flex-shrink-0 mt-0.5" />
                     <span className="text-neutral-charcoal/80 dark:text-white/80">
                       <strong>Industry Certifications:</strong> Specialized training for medical
                       facilities (HIPAA awareness), schools (child safety), and more
@@ -377,7 +377,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="bg-brand-navy rounded-2xl p-8 md:p-12 text-white text-center">
-              <Sparkles className="h-16 w-16 text-brand-emerald mx-auto mb-6" />
+              <Sparkles className="h-16 w-16 text-brand-bright-blue mx-auto mb-6" />
               <h2 className="text-h2 leading-tight font-bold mb-6">Our Commitment to You</h2>
               <p className="text-body text-white/80 mb-8">
                 We promise to treat your facility like it's our own. We show up on time, do the work

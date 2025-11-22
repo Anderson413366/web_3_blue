@@ -115,7 +115,7 @@ export default function QuoteAdvancedModal({
               <label className="mb-1 block text-body-sm font-semibold">Name *</label>
               <input
                 {...register('name')}
-                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
               />
               {errors.name && <p className="text-sm text-red-600">{errors.name.message}</p>}
             </div>
@@ -124,7 +124,7 @@ export default function QuoteAdvancedModal({
               <label className="mb-1 block text-body-sm font-semibold">Company *</label>
               <input
                 {...register('company')}
-                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
               />
               {errors.company && <p className="text-sm text-red-600">{errors.company.message}</p>}
             </div>
@@ -137,7 +137,7 @@ export default function QuoteAdvancedModal({
                 {...register('phone')}
                 type="tel"
                 maxLength={10}
-                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
               />
               {errors.phone && <p className="text-sm text-red-600">{errors.phone.message}</p>}
             </div>
@@ -147,7 +147,7 @@ export default function QuoteAdvancedModal({
               <input
                 {...register('email')}
                 type="email"
-                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+                className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
               />
               {errors.email && <p className="text-sm text-red-600">{errors.email.message}</p>}
             </div>
@@ -157,7 +157,7 @@ export default function QuoteAdvancedModal({
             <label className="mb-1 block text-body-sm font-semibold">Square Footage *</label>
             <select
               {...register('square_footage')}
-              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
             >
               <option value="">Select range...</option>
               <option value="<5000">Under 5,000 sq ft</option>
@@ -174,7 +174,7 @@ export default function QuoteAdvancedModal({
             <label className="mb-1 block text-body-sm font-semibold">Cleaning Frequency *</label>
             <select
               {...register('frequency')}
-              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
             >
               <option value="">Select frequency...</option>
               <option value="daily">Daily</option>
@@ -209,7 +209,7 @@ export default function QuoteAdvancedModal({
             <textarea
               {...register('additional_notes')}
               rows={3}
-              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-emerald"
+              className="w-full rounded border-2 border-neutral-light-grey px-4 py-2 outline-none focus:border-brand-bright-blue"
             />
           </div>
 

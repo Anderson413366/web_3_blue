@@ -169,17 +169,17 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
       {/* Main Form Card */}
       <div className="rounded-xl border-2 border-neutral-light-grey bg-white p-8 shadow-lg dark:border-slate-700 dark:bg-slate-800">
         {/* Quick Contact Option */}
-        <div className="mb-6 rounded-lg border border-brand-emerald/30 bg-brand-emerald/5 p-4 dark:bg-brand-emerald/10">
+        <div className="mb-6 rounded-lg border border-brand-bright-blue/30 bg-brand-bright-blue/5 p-4 dark:bg-brand-bright-blue/10">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div>
-              <p className="font-semibold text-brand-emerald dark:text-white">Prefer to talk now?</p>
+              <p className="font-semibold text-brand-bright-blue dark:text-white">Prefer to talk now?</p>
               <p className="text-sm text-neutral-charcoal/70 dark:text-white/80">
                 Call us directly for immediate assistance
               </p>
             </div>
             <a
               href={CONTACT_INFO.phone.href}
-              className="flex items-center gap-2 rounded-lg bg-brand-emerald px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700"
+              className="flex items-center gap-2 rounded-lg bg-brand-bright-blue px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700"
             >
               <Phone className="h-5 w-5" />
               {CONTACT_INFO.phone.formatted}
@@ -209,7 +209,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('fullName')}
                   type="text"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="John Smith"
                 />
                 {errors.fullName && (
@@ -224,7 +224,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('company')}
                   type="text"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="ABC Corporation"
                 />
                 {errors.company && (
@@ -241,7 +241,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('email')}
                   type="email"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="john@company.com"
                 />
                 {errors.email && (
@@ -256,7 +256,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('phone')}
                   type="tel"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder={CONTACT_INFO.phone.formatted}
                 />
                 {errors.phone && (
@@ -279,7 +279,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
               <input
                 {...register('address')}
                 type="text"
-                className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                 placeholder="123 Main Street"
               />
               {errors.address && (
@@ -295,7 +295,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('city')}
                   type="text"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="Springfield"
                 />
                 {errors.city && (
@@ -310,7 +310,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('zipCode')}
                   type="text"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="01089"
                   maxLength={5}
                 />
@@ -327,7 +327,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 </label>
                 <select
                   {...register('facilityType')}
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                 >
                   <option value="">Select type...</option>
                   {facilityTypes.map((type) => (
@@ -350,7 +350,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 <input
                   {...register('squareFootage', { valueAsNumber: true })}
                   type="number"
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                   placeholder="5000"
                   min="1000"
                 />
@@ -370,7 +370,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                 </label>
                 <select
                   {...register('cleaningFrequency')}
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                 >
                   <option value="">Select frequency...</option>
                   {frequencies.map((freq) => (
@@ -394,7 +394,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
                   {...register('desiredStartDate')}
                   type="date"
                   min={new Date().toISOString().split('T')[0]}
-                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+                  className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
                 />
               </div>
             </div>
@@ -441,7 +441,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
               {...register('specialRequests')}
               rows={4}
               maxLength={500}
-              className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-emerald focus:ring-2 focus:ring-brand-emerald/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
+              className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 focus:border-brand-bright-blue focus:ring-2 focus:ring-brand-bright-blue/20 dark:border-gray-600 dark:bg-slate-900 dark:text-white"
               placeholder="Tell us about any special requirements, current challenges, or questions..."
             />
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -455,7 +455,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
               {...register('consent')}
               type="checkbox"
               id="consent"
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-brand-emerald focus:ring-brand-emerald"
+              className="mt-1 h-4 w-4 rounded border-gray-300 text-brand-bright-blue focus:ring-brand-bright-blue"
             />
             <label htmlFor="consent" className="flex-1 text-sm text-neutral-charcoal/80 dark:text-white/80">
               I agree to be contacted by Anderson Cleaning regarding this quote request. We respond
@@ -511,7 +511,7 @@ export default function QuoteFormSimplified({ onSuccess }: QuoteFormSimplifiedPr
           Questions? Call us directly at{' '}
           <a
             href={CONTACT_INFO.phone.href}
-            className="font-semibold text-brand-emerald hover:underline"
+            className="font-semibold text-brand-bright-blue hover:underline"
           >
             {CONTACT_INFO.phone.formatted}
           </a>

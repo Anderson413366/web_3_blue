@@ -25,7 +25,7 @@ export default function OfficeCleaningPage() {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
-              <Building2 className="h-8 w-8 text-brand-emerald" aria-hidden="true" />
+              <Building2 className="h-8 w-8 text-brand-bright-blue" aria-hidden="true" />
             </div>
             <h1 className="text-h1 md:text-h1 font-extrabold mb-6">
               Office & Commercial Cleaning
@@ -205,7 +205,7 @@ export default function OfficeCleaningPage() {
                   key={i}
                   className="bg-neutral-off-white rounded-lg p-6 text-center hover:shadow-lg transition-all"
                 >
-                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-off-white text-brand-emerald">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-off-white text-brand-bright-blue">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <h3 className="font-bold text-neutral-charcoal dark:text-white mb-2">{item.title}</h3>

@@ -73,8 +73,8 @@ export default function Header() {
               href={item.href}
               className={`text-sm font-semibold leading-6 transition-colors ${
                 pathname === item.href
-                  ? 'text-brand-emerald'
-                  : 'text-neutral-charcoal dark:text-white hover:text-brand-emerald dark:hover:text-brand-emerald/90'
+                  ? 'text-brand-bright-blue'
+                  : 'text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-brand-bright-blue/90'
               }`}
             >
               {item.name}
@@ -97,7 +97,7 @@ export default function Header() {
           </button>
           <Link
             href="/quote"
-            className="rounded-md bg-brand-emerald px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-emerald/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-emerald"
+            className="rounded-md bg-brand-bright-blue px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-bright-blue/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-bright-blue"
           >
             Get a Quote
           </Link>
@@ -134,7 +134,7 @@ export default function Header() {
                       href={item.href}
                       className={`-mx-3 block rounded-lg px-3 py-2 text-body-sm font-semibold leading-7 hover:bg-neutral-light-grey dark:hover:bg-slate-800 ${
                         pathname === item.href
-                          ? 'text-brand-emerald bg-neutral-light-grey dark:bg-slate-800'
+                          ? 'text-brand-bright-blue bg-neutral-light-grey dark:bg-slate-800'
                           : 'text-neutral-charcoal dark:text-white'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
@@ -146,7 +146,7 @@ export default function Header() {
                 <div className="py-6">
                   <Link
                     href="/quote"
-                    className="block rounded-md bg-brand-emerald px-4 py-2.5 text-center text-body-sm font-semibold text-white shadow-sm hover:bg-brand-emerald/90"
+                    className="block rounded-md bg-brand-bright-blue px-4 py-2.5 text-center text-body-sm font-semibold text-white shadow-sm hover:bg-brand-bright-blue/90"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Get a Quote
@@ -154,7 +154,7 @@ export default function Header() {
                   <div className="mt-4 space-y-2">
                     <button
                       onClick={toggleTheme}
-                      className="flex w-full items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-emerald dark:hover:text-brand-emerald/90"
+                      className="flex w-full items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-brand-bright-blue/90"
                     >
                       {theme === 'dark' ? (
                         <>
@@ -170,14 +170,14 @@ export default function Header() {
                     </button>
                     <a
                       href="tel:4133065053"
-                      className="flex items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-emerald dark:hover:text-brand-emerald/90"
+                      className="flex items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-brand-bright-blue/90"
                     >
                       <Phone className="h-4 w-4" />
                       (413) 306-5053
                     </a>
                     <a
                       href="mailto:info@andersoncleaning.com"
-                      className="flex items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-emerald dark:hover:text-brand-emerald/90"
+                      className="flex items-center gap-2 text-sm text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-brand-bright-blue/90"
                     >
                       <Mail className="h-4 w-4" />
                       info@andersoncleaning.com

@@ -28,13 +28,13 @@ export default function QuotePage() {
 
       {/* Success Message */}
       {showSuccess && (
-        <section className="py-8 bg-brand-emerald/10 border-b border-brand-emerald/30">
+        <section className="py-8 bg-brand-bright-blue/10 border-b border-brand-bright-blue/30">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-brand-emerald/40 shadow-sm">
+              <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-brand-bright-blue/40 shadow-sm">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="h-12 w-12 rounded-full bg-brand-emerald flex items-center justify-center">
+                    <div className="h-12 w-12 rounded-full bg-brand-bright-blue flex items-center justify-center">
                       <CheckCircle2 className="h-7 w-7 text-white" />
                     </div>
                   </div>

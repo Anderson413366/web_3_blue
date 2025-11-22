@@ -29,7 +29,7 @@ export default function ContactPage() {
             <div className="lg:col-span-1 space-y-6">
               {/* Fast Response */}
               <div className="bg-brand-navy text-white rounded-xl p-6 shadow-sm">
-                <Clock className="h-12 w-12 mb-4 text-brand-emerald" />
+                <Clock className="h-12 w-12 mb-4 text-brand-bright-blue" />
                 <h3 className="text-h3 leading-normal font-semibold mb-2">Here When You Need Us</h3>
                 <p className="text-white/80 mb-4">
                   Office hours: Monday – Friday, 9 AM – 5 PM EST. We respond to all inquiries within
@@ -49,12 +49,12 @@ export default function ContactPage() {
 
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <Phone className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
+                    <Phone className="h-5 w-5 text-brand-bright-blue mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Phone</p>
                       <a
                         href="tel:+14133065053"
-                        className="text-brand-emerald hover:underline"
+                        className="text-brand-bright-blue hover:underline"
                       >
                         (413) 306-5053
                       </a>
@@ -65,12 +65,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Mail className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
+                    <Mail className="h-5 w-5 text-brand-bright-blue mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Email</p>
                       <a
                         href="mailto:info@andersoncleaning.com"
-                        className="text-brand-emerald hover:underline"
+                        className="text-brand-bright-blue hover:underline"
                       >
                         info@andersoncleaning.com
                       </a>
@@ -79,7 +79,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <MapPin className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
+                    <MapPin className="h-5 w-5 text-brand-bright-blue mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Office</p>
                       <address className="text-neutral-charcoal/80 dark:text-white/80 not-italic">
@@ -91,13 +91,13 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Clock className="h-5 w-5 text-brand-emerald mt-1 flex-shrink-0" />
+                    <Clock className="h-5 w-5 text-brand-bright-blue mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-charcoal dark:text-white">Office Hours</p>
                       <p className="text-neutral-charcoal/80 dark:text-white/80">
                         Monday – Friday: 9 AM – 5 PM EST
                       </p>
-                      <p className="text-sm text-brand-emerald font-medium mt-1">
+                      <p className="text-sm text-brand-bright-blue font-medium mt-1">
                         24/7 emergency support for current clients. On-site in 2 hours or less;
                         premium rates apply.
                       </p>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-neutral-charcoal/80 dark:text-white/80">
                   <li className="flex items-center">
-                    <CheckCircle2 className="h-4 w-4 text-brand-emerald mr-2 flex-shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-brand-bright-blue mr-2 flex-shrink-0" />
                     Western Massachusetts
                   </li>
                   <li className="flex items-center">

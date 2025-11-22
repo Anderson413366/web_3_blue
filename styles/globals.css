@@ -118,7 +118,7 @@ body {
 
 /* Focus visible styles for keyboard navigation (WCAG 2.2) */
 *:focus-visible {
-  outline: 2px solid var(--color-brand-emerald);
+  outline: 2px solid var(--brand-bright-blue);
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
@@ -127,21 +127,21 @@ body {
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible {
-  outline: 3px solid var(--color-brand-emerald);
+  outline: 3px solid var(--brand-bright-blue);
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px rgba(0, 165, 126, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 119, 217, 0.15);
 }
 
 /* Focus styles for dark mode */
 .dark *:focus-visible {
-  outline-color: var(--color-brand-emerald);
+  outline-color: var(--brand-bright-blue);
 }
 
 .dark button:focus-visible,
 .dark a:focus-visible,
 .dark [role="button"]:focus-visible {
-  outline-color: var(--color-brand-emerald);
-  box-shadow: 0 0 0 3px rgba(0, 165, 126, 0.15);
+  outline-color: var(--brand-bright-blue);
+  box-shadow: 0 0 0 3px rgba(0, 119, 217, 0.2);
 }
 
 /* Skip to main content link */
@@ -151,8 +151,8 @@ a:focus-visible,
   top: 0;
   z-index: 9999;
   padding: 1rem 1.5rem;
-  background-color: var(--color-brand-navy);
-  color: var(--color-neutral-white);
+  background-color: var(--brand-deep-blue);
+  color: var(--brand-white);
   text-decoration: none;
   font-weight: 600;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -168,7 +168,7 @@ a:focus-visible,
 }
 
 .dark .skip-link {
-  background-color: var(--color-brand-navy);
+  background-color: var(--brand-deep-blue);
   border-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -230,18 +230,18 @@ li a {
 /* Error styling for form validation */
 [aria-invalid="true"],
 .error-field {
-  border-color: #dc2626 !important;
+  border-color: var(--brand-red) !important;
   border-width: 2px;
 }
 
 .dark [aria-invalid="true"],
 .dark .error-field {
-  border-color: #ef4444 !important;
+  border-color: var(--brand-red) !important;
 }
 
 /* Error message styling */
 .error-message {
-  color: #dc2626;
+  color: var(--brand-red);
   font-size: 0.875rem;
   margin-top: 0.25rem;
   display: flex;
@@ -250,18 +250,18 @@ li a {
 }
 
 .dark .error-message {
-  color: #fca5a5;
+  color: var(--brand-red);
 }
 
 /* Required field indicator */
 .required-indicator {
-  color: #dc2626;
+  color: var(--brand-red);
   font-weight: 600;
   margin-left: 0.25rem;
 }
 
 .dark .required-indicator {
-  color: #fca5a5;
+  color: var(--brand-red);
 }
 
 /* Loading/status announcements */

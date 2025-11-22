@@ -45,7 +45,7 @@ export default async function ServiceDetailPage({
 
           <div className="flex items-start gap-6">
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10">
-              <ServiceIcon className="h-10 w-10 text-brand-emerald" aria-hidden="true" />
+              <ServiceIcon className="h-10 w-10 text-brand-bright-blue" aria-hidden="true" />
             </div>
             <div className="flex-1">
               <h1 className="text-h1 md:text-h1 font-extrabold mb-4">{service.title}</h1>
@@ -82,7 +82,7 @@ export default async function ServiceDetailPage({
                 key={index}
                 className="bg-white dark:bg-slate-800 border border-neutral-light-grey dark:border-slate-700 rounded-lg p-6 shadow-sm flex items-start gap-3"
               >
-                <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                 <span className="text-body text-neutral-charcoal/80 dark:text-white/80">{benefit}</span>
               </div>
             ))}

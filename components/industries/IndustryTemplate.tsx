@@ -254,11 +254,11 @@ export default function IndustryTemplate({
                   {/* Icon */}
                   <div className="mb-3">
                     {index % 3 === 0 ? (
-                      <Shield className="h-8 w-8 text-brand-emerald" aria-hidden="true" />
+                      <Shield className="h-8 w-8 text-brand-bright-blue" aria-hidden="true" />
                     ) : index % 3 === 1 ? (
                       <Award className="h-8 w-8 text-brand-navy" aria-hidden="true" />
                     ) : (
-                      <Users className="h-8 w-8 text-brand-emerald" aria-hidden="true" />
+                      <Users className="h-8 w-8 text-brand-bright-blue" aria-hidden="true" />
                     )}
                   </div>
 
@@ -345,15 +345,15 @@ export default function IndustryTemplate({
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                       <span>Free, no-obligation quote</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                       <span>Response within 24 hours</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="h-6 w-6 text-brand-emerald flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-0.5" />
                       <span>Industry-specific solutions</span>
                     </li>
                   </ul>
