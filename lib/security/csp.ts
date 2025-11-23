@@ -79,6 +79,9 @@ export const cspDirectives: CSPDirectives = {
     'https://api.resend.com',
     'https://cdn.sanity.io',
     'https://*.sanity.io',
+    'https://vercel.live',
+    'wss://ws-us3.pusher.com',
+    'wss://*.pusher.com',
   ],
 
   'frame-src': [
