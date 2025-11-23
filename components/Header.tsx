@@ -55,7 +55,6 @@ export default function Header() {
         {/* Logo */}
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 transition-opacity hover:opacity-80">
-            <span className="sr-only">Anderson Cleaning</span>
             {/* Desktop Logo - Swaps to white in dark mode, hidden on mobile */}
             <img
               src="/brand/color/logo-full-2000.png"

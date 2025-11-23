@@ -170,24 +170,24 @@ export default function Footer() {
               <div className="space-y-2.5">
                 <a
                   href="tel:+14133065053"
-                  className="flex items-start gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="flex items-center gap-2.5 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
-                  <div className="w-5 flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-4 w-4 mt-0.5" aria-hidden="true" />
+                  <div className="w-6 flex items-center justify-center flex-shrink-0">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <span>(413) 306-5053</span>
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="flex items-start gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="flex items-center gap-2.5 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
-                  <div className="w-5 flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-4 w-4 mt-0.5" aria-hidden="true" />
+                  <div className="w-6 flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <span>info@andersoncleaning.com</span>
                 </a>
-                <div className="flex items-start gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75">
-                  <div className="w-5 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-2.5 text-sm text-neutral-charcoal/70 dark:text-white/75">
+                  <div className="w-6 flex items-center justify-center flex-shrink-0 self-start">
                     <MapPin className="h-4 w-4 mt-0.5" aria-hidden="true" />
                   </div>
                   <span>
@@ -217,24 +217,24 @@ export default function Footer() {
 
           {/* Bottom Section */}
           <div className="border-t border-neutral-light-grey dark:border-white/10 pt-6">
-            <div className="flex flex-col items-center justify-between gap-4 text-xs text-neutral-charcoal/50 dark:text-white/50 md:flex-row">
+            <div className="flex flex-col items-center justify-between gap-4 text-xs text-neutral-charcoal/70 dark:text-white/70 md:flex-row">
               <p>© {currentYear} Anderson Cleaning, Inc.</p>
               <div className="flex gap-4">
                 <Link
                   href="/legal/privacy"
-                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white/80"
+                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white"
                 >
                   Privacy
                 </Link>
                 <Link
                   href="/legal/terms"
-                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white/80"
+                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white"
                 >
                   Terms
                 </Link>
                 <Link
                   href="/sitemap.xml"
-                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white/80"
+                  className="transition-colors duration-150 hover:text-neutral-charcoal dark:hover:text-white"
                 >
                   Sitemap
                 </Link>
