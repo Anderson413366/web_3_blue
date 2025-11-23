@@ -16,7 +16,7 @@ export default function QuotePage() {
   return (
     <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900 transition-colors duration-300">
       {/* Hero Section */}
-      <section className="pt-28 pb-12 md:pt-32 bg-brand-navy text-white">
+      <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-brand-navy text-white">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-h1 md:text-h1 font-extrabold mb-4">Get Your Free Quote</h1>
           <p className="text-body text-white/80 max-w-3xl mx-auto">

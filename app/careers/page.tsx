@@ -95,7 +95,7 @@ export default function CareersPage() {
 
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
+        <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white pt-28 pb-16 md:pt-32 md:pb-20">
           <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
 
           <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">

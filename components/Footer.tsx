@@ -90,8 +90,6 @@ const navigation = {
   ],
 }
 
-const serviceAreas = ['Springfield', 'Worcester', 'Hartford', 'Northampton', 'Amherst']
-
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -130,58 +128,34 @@ export default function Footer() {
           Footer
         </h2>
         <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8">
-          {/* Three Columns - Restructured Layout */}
+          {/* Three Columns - Clean Layout */}
           <div className="mb-12 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3 md:gap-x-12">
-            {/* Column 1: Logo + Description + Address */}
-            <div>
-              <img
-                src="/brand/blue/logo-full-2000-blue.png"
-                alt="Anderson Cleaning"
-                className="mb-4 dark:hidden"
-                style={{ maxWidth: '140px', height: 'auto' }}
-              />
-              <img
-                src="/brand/white/logo-full-2000-white.png"
-                alt="Anderson Cleaning"
-                className="mb-4 hidden dark:block"
-                style={{ maxWidth: '140px', height: 'auto' }}
-              />
-              <p className="mb-6 text-sm leading-relaxed text-neutral-charcoal/70 dark:text-white/70">
-                Commercial Cleaning Excellence Since 2007
-              </p>
-              <div className="flex items-start gap-3">
-                <div className="w-7 flex-shrink-0">
-                  <MapPin className="mt-1 h-5 w-5 text-neutral-charcoal/70 dark:text-white/70" aria-hidden="true" />
-                </div>
-                <span className="text-sm leading-tight text-neutral-charcoal/70 dark:text-white/70">
-                  101 Liberty Street<br />
-                  West Springfield, MA 01089
-                </span>
-              </div>
-            </div>
-
-            {/* Column 2: Our Services + Quick Links */}
+            {/* Column 1: Our Services */}
             <div>
               <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Our Services</h3>
-              <ul className="space-y-2.5 mb-6">
+              <ul className="space-y-2.5">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                      className="text-base text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                     >
                       {item.name}
                     </Link>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Column 2: Quick Links */}
+            <div>
               <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Quick Links</h3>
               <ul className="space-y-2.5">
                 {navigation.company.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                      className="text-base text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                     >
                       {item.name}
                     </Link>
@@ -193,21 +167,34 @@ export default function Footer() {
             {/* Column 3: Get in Touch */}
             <div>
               <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Get in Touch</h3>
-              <div className="space-y-5">
+              <div className="mt-10 space-y-5">
                 <a
                   href="tel:+14133065053"
-                  className="flex items-start gap-3 text-base text-neutral-charcoal/80 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white md:text-lg"
+                  className="flex items-start gap-3 text-base text-neutral-charcoal/80 dark:text-white/75 transition-colors duration-150 hover:text-white/80 md:text-lg"
                 >
-                  <Phone className="mt-1 h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                  <div className="w-7 flex-shrink-0">
+                    <Phone className="mt-1 h-5 w-5" aria-hidden="true" />
+                  </div>
                   <span className="leading-tight">(413) 306-5053</span>
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="flex items-start gap-3 text-base text-neutral-charcoal/80 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white md:text-lg"
+                  className="flex items-start gap-3 text-base text-neutral-charcoal/80 dark:text-white/75 transition-colors duration-150 hover:text-white/80 md:text-lg"
                 >
-                  <Mail className="mt-1 h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                  <div className="w-7 flex-shrink-0">
+                    <Mail className="mt-1 h-5 w-5" aria-hidden="true" />
+                  </div>
                   <span className="leading-tight">info@andersoncleaning.com</span>
                 </a>
+                <div className="flex items-start gap-3 text-base text-neutral-charcoal/80 dark:text-white/75 md:text-lg">
+                  <div className="w-7 flex-shrink-0">
+                    <MapPin className="mt-1 h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <span className="leading-tight">
+                    103 Wayside Avenue<br />
+                    West Springfield, MA 01089
+                  </span>
+                </div>
 
                 {/* Social Icons - Colored in light mode, white in dark mode */}
                 <div className="flex gap-3 pt-4">
@@ -230,9 +217,6 @@ export default function Footer() {
 
           {/* Bottom Section */}
           <div className="border-t border-neutral-light-grey dark:border-white/10 pt-6">
-            <p className="mb-4 text-center text-xs text-neutral-charcoal/60 dark:text-white/60">
-              {serviceAreas.join(' • ')}
-            </p>
             <div className="flex flex-col items-center justify-between gap-4 text-xs text-neutral-charcoal/50 dark:text-white/50 md:flex-row">
               <p>© {currentYear} Anderson Cleaning, Inc.</p>
               <div className="flex gap-4">

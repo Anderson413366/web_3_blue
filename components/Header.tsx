@@ -30,6 +30,18 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
+
   // Determine if we're on the home page
   const isHomePage = pathname === '/'
 
@@ -79,13 +91,13 @@ export default function Header() {
               href={item.href}
               className={`relative text-sm font-medium leading-6 transition-all duration-150 ${
                 pathname === item.href
-                  ? 'text-brand-bright-blue'
+                  ? 'text-brand-bright-blue dark:text-white'
                   : 'text-neutral-charcoal dark:text-white hover:text-brand-bright-blue dark:hover:text-white/80'
               }`}
             >
               {item.name}
               {pathname === item.href && (
-                <span className="absolute -bottom-5 left-0 right-0 h-0.5 bg-brand-bright-blue rounded-full" />
+                <span className="absolute -bottom-5 left-0 right-0 h-0.5 bg-brand-bright-blue dark:bg-white rounded-full" />
               )}
             </Link>
           ))}
@@ -116,8 +128,8 @@ export default function Header() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden">
-          <div className="fixed inset-0 z-[200] bg-black/30 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed inset-y-0 right-0 z-[210] w-full overflow-y-auto bg-white dark:bg-brand-deep-blue px-6 py-6 sm:max-w-sm sm:shadow-2xl">
+          <div className="fixed inset-0 z-[9998] bg-black/30 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-y-0 right-0 z-[9999] w-full overflow-y-auto bg-white dark:bg-brand-deep-blue px-6 py-6 sm:max-w-sm sm:shadow-2xl">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Anderson Cleaning</span>
