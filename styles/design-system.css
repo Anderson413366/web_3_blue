@@ -204,3 +204,247 @@ html.light .logo-desktop {
 html.light .logo-mobile {
   content: none !important; /* Use HTML src attribute (color variant) */
 }
+
+/* ====================================================================
+   FORM FIELDS - Unified Input & Select Styles (High Contrast)
+   Prompt 1: Improve Input & Select Contrast
+   ==================================================================== */
+
+.form-field,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="date"],
+textarea,
+select {
+  /* Layout */
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: var(--font-primary);
+
+  /* Appearance */
+  background-color: var(--brand-white);
+  border: 1px solid var(--brand-deep-blue);
+  color: var(--color-neutral-charcoal);
+  transition: border-color var(--transition-default), box-shadow var(--transition-default);
+
+}
+
+/* Placeholder */
+.form-field::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="url"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="search"]::placeholder,
+input[type="date"]::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Focus State - High contrast with brand colors */
+.form-field:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand-bright-blue);
+  box-shadow: 0 0 0 2px rgba(0, 119, 217, 0.2);
+}
+
+/* Error State */
+.form-field[aria-invalid="true"],
+.form-field.error,
+input[aria-invalid="true"],
+input.error,
+textarea[aria-invalid="true"],
+textarea.error,
+select[aria-invalid="true"],
+select.error {
+  border-color: var(--brand-red);
+  border-width: 2px;
+}
+
+/* Disabled State */
+.form-field:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+}
+
+/* Dark Mode Form Fields */
+html.dark .form-field,
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="tel"],
+html.dark input[type="url"],
+html.dark input[type="password"],
+html.dark input[type="number"],
+html.dark input[type="search"],
+html.dark input[type="date"],
+html.dark textarea,
+html.dark select {
+  background-color: var(--brand-deep-blue);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--brand-white);
+}
+
+html.dark .form-field::placeholder,
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+html.dark .form-field:focus,
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  border-color: var(--brand-bright-blue);
+  box-shadow: 0 0 0 2px rgba(0, 119, 217, 0.3);
+}
+
+html.dark .form-field:disabled,
+html.dark input:disabled,
+html.dark textarea:disabled,
+html.dark select:disabled {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ====================================================================
+   CUSTOM SELECT DROPDOWN - Unified Arrow Icons
+   Prompt 2: Unify Dropdown Icons & Spacing
+   ==================================================================== */
+
+select,
+.form-select {
+  /* Remove default arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Add custom arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23002A86' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+
+  /* Ensure padding for arrow */
+  padding-right: 40px;
+  padding-left: 16px;
+
+  /* Ensure same height as text inputs */
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* Dark Mode Select Arrow */
+html.dark select,
+html.dark .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ====================================================================
+   TAG & PILL STYLES - Enhanced Interaction States
+   Prompt 4: Enhance Tag & Pill Interaction Styles
+   ==================================================================== */
+
+.tag-pill,
+.category-pill,
+.filter-pill {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--transition-default);
+  cursor: pointer;
+
+  /* Inactive State */
+  background-color: rgba(0, 119, 217, 0.08);
+  color: var(--brand-deep-blue);
+  border: 1px solid rgba(0, 42, 134, 0.2);
+}
+
+/* Hover State */
+.tag-pill:hover,
+.tag-pill:focus,
+.category-pill:hover,
+.category-pill:focus,
+.filter-pill:hover,
+.filter-pill:focus {
+  background-color: rgba(0, 119, 217, 0.15);
+  border-color: var(--brand-bright-blue);
+  outline: none;
+}
+
+/* Active State */
+.tag-pill.active,
+.tag-pill[aria-pressed="true"],
+.category-pill.active,
+.category-pill[aria-pressed="true"],
+.filter-pill.active,
+.filter-pill[aria-pressed="true"] {
+  background-color: var(--brand-bright-blue);
+  color: var(--brand-white);
+  border-color: var(--brand-bright-blue);
+}
+
+/* Focus Visible for Keyboard Navigation */
+.tag-pill:focus-visible,
+.category-pill:focus-visible,
+.filter-pill:focus-visible {
+  outline: 2px solid var(--brand-bright-blue);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(0, 119, 217, 0.15);
+}
+
+/* Dark Mode Pills */
+html.dark .tag-pill,
+html.dark .category-pill,
+html.dark .filter-pill {
+  background-color: rgba(0, 119, 217, 0.15);
+  color: var(--brand-white);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+html.dark .tag-pill:hover,
+html.dark .tag-pill:focus,
+html.dark .category-pill:hover,
+html.dark .category-pill:focus,
+html.dark .filter-pill:hover,
+html.dark .filter-pill:focus {
+  background-color: rgba(0, 119, 217, 0.25);
+  border-color: var(--brand-bright-blue);
+}
+
+html.dark .tag-pill.active,
+html.dark .tag-pill[aria-pressed="true"],
+html.dark .category-pill.active,
+html.dark .category-pill[aria-pressed="true"],
+html.dark .filter-pill.active,
+html.dark .filter-pill[aria-pressed="true"] {
+  background-color: var(--brand-bright-blue);
+  color: var(--brand-white);
+  border-color: var(--brand-bright-blue);
+}
