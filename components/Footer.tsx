@@ -132,13 +132,13 @@ export default function Footer() {
           <div className="mb-12 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3 md:gap-x-12">
             {/* Column 1: Our Services */}
             <div>
-              <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Our Services</h3>
+              <h3 className="mb-4 text-body-sm font-semibold text-neutral-charcoal dark:text-white">Our Services</h3>
               <ul className="space-y-2.5">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-base text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                      className="text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                     >
                       {item.name}
                     </Link>
@@ -149,13 +149,13 @@ export default function Footer() {
 
             {/* Column 2: Quick Links */}
             <div>
-              <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Quick Links</h3>
+              <h3 className="mb-4 text-body-sm font-semibold text-neutral-charcoal dark:text-white">Quick Links</h3>
               <ul className="space-y-2.5">
                 {navigation.company.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-base text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                      className="text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                     >
                       {item.name}
                     </Link>
@@ -166,23 +166,23 @@ export default function Footer() {
 
             {/* Column 3: Get in Touch */}
             <div>
-              <h3 className="mb-4 text-base font-semibold text-neutral-charcoal dark:text-white">Get in Touch</h3>
+              <h3 className="mb-4 text-body-sm font-semibold text-neutral-charcoal dark:text-white">Get in Touch</h3>
               <div className="space-y-2.5">
                 <a
                   href="tel:+14133065053"
-                  className="flex items-center gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="flex items-center gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
                   <Phone className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                   <span>(413) 306-5053</span>
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="flex items-center gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="flex items-center gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
                   <Mail className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                   <span>info@andersoncleaning.com</span>
                 </a>
-                <div className="flex items-start gap-2 text-sm text-neutral-charcoal/70 dark:text-white/75">
+                <div className="flex items-start gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75">
                   <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <div>103 Wayside Avenue</div>
@@ -211,7 +211,7 @@ export default function Footer() {
 
           {/* Bottom Section */}
           <div className="border-t border-neutral-light-grey dark:border-white/10 pt-6">
-            <div className="flex flex-col items-center justify-between gap-4 text-xs text-neutral-charcoal/70 dark:text-white/70 md:flex-row">
+            <div className="flex flex-col items-center justify-between gap-4 text-body-sm text-neutral-charcoal/70 dark:text-white/70 md:flex-row">
               <p>© {currentYear} Anderson Cleaning, Inc.</p>
               <div className="flex gap-4">
                 <Link
