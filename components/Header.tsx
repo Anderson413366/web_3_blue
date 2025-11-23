@@ -106,7 +106,7 @@ export default function Header() {
           </button>
           <Link
             href="/quote"
-            className="rounded-lg bg-brand-bright-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 hover:-translate-y-0.5 transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-bright-blue"
+            className="rounded-[10px] bg-brand-bright-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#006bc4] active:bg-[#005aa3] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright-blue focus-visible:ring-offset-2"
           >
             Get a Quote
           </Link>
@@ -166,7 +166,7 @@ export default function Header() {
                 <div className="py-6">
                   <Link
                     href="/quote"
-                    className="block rounded-md bg-brand-bright-blue px-4 py-2.5 text-center text-body-sm font-semibold text-white shadow-sm hover:bg-brand-bright-blue/90"
+                    className="block w-full rounded-[10px] bg-brand-bright-blue px-7 py-4 text-center text-base font-semibold text-white shadow-sm hover:bg-[#006bc4] active:bg-[#005aa3] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright-blue focus-visible:ring-offset-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Get a Quote

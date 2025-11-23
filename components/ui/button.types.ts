@@ -2,11 +2,13 @@ import React from 'react'
 
 export type ButtonVariant =
   | 'default'
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
   | 'outline'
   | 'ghost'
   | 'link'
   | 'destructive'
-  | 'primary'
   | 'accent'
 
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon'

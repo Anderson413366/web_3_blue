@@ -109,13 +109,13 @@ export default function Footer() {
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/quote"
-              className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-brand-deep-blue transition-colors hover:bg-gray-50"
+              className="inline-flex items-center justify-center rounded-[10px] bg-white px-7 py-[14px] text-base font-semibold text-brand-deep-blue transition-all duration-150 hover:bg-gray-100 active:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
             >
               Get Your Free Quote
             </Link>
             <a
               href="tel:+14133065053"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-brand-deep-blue"
+              className="inline-flex items-center justify-center gap-2 rounded-[10px] border-2 border-white bg-transparent px-7 py-[14px] text-base font-semibold text-white transition-all duration-150 hover:bg-white/10 active:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
             >
               <Phone className="h-5 w-5" />
               Call (413) 306-5053

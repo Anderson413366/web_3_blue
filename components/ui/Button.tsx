@@ -6,52 +6,54 @@ import type { ButtonProps } from './button.types'
 
 const Button = forwardRef<HTMLButtonElement | HTMLDivElement, ButtonProps>(
   ({ className, variant, size, asChild = false, isLoading = false, children, ...props }, ref) => {
+    // Base styles with 10px border-radius and proper focus states
     const baseStyles =
-      'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background dark:ring-offset-slate-900'
+      'inline-flex items-center justify-center rounded-[10px] font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-bright-blue focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background dark:ring-offset-slate-900'
 
     let variantStyles = ''
     switch (variant) {
       case 'outline':
+      case 'secondary':
+        // SECONDARY BUTTON (Outline) - 2px solid bright blue border
         variantStyles =
-          'border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-brand-navy'
+          'border-2 border-brand-bright-blue bg-transparent text-brand-bright-blue hover:bg-[rgba(0,119,217,0.08)] active:bg-[rgba(0,119,217,0.12)] dark:border-white dark:text-white dark:hover:bg-white/10'
         break
       case 'ghost':
+      case 'tertiary':
+        // TERTIARY BUTTON (Ghost/Text link) - No border, color text
         variantStyles =
-          'text-brand-navy hover:bg-neutral-light-grey dark:text-white dark:hover:bg-slate-800'
+          'border-none bg-transparent text-brand-deep-blue hover:text-brand-bright-blue dark:text-white dark:hover:text-brand-bright-blue'
         break
       case 'link':
         variantStyles =
           'underline-offset-4 hover:underline text-brand-bright-blue dark:text-brand-bright-blue'
         break
       case 'destructive':
-        variantStyles = 'bg-red-600 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800'
+        variantStyles = 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 dark:bg-red-700 dark:hover:bg-red-800'
         break
       case 'primary':
-        variantStyles =
-          'bg-brand-navy text-white hover:bg-brand-navy/90 dark:bg-brand-navy dark:hover:bg-brand-navy/80'
-        break
       case 'accent':
+      default:
+        // PRIMARY BUTTON - Bright blue background, white text
         variantStyles =
-          'bg-brand-bright-blue text-white hover:bg-brand-bright-blue/90 dark:bg-brand-bright-blue dark:hover:bg-brand-bright-blue/80'
-        break
-      default: // 'default' variant
-        variantStyles =
-          'bg-brand-navy text-white hover:bg-brand-navy/90 dark:bg-brand-navy dark:hover:bg-brand-navy/80'
+          'bg-brand-bright-blue text-white hover:bg-[#006bc4] active:bg-[#005aa3] dark:bg-brand-bright-blue dark:hover:bg-[#006bc4] dark:active:bg-[#005aa3]'
     }
 
     let sizeStyles = ''
     switch (size) {
       case 'sm':
-        sizeStyles = 'h-9 px-4 text-button-sm'
+        sizeStyles = 'h-10 px-5 text-sm'
         break
       case 'lg':
-        sizeStyles = 'h-12 px-8 text-button'
+        // Default size per spec: padding 14px 28px (h-[56px] px-7)
+        sizeStyles = 'h-[56px] px-7 text-base font-semibold'
         break
       case 'icon':
         sizeStyles = 'h-10 w-10'
         break
-      default: // 'default' size
-        sizeStyles = 'h-10 px-6 text-button-sm'
+      default: // 'default' size - standard button size
+        // padding: 14px 28px as specified
+        sizeStyles = 'py-[14px] px-7 text-base font-medium'
     }
 
     const finalClassName = `${baseStyles} ${variantStyles} ${sizeStyles} ${className || ''}`
