@@ -263,9 +263,10 @@ input[type="search"]:focus,
 input[type="date"]:focus,
 textarea:focus,
 select:focus {
-  outline: none;
   border-color: var(--brand-bright-blue);
-  box-shadow: 0 0 0 2px rgba(0, 119, 217, 0.2);
+  outline: 2px solid var(--brand-bright-blue);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(0, 119, 217, 0.15);
 }
 
 /* Error State */
@@ -304,7 +305,7 @@ html.dark input[type="date"],
 html.dark textarea,
 html.dark select {
   background-color: var(--brand-deep-blue);
-  border-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--brand-white);
   color: var(--brand-white);
 }
 
