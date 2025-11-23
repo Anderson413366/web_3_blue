@@ -37,99 +37,45 @@ export default function Home() {
       {/* Promotional Modal */}
       <PromotionalModal />
 
-      {/* Hero Section with Quote Form */}
-      <section
-        className="relative overflow-hidden bg-brand-navy text-white pt-28 pb-16 md:pt-32 md:pb-24"
-      >
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Value Proposition */}
-            <div>
-              <div className="mb-4">
-                <span className="inline-block px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-body-sm font-medium">
-                  B2B Commercial Cleaning Experts
-                </span>
-              </div>
-              <h1 className="text-h1 font-extrabold mb-6 leading-tight">
-                Western Massachusetts' Premier Commercial Cleaning Partner
-              </h1>
-
-              <div className="mb-4">
-                <span className="inline-block px-4 py-2 rounded-full bg-brand-bright-blue text-white text-body-sm font-semibold">
-                  Serving Western MA & Northern CT
-                </span>
-              </div>
-
-              {/* Key Selling Points */}
-              <div className="space-y-3 mb-8 text-body text-white/90">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
-                  <span>
-                    Full-time salaried cleaners — stable, trained professionals
-                  </span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
-                  <span>
-                    24/7 emergency support for current clients — on-site within 2 hours
-                  </span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
-                  <span>Corporate-grade systems with small business care</span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-6 w-6 text-brand-bright-blue flex-shrink-0 mt-1" />
-                  <span>Licensed, insured & background-checked teams</span>
-                </div>
-              </div>
-
-              {/* Trust Badges */}
-              <div className="flex flex-wrap items-center gap-6 text-body-sm text-white/80 mb-8">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
-                  <span>Licensed & Insured</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
-                  <span>18 Years of Excellence</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Star className="h-5 w-5 text-brand-bright-blue" aria-hidden="true" />
-                  <span>100% Satisfaction</span>
-                </div>
-              </div>
-
-              {/* Mobile CTA Buttons */}
-              <div className="lg:hidden flex flex-col sm:flex-row gap-4">
-                <Link href="/quote" className="flex-1">
-                  <Button variant="accent" size="lg" className="w-full">
-                    Get a Free Quote
-                  </Button>
-                </Link>
-                <a href="tel:+14133065053" className="flex-1">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="w-full border-white text-white hover:bg-white/10"
-                  >
-                    <Phone className="h-5 w-5 mr-2" />
-                    Call Now
-                  </Button>
-                </a>
-              </div>
+        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Eyebrow */}
+            <div className="mb-6">
+              <span className="inline-block px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-sm font-medium">
+                Trusted by 100+ Businesses Since 2007
+              </span>
             </div>
 
-            {/* Right Column - Quick Quote Form */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-md rounded-lg bg-white p-6 text-brand-navy shadow-lg">
-                <h3 className="text-h3 mb-4">Get a Free Quote</h3>
-                <QuoteMiniForm
-                  source="hero"
-                  onOpenAdvanced={() => setShowAdvancedModal(true)}
-                />
-              </div>
+            {/* Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+              Professional Commercial Cleaning You Can Count On
+            </h1>
+
+            {/* Supporting Line */}
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Full-time salaried teams, 24/7 support, and corporate-grade standards for your Western MA & Northern CT facility
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/quote">
+                <Button variant="accent" size="lg" className="min-w-[220px]">
+                  Get a Free Quote
+                </Button>
+              </Link>
+              <a href="tel:+14133065053">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="min-w-[220px] border-2 border-white text-white hover:bg-white/10"
+                >
+                  <Phone className="h-5 w-5 mr-2" />
+                  Call (413) 306-5053
+                </Button>
+              </a>
             </div>
           </div>
         </div>

@@ -31,21 +31,16 @@ export default function IndustriesPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy text-white pt-28 pb-16 md:pt-32 md:pb-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-h1 leading-tight font-extrabold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
               Industries We Serve
             </h1>
-            <p className="text-body md:text-body lg:text-h3 text-white/80 mb-8">
-              Specialized commercial cleaning solutions tailored to your industry's unique needs
-            </p>
-            <p className="text-body-sm md:text-body text-blue-200 max-w-3xl mx-auto">
-              With decades of experience across multiple sectors, we understand that each industry
-              has specific cleaning requirements, compliance standards, and operational challenges.
-              Our customized approach ensures your facility receives the specialized care it deserves.
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Specialized cleaning solutions tailored to your industry's unique standards and compliance requirements
             </p>
           </div>
         </div>

@@ -196,23 +196,23 @@ export default function ServicesPage() {
       <StructuredData schema={jsonLd} />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-brand-navy text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-h1 md:text-h1 font-extrabold mb-6">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
             Comprehensive Commercial Cleaning Solutions
           </h1>
-          <p className="text-body text-white/80 max-w-3xl mx-auto mb-8">
-            We build programs around your facility's realities—foot traffic, risk points, schedules,
-            and compliance.
+          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Tailored programs for your facility's unique needs and compliance standards
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/quote">
-              <Button variant="accent" size="lg">
+              <Button variant="accent" size="lg" className="min-w-[220px]">
                 Request a Quote
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+              <Button variant="outline" size="lg" className="min-w-[220px] border-2 border-white text-white hover:bg-white/10">
                 Schedule Walk-Through
               </Button>
             </Link>

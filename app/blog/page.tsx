@@ -72,22 +72,21 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy text-white pt-28 pb-16 md:pt-32 md:pb-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl">
-            <div className="mb-4">
-              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-body-sm font-medium">
+        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-6">
+              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-bright-blue/40 bg-brand-bright-blue/10 text-brand-bright-blue text-sm font-medium">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Resources & Insights
               </span>
             </div>
-            <h1 className="text-h1 font-extrabold mb-6 leading-tight">
-              Commercial Cleaning Resources & Tips
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+              Commercial Cleaning Resources
             </h1>
-            <p className="text-body text-white/80 leading-relaxed">
-              Expert advice for facility managers and business owners on maintaining clean, healthy,
-              and productive workspaces.
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Expert advice for facility managers on maintaining clean, healthy, and productive workspaces
             </p>
           </div>
         </div>

@@ -95,44 +95,16 @@ export default function CareersPage() {
 
       <main>
         {/* Hero */}
-        <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/team-cleaning.jpg"
-              alt="Anderson Cleaning Team"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-brand-navy/70" />
-          </div>
+        <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
 
-          <div className="relative z-10 container mx-auto px-4 text-center text-white">
-            <h1 className="text-h1 font-extrabold mb-4">Join a Crew That Cleans Up – And Levels Up</h1>
-            <p className="text-xl mb-8 max-w-3xl mx-auto">
-              18 Years of Excellence • Paid Training • Flexible Schedules • Real Growth
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-8 mb-10">
-              <div className="flex flex-col items-center">
-                <DollarSign className="h-12 w-12 text-brand-bright-blue mb-2" />
-                <span className="font-semibold">Competitive Pay</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <GraduationCap className="h-12 w-12 text-brand-bright-blue mb-2" />
-                <span className="font-semibold">40+ Hours Training</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <TrendingUp className="h-12 w-12 text-brand-bright-blue mb-2" />
-                <span className="font-semibold">Career Advancement</span>
-              </div>
+          <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">Join Our Growing Team</h1>
+              <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+                Competitive pay, comprehensive training, and real career advancement opportunities
+              </p>
             </div>
-
-            <a href="#open-positions" className="inline-block">
-              <Button variant="accent" size="lg">
-                View Open Positions
-              </Button>
-            </a>
           </div>
         </section>
 

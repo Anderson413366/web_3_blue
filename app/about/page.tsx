@@ -26,12 +26,12 @@ export default function AboutPage() {
     <div className="min-h-screen bg-neutral-off-white dark:bg-slate-900 transition-colors duration-300">
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-brand-navy text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-h1 md:text-h1 font-extrabold mb-6">About Anderson Cleaning</h1>
-          <p className="text-body text-white/80 max-w-3xl mx-auto">
-            18 Years of Excellence delivering professional commercial cleaning with the personal
-            touch your facility deserves.
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-deep-blue via-brand-navy to-brand-bright-blue text-white py-20 md:py-24">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">About Anderson Cleaning</h1>
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            18 years of excellence delivering professional commercial cleaning with the personal touch
           </p>
         </div>
       </section>
