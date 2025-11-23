@@ -97,16 +97,16 @@ export default function Footer() {
 
   return (
     <>
-      {/* CTA Section - Above Footer */}
-      <section className="bg-gradient-to-r from-brand-bright-blue via-brand-deep-blue to-brand-deep-blue py-12">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-3xl font-bold text-white">
+      {/* CTA Section - Above Footer - Apple-style rhythm */}
+      <section className="bg-gradient-to-r from-brand-bright-blue via-brand-deep-blue to-brand-deep-blue py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
+          <h2 className="mb-6 text-3xl font-bold leading-tight text-white md:text-4xl">
             Ready to Experience Professional Cleaning?
           </h2>
-          <p className="mb-8 text-lg text-white/90">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-white/90">
             Join 100+ businesses that trust Anderson Cleaning for their facility maintenance
           </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/quote"
               className="inline-flex items-center justify-center rounded-[10px] bg-white px-7 py-[14px] text-base font-semibold text-brand-deep-blue transition-all duration-150 hover:bg-gray-100 active:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
@@ -124,25 +124,27 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Main Footer - Apple Style Minimal */}
+      {/* Main Footer - Apple Style Minimal with 32px Vertical Rhythm */}
       <footer className="bg-brand-deep-blue text-white" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
-        <div className="mx-auto max-w-7xl px-6 pb-6 pt-12 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8">
           {/* Logo Section - MINIMAL */}
           <div className="mb-12 text-center">
             <img
               src="/brand/white/logo-full-2000-white.png"
               alt="Anderson Cleaning"
-              className="mx-auto mb-3"
+              className="mx-auto mb-4"
               style={{ maxWidth: '120px', height: 'auto' }}
             />
-            <p className="text-sm text-white/70">Commercial Cleaning Excellence Since 2007</p>
+            <p className="text-sm leading-relaxed text-white/70">
+              Commercial Cleaning Excellence Since 2007
+            </p>
           </div>
 
-          {/* Three Columns - CLEAN GRID */}
-          <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-3">
+          {/* Three Columns - CLEAN GRID with Consistent Alignment */}
+          <div className="mb-12 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3 md:gap-x-12">
             {/* Column 1: Our Services */}
             <div>
               <h3 className="mb-4 text-base font-semibold text-white">Our Services</h3>
@@ -180,28 +182,36 @@ export default function Footer() {
             {/* Column 3: Get in Touch */}
             <div>
               <h3 className="mb-4 text-base font-semibold text-white">Get in Touch</h3>
-              <div className="space-y-3">
+              <p className="mb-6 text-sm leading-relaxed text-white/70">
+                Let us know how we can help with your commercial cleaning needs.
+              </p>
+              <div className="mt-10 space-y-5">
                 <a
                   href="tel:+14133065053"
-                  className="flex items-center gap-2 text-sm text-white/75 transition-colors duration-150 hover:text-white"
+                  className="flex items-start gap-3 text-base text-white/75 transition-colors duration-150 hover:text-white/80 md:text-lg"
                 >
-                  <Phone className="h-4 w-4" aria-hidden="true" />
-                  <span>(413) 306-5053</span>
+                  <Phone className="mt-1 h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                  <span className="leading-tight">(413) 306-5053</span>
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="flex items-center gap-2 text-sm text-white/75 transition-colors duration-150 hover:text-white"
+                  className="flex items-start gap-3 text-base text-white/75 transition-colors duration-150 hover:text-white/80 md:text-lg"
                 >
-                  <Mail className="h-4 w-4" aria-hidden="true" />
-                  <span>info@andersoncleaning.com</span>
+                  <Mail className="mt-1 h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                  <span className="leading-tight">info@andersoncleaning.com</span>
                 </a>
-                <div className="flex items-start gap-2 text-sm text-white/75">
-                  <MapPin className="mt-0.5 h-4 w-4" aria-hidden="true" />
-                  <span>West Springfield, MA</span>
+                <div className="flex items-start gap-3">
+                  <div className="w-7 flex-shrink-0">
+                    <MapPin className="mt-1 h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <span className="text-base leading-tight text-white/75 md:text-lg">
+                    101 Liberty Street<br />
+                    West Springfield, MA 01089
+                  </span>
                 </div>
 
                 {/* Social Icons - MINIMAL */}
-                <div className="flex gap-3 pt-2">
+                <div className="flex gap-3 pt-4">
                   {navigation.social.map((item) => (
                     <a
                       key={item.name}
