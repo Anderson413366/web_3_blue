@@ -176,21 +176,31 @@ html.dark {
 }
 
 /* Dark mode - Swap to white logos using content property */
+/* System dark mode preference (only when no manual override) */
 @media (prefers-color-scheme: dark) {
-  .logo-desktop {
+  html:not(.dark):not(.light) .logo-desktop {
     content: url('/brand/white/logo-full-2000-white.png');
   }
 
-  .logo-mobile {
+  html:not(.dark):not(.light) .logo-mobile {
     content: url('/brand/white/logo-icon-512-white.png');
   }
 }
 
-/* Manual dark mode toggle support */
+/* Manual dark mode toggle - highest priority */
 html.dark .logo-desktop {
-  content: url('/brand/white/logo-full-2000-white.png');
+  content: url('/brand/white/logo-full-2000-white.png') !important;
 }
 
 html.dark .logo-mobile {
-  content: url('/brand/white/logo-icon-512-white.png');
+  content: url('/brand/white/logo-icon-512-white.png') !important;
+}
+
+/* Manual light mode toggle - explicitly reset to color logos */
+html.light .logo-desktop {
+  content: none !important; /* Use HTML src attribute (color variant) */
+}
+
+html.light .logo-mobile {
+  content: none !important; /* Use HTML src attribute (color variant) */
 }
