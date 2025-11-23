@@ -144,34 +144,10 @@ export default function IndustriesPage() {
               Not Sure Which Category Fits Your Business?
             </h2>
 
-            <p className="text-body md:text-body text-white/80 mb-8 max-w-2xl mx-auto">
+            <p className="text-body md:text-body text-white/80 max-w-2xl mx-auto">
               We serve a wide range of commercial facilities beyond these categories.
               Contact us to discuss your specific cleaning needs and how we can help.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button
-                  variant="accent"
-                  size="lg"
-                  className="min-w-[200px]"
-                  aria-label="Contact us to discuss your facility cleaning needs"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-
-              <Link href="/quote">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="min-w-[200px] border-white text-white hover:bg-white/10"
-                  aria-label="Get a free quote for your facility"
-                >
-                  Get Free Quote
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>

@@ -228,27 +228,10 @@ export default function TestimonialsPage() {
           <h2 className="text-h2 leading-tight font-bold mb-6">
             Ready to Experience the Anderson Difference?
           </h2>
-          <p className="text-body text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-body text-white/80 max-w-2xl mx-auto">
             Join dozens of satisfied clients across Massachusetts and Connecticut who trust Anderson
             Cleaning with their facilities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/quote">
-              <Button variant="accent" size="lg">
-                Get Your Free Quote
-              </Button>
-            </Link>
-            <a
-              href="https://www.google.com/search?q=Anderson+Cleaning+reviews"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                <ExternalLink className="h-5 w-5 mr-2" />
-                Leave a Review
-              </Button>
-            </a>
-          </div>
         </div>
       </section>
     </div>

@@ -379,23 +379,11 @@ export default function AboutPage() {
             <div className="bg-brand-navy rounded-2xl p-8 md:p-12 text-white text-center">
               <Sparkles className="h-16 w-16 text-brand-bright-blue mx-auto mb-6" />
               <h2 className="text-h2 leading-tight font-bold mb-6">Our Commitment to You</h2>
-              <p className="text-body text-white/80 mb-8">
+              <p className="text-body text-white/80">
                 We promise to treat your facility like it's our own. We show up on time, do the work
                 right, and fix any issues immediately. No excuses, no runarounds, just professional
                 cleaning you can count on.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/quote">
-                  <Button variant="accent" size="lg">
-                    Get Your Free Quote
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                    View Our Services
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>

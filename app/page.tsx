@@ -414,17 +414,6 @@ export default function Home() {
             ]}
             height="h-[500px]"
           />
-
-          <div className="text-center mt-12">
-            <p className="text-neutral-charcoal/70 dark:text-white/80 mb-4">
-              Want to see more examples of our work?
-            </p>
-            <Link href="/quote">
-              <Button variant="primary" size="lg">
-                Schedule a Walk-Through
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 

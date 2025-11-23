@@ -510,18 +510,6 @@ export default function ServicesPage() {
                 </ul>
               </div>
             </div>
-
-            <div className="text-center mt-8">
-              <p className="text-body-sm text-neutral-charcoal/70 dark:text-white/80 mb-4">
-                Not sure if we serve your area? Contact us to find out!
-              </p>
-              <Link href="/contact">
-                <Button variant="primary" size="lg">
-                  Contact Us Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -595,47 +583,6 @@ export default function ServicesPage() {
                   </ul>
                 </div>
               ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-brand-navy text-white">
-        <div className="container mx-auto px-6">
-          <div className="grid gap-10 lg:grid-cols-2 items-center">
-            <div>
-              <h2 className="text-h2 leading-tight font-bold mb-6">
-                Ready to Experience the Anderson Difference?
-              </h2>
-              <p className="text-body text-white/80 mb-6 max-w-2xl">
-                Answer four quick questions and we will call you within one business day with pricing
-                guidance. Prefer a deep dive? Use the detailed form for square footage, frequency,
-                and service mix.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="tel:+14133065053">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-white text-white hover:bg-white/10 w-full"
-                  >
-                    Call (413) 306-5053
-                  </Button>
-                </a>
-                <Link href="/contact">
-                  <Button variant="ghost" size="lg" className="text-white hover:text-brand-bright-blue">
-                    Schedule Walk-Through
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg border-2 border-brand-bright-blue p-6 text-brand-navy shadow-lg">
-              <h3 className="text-h3 mb-4">Get a Custom Quote</h3>
-              <QuoteMiniForm
-                source="services"
-                onOpenAdvanced={() => setShowAdvancedModal(true)}
-              />
-            </div>
           </div>
         </div>
       </section>

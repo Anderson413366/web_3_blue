@@ -249,29 +249,9 @@ export default function CaseStudiesPage() {
             <h2 className="text-h2 leading-tight font-bold mb-4">
               Want Results Like These for Your Facility?
             </h2>
-            <p className="text-body text-white/80 mb-8">
+            <p className="text-body text-white/80">
               Every case study started with a free consultation. Let's discuss your challenges and
               create a custom solution.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                variant="accent"
-                size="lg"
-                onClick={() => (window.location.href = '/quote')}
-              >
-                Get Your Free Quote
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10"
-                onClick={() => (window.location.href = 'tel:+15551234567')}
-              >
-                Call (555) 123-4567
-              </Button>
-            </div>
-            <p className="text-sm text-white/80 mt-6">
-              Complimentary walk-through • Custom proposal • Response within 24 hours (Mon–Fri)
             </p>
           </div>
         </div>
