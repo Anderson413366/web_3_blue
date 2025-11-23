@@ -134,8 +134,12 @@ html.dark {
 /* Light mode uses the HTML src attribute (color variant) */
 .logo-desktop {
   display: block;
-  height: 3rem; /* 48px */
-  width: auto;
+  height: 3rem; /* 48px - fixed height prevents shrinking */
+  width: auto; /* Maintains aspect ratio */
+  max-width: 180px; /* Maximum width */
+  min-width: 140px; /* Minimum width - prevents shrinking below this */
+  object-fit: contain; /* Prevents distortion */
+  flex-shrink: 0; /* Prevents flex containers from shrinking logo */
   /* NO content property here - let HTML src work naturally */
 }
 
@@ -144,18 +148,30 @@ html.dark {
 .logo-mobile {
   display: none;
   height: 2.5rem; /* 40px */
-  width: auto;
+  width: 2.5rem; /* 40px - fixed size */
+  object-fit: contain; /* Prevents distortion */
+  flex-shrink: 0; /* Prevents shrinking */
   /* NO content property here - let HTML src work naturally */
 }
 
-/* Mobile breakpoint (≤767px) - Swap logos */
+/* Tablet breakpoint (768px - 1024px) - Slightly smaller but still fixed */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .logo-desktop {
+    height: 2.5rem; /* 40px - slightly smaller but still fixed */
+    min-width: 120px; /* Adjusted minimum width for tablets */
+  }
+}
+
+/* Mobile breakpoint (≤767px) - SWAP to icon, don't shrink */
 @media (max-width: 767px) {
   .logo-desktop {
-    display: none;
+    display: none; /* HIDE full logo - don't shrink it! */
   }
 
   .logo-mobile {
-    display: block;
+    display: block; /* SHOW icon logo */
+    width: 3rem; /* 48px - fixed size */
+    height: 3rem; /* 48px - fixed size */
   }
 }
 
