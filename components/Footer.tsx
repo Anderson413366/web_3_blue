@@ -1,72 +1,98 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Facebook,
-  Linkedin,
-  Twitter,
-  ShieldCheck,
-  BadgeCheck,
-  Leaf,
-  Star,
-  Sun,
-  Moon,
-} from 'lucide-react'
-
-import { useTheme } from '@/lib/ThemeProvider'
+import { Phone, Mail, MapPin } from 'lucide-react'
 
 const navigation = {
   services: [
-    { name: 'Office & Commercial Cleaning', href: '/services/office-cleaning' },
+    { name: 'Office Cleaning', href: '/services/office-cleaning' },
     { name: 'Janitorial Services', href: '/services/janitorial' },
     { name: 'Floor & Carpet Care', href: '/services/floor-carpet-care' },
     { name: 'Window Cleaning', href: '/services/window-cleaning' },
-    { name: 'Post-Construction Cleanup', href: '/services/post-construction' },
+    { name: 'Post-Construction', href: '/services/post-construction' },
   ],
-  quickLinks: [
+  company: [
     { name: 'About Us', href: '/about' },
-    { name: 'Industries We Serve', href: '/industries' },
-    { name: 'Client Testimonials', href: '/testimonials' },
-    { name: 'Blog & Resources', href: '/blog' },
+    { name: 'Industries', href: '/industries' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Careers', href: '/careers' },
     { name: 'FAQ', href: '/faq' },
   ],
-  legal: [
-    { name: 'Privacy Policy', href: '/legal/privacy' },
-    { name: 'Terms of Service', href: '/legal/terms' },
-  ],
   social: [
-    { name: 'Facebook', href: '#', icon: Facebook },
-    { name: 'LinkedIn', href: '#', icon: Linkedin },
-    { name: 'Twitter', href: '#', icon: Twitter },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/anderson-cleaning-inc-',
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+          <rect width="4" height="12" x="2" y="9" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Facebook',
+      href: 'https://www.facebook.com/Andersonclean/',
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'X',
+      href: 'https://x.com/andersonclean',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/andersonclean/',
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+        </svg>
+      ),
+    },
   ],
 }
 
-const trustBadges = [
-  { name: 'Licensed & Insured', icon: ShieldCheck },
-  { name: 'OSHA Compliant', icon: BadgeCheck },
-  { name: 'Eco-Friendly', icon: Leaf },
-  { name: 'BBB Accredited', icon: Star },
-]
-
-const serviceAreas = [
-  'Springfield',
-  'Worcester',
-  'Hartford',
-  'Northampton',
-  'Amherst',
-  'Holyoke',
-  'Chicopee',
-  'West Springfield',
-  'Westfield',
-  'Enfield',
-]
+const serviceAreas = ['Springfield', 'Worcester', 'Hartford', 'Northampton', 'Amherst']
 
 export default function Footer() {
-  const { theme, toggleTheme } = useTheme()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -98,82 +124,51 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Main Footer */}
-      <footer className="bg-brand-deep-blue text-gray-300" aria-labelledby="footer-heading">
+      {/* Main Footer - Apple Style Minimal */}
+      <footer className="bg-brand-deep-blue text-white" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          {/* Footer Logo - Centered */}
+        <div className="mx-auto max-w-7xl px-6 pb-6 pt-12 lg:px-8">
+          {/* Logo Section - MINIMAL */}
           <div className="mb-12 text-center">
             <img
               src="/brand/white/logo-full-2000-white.png"
               alt="Anderson Cleaning"
-              className="mx-auto mb-4"
-              style={{ maxWidth: '240px', height: 'auto' }}
+              className="mx-auto mb-3"
+              style={{ maxWidth: '120px', height: 'auto' }}
             />
-            <p className="text-sm text-gray-400">Commercial Cleaning Excellence Since 2007</p>
+            <p className="text-sm text-white/70">Commercial Cleaning Excellence Since 2007</p>
           </div>
 
-          {/* Top Section - 4 Columns */}
-          <div className="grid grid-cols-1 gap-8 border-b border-gray-800 pb-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Column 1: Company Info */}
+          {/* Three Columns - CLEAN GRID */}
+          <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-3">
+            {/* Column 1: Our Services */}
             <div>
-              <h4 className="mb-4 font-semibold text-white">About Us</h4>
-              <p className="mb-4 text-sm leading-relaxed text-gray-300">
-                Professional facility maintenance for businesses throughout Western Massachusetts and
-                Northern Connecticut.
-              </p>
-
-              {/* Trust Badges */}
-              <div className="mb-4 flex gap-3">
-                {trustBadges.map((badge) => (
-                  <div
-                    key={badge.name}
-                    className="rounded bg-gray-800 p-2"
-                    title={badge.name}
-                    aria-label={badge.name}
-                  >
-                    <badge.icon className="h-6 w-6 text-brand-bright-blue" aria-hidden="true" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Column 2: Our Services */}
-            <div>
-              <h4 className="mb-4 font-semibold text-white">Our Services</h4>
-              <ul className="space-y-2">
+              <h3 className="mb-4 text-base font-semibold text-white">Our Services</h3>
+              <ul className="space-y-2.5">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm transition-colors hover:text-brand-bright-blue"
+                      className="text-sm text-white/75 transition-all duration-150 hover:translate-x-0.5 hover:text-white"
                     >
                       {item.name}
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link
-                    href="/quote"
-                    className="text-sm font-semibold text-brand-bright-blue transition-colors hover:text-brand-bright-blue/80"
-                  >
-                    Get a Custom Quote →
-                  </Link>
-                </li>
               </ul>
             </div>
 
-            {/* Column 3: Quick Links */}
+            {/* Column 2: Company */}
             <div>
-              <h4 className="mb-4 font-semibold text-white">Quick Links</h4>
-              <ul className="space-y-2">
-                {navigation.quickLinks.map((item) => (
+              <h3 className="mb-4 text-base font-semibold text-white">Company</h3>
+              <ul className="space-y-2.5">
+                {navigation.company.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-sm transition-colors hover:text-brand-bright-blue"
+                      className="text-sm text-white/75 transition-all duration-150 hover:translate-x-0.5 hover:text-white"
                     >
                       {item.name}
                     </Link>
@@ -182,50 +177,41 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 4: Get in Touch */}
+            {/* Column 3: Get in Touch */}
             <div>
-              <h4 className="mb-4 font-semibold text-white">Get in Touch</h4>
+              <h3 className="mb-4 text-base font-semibold text-white">Get in Touch</h3>
               <div className="space-y-3">
                 <a
                   href="tel:+14133065053"
-                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-bright-blue"
+                  className="flex items-center gap-2 text-sm text-white/75 transition-colors duration-150 hover:text-white"
                 >
-                  <Phone className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-bright-blue" />
-                  <div>
-                    <div className="font-semibold">(413) 306-5053</div>
-                    <div className="text-xs text-gray-500">Mon-Fri, 9 AM - 5 PM EST</div>
-                  </div>
+                  <Phone className="h-4 w-4" aria-hidden="true" />
+                  <span>(413) 306-5053</span>
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="group flex items-start gap-3 text-sm transition-colors hover:text-brand-bright-blue"
+                  className="flex items-center gap-2 text-sm text-white/75 transition-colors duration-150 hover:text-white"
                 >
-                  <Mail className="mt-0.5 h-5 w-5 text-gray-400 group-hover:text-brand-bright-blue" />
-                  <div>
-                    <div>info@andersoncleaning.com</div>
-                    <div className="text-xs text-gray-500">24-hour response time</div>
-                  </div>
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  <span>info@andersoncleaning.com</span>
                 </a>
-                <div className="flex items-start gap-3 text-sm">
-                  <MapPin className="mt-0.5 h-5 w-5 text-gray-400" />
-                  <div>
-                    <div>103 Wayside Avenue</div>
-                    <div>West Springfield, MA 01089</div>
-                  </div>
+                <div className="flex items-start gap-2 text-sm text-white/75">
+                  <MapPin className="mt-0.5 h-4 w-4" aria-hidden="true" />
+                  <span>West Springfield, MA</span>
                 </div>
 
-                {/* Social Media */}
-                <div className="flex gap-3 pt-3">
+                {/* Social Icons - MINIMAL */}
+                <div className="flex gap-3 pt-2">
                   {navigation.social.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="rounded bg-gray-800 p-2 transition-colors hover:bg-brand-bright-blue"
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-150 hover:-translate-y-0.5 hover:bg-white/20 hover:text-white"
                       aria-label={item.name}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <item.icon className="h-4 w-4" aria-hidden="true" />
+                      {item.icon}
                     </a>
                   ))}
                 </div>
@@ -233,73 +219,29 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Bottom Section - Service Area & Legal */}
-          <div className="pt-8">
-            <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {/* Service Areas */}
-              <div>
-                <p className="mb-2 text-sm text-gray-400">
-                  <span className="font-semibold text-white">Service Areas:</span>
-                </p>
-                <p className="text-sm text-gray-400">{serviceAreas.join(' • ')}</p>
-              </div>
-
-              {/* Certifications Text */}
-              <div className="md:text-right">
-                <p className="text-sm text-gray-400">
-                  Licensed & Insured • OSHA Compliant • EPA Registered • Background Checked • W2
-                  Employees Only
-                </p>
-              </div>
-            </div>
-
-            {/* Dark Mode Toggle */}
-            <div className="mb-6 flex justify-center border-t border-gray-800 pt-6">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold uppercase tracking-wide text-white/70">
-                  Theme
-                </span>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  aria-label="Toggle dark mode"
+          {/* Bottom Section - ULTRA COMPACT */}
+          <div className="border-t border-white/10 pt-6">
+            <p className="mb-4 text-center text-xs text-white/60">
+              {serviceAreas.join(' • ')}
+            </p>
+            <div className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 md:flex-row">
+              <p>© {currentYear} Anderson Cleaning, Inc.</p>
+              <div className="flex gap-4">
+                <Link
+                  href="/legal/privacy"
+                  className="transition-colors duration-150 hover:text-white/80"
                 >
-                  <span className="relative h-5 w-5 text-brand-bright-blue" aria-hidden="true">
-                    <Sun
-                      className={`absolute inset-0 h-5 w-5 transition-all duration-200 ${
-                        theme === 'dark' ? 'rotate-90 scale-75 opacity-0' : 'rotate-0 scale-100 opacity-100'
-                      }`}
-                    />
-                    <Moon
-                      className={`absolute inset-0 h-5 w-5 transition-all duration-200 ${
-                        theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-75 opacity-0'
-                      }`}
-                    />
-                  </span>
-                  <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Copyright and Legal Links */}
-            <div className="flex flex-col items-center justify-between border-t border-gray-800 pt-6 md:flex-row">
-              <p className="mb-4 text-sm text-gray-500 md:mb-0">
-                © {currentYear} Anderson Cleaning, Inc. All rights reserved.
-              </p>
-              <div className="flex gap-6">
-                {navigation.legal.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="text-sm text-gray-500 transition-colors hover:text-brand-bright-blue"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                  Privacy
+                </Link>
+                <Link
+                  href="/legal/terms"
+                  className="transition-colors duration-150 hover:text-white/80"
+                >
+                  Terms
+                </Link>
                 <Link
                   href="/sitemap.xml"
-                  className="text-sm text-gray-500 transition-colors hover:text-brand-bright-blue"
+                  className="transition-colors duration-150 hover:text-white/80"
                 >
                   Sitemap
                 </Link>
