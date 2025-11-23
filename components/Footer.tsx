@@ -170,28 +170,23 @@ export default function Footer() {
               <div className="space-y-2.5">
                 <a
                   href="tel:+14133065053"
-                  className="flex items-center gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="block text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
-                  <Phone className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                  <span>(413) 306-5053</span>
+                  (413) 306-5053
                 </a>
                 <a
                   href="mailto:info@andersoncleaning.com"
-                  className="flex items-center gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
+                  className="block text-body-sm text-neutral-charcoal/70 dark:text-white/75 transition-colors duration-150 hover:text-brand-bright-blue dark:hover:text-white"
                 >
-                  <Mail className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                  <span>info@andersoncleaning.com</span>
+                  info@andersoncleaning.com
                 </a>
-                <div className="flex items-start gap-2 text-body-sm text-neutral-charcoal/70 dark:text-white/75">
-                  <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <div>103 Wayside Avenue</div>
-                    <div>West Springfield, MA 01089</div>
-                  </div>
+                <div className="text-body-sm text-neutral-charcoal/70 dark:text-white/75">
+                  <div>103 Wayside Avenue</div>
+                  <div>West Springfield, MA 01089</div>
                 </div>
 
                 {/* Social Icons - Colored in light mode, white in dark mode */}
-                <div className="flex gap-3 pt-2">
+                <div className="flex gap-3 pt-4">
                   {navigation.social.map((item) => (
                     <a
                       key={item.name}
